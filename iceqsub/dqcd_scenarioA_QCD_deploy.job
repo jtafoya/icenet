@@ -1,0 +1,8 @@
+executable = tests/runme_dqcd_newmodels_qcd_deploy.sh
+arguments  = "$(PROCESS) 1000"
+output = outputfile.$(CLUSTER)
+error = errorfile.$(CLUSTER)
+log = example.job.$(CLUSTER).log
++MaxRuntime = 6500
+periodic_release = (HoldReasonCode == 34) && (HoldReasonSubCode == 0)
+queue 1000

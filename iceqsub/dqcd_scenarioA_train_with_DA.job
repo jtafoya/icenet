@@ -1,0 +1,9 @@
+executable = tests/runme_dqcd_newmodels_train_DA.sh
+output = outputfile.$(CLUSTER)
+error = errorfile.$(CLUSTER)
+log = example.job.$(CLUSTER).log
+request_gpus = 1
+request_memory = 100G
++MaxRuntime = 86400
+periodic_release = (HoldReasonCode == 34) && (HoldReasonSubCode == 0)
+queue 

@@ -1,0 +1,313 @@
+ 
+# [0] 
+bparkProductionAll_V1p3--scenarioA_mpi_1_mA_0p33_ctau_0p1: &bparkProductionAll_V1p3--scenarioA_mpi_1_mA_0p33_ctau_0p1 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_1_mA_0p33_ctau_0p1' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    1.0 
+    mA:     0.33 
+    ctau:   0.1 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [1] 
+bparkProductionAll_V1p3--scenarioA_mpi_1_mA_0p33_ctau_1p0: &bparkProductionAll_V1p3--scenarioA_mpi_1_mA_0p33_ctau_1p0 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_1_mA_0p33_ctau_1p0' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    1.0 
+    mA:     0.33 
+    ctau:   1.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [2] 
+bparkProductionAll_V1p3--scenarioA_mpi_1_mA_0p33_ctau_10: &bparkProductionAll_V1p3--scenarioA_mpi_1_mA_0p33_ctau_10 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_1_mA_0p33_ctau_10' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    1.0 
+    mA:     0.33 
+    ctau:   10.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [3] 
+bparkProductionAll_V1p3--scenarioA_mpi_1_mA_0p33_ctau_100: &bparkProductionAll_V1p3--scenarioA_mpi_1_mA_0p33_ctau_100 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_1_mA_0p33_ctau_100' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    1.0 
+    mA:     0.33 
+    ctau:   100.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [4] 
+bparkProductionAll_V1p3--scenarioA_mpi_2_mA_0p67_ctau_0p1: &bparkProductionAll_V1p3--scenarioA_mpi_2_mA_0p67_ctau_0p1 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_2_mA_0p67_ctau_0p1' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    2.0 
+    mA:     0.67 
+    ctau:   0.1 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [5] 
+bparkProductionAll_V1p3--scenarioA_mpi_2_mA_0p67_ctau_1p0: &bparkProductionAll_V1p3--scenarioA_mpi_2_mA_0p67_ctau_1p0 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_2_mA_0p67_ctau_1p0' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    2.0 
+    mA:     0.67 
+    ctau:   1.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [6] 
+bparkProductionAll_V1p3--scenarioA_mpi_2_mA_0p67_ctau_10: &bparkProductionAll_V1p3--scenarioA_mpi_2_mA_0p67_ctau_10 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_2_mA_0p67_ctau_10' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    2.0 
+    mA:     0.67 
+    ctau:   10.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [7] 
+bparkProductionAll_V1p3--scenarioA_mpi_2_mA_0p67_ctau_100: &bparkProductionAll_V1p3--scenarioA_mpi_2_mA_0p67_ctau_100 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_2_mA_0p67_ctau_100' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    2.0 
+    mA:     0.67 
+    ctau:   100.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [8] 
+bparkProductionAll_V1p3--scenarioA_mpi_4_mA_0p40_ctau_0p1: &bparkProductionAll_V1p3--scenarioA_mpi_4_mA_0p40_ctau_0p1 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_4_mA_0p40_ctau_0p1' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    4.0 
+    mA:     0.4 
+    ctau:   0.1 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [9] 
+bparkProductionAll_V1p3--scenarioA_mpi_4_mA_0p40_ctau_1p0: &bparkProductionAll_V1p3--scenarioA_mpi_4_mA_0p40_ctau_1p0 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_4_mA_0p40_ctau_1p0' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    4.0 
+    mA:     0.4 
+    ctau:   1.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [10] 
+bparkProductionAll_V1p3--scenarioA_mpi_4_mA_0p40_ctau_10: &bparkProductionAll_V1p3--scenarioA_mpi_4_mA_0p40_ctau_10 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_4_mA_0p40_ctau_10' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    4.0 
+    mA:     0.4 
+    ctau:   10.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [11] 
+bparkProductionAll_V1p3--scenarioA_mpi_4_mA_0p40_ctau_100: &bparkProductionAll_V1p3--scenarioA_mpi_4_mA_0p40_ctau_100 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_4_mA_0p40_ctau_100' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    4.0 
+    mA:     0.4 
+    ctau:   100.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [12] 
+bparkProductionAll_V1p3--scenarioA_mpi_4_mA_1p33_ctau_0p1: &bparkProductionAll_V1p3--scenarioA_mpi_4_mA_1p33_ctau_0p1 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_4_mA_1p33_ctau_0p1' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    4.0 
+    mA:     1.33 
+    ctau:   0.1 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [13] 
+bparkProductionAll_V1p3--scenarioA_mpi_4_mA_1p33_ctau_1p0: &bparkProductionAll_V1p3--scenarioA_mpi_4_mA_1p33_ctau_1p0 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_4_mA_1p33_ctau_1p0' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    4.0 
+    mA:     1.33 
+    ctau:   1.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [14] 
+bparkProductionAll_V1p3--scenarioA_mpi_4_mA_1p33_ctau_10: &bparkProductionAll_V1p3--scenarioA_mpi_4_mA_1p33_ctau_10 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_4_mA_1p33_ctau_10' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    4.0 
+    mA:     1.33 
+    ctau:   10.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [15] 
+bparkProductionAll_V1p3--scenarioA_mpi_4_mA_1p33_ctau_100: &bparkProductionAll_V1p3--scenarioA_mpi_4_mA_1p33_ctau_100 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_4_mA_1p33_ctau_100' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    4.0 
+    mA:     1.33 
+    ctau:   100.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [16] 
+bparkProductionAll_V1p3--scenarioA_mpi_10_mA_1p00_ctau_0p1: &bparkProductionAll_V1p3--scenarioA_mpi_10_mA_1p00_ctau_0p1 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_10_mA_1p00_ctau_0p1' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    10.0 
+    mA:     1.0 
+    ctau:   0.1 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [17] 
+bparkProductionAll_V1p3--scenarioA_mpi_10_mA_1p00_ctau_1p0: &bparkProductionAll_V1p3--scenarioA_mpi_10_mA_1p00_ctau_1p0 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_10_mA_1p00_ctau_1p0' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    10.0 
+    mA:     1.0 
+    ctau:   1.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [18] 
+bparkProductionAll_V1p3--scenarioA_mpi_10_mA_1p00_ctau_10: &bparkProductionAll_V1p3--scenarioA_mpi_10_mA_1p00_ctau_10 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_10_mA_1p00_ctau_10' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    10.0 
+    mA:     1.0 
+    ctau:   10.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [19] 
+bparkProductionAll_V1p3--scenarioA_mpi_10_mA_1p00_ctau_100: &bparkProductionAll_V1p3--scenarioA_mpi_10_mA_1p00_ctau_100 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_10_mA_1p00_ctau_100' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    10.0 
+    mA:     1.0 
+    ctau:   100.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [20] 
+bparkProductionAll_V1p3--scenarioA_mpi_10_mA_3p33_ctau_0p1: &bparkProductionAll_V1p3--scenarioA_mpi_10_mA_3p33_ctau_0p1 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_10_mA_3p33_ctau_0p1' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    10.0 
+    mA:     3.33 
+    ctau:   0.1 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [21] 
+bparkProductionAll_V1p3--scenarioA_mpi_10_mA_3p33_ctau_1p0: &bparkProductionAll_V1p3--scenarioA_mpi_10_mA_3p33_ctau_1p0 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_10_mA_3p33_ctau_1p0' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    10.0 
+    mA:     3.33 
+    ctau:   1.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [22] 
+bparkProductionAll_V1p3--scenarioA_mpi_10_mA_3p33_ctau_10: &bparkProductionAll_V1p3--scenarioA_mpi_10_mA_3p33_ctau_10 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_10_mA_3p33_ctau_10' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    10.0 
+    mA:     3.33 
+    ctau:   10.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [23] 
+bparkProductionAll_V1p3--scenarioA_mpi_10_mA_3p33_ctau_100: &bparkProductionAll_V1p3--scenarioA_mpi_10_mA_3p33_ctau_100 
+  path:  'bparkProductionAll_V1p3/scenarioA_mpi_10_mA_3p33_ctau_100' 
+  files: 'data_[0-20].root' 
+  xs:   1.0 # [pb] 
+  model_param: 
+    mpi:    10.0 
+    mA:     3.33 
+    ctau:   100.0 
+  force_xs: true 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
