@@ -1,0 +1,1058 @@
+# ML model definitions
+#
+# m.mieskolainen@imperial.ac.uk, 2024
+
+# -----------------------------------------------
+# ** Main Domain Filter **
+MAIN_DOMAIN_FILTER: &MAIN_DOMAIN_FILTER
+  
+  filter[0]:
+    operator: null   # null (unary), cartesian_and', 'cartesian_or'
+    sets: [0]        # input set ids (one or several)
+  
+  # ... more filters here
+  
+  # --------------------
+  
+  set[0]:
+    expand: 'set'    # 'set', 'vetoset' or 'powerset'
+    cutset:
+      # Latex description is for boolean [0,1] per cut
+      [{cut: 'muonSV_chi2_0 > 0', latex: ['', 'muonSV_chi2_0 > 0']}]
+
+# -----------------------------------------------
+
+
+# -----------------------------------------------
+# ** Domain Adaptation Control Domain Filter **
+DA_DOMAIN_FILTER: &DA_DOMAIN_FILTER
+  
+  filter[0]:
+    operator: null  # null (unary), cartesian_and', 'cartesian_or'
+    sets: [0]       # input set ids (one or several)
+  
+  # ... more filters here
+  
+  # --------------------
+  
+  set[0]:
+    expand: 'set'    # 'set', 'vetoset' or 'powerset'
+    cutset:
+
+      # Inverted sec.vertex quality cut
+      [{cut: 'muonSV_chi2_0 > 10', latex: ['', 'muonSV_chi2_0 > 10']}]
+
+      # J/psi domain
+      #[{cut: '(2.9 < muonSV_mass_0) && (muonSV_mass_0 < 3.3)', latex: ['', '2.9 < M < 3.3']}]
+      
+      # Add Upsilon domain ...
+
+# -----------------------------------------------
+
+
+# -----------------------------------------------
+# ** Mutual Information Control Domain Filter **
+MI_DOMAIN_FILTER: &MI_DOMAIN_FILTER
+  
+  filter[0]:
+    operator: null  # null (unary), 'cartesian_and', 'cartesian_or'
+    sets: [0]       # input set ids (one or several)
+  
+  # ... more filters here
+  
+  # --------------------
+  
+  set[0]:
+    expand: 'set'  # 'set', 'vetoset' or 'powerset'
+    cutset:
+      # Latex description is for boolean [0,1] per cut
+      [{cut: '0 < muonSV_mass_0 && muonSV_mass_0 < 25', latex: ['', '0 < M < 25']}]
+  
+  #set[0]:
+  #  expand: 'set'   # 'set', 'vetoset' or 'powerset'
+  #  cutset:
+  #    [{cut: '0 < muonSV_mass_0 && muonSV_dxy_0 < 1.0  && muonSV_pAngle_0 < 0.2', latex: ['', '$\Delta_{xy} < 1$ & $\delta < 0.2$']},
+  #     {cut: '0 < muonSV_mass_0 && muonSV_dxy_0 < 1.0  && muonSV_pAngle_0 > 0.2', latex: ['', '$\Delta_{xy} < 1$ & $\delta > 0.2$']},
+  #     {cut: '0 < muonSV_mass_0 && 1.0  < muonSV_dxy_0 && muonSV_dxy_0 < 10 && muonSV_pAngle_0 < 0.2', latex: ['', '$1 < \Delta_{xy} < 10$ & $\delta < 0.2$']},
+  #     {cut: '0 < muonSV_mass_0 && 1.0  < muonSV_dxy_0 && muonSV_dxy_0 < 10 && muonSV_pAngle_0 > 0.2', latex: ['', '$1 < \Delta_{xy} < 10$ & $\delta > 0.2$']},
+  #     {cut: '0 < muonSV_mass_0 && muonSV_dxy_0 > 10.0 && muonSV_pAngle_0 < 0.2', latex: ['', '$\Delta_{xy} > 10$ & $\delta < 0.2$']},
+  #     {cut: '0 < muonSV_mass_0 && muonSV_dxy_0 > 10.0 && muonSV_pAngle_0 > 0.2', latex: ['', '$\Delta_{xy} > 10$ & $\delta > 0.2$']}
+  #    ]
+# -----------------------------------------------
+
+
+# -----------------------------------------------
+# ** Mutual Information regularization **
+MI_REG_PARAM: &MI_REG_PARAM
+  
+  classes: [0,-2]          #  Which classes to use in the regularization
+  
+  losstype: 'DCORR'        # 'MINE', 'MINE_EMA', 'DENSITY', 'DCORR', 'PEARSON' (use PEARSON only for debug)
+  min_count: 32            #  Minimum number of events (per category)
+  max_N: 5000              #  Maximum number of events per function call (use to limit sample size for DCORR)
+  min_score: 0.6           #  Consider only events with MVA output [0,1] larger than this value (null for None)
+  poisson_weight: False    #  Per category Poisson sqrt(N) weighted loss
+  
+  # ------------------
+  # Neural MI param
+
+  eval_batch_size: 8192    #  Evaluation batch size (pure memory <-> time tradeoff)
+  alpha:  0.01             #  Exponential Moving Average (EMA) coupling parameter
+  ma_eT:  [null, null]     #  EMA tracking values (set for each class!)
+  
+  y_dim: [1]               #  dimensionality ([1] for NN scalar output Z vs target X)
+  
+  epochs: 5
+  batch_size: 256          #  if the estimate (network) turns into NaN, try tuning batch size, lr, weight decay ...
+  lr: 1.0e-4
+  weight_decay: 1.0e-2
+  clip_norm: 1.0
+  
+  mlp_dim: [128, 128]
+  batch_norm: False
+  dropout: 0.01
+  noise_std: 0.025
+  activation: 'relu'
+  
+  # -------------------------
+  
+  # Comment out for no categories (N.B. dependence structure over inclusive sample != categorical)
+  set_filter: *MI_DOMAIN_FILTER
+# -----------------------------------------------
+
+
+# ========================================================================
+## Classifier setup
+# ========================================================================
+
+cutset0:
+  train:   'cutset'
+  predict: 'cutset'
+  
+  label:   'cutset'
+  raytune:  null
+  
+  # Using yaml multiline syntax without last linebreak syntax with >-
+  # https://stackoverflow.com/questions/3790454/how-do-i-break-a-string-in-yaml-over-multiple-lines
+  cutstring: >-
+    nsv   >= 1 &&  
+    nJet  >= 1 &&  
+    nMuon >= 4
+
+cut0:
+  train:    'cut'
+  predict:  'cut'
+  label:    'nMuon'
+  variable: 'nMuon'
+  sign: 1
+  transform: null
+
+cut1:
+  train:    'cut'
+  predict:  'cut'
+  label:    'nJet'
+  variable: 'nJet'
+  sign: 1
+  transform: null
+
+cut2:
+  train:    'cut'
+  predict:  'cut'
+  label:    'nsv'
+  variable: 'nsv'
+  sign: -1
+  transform: null
+
+exp:
+  train:    'exp'
+  predict:  'exp'
+  label:    'exp'
+  variable: ['nsv', 'nMuon', 'nJet']
+  sign: 1
+  transform: null
+
+
+# ------------------------------------------------------------------------------------------
+
+
+# XGBoost
+# https://xgboost.readthedocs.io/en/latest/parameter.html
+xgb01: &XGB01
+  train:   'xgb'
+  predict: 'xgb'
+  label:   'XGB'
+  raytune:  xgb_trial_0
+  
+  #exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*']
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*', 'muonSV_deltaR_*', 'nJet', 'muonSV_SVdeltaR_.*', 'dRmSV_.*']
+  #exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*', 'MET_.*', 'muonSV_SVdeltaR_.*']
+  #exclude_MVA_vars: ['.*']
+  #include_MVA_vars: ['.*']
+  
+  # general parameters
+  model_param:
+    num_boost_round: 250       # number of epochs (equal to the number of trees!)
+    booster: 'gbtree'          # 'gbtree' (default), 'dart' (dropout boosting)
+    tree_method: 'hist'
+    device:      'auto'        # 'auto', 'cpu', 'cuda'
+    
+    learning_rate: 0.1
+    gamma: 1.67
+    max_depth: 10
+    min_child_weight: 1.0
+    max_delta_step: 1
+    subsample: 1
+
+    colsample_bytree:  0.86
+    colsample_bylevel: 0.6
+    colsample_bynode:  0.8
+    
+    reg_lambda: 2.0               # L2 regularization
+    reg_alpha: 0.05               # L1 regularization
+    
+    # learning task parameters
+    objective: 'binary:logistic'               # Note that 'multi:softprob' does not work with distillation
+    eval_metric: ['logloss']                   
+    #objective: 'custom:binary_cross_entropy'  # Use 'custom:binary_cross_entropy:hessian' for 2nd order descent
+    #eval_metric: ['custom']                   # for custom losses, otherwise 'logloss', 'mlogloss' ...
+  
+  plot_trees: false
+  tensorboard: true
+  
+  # Read/Write of epochs
+  evalmode: 1                  # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                 # -1 is the last saved epoch
+
+
+# ICEBOOST (XGB with torch driven custom loss)
+# https://xgboost.readthedocs.io/en/latest/parameter.html
+xgb01-NOJETS:
+  train:   'xgb'
+  predict: 'xgb'
+  label:   'XGB-NOJETS'
+  raytune:  xgb_trial_0
+  
+  #exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_.*']
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_.*', 'muonSV_deltaR_*', 'nJet', 'muonSV_SVdeltaR_.*', 'dRmSV_.*']
+  #include_MVA_vars: ['.*']
+  
+  # general parameters
+  model_param:
+    num_boost_round: 150       # number of epochs (equal to the number of trees!)
+    booster: 'gbtree'         # 'gbtree' (default), 'dart' (dropout boosting)
+    tree_method: 'hist'
+    device:      'auto'       # 'auto', 'cpu', 'cuda'
+    
+    learning_rate: 0.1
+    gamma: 1.67
+    max_depth: 10
+    min_child_weight: 1.0
+    max_delta_step: 1
+    subsample: 1
+
+    colsample_bytree:  0.86
+    colsample_bylevel: 0.6
+    colsample_bynode:  0.8
+    
+    reg_lambda: 2.0               # L2 regularization
+    reg_alpha: 0.05               # L1 regularization
+    
+    # learning task parameters
+    objective: 'binary:logistic'             # Note that 'multi:softprob' does not work with distillation
+    eval_metric: ['logloss']                 
+    #objective: 'custom:binary_cross_entropy'  # Use 'custom:binary_cross_entropy:hessian' for 2nd order descent
+    #eval_metric: ['custom']                   # for custom losses, otherwise 'logloss', 'mlogloss' ...
+  
+  plot_trees: false
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1                  # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                 # -1 is the last saved epoch
+
+# XGBoost
+# https://xgboost.readthedocs.io/en/latest/parameter.html
+xgb01-ONLYMU:
+  train:   'xgb'
+  predict: 'xgb'
+  label:   'XGB-ONLYMU'
+  raytune:  xgb_trial_0
+  
+  exclude_MVA_vars: ['.*']
+  include_MVA_vars: ['muonSV_chi2.*', 'muonSV_pAngle.*', 'muonSV_dlen.*', muonSV_dlenSig.*', 'muonSV_dxy.*', 'muonSV_dxySig.*', 'muonSV_mu1pt.*', 'muonSV_mu1eta.*', 'muonSV_mu1phi.*', 'muonSV_mu2pt.*', 'muonSV_mu2eta.*', 'muonSV_mu2phi.*', 'muonSV_x.*', 'muonSV_y.*', 'muonSV_z.*', 'Muon_.*', 'nMuon']
+  #include_MVA_vars: ['muonSV_pAngle_0', 'Muon_pt_3', 'Muon_pt_2', 'muonSV_chi2_0', 'Muon_phi_3', 'muonSV_dxy_0', 'Muon_dz_3', 'Muon_dxy_3', 'Muon_eta_3', 'Muon_softMva_3']
+
+  # general parameters
+  model_param:
+    num_boost_round: 150       # number of epochs (equal to the number of trees!)
+    booster: 'gbtree'         # 'gbtree' (default), 'dart' (dropout boosting)
+    tree_method: 'hist'
+    device:      'auto'       # 'auto', 'cpu', 'cuda'
+    
+    learning_rate: 0.1
+    gamma: 1.67
+    max_depth: 10
+    min_child_weight: 1.0
+    max_delta_step: 1
+    subsample: 1
+
+    colsample_bytree:  0.86
+    colsample_bylevel: 0.6
+    colsample_bynode:  0.8
+    
+    reg_lambda: 2.0               # L2 regularization
+    reg_alpha: 0.05               # L1 regularization
+    
+    # learning task parameters
+    objective: 'binary:logistic'             # Note that 'multi:softprob' does not work with distillation
+    eval_metric: ['logloss']                 # for custom losses, otherwise 'logloss', 'mlogloss' ...
+    #objective: 'custom:binary_cross_entropy'  # Note that 'multi:softprob' does not work with distillation
+    #eval_metric: ['custom']                   # for custom losses, otherwise 'logloss', 'mlogloss' ...
+  
+  plot_trees: false
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1               # 'all', 'latest'
+  readmode: -1                 # -1 is the last saved epoch
+
+# XGBoost
+# https://xgboost.readthedocs.io/en/latest/parameter.html
+xgb01-ONLYMU-10-vars:
+  train:   'xgb'
+  predict: 'xgb'
+  label:   'XGB-ONLYMU-10-vars'
+  raytune:  xgb_trial_0
+  
+  exclude_MVA_vars: ['.*']
+  #include_MVA_vars: ['muonSV_chi2.*', 'muonSV_pAngle.*', 'muonSV_dlen.*', muonSV_dlenSig.*', 'muonSV_dxy.*', 'muonSV_dxySig.*', 'muonSV_mu1pt.*', 'muonSV_mu1eta.*', 'muonSV_mu1phi.*', 'muonSV_mu2pt.*', 'muonSV_mu2eta.*', 'muonSV_mu2phi.*', 'muonSV_x.*', 'muonSV_y.*', 'muonSV_z.*', 'Muon_.*', 'nMuon']
+  include_MVA_vars: ['muonSV_pAngle_0', 'Muon_pt_3', 'Muon_pt_2', 'muonSV_chi2_0', 'Muon_phi_3', 'muonSV_dxy_0', 'Muon_dz_3', 'Muon_dxy_3', 'Muon_eta_3', 'Muon_softMva_3']
+
+  # general parameters
+  model_param:
+    num_boost_round: 150       # number of epochs (equal to the number of trees!)
+    booster: 'gbtree'         # 'gbtree' (default), 'dart' (dropout boosting)
+    tree_method: 'hist'
+    device:      'auto'       # 'auto', 'cpu', 'cuda'
+    
+    learning_rate: 0.1
+    gamma: 1.67
+    max_depth: 10
+    min_child_weight: 1.0
+    max_delta_step: 1
+    subsample: 1
+
+    colsample_bytree:  0.86
+    colsample_bylevel: 0.6
+    colsample_bynode:  0.8
+    
+    reg_lambda: 2.0               # L2 regularization
+    reg_alpha: 0.05               # L1 regularization
+    
+    # learning task parameters
+    objective: 'binary:logistic'             # Note that 'multi:softprob' does not work with distillation
+    eval_metric: ['logloss']                 # for custom losses, otherwise 'logloss', 'mlogloss' ...
+    #objective: 'custom:binary_cross_entropy'  # Note that 'multi:softprob' does not work with distillation
+    #eval_metric: ['custom']                   # for custom losses, otherwise 'logloss', 'mlogloss' ...
+  
+  plot_trees: false
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1               # 'all', 'latest'
+  readmode: -1                 # -1 is the last saved epoch
+
+
+# ICEBOOST (XGB with torch driven custom loss)
+# https://xgboost.readthedocs.io/en/latest/parameter.html
+iceboost01: &ICEBOOST01
+  train:   'xgb'
+  predict: 'xgb_logistic'
+  label:   'ICEBOOST'
+  raytune:  xgb_trial_0
+
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*']
+  #include_MVA_vars: ['.*']
+  
+  # general parameters
+  model_param:
+    num_boost_round: 250       # number of epochs (equal to the number of trees!)
+    booster: 'gbtree'         # 'gbtree' (default), 'dart' (dropout boosting)
+    tree_method: 'hist'
+    device:      'auto'       # 'auto', 'cpu', 'cuda'
+    
+    learning_rate: 0.1
+    gamma: 1.67
+    max_depth: 10
+    min_child_weight: 1.0
+    max_delta_step: 1
+    subsample: 1
+
+    colsample_bytree:  0.86
+    colsample_bylevel: 0.6
+    colsample_bynode:  0.8
+    
+    reg_lambda: 2.0               # L2 regularization
+    reg_alpha: 0.05               # L1 regularization
+    
+    # learning task parameters
+    #objective: 'binary:logistic'             # Note that 'multi:softprob' does not work with distillation
+    #eval_metric: ['logloss']                 
+    objective: 'custom:binary_cross_entropy'  # Use 'custom:binary_cross_entropy:hessian' for 2nd order descent
+    eval_metric: ['custom']                   # for custom losses, otherwise 'logloss', 'mlogloss' ...
+  
+  # BCE loss domains
+  BCE_param:
+    main:
+      classes: [0, 1]
+      beta: 1.0
+      set_filter: *MAIN_DOMAIN_FILTER # Comment out for 'inclusive'
+  
+  plot_trees: false
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1                  # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                 # -1 is the last saved epoch
+
+# ICEBOOST without Jets
+#
+iceboost01-NOJETS:
+
+  <<: *ICEBOOST01
+
+  label:   'ICEBOOST-NOJETS'
+
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_.*']
+  #include_MVA_vars: ['.*']
+
+iceboost01-ONLYMU:
+
+  <<: *ICEBOOST01
+
+  label:   'ICEBOOST-ONLYMU'
+
+  exclude_MVA_vars: ['.*']
+  include_MVA_vars: ['muonSV_chi2.*', 'muonSV_pAngle.*', 'muonSV_dlen.*', muonSV_dlenSig.*', 'muonSV_dxy.*', 'muonSV_dxySig.*', 'muonSV_mu1pt.*', 'muonSV_mu1eta.*', 'muonSV_mu1phi.*', 'muonSV_mu2pt.*', 'muonSV_mu2eta.*', 'muonSV_mu2phi.*', 'muonSV_x.*', 'muonSV_y.*', 'muonSV_z.*', 'Muon_.*', 'MODEL_.*', 'nMuon']
+
+# ICEBOOST with MI-regularization
+#
+iceboost01-MI:
+
+  <<: *ICEBOOST01
+
+  label:   'ICEBOOST-MI'
+
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*']
+  #include_MVA_vars: ['.*']
+  
+  MI_param:
+    beta: [0.1, 0.1]         # Positive for minimizing (per class in use)
+    <<: *MI_REG_PARAM
+
+
+# ICEBOOST with Domain Adaptation
+#
+iceboost01-DA:
+
+  <<: *ICEBOOST01
+
+  label:   'ICEBOOST-DA'
+  
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*']
+  #include_MVA_vars: ['.*']
+
+  # BCE loss domains
+  BCE_param:
+    main:
+      classes: [0, 1]
+      beta: 1.0
+      set_filter: *MAIN_DOMAIN_FILTER # Comment out for 'inclusive'
+    DA:
+      classes: [0,-2]
+      beta: -0.08
+      set_filter: *DA_DOMAIN_FILTER   # Comment out for 'inclusive'
+
+
+# ICEBOOST with Domain Adaptation and without Jets
+#
+iceboost01-DA-NOJETS:
+  
+  <<: *ICEBOOST01
+
+  label:   'ICEBOOST-DA-NOJETS'
+
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet.*']
+  #include_MVA_vars: ['.*']
+
+  # BCE loss domains
+  BCE_param:
+    main:
+      classes: [0, 1]
+      beta: 1.0
+      set_filter: *MAIN_DOMAIN_FILTER # Comment out for 'inclusive'
+    DA:
+      classes: [0,-2]
+      beta: -0.08
+      set_filter: *DA_DOMAIN_FILTER   # Comment out for 'inclusive'
+
+
+# ICEBOOST with Domain Adaptation and without theory conditional (MODEL_) parameters
+#
+iceboost01-DA-NC:
+
+  <<: *ICEBOOST01
+
+  label:   'ICEBOOST-DA-NC'
+
+  exclude_MVA_vars: ['MODEL.*', 'muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*']
+  #include_MVA_vars: ['.*']
+  
+  # BCE loss domains
+  BCE_param:
+    main:
+      classes: [0, 1]
+      beta: 1.0
+      set_filter: *MAIN_DOMAIN_FILTER # Comment out for 'inclusive'
+    DA:
+      classes: [0,-2]
+      beta: -0.08
+      set_filter: *DA_DOMAIN_FILTER   # Comment out for 'inclusive'
+
+
+# ICEBOOST with Domain Adaptation and MI-regularization
+#
+iceboost01-DA-MI:
+
+  <<: *ICEBOOST01
+
+  label:   'ICEBOOST-DA-MI'
+
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*']
+  #include_MVA_vars: ['.*']
+  
+  # BCE loss domains
+  BCE_param:
+    main:
+      classes: [0, 1]
+      beta: 1.0
+      set_filter: *MAIN_DOMAIN_FILTER # Comment out for 'inclusive'
+    DA:
+      classes: [0,-2]
+      beta: -0.08
+      set_filter: *DA_DOMAIN_FILTER   # Comment out for 'inclusive'
+  
+  MI_param:
+    beta: [0.1, 0.1]                # Positive for minimizing (per class in use)
+    <<: *MI_REG_PARAM
+
+
+# ICEBOOST with Domain Adaptation and MI-regularization and without Jets
+#
+iceboost01-DA-MI-NOJETS:
+
+  <<: *ICEBOOST01
+
+  label:   'ICEBOOST-DA-MI-NOJETS'
+
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet.*']
+  #include_MVA_vars: ['.*']
+  
+  # BCE loss domains
+  BCE_param:
+    main:
+      classes: [0, 1]
+      beta: 1.0
+      set_filter: *MAIN_DOMAIN_FILTER # Comment out for 'inclusive'
+    DA:
+      classes: [0,-2]
+      beta: -0.08
+      set_filter: *DA_DOMAIN_FILTER   # Comment out for 'inclusive'
+  
+  MI_param:
+    beta: [0.1, 0.1]                  # Positive for minimizing (per class in use)
+    <<: *MI_REG_PARAM
+
+iceboost01-DA-ONLYMU:
+  
+  <<: *ICEBOOST01
+
+  label:   'ICEBOOST-DA-ONLYMU'
+
+  exclude_MVA_vars: ['.*']
+  include_MVA_vars: ['muonSV_chi2.*', 'muonSV_pAngle.*', 'muonSV_dlen.*', muonSV_dlenSig.*', 'muonSV_dxy.*', 'muonSV_dxySig.*', 'muonSV_mu1pt.*', 'muonSV_mu1eta.*', 'muonSV_mu1phi.*', 'muonSV_mu2pt.*', 'muonSV_mu2eta.*', 'muonSV_mu2phi.*', 'muonSV_x.*', 'muonSV_y.*', 'muonSV_z.*', 'Muon_.*', 'MODEL_.*', 'nMuon']
+
+  # BCE loss domains
+  BCE_param:
+    main:
+      classes: [0, 1]
+      beta: 1.0
+      set_filter: *MAIN_DOMAIN_FILTER # Comment out for 'inclusive'
+    DA:
+      classes: [0,-2]
+      beta: -0.08
+      set_filter: *DA_DOMAIN_FILTER   # Comment out for 'inclusive'
+
+iceboost01-DA-MI-ONLYMU:
+
+  <<: *ICEBOOST01
+
+  label:   'ICEBOOST-DA-MI-ONLYMU'
+
+  exclude_MVA_vars: ['.*']
+  include_MVA_vars: ['muonSV_chi2.*', 'muonSV_pAngle.*', 'muonSV_dlen.*', muonSV_dlenSig.*', 'muonSV_dxy.*', 'muonSV_dxySig.*', 'muonSV_mu1pt.*', 'muonSV_mu1eta.*', 'muonSV_mu1phi.*', 'muonSV_mu2pt.*', 'muonSV_mu2eta.*', 'muonSV_mu2phi.*', 'muonSV_x.*', 'muonSV_y.*', 'muonSV_z.*', 'Muon_.*', 'MODEL_.*', 'nMuon']
+  
+  # BCE loss domains
+  BCE_param:
+    main:
+      classes: [0, 1]
+      beta: 1.0
+      set_filter: *MAIN_DOMAIN_FILTER # Comment out for 'inclusive'
+    DA:
+      classes: [0,-2]
+      beta: -0.08
+      set_filter: *DA_DOMAIN_FILTER   # Comment out for 'inclusive'
+  
+  MI_param:
+    beta: [0.1, 0.1]                  # Positive for minimizing (per class in use)
+    <<: *MI_REG_PARAM
+
+# -----------------------------------------------------------------------------
+# Remember to use 'zscore-weighted' (or 'zscore') typically with Neural Networks,
+# however, performance with BDTs may be better without.
+# -----------------------------------------------------------------------------
+
+# Logistic Regression (simple linear convex model = global optimum guarantee)
+lgr0:
+  train:   'torch_generic'
+  predict: 'torch_vector'
+  label:   'LGR'
+  raytune:  null
+  
+  # Model parameter
+  conv_type: 'lgr'
+  model_param:  
+    null
+
+  # Optimization
+  opt_param:  
+    lossfunc: 'cross_entropy'   # cross_entropy, focal_entropy, logit_norm_cross_entropy
+    gamma: 2                    # focal_entropy exponent
+    temperature: 1              # logit norm temperature
+    
+    optimizer: 'AdamW'
+    clip_norm: 1.0
+    
+    epochs: 200
+    batch_size: 1024
+    lr: 1.0e-3
+    weight_decay: 1.0e-2       # L2-regularization
+  
+  # Scheduler
+  scheduler_param:
+    step_size: 150
+    gamma: 0.1
+  
+  device: 'auto'                # alternative 'cpu:0', 'cuda:0'
+  num_workers: 4
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1                   # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                  # -1 is the last saved epoch
+
+  eval_batch_size: 1024
+
+
+# Permutation Equivariant Network
+deps:
+  train:   'torch_deps'
+  predict: 'torch_deps'
+  label:   'DEPS'
+  raytune:  null
+  
+  # Model parameters
+  conv_type: 'deps'
+  model_param:  
+    z_dim: 64                   # Latent dimension
+    pool: 'max'
+    dropout: 0.1
+    phi_layers: 3
+    rho_layers: 3
+
+  # Optimization
+  opt_param:  
+    lossfunc: 'cross_entropy' # cross_entropy, focal_entropy, logit_norm_cross_entropy
+    gamma: 2                  # focal_entropy exponent
+    temperature: 1            # logit norm temperature
+    
+    optimizer: 'AdamW'
+    clip_norm: 1.0
+    
+    epochs:  200
+    batch_size:  1024
+    lr: 1.0e-3
+    weight_decay: 1.0e-4       # L2-regularization
+
+  # Scheduler
+  scheduler_param:
+    step_size: 150
+    gamma: 0.1
+  
+  device: 'auto'                # alternative 'cpu:0', 'cuda:0'
+  num_workers: 4
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode:  1                  # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                  # -1 is the last saved epoch
+
+  eval_batch_size: 1024
+
+
+# Deep MAXOUT network
+dmx0:
+  train:   'torch_generic'
+  predict: 'torch_vector'
+  label:   'MAXO'
+  raytune:  null
+
+  # Model parameter
+  conv_type: 'maxo'
+  model_param:
+    num_units: 8
+    neurons:  50
+    dropout:  0.1
+
+  # Optimization
+  opt_param:  
+    lossfunc: 'cross_entropy'  # cross_entropy, focal_entropy, logit_norm_cross_entropy
+    gamma: 2                   # focal_entropy exponent
+    temperature: 1             # logit norm temperature
+
+    optimizer: 'AdamW'          # Adam, AdamW
+    clip_norm: 1.0
+
+    epochs: 200
+    batch_size: 1024
+    lr: 1.0e-3
+    weight_decay: 1.0e-2       # L2-regularization
+
+  # Scheduler
+  scheduler_param:
+    step_size: 150
+    gamma: 0.1
+  
+  device: 'auto'               # alternative 'cpu:0', 'cuda:0'
+  num_workers: 4
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1                  # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                 # -1 is the last saved epoch
+
+  eval_batch_size: 1024
+
+
+# Deep MLP
+dmlp:
+  train:   'torch_generic'
+  predict: 'torch_vector'
+  label:   'DMLP'
+  raytune:  null
+  
+  # Model
+  conv_type: 'dmlp'
+  model_param:
+    mlp_dim: [64, 64, 64, 64] # hidden layer dimensions
+    activation: 'silu'
+    batch_norm: False
+    dropout: 0.0
+
+  # Optimization
+  opt_param:  
+    lossfunc: 'cross_entropy' # cross_entropy, focal_entropy, logit_norm_cross_entropy
+    gamma: 2                  # focal_entropy exponent
+    temperature: 1            # logit norm temperature
+
+    optimizer: 'AdamW'
+    clip_norm: 1.0
+    
+    epochs: 200
+    batch_size: 1024
+    lr: 1.0e-4
+    weight_decay: 1.0e-2      # L2-regularization
+
+  # Scheduler
+  scheduler_param:
+    step_size: 150
+    gamma: 0.1
+  
+  device: 'auto'               # alternative 'cpu:0', 'cuda:0'
+  num_workers: 4
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1                  # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                 # -1 is the last saved epoch
+
+  eval_batch_size: 1024
+
+
+# Variational Autoencoder
+vae0:
+  train:   'torch_generic'
+  predict: 'torch_scalar'
+  label:   'VAE'
+  raytune:  null
+
+  # ** Custom set of variables **
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet.*', 'MODEL.*']
+  #include_MVA_vars: ['.*']
+
+  # Model param
+  conv_type: 'vae'
+  model_param:
+    encoder_hidden_dim: [64, 64, 64]
+    var_hidden_dim:     [64]        # First dimension needs to match with the last of 'encoder_hidden_dim'
+    latent_dim:          12
+    decoder_hidden_dim: [64, 64, 64]
+    
+    encoder_act: 'silu'
+    encoder_bn: False
+    encoder_dropout: 0.01
+
+    decoder_act: 'silu'
+    decoder_bn: False
+    decoder_dropout: 0.01
+    
+    reco_prob: 'Gaussian'           # 'Gaussian', 'Bernoulli'
+    kl_prob:   'Gaussian'           # 'Gaussian'
+    anomaly_score: 'RECO'           # 'RECO', 'KL_RECO'
+  
+  # Optimization
+  opt_param:  
+    lossfunc: 'VAE_background_only' # cross_entropy, focal_entropy, logit_norm_cross_entropy
+    VAE_beta:  1.0                  # (for vanilla VAE set beta = 1.0)
+    gamma: 2                        # focal_entropy exponent
+    temperature: 1                  # logit norm temperature
+    
+    optimizer: 'AdamW'
+    clip_norm: 1.0
+
+    epochs: 200
+    batch_size: 1024
+    lr: 3.0e-4
+    weight_decay: 1.0e-3       # L2-regularization
+
+  # Scheduler
+  scheduler_param:
+    type: 'step'               # 'cos', 'warm-cos', 'exp', 'step', 'constant' (deeptools.set_scheduler)
+    step_size: 200
+    gamma: 0.1
+
+  device: 'auto'                # alternative 'cpu:0', 'cuda:0'
+  num_workers: 4
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1                   # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                  # -1 is the last saved epoch
+
+  eval_batch_size: 1024
+
+
+# Graph net
+gnet1:
+  train:    'torch_graph'
+  predict:  'torch_graph'
+  label:    'EdgeConv'
+  raytune:  'gnn_setup'
+
+  conv_type: 'EdgeConv'        # See models under icenet/deep/graph.py
+  
+  # Model
+  model_param:
+    task: 'graph'              # 'graph', 'node', 'edge_directed', 'edge_undirected' (level of inference)
+    global_pool: 'mean'
+    z_dim: 196                 # Convolution output dimension
+    
+    # Message passing parameters
+    conv_MLP_act: 'relu'
+    conv_MLP_bn: True
+    conv_MLP_dropout: 0.01
+    conv_aggr: 'max'
+    conv_knn: 8
+
+    fusion_MLP_act: 'relu'
+    fusion_MLP_bn: False
+    fusion_MLP_dropout: 0.01
+
+    final_MLP_act: 'relu'
+    final_MLP_bn:  False
+    final_MLP_dropout: 0.01
+
+    # Domain adaptation
+    DA_active: False
+    # ...
+
+  # Optimization
+  opt_param:  
+    lossfunc: 'cross_entropy' # cross_entropy, focal_entropy, logit_norm_cross_entropy
+    gamma: 2                  # focal_entropy exponent
+    temperature: 1            # logit norm temperature
+
+    optimizer: 'AdamW'
+    clip_norm: 1.0
+
+    epochs: 150
+    batch_size: 1024
+    lr: 3.0e-4
+    weight_decay:  1.0e-4        # L2-regularization
+
+  # Scheduler
+  scheduler_param:
+    type: 'step'               # 'cos', 'warm-cos', 'exp', 'step', 'constant' (deeptools.set_scheduler)
+    step_size: 200
+    gamma: 0.1
+
+  device: 'auto'              # alternative 'cpu:0', 'cuda:0'
+  num_workers: 4
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1                  # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                 # 'name', epoch number, or -1 uses the last saved epoch
+
+  eval_batch_size: 1024
+
+
+# Graph net
+gnet2:
+  train:    'torch_graph'
+  predict:  'torch_graph'
+  label:    'SuperEdgeConv'
+  raytune:  'gnn_setup'
+
+  conv_type: 'SuperEdgeConv'   # See models under icenet/deep/graph.py
+  
+  # Model
+  model_param:
+    task: 'graph'              # 'graph', 'node', 'edge_directed', 'edge_undirected' (level of inference)
+    global_pool: 'mean'        # 'mean', 'max' etc
+    z_dim: 196                 # Convolution output dimension
+    
+    # Message passing parameters
+    conv_MLP_act: 'relu'
+    conv_MLP_bn: True
+    conv_MLP_dropout: 0.01
+    conv_aggr: 'attention'     # 'mean', 'max', 'attention' (for SuperEdgeConv)
+    conv_knn: 8
+    
+    fusion_MLP_act: 'relu'
+    fusion_MLP_bn: False
+    fusion_MLP_dropout: 0.01
+
+    final_MLP_act: 'relu'
+    final_MLP_bn:  False
+    final_MLP_dropout: 0.01
+    
+    # Domain adaptation
+    DA_active: False
+    # ...
+
+  # Optimization
+  opt_param:  
+    lossfunc: 'cross_entropy' # cross_entropy, focal_entropy, logit_norm_cross_entropy
+    gamma: 2                  # focal_entropy exponent
+    temperature: 1            # logit norm temperature
+
+    optimizer: 'AdamW'
+    clip_norm: 1.0
+
+    epochs: 150
+    batch_size: 1024
+    lr: 3.0e-4
+    weight_decay:  1.0e-4      # L2-regularization
+
+  # Scheduler
+  scheduler_param:
+    type: 'step'               # 'cos', 'warm-cos', 'exp', 'step', 'constant' (deeptools.set_scheduler)
+    step_size: 200
+    gamma: 0.1
+
+  device: 'auto'              # alternative 'cpu:0', 'cuda:0'
+  num_workers: 4
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1                  # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                # 'name', epoch number, or -1 uses the last saved epoch
+
+  eval_batch_size: 1024
+
+
+# Graph net
+gnet3:
+  train:    'torch_graph'
+  predict:  'torch_graph'
+  label:    'DynamicEdgeConv'
+  raytune:  'gnn_setup'
+
+  conv_type: 'DynamicEdgeConv'       # See models under icenet/deep/graph.py
+  
+  # Model
+  model_param:
+    task: 'graph'                    # 'graph', 'node', 'edge_directed', 'edge_undirected' (level of inference)
+    global_pool: 'mean'
+    z_dim: 196                       # Convolution output dimension
+    
+    # Message passing parameters
+    conv_MLP_act: 'relu'
+    conv_MLP_bn: True
+    conv_MLP_dropout: 0.01
+    conv_aggr: 'max'
+    conv_knn: 8
+
+    fusion_MLP_act: 'relu'
+    fusion_MLP_bn: False
+    fusion_MLP_dropout: 0.01
+
+    final_MLP_act: 'relu'
+    final_MLP_bn:  False
+    final_MLP_dropout: 0.01
+
+    # Domain adaptation
+    DA_active: False
+    # ...
+
+  # Optimization
+  opt_param:  
+    lossfunc: 'cross_entropy' # cross_entropy, focal_entropy, logit_norm_cross_entropy
+    gamma: 2                  # focal_entropy exponent
+    temperature: 1            # logit norm temperature
+
+    optimizer: 'AdamW'
+    clip_norm: 1.0
+
+    epochs: 150
+    batch_size: 1024
+    lr: 3.0e-4
+    weight_decay:  1.0e-4        # L2-regularization
+
+  # Scheduler
+  scheduler_param:
+    type: 'step'               # 'cos', 'warm-cos', 'exp', 'step', 'constant' (deeptools.set_scheduler)
+    step_size: 200
+    gamma: 0.1
+
+  device: 'auto'              # alternative 'cpu:0', 'cuda:0'
+  num_workers: 4
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1                  # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                # 'name', epoch number, or -1 uses the last saved epoch
+
+  eval_batch_size: 1024
+

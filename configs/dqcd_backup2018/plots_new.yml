@@ -1,0 +1,137 @@
+FILTER: &FILTER
+  
+  filter[0]:
+    operator: 'cartesian_and' # null (unary), 'cartesian_and', 'cartesian_or'
+    sets: [0,1]               # input set ids (one or several)
+  
+  filter[1]:
+    operator: null            # null (unary), 'cartesian_and', 'cartesian_or'
+    sets: [0]                 # input set ids (one or several)
+  
+  filter[2]:
+    operator: null            # null (unary), 'cartesian_and', 'cartesian_or'
+    sets: [1]                 # input set ids (one or several)
+  
+  filter[3]:
+    operator: 'cartesian_and' # null (unary), 'cartesian_and', 'cartesian_or'
+    sets: [0,1,2]             # input set ids (one or several)
+    match: [0,2]              # require pair/N-tuplet wise cartesian combination match between these set indices
+  
+  filter[4]:
+    operator: null            # null (unary), 'cartesian_and', 'cartesian_or'
+    sets: [2]                 # input set ids (one or several)
+  
+  # ... more filters here
+  
+  # --------------------
+  
+  # Theory model param
+  set[0]:
+    #diplomat_classes: [-2, 0]   # classes which always pass this selection (use with care)
+    expand: 'set'                # 'set', 'vetoset' or 'powerset'
+    cutset:
+      # Latex description is for boolean [0,1] per cut
+      [{cut: 'GEN_mpi == 1  && GEN_mA == 0.33', latex: ['', 'mpi = 1 & mA = 0.33']},
+       {cut: 'GEN_mpi == 4  && GEN_mA == 0.40', latex: ['', 'mpi = 4 & mA = 0.40']},
+       {cut: 'GEN_mpi == 2  && GEN_mA == 0.67', latex: ['', 'mpi = 2 & mA = 0.67']},
+       {cut: 'GEN_mpi == 4  && GEN_mA == 1.33', latex: ['', 'mpi = 4 & mA = 1.33']},
+       {cut: 'GEN_mpi == 10 && GEN_mA == 1.00', latex: ['', 'mpi = 10 & mA = 1.00']},
+       {cut: 'GEN_mpi == 10 && GEN_mA == 3.33', latex: ['', 'mpi = 10 & mA = 3.33']}]
+  
+  # Theory model param
+  set[1]:
+    #diplomat_classes: [-2, 0]   # classes which always pass this selection (use with care)
+    expand: 'set'                # 'set', 'vetoset' or 'powerset'
+    cutset:
+      [{cut: 'GEN_ctau == 0.1', latex: ['', 'ctau = 0.1']},
+       {cut: 'GEN_ctau == 1',   latex: ['', 'ctau = 1'  ]},
+       {cut: 'GEN_ctau == 10',  latex: ['', 'ctau = 10' ]},
+       {cut: 'GEN_ctau == 100', latex: ['', 'ctau = 100']}]
+  
+  # +- 20 sigma windows except last one with +- 5 sigma, assuming 1% mass resolution ~ 1 sigma
+  set[2]:
+    expand: 'set'  # 'set', 'vetoset' or 'powerset'
+    cutset:
+      [{cut: '0.264  < muonSV_mass_0 && muonSV_mass_0 < 0.396',  latex: ['', 'box(M ~ 0.33)']},
+       {cut: '0.320  < muonSV_mass_0 && muonSV_mass_0 < 0.480',  latex: ['', 'box(M ~ 0.40)']},
+       {cut: '0.536  < muonSV_mass_0 && muonSV_mass_0 < 0.804',  latex: ['', 'box(M ~ 0.67)']},
+       {cut: '1.064  < muonSV_mass_0 && muonSV_mass_0 < 1.596',  latex: ['', 'box(M ~ 1.33)']},
+       {cut: '0.800  < muonSV_mass_0 && muonSV_mass_0 < 1.200',  latex: ['', 'box(M ~ 1.00)']},
+       {cut: '3.1635 < muonSV_mass_0 && muonSV_mass_0 < 3.4965', latex: ['', 'box(M ~ 3.33)']}]
+  
+  # Final state category cuts
+  set[3]:
+    expand: 'set'  # 'set', 'vetoset' or 'powerset'
+    cutset:
+      [{cut: '0.0 < muonSV_dxy_0  && muonSV_dxy_0 < 1.0 && muonSV_pAngle_0 < 0.2', latex: ['', '$\Delta_{xy} < 1$ & $\delta < 0.2$']},
+       {cut: '0.0 < muonSV_dxy_0  && muonSV_dxy_0 < 1.0 && muonSV_pAngle_0 > 0.2', latex: ['', '$\Delta_{xy} < 1$ & $\delta > 0.2$']},
+       {cut: '1.0 < muonSV_dxy_0  && muonSV_dxy_0 < 10  && muonSV_pAngle_0 < 0.2', latex: ['', '$1 < \Delta_{xy} < 10$ & $\delta < 0.2$']},
+       {cut: '1.0 < muonSV_dxy_0  && muonSV_dxy_0 < 10  && muonSV_pAngle_0 > 0.2', latex: ['', '$1 < \Delta_{xy} < 10$ & $\delta > 0.2$']},
+       {cut: 'muonSV_dxy_0 > 10.0 && muonSV_pAngle_0 < 0.2', latex: ['', '$\Delta_{xy} > 10$ & $\delta < 0.2$']},
+       {cut: 'muonSV_dxy_0 > 10.0 && muonSV_pAngle_0 > 0.2', latex: ['', '$\Delta_{xy} > 10$ & $\delta > 0.2$']}]
+  
+  # ... more sets here
+
+# -----------------------------------------------------------------------
+
+basic:
+  active: True
+  nbins:  70
+  percentile_range: [0.5, 99.5]
+  exclude_vals: [null, -999.0]
+  plot_unweighted: False
+
+corrmat:
+  active: False
+
+contours:
+  active: False
+
+ROC:
+  active: True
+  num_bootstrap: 50
+  xmin: 1.0E-6
+  set_filter: *FILTER
+
+## Binned ROC plots can be 1D or 2D
+ROC_binned:
+  active: False
+  num_bootstrap: 50
+  xmin: 1.0E-4
+
+  plot[0]:
+    var:   ['ChsMET_pt']
+    edges: [4.0, 6, 8.0, 10.0, 12.0, 15.0, 10000]
+
+  plot[1]:
+    var:   ['muonSV_mass_0']
+    edges: [0.5, 1.5, 2.5, 3.5, 5.5, 7.0, 10.0, 20.0, 40.0, 80.0]
+  
+  #plot[2]:
+  #  var:   ['GEN_mpi', 'GEN_ctau']
+  #  edges: [[1.9, 2.1, 4.9, 5.1, 9.9, 10.1, 14.1, 15.1],
+  #          [9, 11, 49, 51, 99, 101]]
+
+## MVA output density (1D)
+MVA_output:
+  active: True
+  edges: 80
+  set_filter: *FILTER
+
+## (MVA output x External variable) density (2D)
+MVA_2D:
+  active: False
+
+  plot[0]:
+    #var:  ['.*'] # RegExp supported
+    #var:  ['muonSV_mass.*'] # RegExp supported
+    var:   ['muonSV_mass_0', 'muonSV_mass_1']
+    edges: [{'nbin': 50,  'minmax': [0.0, 1.0],  'space': 'linear'},
+            {'nbin': 100, 'minmax': [0.0, 20.0], 'space': 'linear'}]
+    density: True
+  
+  #plot[1]:
+  #  var:   ['.?hlt_pms2.?'] # RegExp supported
+  #  edges: [{'nbin': 50, 'minmax': [0.0, 1.0], 'space': 'linear'},
+  #          {'nbin': 50, 'q': [0.0, 0.95],     'space': 'log10'}]
+  #  density: True

@@ -267,7 +267,7 @@ def process_data(args):
                     print("param = ", param)
                     print("ids = ", ids)
                     print("len = ", len(ids))
-                    model.save_model("/vols/cms/jtafoyav/parking/bdt/model_ul_saved_scenarioA_ONLYMU.model")
+                    model.save_model("/vols/cms/khl216/model_ul_saved_scenarioA_ONLYMU.model")
                     import sys
                     sys.exit()
                     '''

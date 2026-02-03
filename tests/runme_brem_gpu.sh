@@ -4,7 +4,8 @@
 # 
 # Run with: maxevents=10000; source runme.sh
 
-ICEPATH=/home/hep/rjb3/work/icenet
+#ICEPATH=/home/hep/rjb3/work/icenet
+ICEPATH=/home/hep/jtafoyav/vols/parking/bdt/icenet
 cd $ICEPATH
 echo "$(pwd)"
 #echo "superclean ..."; rm -f -r $ICEPATH/output/*; rm -f -r $ICEPATH/figs/*; rm -f -r $ICEPATH/checkpoint/*; rm -f -r $ICEPATH/tmp/*

@@ -1,0 +1,126 @@
+FILTER: &FILTER
+  
+  filter[0]:
+    operator: 'cartesian_and' # null (unary), 'cartesian_and', 'cartesian_or'
+    sets: [0,1]               # input set ids (one or several)
+  
+  filter[1]:
+    operator: null            # null (unary), 'cartesian_and', 'cartesian_or'
+    sets: [0]                 # input set ids (one or several)
+  
+  filter[2]:
+    operator: null            # null (unary), 'cartesian_and', 'cartesian_or'
+    sets: [1]                 # input set ids (one or several)
+  
+  filter[3]:
+    operator: 'cartesian_and' # null (unary), 'cartesian_and', 'cartesian_or'
+    sets: [0,1,2]             # input set ids (one or several)
+    match: [0,2]              # require pair/N-tuplet wise cartesian combination match required between these set indices
+  
+  filter[4]:
+    operator: null            # null (unary), 'cartesian_and', 'cartesian_or'
+    sets: [2]                 # input set ids (one or several)
+  
+  # ... more filters here
+  #filter[0]:
+    #operator: null
+    #sets: [3]
+  # -------------------
+
+  # Theory model param
+  set[0]:
+    diplomat_classes: [-2, 0]    # classes which always pass this selection (use with care)
+    expand: 'set'                # 'set', 'vetoset' or 'powerset'
+    cutset:
+      # Latex description is for boolean [0,1] per cut
+      [{cut: 'GEN_m == 2',  latex: ['', 'm = 2'] },
+       {cut: 'GEN_m == 5',  latex: ['', 'm = 5'] },
+       {cut: 'GEN_m == 10', latex: ['', 'm = 10']},
+       {cut: 'GEN_m == 15', latex: ['', 'm = 15']},
+       {cut: 'GEN_m == 20', latex: ['', 'm = 20']}]
+  
+  # Theory model param
+  set[1]:
+    diplomat_classes: [-2, 0]    # classes which always pass this selection (use with care)
+    expand: 'set'                # 'set', 'vetoset' or 'powerset'
+    cutset:
+      [{cut: 'GEN_ctau == 1',   latex: ['', 'ctau = 1']},
+       {cut: 'GEN_ctau == 10',  latex: ['', 'ctau = 10']},
+       {cut: 'GEN_ctau == 50',  latex: ['', 'ctau = 50']},
+       {cut: 'GEN_ctau == 100', latex: ['', 'ctau = 100']},
+       {cut: 'GEN_ctau == 500', latex: ['', 'ctau = 500']}]
+  
+  # +- 5 sigma windows, assuming 1% mass resolution ~ 1 sigma
+  set[2]:
+    expand: 'set'   # 'set', 'vetoset' or 'powerset'
+    cutset:
+      [{cut: '1.90  < muonSV_mass_0 && muonSV_mass_0 < 2.10', latex: ['', 'box(M ~ 2)']},
+       {cut: '4.75  < muonSV_mass_0 && muonSV_mass_0 < 5.25', latex: ['', 'box(M ~ 5)']},
+       {cut: '9.50  < muonSV_mass_0 && muonSV_mass_0 < 10.50', latex: ['', 'box(M ~ 10)']},
+       {cut: '14.25 < muonSV_mass_0 && muonSV_mass_0 < 15.75', latex: ['', 'box(M ~ 15)']},
+       {cut: '19.00 < muonSV_mass_0 && muonSV_mass_0 < 21.00', latex: ['', 'box(M ~ 20)']}]
+  
+  # ... more sets here
+  set[3]:
+    expand: 'set'
+    cutset:
+      [{cut: 'muonSV_mu1pt_0 > 5 || muonSV_mu2pt_0 > 5', latex: ['', 'At least one muon SV']}]
+
+# -----------------------------------------------------------------------
+
+basic:
+  active: True
+  nbins:  70
+  percentile_range: [0.5, 99.5]
+  exclude_vals: [null, -999.0]
+  plot_unweighted: False
+
+corrmat:
+  active: False
+
+contours:
+  active: false
+
+ROC:
+  active: true
+  num_bootstrap: 50
+  xmin: 1.0E-6
+  set_filter: *FILTER
+
+## Binned ROC plots can be 1D or 2D
+ROC_binned:
+  active: false
+  num_bootstrap: 50
+  xmin: 1.0E-6
+  
+  #plot[0]:
+  #  var:   ['ChsMET_pt']
+  #  edges: [4.0, 6, 8.0, 10.0, 12.0, 15.0, 10000]
+
+  #plot[0]:
+  #  var:   ['GEN_m', 'GEN_ctau']
+  #  edges: [[1.9, 2.1, 4.9, 5.1, 9.9, 10.1, 14.1, 15.1],
+  #          [9, 11, 49, 51, 99, 101]]
+
+## MVA output density (1D)
+MVA_output:
+  active: true
+  edges: 80
+  set_filter: *FILTER
+
+## (MVA output x External variable) density (2D)
+MVA_2D:
+  active: false
+  
+  plot[0]:
+    var:   ['.*'] # RegExp supported
+    edges: [{'nbin': 50, 'q': [0.01, 0.99], 'space': 'linear'},
+            {'nbin': 50, 'q': [0.01, 0.99], 'space': 'linear'}]
+    density: True
+  
+  #plot[1]:
+  #  var:   ['.?hlt_pms2.?']
+  #  edges: [{'nbin': 50, 'minmax': [0.0, 1.0], 'space': 'linear'},
+  #          {'nbin': 50, 'q': [0.0, 0.95],     'space': 'log10'}]
+  #  density: True
+  
