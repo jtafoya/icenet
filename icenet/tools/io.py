@@ -23,6 +23,7 @@ from sklearn.impute import IterativeImputer
 
 # Command line arguments
 from glob import glob
+from fnmatch import fnmatch
 from braceexpand import braceexpand
 import copy
 
@@ -107,6 +108,46 @@ def make_hashable(o):
     return o
 
 
+def _is_remote_url(path):
+    """Check if a path is a remote URL (contains :// scheme)."""
+    return '://' in str(path)
+
+
+def gfal_list_files(directory_url, pattern='*'):
+    """
+    List files in a remote directory using gfal2 and filter by pattern.
+
+    Args:
+        directory_url: Remote directory URL (e.g. davs://host/path/to/dir)
+        pattern:       Filename glob pattern to match (e.g. 'output_*.root')
+
+    Returns:
+        List of full remote URLs for matching files
+    """
+    try:
+        import gfal2
+    except ImportError:
+        raise ImportError(
+            "gfal2 Python bindings are required for remote file access. "
+            "Install with: conda install -c conda-forge python-gfal2"
+        )
+
+    ctx = gfal2.creat_context()
+
+    # Ensure directory URL does not have a trailing slash for consistent joining
+    directory_url = directory_url.rstrip('/')
+
+    entries = ctx.listdir(directory_url)
+    matched = []
+    for entry in entries:
+        if entry in ('.', '..'):
+            continue
+        if fnmatch(entry, pattern):
+            matched.append(directory_url + '/' + entry)
+
+    return sorted(matched)
+
+
 def glob_expand_files(datasets, datapath, recursive_glob=False):
     """
     Do global / brace expansion of files
@@ -161,23 +202,38 @@ def glob_expand_files(datasets, datapath, recursive_glob=False):
         #print(__name__ + f'.glob_expand_files: After expanding the range: {datasets}')
 
     # Parse input files into a list
-    files = list()
+    remote = _is_remote_url(datapath)
+    files  = list()
+
     for data in datasets:
-        
+
         x = datapath + '/' + data
-        expanded_files = glob(x, recursive=recursive_glob) # This does e.g. _*.root expansion (finds the files)
+
+        if remote:
+            # Split into directory and filename pattern for remote listing
+            last_slash = x.rfind('/')
+            directory  = x[:last_slash]
+            pattern    = x[last_slash + 1:]
+
+            expanded_files = gfal_list_files(directory, pattern)
+        else:
+            expanded_files = glob(x, recursive=recursive_glob) # This does e.g. _*.root expansion (finds the files)
 
         # Loop over expanded set of files
         if expanded_files != []:
             for i in range(len(expanded_files)):
                 files.append(expanded_files[i])
-    
+
     if files == []:
        files = [datapath]
-    
-    # Transform multiple slashes
+
+    # Transform multiple slashes (preserve :// in remote URLs)
     for i in range(len(files)):
-        files[i] = files[i].replace('////','/').replace('///', '/').replace('//', '/')
+        if _is_remote_url(files[i]):
+            scheme_end = files[i].index('://') + 3
+            files[i] = files[i][:scheme_end] + files[i][scheme_end:].replace('////','/').replace('///', '/').replace('//', '/')
+        else:
+            files[i] = files[i].replace('////','/').replace('///', '/').replace('//', '/')
 
     # Make them unique
     files = list(set(files))
