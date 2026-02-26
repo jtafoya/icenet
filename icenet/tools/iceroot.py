@@ -11,6 +11,7 @@ import os
 import copy
 import gc
 import time
+import io as _io
 from tqdm import tqdm
 
 from icenet.tools import io
@@ -208,7 +209,7 @@ def load_tree_stats(rootfile, tree, key=None, verbose=False):
     num_events = np.zeros(len(rootfile), dtype=int)
     
     for i in range(len(rootfile)):
-        with uproot.open(rootfile[i]) as file:
+        with uproot.open(open_root_file(rootfile[i])) as file:
 
             events   = file[tree]
             key_name = events.keys()[0] if key is None else key    
@@ -266,6 +267,69 @@ def events_to_jagged_numpy(events, ids, entry_start=0,
     return X, ids
 
 
+def open_root_file(filepath):
+    """
+    Open a ROOT file, handling local paths and remote URLs.
+
+    For root:// (XRootD) URLs, the path is returned as-is since uproot
+    supports XRootD natively (requires the xrootd Python package).
+    For other remote URLs (e.g. davs://), the file is read via gfal2
+    into a BytesIO buffer.
+    For local paths, the path string is returned as-is.
+
+    Args:
+        filepath: Local path or remote URL (possibly with ':treename' appended)
+
+    Returns:
+        A path string (local/xrootd) or BytesIO object (other remote) suitable for uproot.open()
+    """
+    if not io._is_remote_url(filepath):
+        return filepath
+
+    # Protocols that uproot supports natively — pass through as-is
+    UPROOT_NATIVE_SCHEMES = ('root://', 'http://', 'https://')
+    if any(filepath.startswith(s) for s in UPROOT_NATIVE_SCHEMES):
+        return filepath
+
+    # For other remote URLs, the tree part is after the last ':'
+    # that is NOT part of the :// scheme
+    scheme_end = filepath.index('://') + 3
+    rest = filepath[scheme_end:]
+    colon_pos = rest.rfind(':')
+    if colon_pos != -1:
+        url_part    = filepath[:scheme_end + colon_pos]
+        tree_suffix = filepath[scheme_end + colon_pos:]  # e.g. ':Events'
+    else:
+        url_part    = filepath
+        tree_suffix = ''
+
+    try:
+        import gfal2
+    except ImportError:
+        raise ImportError(
+            "gfal2 Python bindings are required for remote file access. "
+            "Install with: conda install -c conda-forge python-gfal2"
+        )
+
+    print(f'open_root_file: Reading remote file via gfal2: {url_part}', 'yellow')
+
+    ctx = gfal2.creat_context()
+    f   = ctx.open(url_part, 'r')
+
+    # Get file size
+    stat = ctx.stat(url_part)
+    size = stat.st_size
+
+    data = f.read(size)
+    f.close()
+
+    buf = _io.BytesIO(data)
+    if tree_suffix:
+        # uproot accepts {file_like_object: treename} syntax
+        return {buf: tree_suffix.lstrip(':')}
+    return buf
+
+
 def load_tree(rootfile, tree, entry_start=0, entry_stop=None, maxevents=None,
               ids=None, library='np', dtype=None, num_cpus=0, verbose=False):
     """
@@ -296,7 +360,7 @@ def load_tree(rootfile, tree, entry_start=0, entry_stop=None, maxevents=None,
     
     # ----------------------------------------------------------
     ### Select variables
-    with uproot.open(files[0]) as events:
+    with uproot.open(open_root_file(files[0])) as events:
         all_ids = events.keys()
     
     load_ids = aux.process_regexp_ids(ids=ids, all_ids=all_ids)
@@ -327,7 +391,7 @@ def load_tree(rootfile, tree, entry_start=0, entry_stop=None, maxevents=None,
         # Non-multiprocessed version for single files
         if len(files) == 1:
             
-            with uproot.open(files[0]) as events:
+            with uproot.open(open_root_file(files[0])) as events:
                 
                 param = {'events': events, 'ids': load_ids,
                           'entry_start': entry_start, 'entry_stop': entry_stop, 'maxevents': maxevents, 'label': files[0]}
@@ -397,7 +461,7 @@ def load_tree(rootfile, tree, entry_start=0, entry_stop=None, maxevents=None,
             # Get the number of events
             num_events = get_num_events(rootfile=files[0])
             
-            with uproot.open(files[0]) as events:
+            with uproot.open(open_root_file(files[0])) as events:
                 
                 X = events.arrays(load_ids, entry_start=entry_start,
                                   entry_stop=entry_stop, library='ak', how='zip')
@@ -477,7 +541,7 @@ def read_file_np(files, ids, entry_start, entry_stop, maxevents, dtype=None):
         #num_entries = get_num_events(rootfile=files[i])
         #print(__name__ + f'.read_file_ak: Found {num_entries} entries from the file: {files[i]}')
         
-        with uproot.open(files[i]) as events:
+        with uproot.open(open_root_file(files[i])) as events:
             
             param = {'events': events, 'ids': ids,
                     'entry_start': entry_start, 'entry_stop': entry_stop, 'maxevents': maxevents, 'label': files[0]}
@@ -522,7 +586,7 @@ def read_file_ak(files, ids, entry_start, entry_stop, maxevents, dtype=None):
         #num_entries = get_num_events(rootfile=files[i])
         #print(__name__ + f'.read_file_ak: Found {num_entries} entries from the file: {files[i]}')
         
-        with uproot.open(files[i]) as events:
+        with uproot.open(open_root_file(files[i])) as events:
             
             data = events.arrays(ids, entry_start=entry_start, entry_stop=entry_stop, library='ak', how='zip')
             
@@ -553,7 +617,7 @@ def get_num_events(rootfile, key_index=0):
     Returns:
         number of entries
     """
-    with uproot.open(rootfile) as events:
+    with uproot.open(open_root_file(rootfile)) as events:
         return len(events.arrays(events.keys()[key_index]))
 
 @ray.remote
