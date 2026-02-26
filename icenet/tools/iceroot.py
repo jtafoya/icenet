@@ -269,21 +269,29 @@ def events_to_jagged_numpy(events, ids, entry_start=0,
 
 def open_root_file(filepath):
     """
-    Open a ROOT file, handling both local paths and remote URLs (davs://, etc.).
+    Open a ROOT file, handling local paths and remote URLs.
 
-    For remote URLs, the file is read via gfal2 into a BytesIO buffer.
-    For local paths, the path string is returned as-is for uproot to open.
+    For root:// (XRootD) URLs, the path is returned as-is since uproot
+    supports XRootD natively (requires the xrootd Python package).
+    For other remote URLs (e.g. davs://), the file is read via gfal2
+    into a BytesIO buffer.
+    For local paths, the path string is returned as-is.
 
     Args:
         filepath: Local path or remote URL (possibly with ':treename' appended)
 
     Returns:
-        A path string (local) or BytesIO object (remote) suitable for uproot.open()
+        A path string (local/xrootd) or BytesIO object (other remote) suitable for uproot.open()
     """
     if not io._is_remote_url(filepath):
         return filepath
 
-    # For remote URLs, the tree part is after the last ':'
+    # Protocols that uproot supports natively — pass through as-is
+    UPROOT_NATIVE_SCHEMES = ('root://', 'http://', 'https://')
+    if any(filepath.startswith(s) for s in UPROOT_NATIVE_SCHEMES):
+        return filepath
+
+    # For other remote URLs, the tree part is after the last ':'
     # that is NOT part of the :// scheme
     scheme_end = filepath.index('://') + 3
     rest = filepath[scheme_end:]

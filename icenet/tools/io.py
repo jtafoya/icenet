@@ -118,7 +118,7 @@ def gfal_list_files(directory_url, pattern='*'):
     List files in a remote directory using gfal2 and filter by pattern.
 
     Args:
-        directory_url: Remote directory URL (e.g. davs://host/path/to/dir)
+        directory_url: Remote directory URL (e.g. root://xrootd.grid.hep.ph.ic.ac.uk/path/to/dir)
         pattern:       Filename glob pattern to match (e.g. 'output_*.root')
 
     Returns:
