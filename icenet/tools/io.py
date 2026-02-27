@@ -113,7 +113,7 @@ def _is_remote_url(path):
     return '://' in str(path)
 
 
-def gfal_list_files(directory_url, pattern='*'):
+def gfal_list_files_OLD(directory_url, pattern='*'):
     """
     List files in a remote directory using gfal2 and filter by pattern.
 
@@ -148,6 +148,50 @@ def gfal_list_files(directory_url, pattern='*'):
     return sorted(matched)
 
 
+def gfal_list_files(directory_url, pattern='*'):
+    """
+    List files in a remote directory using gfal-ls and filter by pattern.
+
+    Args:
+        directory_url: Remote directory URL
+                       (e.g. root://xrootd.grid.hep.ph.ic.ac.uk//store/user/...)
+        pattern:       Filename glob pattern (e.g. 'output_*.root')
+
+    Returns:
+        List of full remote URLs for matching files
+    """
+
+    directory_url = directory_url.rstrip('/')
+
+    try:
+        result = subprocess.run(
+            ["gfal-ls", directory_url],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=True
+        )
+    except FileNotFoundError:
+        raise RuntimeError(
+            "gfal-ls not found. Make sure Grid UI is loaded "
+            "(source /cvmfs/grid.cern.ch/etc/profile.d/setup-cvmfs-ui.sh)"
+        )
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(
+            f"gfal-ls failed for {directory_url}\n{e.stderr}"
+        )
+
+    entries = result.stdout.splitlines()
+
+    matched = []
+    for entry in entries:
+        if entry in ('.', '..'):
+            continue
+        if fnmatch(entry, pattern):
+            matched.append(f"{directory_url}/{entry}")
+
+    return sorted(matched)
+
 def glob_expand_files(datasets, datapath, recursive_glob=False):
     """
     Do global / brace expansion of files
@@ -164,6 +208,10 @@ def glob_expand_files(datasets, datapath, recursive_glob=False):
     print("See https://docs.python.org/3/library/glob.html and brace expansion (be careful, do not use [,] brackets in your filenames)")
     print("")
     
+
+    print(f'TODO start glob_expand_files datasets={datasets}')
+    print(f'TODO start glob_expand_files datapath={datapath}')
+
     # Remove unnecessary []
     if type(datasets) is list and len(datasets) == 1:
         datasets = datasets[0]
@@ -202,14 +250,24 @@ def glob_expand_files(datasets, datapath, recursive_glob=False):
         #print(__name__ + f'.glob_expand_files: After expanding the range: {datasets}')
 
     # Parse input files into a list
-    remote = _is_remote_url(datapath)
+    #TODO remove next line when not useful anymore
+    #remote = _is_remote_url(datapath)
+    remote = _is_remote_url(datasets)
     files  = list()
 
     for data in datasets:
 
         x = datapath + '/' + data
+        #TODO delete next line if not useful anymore
+        #if ( data.startswith("root://xrootd.grid.hep.ph.ic.ac.uk") ):
+        if ( data.startswith("root://") ):
+            x = data
+        print(f'TODO datapath={datapath}')
+        print(f'TODO data={data}')
+        print(f'Fetching dataset: {x}')
 
         if remote:
+            print(f'TODO entered remote case')
             # Split into directory and filename pattern for remote listing
             last_slash = x.rfind('/')
             directory  = x[:last_slash]
@@ -217,6 +275,7 @@ def glob_expand_files(datasets, datapath, recursive_glob=False):
 
             expanded_files = gfal_list_files(directory, pattern)
         else:
+            print(f'TODO entered NOT remote case')
             expanded_files = glob(x, recursive=recursive_glob) # This does e.g. _*.root expansion (finds the files)
 
         # Loop over expanded set of files

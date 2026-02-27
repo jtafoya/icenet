@@ -8,20 +8,20 @@
 export HTC_PROCESS_ID=$1
 export HTC_QUEUE_SIZE=$2
 
-__conda_setup="$('/home/hep/jtafoyav/vols/dependencies/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/vols/cms/khl216/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/hep/jtafoyav/vols/dependencies/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/hep/jtafoyav/vols/dependencies/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/vols/cms/khl216/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/vols/cms/khl216/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/hep/jtafoyav/vols/dependencies/anaconda3/bin:$PATH"
+        export PATH="/vols/cms/khl216/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 conda activate icenet
 
-ICEPATH="/home/hep/jtafoyav/vols/parking/bdt/icenet"
+ICEPATH="/vols/cms/khl216/icenet_Mikael/icenet"
 cd $ICEPATH
 echo "$(pwd)"
 source $ICEPATH/setenv.sh

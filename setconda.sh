@@ -12,3 +12,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+echo "Conda environment variables stablished"
+
+echo "Activating the icenet conda environment"
+conda activate icenet

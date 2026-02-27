@@ -17,3 +17,4 @@ dependencies:
   - cudatoolkit==11.8.0
   - cudatoolkit-dev==11.7.0
   - cudnn==8.9.7.29
+  - fsspec-xrootd
