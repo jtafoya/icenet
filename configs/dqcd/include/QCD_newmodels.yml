@@ -1,7 +1,7 @@
  
 # [0] 
 bparkProductionAll_V1p3--QCD_Pt-15To20_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-15To20_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-15To20_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-15To20_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   2799000.0 
   model_param: 
@@ -14,7 +14,7 @@ bparkProductionAll_V1p3--QCD_Pt-15To20_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunII
  
 # [1] 
 bparkProductionAll_V1p3--QCD_Pt-20To30_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-20To30_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-20To30_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-20To30_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   2526000.0 
   model_param: 
@@ -27,7 +27,7 @@ bparkProductionAll_V1p3--QCD_Pt-20To30_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunII
  
 # [2] 
 bparkProductionAll_V1p3--QCD_Pt-30To50_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-30To50_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-30To50_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-30To50_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   1362000.0 
   model_param: 
@@ -40,7 +40,7 @@ bparkProductionAll_V1p3--QCD_Pt-30To50_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunII
  
 # [3] 
 bparkProductionAll_V1p3--QCD_Pt-50To80_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-50To80_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-50To80_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-50To80_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   376600.0 
   model_param: 
@@ -53,7 +53,7 @@ bparkProductionAll_V1p3--QCD_Pt-50To80_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunII
  
 # [4] 
 bparkProductionAll_V1p3--QCD_Pt-80To120_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-80To120_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-80To120_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-80To120_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   88930.0 
   model_param: 
@@ -66,7 +66,7 @@ bparkProductionAll_V1p3--QCD_Pt-80To120_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunI
  
 # [5] 
 bparkProductionAll_V1p3--QCD_Pt-120To170_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-120To170_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-120To170_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-120To170_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   21230.0 
   model_param: 
@@ -79,7 +79,7 @@ bparkProductionAll_V1p3--QCD_Pt-120To170_MuEnrichedPt5_TuneCP5_13TeV-pythia8_Run
  
 # [6] 
 bparkProductionAll_V1p3--QCD_Pt-170To300_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-170To300_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-170To300_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-170To300_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   7055.0 
   model_param: 
@@ -92,7 +92,7 @@ bparkProductionAll_V1p3--QCD_Pt-170To300_MuEnrichedPt5_TuneCP5_13TeV-pythia8_Run
  
 # [7] 
 bparkProductionAll_V1p3--QCD_Pt-300To470_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-300To470_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-300To470_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-300To470_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   619.3 
   model_param: 
@@ -105,7 +105,7 @@ bparkProductionAll_V1p3--QCD_Pt-300To470_MuEnrichedPt5_TuneCP5_13TeV-pythia8_Run
  
 # [8] 
 bparkProductionAll_V1p3--QCD_Pt-470To600_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-470To600_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-470To600_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-470To600_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   59.24 
   model_param: 
@@ -118,7 +118,7 @@ bparkProductionAll_V1p3--QCD_Pt-470To600_MuEnrichedPt5_TuneCP5_13TeV-pythia8_Run
  
 # [9] 
 bparkProductionAll_V1p3--QCD_Pt-600To800_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-600To800_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-600To800_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-600To800_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   18.21 
   model_param: 
@@ -131,7 +131,7 @@ bparkProductionAll_V1p3--QCD_Pt-600To800_MuEnrichedPt5_TuneCP5_13TeV-pythia8_Run
  
 # [10] 
 bparkProductionAll_V1p3--QCD_Pt-800To1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-800To1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-800To1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-800To1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   3.275 
   model_param: 
@@ -144,7 +144,7 @@ bparkProductionAll_V1p3--QCD_Pt-800To1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_Ru
  
 # [11] 
 bparkProductionAll_V1p3--QCD_Pt-1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2: &bparkProductionAll_V1p3--QCD_Pt-1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2 
-  path:  'bparkProductionAll_V1p3/tmp/QCD_Pt-1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp/QCD_Pt-1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync' 
   files: 'output_[0-50].root' 
   xs:   1.078 
   model_param: 

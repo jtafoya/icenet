@@ -11,6 +11,7 @@ ICEPATH="/home/hep/jtafoyav/vols/parking/bdt/icenet"
 cd $ICEPATH
 echo "$(pwd)"
 source $ICEPATH/setenv.sh
+source $ICEPATH/setproxy.sh
 
 CONFIG="tune0.yml"
 DATAPATH="/vols/cms/khl216"

@@ -1,5 +1,11 @@
 # Files ignored in GIT
 
+README_gitManagement.md
+x509up
+iceqsub/output
+iceqsub/log
+iceqsub/error
+
 *.pdf
 *.pth
 *.dat

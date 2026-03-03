@@ -13,6 +13,7 @@ ICEPATH="/home/hep/jtafoyav/vols/parking/bdt/icenet"
 cd $ICEPATH
 echo "$(pwd)"
 source $ICEPATH/setenv.sh
+source $ICEPATH/setproxy.sh
 
 # Training
 python configs/dqcd/include/ymlgen.py --paramera 'old' --process 'QCD'    --filerange '[0-50]'      --outputfile configs/dqcd/include/QCD.yml

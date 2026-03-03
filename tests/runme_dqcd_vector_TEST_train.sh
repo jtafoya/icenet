@@ -21,6 +21,7 @@ ICEPATH="/home/hep/jtafoyav/vols/parking/bdt/icenet"
 cd $ICEPATH
 echo "$(pwd)"
 source $ICEPATH/setenv.sh
+source $ICEPATH/setproxy.sh
 
 CONFIG="tune0.yml"
 DATAPATH="/vols/cms/khl216"
@@ -29,6 +30,6 @@ CONDITIONAL=0
 MAX=5000000    # Tune according to maximum CPU RAM available
 
 python analysis/dqcd.py --runmode genesis  --maxevents $MAX --inputmap mc_map__vector_TEST.yml --config $CONFIG --datapath $DATAPATH
-python analysis/dqcd.py --runmode train    --maxevents $MAX --inputmap mc_map__vector_TEST.yml --modeltag vector_all_no_DA_old_BDT_new_samples_with_dRmSV_TEST --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL
-python analysis/dqcd.py --runmode eval     --maxevents $MAX --inputmap mc_map__vector_TEST.yml --modeltag vector_all_no_DA_old_BDT_new_samples_with_dRmSV_TEST --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL
-python analysis/dqcd.py --runmode optimize --maxevents $MAX --inputmap mc_map__vector_TEST.yml --modeltag vector_all_no_DA_old_BDT_new_samples_with_dRmSV_TEST --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL
+python analysis/dqcd.py --runmode train    --maxevents $MAX --inputmap mc_map__vector_TEST.yml --modeltag vector_all_no_DA_old_BDT_new_samples_with_dRmSV_TEST_2 --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL
+python analysis/dqcd.py --runmode eval     --maxevents $MAX --inputmap mc_map__vector_TEST.yml --modeltag vector_all_no_DA_old_BDT_new_samples_with_dRmSV_TEST_2 --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL
+python analysis/dqcd.py --runmode optimize --maxevents $MAX --inputmap mc_map__vector_TEST.yml --modeltag vector_all_no_DA_old_BDT_new_samples_with_dRmSV_TEST_2 --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL
