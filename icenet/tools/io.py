@@ -209,8 +209,9 @@ def glob_expand_files(datasets, datapath, recursive_glob=False):
     print("")
     
 
-    print(f'TODO start glob_expand_files datasets={datasets}')
-    print(f'TODO start glob_expand_files datapath={datapath}')
+    #Debugging	
+    #print(f'Initialising glob_expand_files with datasets={datasets}')
+    #print(f'Initialising glob_expand_files with datapath={datapath}')
 
     # Remove unnecessary []
     if type(datasets) is list and len(datasets) == 1:
@@ -250,24 +251,17 @@ def glob_expand_files(datasets, datapath, recursive_glob=False):
         #print(__name__ + f'.glob_expand_files: After expanding the range: {datasets}')
 
     # Parse input files into a list
-    #TODO remove next line when not useful anymore
-    #remote = _is_remote_url(datapath)
     remote = _is_remote_url(datasets)
     files  = list()
 
     for data in datasets:
 
         x = datapath + '/' + data
-        #TODO delete next line if not useful anymore
-        #if ( data.startswith("root://xrootd.grid.hep.ph.ic.ac.uk") ):
+        #Checks whether data path is remote (e.g. DCache) and adjusts reading path accordingly
         if ( data.startswith("root://") ):
             x = data
-        print(f'TODO datapath={datapath}')
-        print(f'TODO data={data}')
-        print(f'Fetching dataset: {x}')
 
         if remote:
-            print(f'TODO entered remote case')
             # Split into directory and filename pattern for remote listing
             last_slash = x.rfind('/')
             directory  = x[:last_slash]
@@ -275,7 +269,6 @@ def glob_expand_files(datasets, datapath, recursive_glob=False):
 
             expanded_files = gfal_list_files(directory, pattern)
         else:
-            print(f'TODO entered NOT remote case')
             expanded_files = glob(x, recursive=recursive_glob) # This does e.g. _*.root expansion (finds the files)
 
         # Loop over expanded set of files
@@ -306,7 +299,7 @@ def glob_expand_files(datasets, datapath, recursive_glob=False):
 def showmem(color='red'):
     print(f"""Process RAM: {process_memory_use():0.2f} GB [total RAM in use {psutil.virtual_memory()[2]} %]""", color)
 
-def showmem_cuda(device, color='red'):
+def showmem_cuda(device=0, color='red'):
     print(f"Process RAM: {process_memory_use():0.2f} GB [total RAM in use {psutil.virtual_memory()[2]} %] | VRAM usage: {get_gpu_memory_map()} GB [total VRAM {torch_cuda_total_memory(device):0.2f} GB]", color)
 
 

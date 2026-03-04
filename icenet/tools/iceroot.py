@@ -67,7 +67,6 @@ def read_single(process_func, process, root_path, param, class_id, dtype=None, n
         maxevents = np.max([1, int(param['maxevents'] * maxevents_scale)])
     
     # Load file
-    print(f'TODO remove this statement: loading {rootfile}')
     X_uncut, ids = iceroot.load_tree(rootfile=rootfile, tree=param['tree'],
                     entry_start=param['entry_start'], entry_stop=param['entry_stop'],
                     maxevents=maxevents, ids=param['load_ids'], library='ak', dtype=dtype,
