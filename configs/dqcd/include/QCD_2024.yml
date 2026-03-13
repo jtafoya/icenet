@@ -1,0 +1,172 @@
+#TODO adjust cross-section (i.e. xs) value if needed
+#TODO why did 2018 use only the first 50 files of each QCD group when some had ~100 files, but others had >1000 files?
+#TODO    leaving (commented out) 20% of each of the QCD groups
+ 
+# [0] 
+bparkProductionAll_2024--QCD_Bin-Pt-15To20_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-15To20_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-15to20_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-724].root' 
+  xs:   2799000.0 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [1] 
+bparkProductionAll_2024--QCD_Bin-Pt-20To30_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-20To30_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-20to30_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-524].root' 
+  xs:   2526000.0 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [2] 
+bparkProductionAll_2024--QCD_Bin-Pt-30To50_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-30To50_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-30to50_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-556].root' 
+  xs:   1362000.0 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [3] 
+bparkProductionAll_2024--QCD_Bin-Pt-50To80_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-50To80_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-50to80_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-614].root' 
+  xs:   376600.0 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [4] 
+bparkProductionAll_2024--QCD_Bin-Pt-80To120_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-80To120_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-80to120_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-588].root' 
+  xs:   88930.0 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [5] 
+bparkProductionAll_2024--QCD_Bin-Pt-120To170_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-120To170_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-120to170_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-624].root' 
+  xs:   21230.0 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [6] 
+bparkProductionAll_2024--QCD_Bin-Pt-170To300_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-170To300_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-170to300_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-672].root' 
+  xs:   7055.0 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [7] 
+bparkProductionAll_2024--QCD_Bin-Pt-300To470_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-300To470_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-300to470_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-596].root' 
+  xs:   619.3 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [8] 
+bparkProductionAll_2024--QCD_Bin-Pt-470To600_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-470To600_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-470to600_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-580].root' 
+  xs:   59.24 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [9] 
+bparkProductionAll_2024--QCD_Bin-Pt-600To800_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-600To800_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-600to800_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-748].root' 
+  xs:   18.21 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [10] 
+bparkProductionAll_2024--QCD_Bin-Pt-800To1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-800To1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-800to1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-718].root' 
+  xs:   3.275 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
+# [11] 
+bparkProductionAll_2024--QCD_Bin-Pt-1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
+  files: 'output_[0-50].root'
+  #files: 'output_[0-760].root' 
+  xs:   1.078 
+  model_param: 
+    mpi:    null 
+    mA:     null 
+    ctau:   null 
+  force_xs: false 
+  isMC:     true 
+  maxevents_scale: 1.0 
+ 
