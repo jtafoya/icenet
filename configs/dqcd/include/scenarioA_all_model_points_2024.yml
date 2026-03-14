@@ -57,7 +57,6 @@ bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_100: &bparkProductionAll_2
 # [4] 
 bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_0p1: &bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_0p1 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-0p1-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
- scenarioA_mpi_2_mA_0p67_ctau_0p1' 
   files: 'data_[0-5].root' 
   xs:   1.0 # [pb] 
   model_param: 

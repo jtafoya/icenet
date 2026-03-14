@@ -41,4 +41,39 @@ def filter_standard(X, isMC=None, class_id=None, xcorr_flow=False):
 
     return mask
 
-# Add alternative filters here ...
+def filter_Mu10(X, isMC=None, class_id=None, xcorr_flow=False):
+    """ HLT_Mu10_Barrel_L1HP11_IP6 only.
+
+    Args:
+        X : Awkward jagged array
+
+    Returns:
+        Passing indices mask (N)
+    """
+    global O; O = X  # __technical__ recast due to eval() scope
+
+    names = ["O['HLT_Mu10_Barrel_L1HP11_IP6']"]
+
+    cuts  = [eval(names[i], globals()) for i in range(len(names))]
+    mask  = stx.apply_cutflow(cut=cuts, names=names, xcorr_flow=xcorr_flow)
+
+    return mask
+
+
+def filter_DoubleMu(X, isMC=None, class_id=None, xcorr_flow=False):
+    """ HLT_DoubleMu4_3_LowMass only.
+
+    Args:
+        X : Awkward jagged array
+
+    Returns:
+        Passing indices mask (N)
+    """
+    global O; O = X  # __technical__ recast due to eval() scope
+
+    names = ["O['HLT_DoubleMu4_3_LowMass']"]
+
+    cuts  = [eval(names[i], globals()) for i in range(len(names))]
+    mask  = stx.apply_cutflow(cut=cuts, names=names, xcorr_flow=xcorr_flow)
+
+    return mask
