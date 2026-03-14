@@ -1,5 +1,7 @@
 # Files ignored in GIT
 
+CLAUDE.md
+
 README_gitManagement.md
 x509up
 iceqsub/output

@@ -23,13 +23,13 @@ echo "$(pwd)"
 source $ICEPATH/setenv.sh
 source $ICEPATH/setproxy.sh
 
-CONFIG="tune0_2024.yml"
+CONFIG="tune0_2024_new.yml"
 DATAPATH="/vols/cms/khl216"
 
 CONDITIONAL=0
 MAX=5000000    # Tune according to maximum CPU RAM available
 
-python analysis/dqcd.py --runmode genesis  --maxevents $MAX --inputmap mc_map__scenarioA_all.yml --config $CONFIG --datapath $DATAPATH
-python analysis/dqcd.py --runmode train    --maxevents $MAX --inputmap mc_map__scenarioA_all.yml --modeltag scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_withMET --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL
-python analysis/dqcd.py --runmode eval     --maxevents $MAX --inputmap mc_map__scenarioA_all.yml --modeltag scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_withMET --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL
-python analysis/dqcd.py --runmode optimize --maxevents $MAX --inputmap mc_map__scenarioA_all.yml --modeltag scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_withMET --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL
+python analysis/dqcd_2024.py --runmode genesis  --maxevents $MAX --inputmap mc_map__scenarioA_all_2024.yml --config $CONFIG --datapath $DATAPATH
+python analysis/dqcd_2024.py --runmode train    --maxevents $MAX --inputmap mc_map__scenarioA_all_2024.yml --modeltag scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_withMET --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL
+python analysis/dqcd_2024.py --runmode eval     --maxevents $MAX --inputmap mc_map__scenarioA_all_2024.yml --modeltag scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_withMET --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL
+python analysis/dqcd_2024.py --runmode optimize --maxevents $MAX --inputmap mc_map__scenarioA_all_2024.yml --modeltag scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_withMET --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL

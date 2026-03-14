@@ -1,0 +1,599 @@
+#include "ROOT/RDataFrame.hxx"
+#include "ROOT/RVec.hxx"
+#include "TCanvas.h"
+#include "TH1D.h"
+#include "TLatex.h"
+#include "TStyle.h"
+#include <iostream>
+#include <cmath>
+
+using namespace ROOT::VecOps;
+
+void hist_stack(const char* stack_name, ROOT::RDF::RResultPtr<::TH1D > h1 , ROOT::RDF::RResultPtr<::TH1D > h, std::string name, bool normalize) {
+     TCanvas* c1 = new TCanvas("", "", 800, 700);
+     h->SetTitle("");
+     if (normalize == true) {
+        h->SetMaximum(1);
+     }
+     else {
+        h->SetMaximum(1E11);
+        h->SetMinimum(1E-1);
+     }
+     h1->SetLineWidth(2);
+
+     h1->SetLineColor(kRed);
+
+     h->SetLineColor(kBlue+1);
+     h->SetLineWidth(2);
+
+     h->DrawClone("hist");
+     h1->DrawClone("same hist");
+     TLegend* out_legend = new TLegend(0.62, 0.70, 0.82, 0.88);
+     out_legend->SetFillColor(0);
+     out_legend->SetBorderSize(0);
+     out_legend->SetTextSize(0.025);
+     out_legend->AddEntry(h1->GetName(), "QCD Background", "f");
+     out_legend->AddEntry(h->GetName(), "#splitline{Signal: vector,}{#splitline{m_{#tilde{#eta}} = 5 GeV, c#tau = 10 mm,}{#xi_{#omega} = 1, #xi_{#Lambda} = 1}}", "f");
+     out_legend->Draw("Same");
+     gPad->SetLogy();
+
+     TLatex cms_label;
+     cms_label.SetTextSize(0.04);
+     cms_label.DrawLatexNDC(0.10, 0.92, "#bf{CMS} #it{Work in progress}");
+
+     TLatex header;
+     header.SetTextSize(0.03);
+     header.DrawLatexNDC(0.63, 0.92, "#sqrt{s} = 13 TeV, L_{int} = 41.6 fb^{-1}");
+
+     std::string hname = h->GetName();
+     std::string fname = hname + "_" + name + ".pdf";
+     c1->SaveAs(fname.c_str());
+     }
+void hist_stack_old(const char* stack_name, std::vector<TH1D*> hist_vector) {
+
+	
+     TCanvas* c1 = new TCanvas();
+     const char* stack_title = hist_vector.at(0)->GetTitle();
+     THStack* out_stack = new THStack(stack_name, stack_title);
+     out_stack->Add(hist_vector.at(0));
+     out_stack->Add(hist_vector.at(1),"S");
+     out_stack->Draw("hist nostack");
+     out_stack->GetXaxis()->SetTitle(hist_vector.at(0)->GetXaxis()->GetTitle());
+     out_stack->GetYaxis()->SetTitle(hist_vector.at(0)->GetYaxis()->GetTitle());
+     TLegend* out_legend = new TLegend(0.78, 0.695, 0.98, 0.775);
+     out_legend->AddEntry(hist_vector.at(0)->GetName(), "Background", "l");
+     out_legend->AddEntry(hist_vector.at(1)->GetName(), "Signal", "l");
+     out_legend->Draw("Same");
+     gPad->SetLogy();
+    }
+
+double Z(Double_t s, Double_t b){
+    Double_t Z_score;
+    if(b>0.0 and 2*((s+b)*log(1+s/b)-s) > 0.0){
+        Z_score = sqrt(2*((s+b)*log(1+s/b)-s));
+    }
+    else{
+        Z_score = 0.0;
+    }
+
+    return Z_score;
+}
+
+double Z_error(Double_t s, Double_t b){
+    Double_t error7;
+
+    Double_t Z2 = 2*((s+b)*log(1+s/b)-s);
+    if(Z2>0.0 and b>0.0){
+        Double_t Z = sqrt(Z2);
+        error7 = sqrt(pow(log(1+s/b)*sqrt(s)/Z, 2)+pow((b*log(1+s/b)-s)*sqrt(b)/(b*Z),2));
+    }
+    else{
+        error7 = 0.0;
+    }
+
+
+    return error7;
+}
+
+TH1D* make_hist(const char* hist_name, const char* hist_title, Int_t nbins, Double_t bin_start, Double_t bin_end, const char* xaxis, const char* yaxis, Color_t lcolor, Width_t lwidth) {
+        TH1D* out_hist = new TH1D(hist_name, hist_title, nbins, bin_start, bin_end);
+        out_hist->SetLineColor(lcolor);
+        out_hist->SetLineWidth(lwidth);
+        out_hist->GetXaxis()->SetTitle(xaxis);
+        out_hist->GetYaxis()->SetTitle(yaxis);
+        return out_hist;
+
+}
+
+double ssqrtb(Double_t s, Double_t b){
+    Double_t ssqrtb_score;
+    if(b>0.0){
+        ssqrtb_score = s/sqrt(b);
+    }
+    else{
+        ssqrtb_score = 0.0;
+    }
+    return ssqrtb_score;
+}
+
+double ssqrtb_error(Double_t s, Double_t b){
+    Double_t error;
+    if(b>0.0){
+        error = sqrt(pow(1.0/sqrt(b)*sqrt(s), 2) + pow(s/(2*pow(b, 1.5))*sqrt(b), 2));
+    }
+    else{
+        error = 0.0;
+    }
+    return error;
+}
+
+void hist_draw_3(std::vector<TH1D*> hist_vector) {
+   TH1D *h1 = hist_vector.at(0);
+   TH1D *h2 = hist_vector.at(1);
+
+   TCanvas *c = new TCanvas();
+   c->SetCanvasSize(800, 800);
+
+   TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
+   pad1->SetBottomMargin(0);
+   pad1->SetGridx();
+   pad1->SetLogy();
+   pad1->Draw();
+   pad1->cd();
+
+
+   h1->SetLineColor(kBlue+1);
+   h1->SetLineWidth(2);
+
+   h1->GetYaxis()->SetTitleSize(20);
+   h1->GetYaxis()->SetTitleFont(43);
+   h1->GetYaxis()->SetTitleOffset(1.55);
+
+   h2->SetLineColor(kRed);
+   h2->SetLineWidth(2);
+   h1->Draw("hist");
+   h2->Draw("hist same");
+
+
+
+   h1->SetMaximum(1E9);
+
+   TLegend* out_legend = new TLegend(0.78, 0.695, 0.98, 0.775);
+   out_legend->AddEntry(h2, "Background", "l");
+   out_legend->AddEntry(h1, "Signal", "l");
+   out_legend->Draw("Same");
+
+   c->cd();
+   TPad *pad2 = new TPad("pad2", "pad2", 0, 0.05, 1, 0.3);
+   pad2->SetTopMargin(0);
+   pad2->SetBottomMargin(0.2);
+   pad2->SetGridx();
+   pad2->SetLogy();
+   pad2->Draw();
+   pad2->cd();
+   pad2->SetLogy();
+
+   TH1D *h3 = hist_vector.at(2);
+   TH1D *h4 = hist_vector.at(3);
+
+   h3->SetLineColor(kBlack);
+   h3->SetMarkerColor(kBlack);
+   h4->SetLineColor(kGreen);
+   h4->SetMarkerColor(kGreen);
+
+   h3->Sumw2();
+   h4->Sumw2();
+   h3->SetStats(0);
+   h4->SetStats(0);
+   h3->SetMarkerStyle(20);
+   h4->SetMarkerStyle(20);
+   h3->SetMarkerSize(1.0);
+   h4->SetMarkerSize(1.0);
+   h3->Draw("ep");
+   h4->Draw("ep same");
+   TLegend* out_legend2 = new TLegend(0.78, 0.695, 0.98, 0.775);
+   out_legend2->AddEntry((TObject*)0, "", "");
+   out_legend2->AddEntry(h3, "#sqrt{q_{0,A}}", "ep");
+   out_legend2->AddEntry((TObject*)0, "", "");
+   out_legend2->AddEntry(h4, "s/#sqrt{b}", "ep");
+   out_legend2->Draw("Same");
+   h3->SetTitle("");
+
+   h3->SetMaximum(0.0);
+   h3->GetYaxis()->SetNdivisions(-505);
+   h3->GetYaxis()->SetTitleSize(20);
+   h3->GetYaxis()->SetTitleFont(43);
+   h3->GetYaxis()->SetTitleOffset(1.55);
+   h3->GetYaxis()->SetLabelFont(43);
+   h3->GetYaxis()->SetLabelSize(15);
+
+   h3->GetXaxis()->SetTitleSize(20);
+   h3->GetXaxis()->SetTitleFont(43);
+   h3->GetXaxis()->SetTitleOffset(4.);
+   h3->GetXaxis()->SetLabelFont(43);
+   h3->GetXaxis()->SetLabelSize(15);
+}
+
+
+void nano_analysis(){
+   TChain *signal_original = new TChain();
+   TChain *signal = new TChain();
+   TChain *background1 = new TChain();
+   TChain *background2 = new TChain();
+   TChain *background3 = new TChain();
+   TChain *background4 = new TChain();
+   TChain *background5 = new TChain();
+   TChain *background6 = new TChain();
+   TChain *background7 = new TChain();
+   TChain *background8 = new TChain();
+   TChain *background9 = new TChain();
+   TChain *background10 = new TChain();
+   TChain *background11 = new TChain();
+   TChain *background12 = new TChain();
+
+   TChain *background5_ext = new TChain();
+   TChain *background6_ext = new TChain();
+   TChain *background8_ext = new TChain();
+   TChain *background9_ext = new TChain();
+   TChain *background11_ext = new TChain();   
+
+   TChain *signal_bdt = new TChain();
+   TChain *signal_bdt2 = new TChain();
+   TChain *background1_bdt = new TChain();
+   TChain *background2_bdt = new TChain();
+   TChain *background3_bdt = new TChain();
+   TChain *background4_bdt = new TChain();
+   TChain *background5_bdt = new TChain();
+   TChain *background6_bdt = new TChain();
+   TChain *background7_bdt = new TChain();
+   TChain *background8_bdt = new TChain();
+   TChain *background9_bdt = new TChain();
+   TChain *background10_bdt = new TChain();
+   TChain *background11_bdt = new TChain();
+   TChain *background12_bdt = new TChain();
+
+   TChain *background5_bdt_ext = new TChain();
+   TChain *background6_bdt_ext = new TChain();
+   TChain *background8_bdt_ext = new TChain();
+   TChain *background9_bdt_ext = new TChain();
+   TChain *background11_bdt_ext = new TChain();
+
+   signal_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__vector_all_no_DA_old_BDT_new_samples_fixed4/vols/cms/khl216/bparkProductionAll_V1p3/hiddenValleyGridPack_vector_m_2_ctau_10_xiO_1_xiL_1/*.root/Events");
+   signal_bdt2->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__vector_all_no_DA_old_BDT_new_samples_fixed4/vols/cms/khl216/bparkProductionAll_V1p3/hiddenValleyGridPack_vector_m_20_ctau_10_xiO_1_xiL_1/*.root/Events");
+   background1_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-15To20_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   background2_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-20To30_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   background3_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-30To50_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   background4_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-50To80_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   background5_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-80To120_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   background6_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-120To170_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+
+   background7_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-170To300_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   background8_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-300To470_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   background9_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-470To600_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   background10_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-600To800_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   background11_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-800To1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   background12_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   
+   signal->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/scenarioA_mpi_4_mA_1p33_ctau_10/*.root/Friends");
+   background1->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-15To20_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   background2->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-20To30_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   background3->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-30To50_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   background4->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-50To80_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   background5->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-80To120_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   background6->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-120To170_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+
+   background7->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-170To300_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   background8->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-300To470_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   background9->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-470To600_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   background10->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-600To800_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   background11->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-800To1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   background12->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   
+
+
+   ROOT::RDataFrame df(*signal);
+   ROOT::RDataFrame df1(*background1);
+   ROOT::RDataFrame df2(*background2);
+   ROOT::RDataFrame df3(*background3);
+   ROOT::RDataFrame df4(*background4);
+   ROOT::RDataFrame df5(*background5);
+   ROOT::RDataFrame df6(*background6);
+   ROOT::RDataFrame df7(*background7);
+   ROOT::RDataFrame df8(*background8);
+   ROOT::RDataFrame df9(*background9);
+   ROOT::RDataFrame df10(*background10);
+   ROOT::RDataFrame df11(*background11);
+   ROOT::RDataFrame df12(*background12);
+
+   ROOT::RDataFrame df_bdt(*signal_bdt);
+   ROOT::RDataFrame df_bdt2(*signal_bdt2);
+   ROOT::RDataFrame df1_bdt(*background1_bdt);
+   ROOT::RDataFrame df2_bdt(*background2_bdt);
+   ROOT::RDataFrame df3_bdt(*background3_bdt);
+   ROOT::RDataFrame df4_bdt(*background4_bdt);
+   ROOT::RDataFrame df5_bdt(*background5_bdt);
+   ROOT::RDataFrame df6_bdt(*background6_bdt);
+   ROOT::RDataFrame df7_bdt(*background7_bdt);
+   ROOT::RDataFrame df8_bdt(*background8_bdt);
+   ROOT::RDataFrame df9_bdt(*background9_bdt);
+   ROOT::RDataFrame df10_bdt(*background10_bdt);
+   ROOT::RDataFrame df11_bdt(*background11_bdt);
+   ROOT::RDataFrame df12_bdt(*background12_bdt);
+
+
+   std::cout << "RDataFrame done" << std::endl;
+   /*
+   auto entries = df.Count();
+   auto entries1 = df1.Count();
+   auto entries2 = df2.Count();
+   auto entries3 = df3.Count();
+   auto entries4 = df4.Count();
+   auto entries5 = df5.Count();
+   auto entries6 = df6.Count();
+   auto entries7 = df7.Count();
+   auto entries8 = df8.Count();
+   auto entries9 = df9.Count();
+   auto entries10 = df10.Count();
+   auto entries11 = df11.Count();
+   auto entries12 = df12.Count();
+   */
+
+   auto entries_bdt = df_bdt.Count();
+   auto entries_bdt2 = df_bdt2.Count();
+   auto entries1_bdt = df1_bdt.Count();
+   auto entries2_bdt = df2_bdt.Count();
+   auto entries3_bdt = df3_bdt.Count();
+   auto entries4_bdt = df4_bdt.Count();
+   auto entries5_bdt = df5_bdt.Count();
+   auto entries6_bdt = df6_bdt.Count();
+   auto entries7_bdt = df7_bdt.Count();
+   auto entries8_bdt = df8_bdt.Count();
+   auto entries9_bdt = df9_bdt.Count();
+   auto entries10_bdt = df10_bdt.Count();
+   auto entries11_bdt = df11_bdt.Count();
+   auto entries12_bdt = df12_bdt.Count();
+  
+   /*
+   Double_t no_of_entries = *entries;
+   Double_t no_of_entries1 = *entries1;
+   Double_t no_of_entries2 = *entries2;
+   Double_t no_of_entries3 = *entries3;
+   Double_t no_of_entries4 = *entries4;
+   Double_t no_of_entries5 = *entries5;
+   Double_t no_of_entries6 = *entries6;
+   Double_t no_of_entries7 = *entries7;
+   Double_t no_of_entries8 = *entries8;
+   Double_t no_of_entries9 = *entries9;
+   Double_t no_of_entries10 = *entries10;
+   Double_t no_of_entries11 = *entries11;
+   Double_t no_of_entries12 = *entries12;
+   */
+   
+   Double_t no_of_entries_original = *entries_bdt;
+   Double_t no_of_entries_original2 = *entries_bdt2;
+   Double_t no_of_entries1_original = *entries1_bdt; 
+   Double_t no_of_entries2_original = *entries2_bdt;
+   Double_t no_of_entries3_original = *entries3_bdt;
+   Double_t no_of_entries4_original = *entries4_bdt;
+   Double_t no_of_entries5_original = *entries5_bdt;
+   Double_t no_of_entries6_original = *entries6_bdt;
+   Double_t no_of_entries7_original = *entries7_bdt;
+   Double_t no_of_entries8_original = *entries8_bdt;
+   Double_t no_of_entries9_original = *entries9_bdt;
+   Double_t no_of_entries10_original = *entries10_bdt; 
+   Double_t no_of_entries11_original = *entries11_bdt;
+   Double_t no_of_entries12_original = *entries12_bdt;
+
+   
+   /*
+   Double_t no_of_entries1_original = 4576065;
+   Double_t no_of_entries2_original = 30612338;
+   Double_t no_of_entries3_original = 29884616;
+   Double_t no_of_entries4_original = 20116013;
+   Double_t no_of_entries5_original = 612919;
+   Double_t no_of_entries6_original = 584368;
+   Double_t no_of_entries7_original = 35187520;
+   Double_t no_of_entries8_original = 492418;
+   Double_t no_of_entries9_original = 492716;
+   Double_t no_of_entries10_original = 16618977;
+   Double_t no_of_entries11_original = 16749914;
+   Double_t no_of_entries12_original = 10719790;
+   */
+
+   /*  
+   std::cout << *entries << "entries in signal" << std::endl;
+   std::cout << *entries1 << " entries in background1" << std::endl;
+   std::cout << *entries2 << " entries in background2" << std::endl;
+   std::cout << *entries3 << " entries in background3" << std::endl;
+   std::cout << *entries4 << " entries in background4" << std::endl;
+   std::cout << *entries5 << " entries in background5" << std::endl;
+   std::cout << *entries6 << " entries in background6" << std::endl;
+   std::cout << *entries7 << " entries in background7" << std::endl;
+   std::cout << *entries8 << " entries in background8" << std::endl;
+   std::cout << *entries9 << " entries in background9" << std::endl;
+   std::cout << *entries10 << " entries in background10" << std::endl;
+   std::cout << *entries11 << " entries in background11" << std::endl;
+   std::cout << *entries12 << " entries in background12" << std::endl;
+   */
+
+   std::cout << no_of_entries_original << "entries in original signal" << std::endl;
+   std::cout << no_of_entries1_original << " entries in original background1" << std::endl;
+   std::cout << no_of_entries2_original << " entries in original background2" << std::endl;
+   std::cout << no_of_entries3_original << " entries in original background3" << std::endl;
+   std::cout << no_of_entries4_original << " entries in original background4" << std::endl;
+   std::cout << no_of_entries5_original << " entries in original background5" << std::endl;
+   std::cout << no_of_entries6_original << " entries in original background6" << std::endl;
+   std::cout << no_of_entries7_original << " entries in original background7" << std::endl;
+   std::cout << no_of_entries8_original << " entries in original background8" << std::endl;
+   std::cout << no_of_entries9_original << " entries in original background9" << std::endl;
+   std::cout << no_of_entries10_original << " entries in original background10" << std::endl;
+   std::cout << no_of_entries11_original << " entries in original background11" << std::endl;
+   std::cout << no_of_entries12_original << " entries in original background12" << std::endl;
+
+   Int_t nbins_histo = 10000;
+
+   auto h_bdt = df_bdt.Histo1D({"hist_bdt_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt_signal2 = df_bdt2.Histo1D({"hist_bdt_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt1 = df1_bdt.Histo1D({"hist_bdt1_nano", "BDT cut efficiency; BDT score; Efficiency", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt2 = df2_bdt.Histo1D({"hist_bdt2_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt3 = df3_bdt.Histo1D({"hist_bdt3_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt4 = df4_bdt.Histo1D({"hist_bdt4_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt5 = df5_bdt.Histo1D({"hist_bdt5_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt6 = df6_bdt.Histo1D({"hist_bdt6_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt7 = df7_bdt.Histo1D({"hist_bdt7_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt8 = df8_bdt.Histo1D({"hist_bdt8_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt9 = df9_bdt.Histo1D({"hist_bdt9_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt10 = df10_bdt.Histo1D({"hist_bdt10_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt11 = df11_bdt.Histo1D({"hist_bdt11_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+   auto h_bdt12 = df12_bdt.Histo1D({"hist_bdt12_nano", "BDT score distribution; BDT score; Number of events", nbins_histo, 0.0, 1.0}, "xgb01_NOJETS");
+
+   Double_t branching_ratio = 0.01;
+   Double_t xs = 43.9;  
+
+   Double_t xs1 = 2799000.0;
+   Double_t xs2 = 2526000.0;
+   Double_t xs3 = 1362000.0;
+   Double_t xs4 = 376600.0;
+   Double_t xs5 = 88930.0;
+   Double_t xs6 = 21230.0; 
+
+   Double_t xs7 = 7055.0;
+   Double_t xs8 = 619.3;
+   Double_t xs9 = 59.24;
+   Double_t xs10 = 18.21;
+   Double_t xs11 = 3.275;
+   Double_t xs12 = 1.078; 
+
+   Double_t lumi = 33.6*1000;    
+
+   h_bdt->Scale(lumi*xs*branching_ratio/no_of_entries_original);
+   h_bdt_signal2->Scale(lumi*xs*branching_ratio/no_of_entries_original2);
+   h_bdt1->Scale(lumi*xs1/no_of_entries1_original);
+   h_bdt2->Scale(lumi*xs2/no_of_entries2_original);
+   h_bdt3->Scale(lumi*xs3/no_of_entries3_original);
+   h_bdt4->Scale(lumi*xs4/no_of_entries4_original);
+   h_bdt5->Scale(lumi*xs5/no_of_entries5_original);
+   h_bdt6->Scale(lumi*xs6/no_of_entries6_original);
+   h_bdt7->Scale(lumi*xs7/no_of_entries7_original);
+   h_bdt8->Scale(lumi*xs8/no_of_entries8_original);
+   h_bdt9->Scale(lumi*xs9/no_of_entries9_original);
+   h_bdt10->Scale(lumi*xs10/no_of_entries10_original);
+   h_bdt11->Scale(lumi*xs11/no_of_entries11_original);
+   h_bdt12->Scale(lumi*xs12/no_of_entries12_original);
+
+
+   gStyle->SetOptStat(0); gStyle->SetTextFont(42);
+
+   h_bdt1->Add(h_bdt2.GetPtr());
+   h_bdt1->Add(h_bdt3.GetPtr());
+   h_bdt1->Add(h_bdt4.GetPtr());
+   h_bdt1->Add(h_bdt5.GetPtr());
+   h_bdt1->Add(h_bdt6.GetPtr());
+   h_bdt1->Add(h_bdt7.GetPtr());
+   h_bdt1->Add(h_bdt8.GetPtr());
+   h_bdt1->Add(h_bdt9.GetPtr());
+   h_bdt1->Add(h_bdt10.GetPtr());
+   h_bdt1->Add(h_bdt11.GetPtr());
+   h_bdt1->Add(h_bdt12.GetPtr());
+
+   
+   TH1D* hist_bdt_expected = (TH1D*)h_bdt->Clone("hist_bdt_expected");
+   TH1D* hist_bdt_signal2_expected = (TH1D*)h_bdt_signal2->Clone("hist_bdt_signal2_expected");
+   TH1D* hist_bdt1_expected = (TH1D*)h_bdt1->Clone("hist_bdt1_expected");
+
+   hist_bdt_expected->Scale(1.0/hist_bdt_expected->Integral());
+   hist_bdt_signal2_expected->Scale(1.0/hist_bdt_signal2_expected->Integral());
+   hist_bdt1_expected->Scale(1.0/hist_bdt1_expected->Integral());
+
+   TCanvas* c1 = new TCanvas("", "", 800, 700);
+   c1->SetLogy();
+   hist_bdt1_expected->SetLineColor(kRed);
+   hist_bdt_expected->SetLineColor(kBlue+1);
+   hist_bdt_signal2_expected->SetLineColor(kMagenta);
+   hist_bdt1_expected->SetTitle("");
+   hist_bdt1_expected->GetYaxis()->SetTitle("Fraction of events");
+
+   hist_bdt1_expected->DrawClone("hist");
+   hist_bdt_expected->DrawClone("hist Same");
+   hist_bdt_signal2_expected->DrawClone("hist Same");
+   
+   TLegend* out_legend1 = new TLegend(0.78, 0.695, 0.98, 0.775);
+   out_legend1->AddEntry(hist_bdt1_expected->GetName(), "Background", "l");
+   out_legend1->AddEntry(hist_bdt_expected->GetName(), "Vector portal, m = 2 GeV, c #tau = 10 mm", "l");
+   out_legend1->AddEntry(hist_bdt_signal2_expected->GetName(), "Vector portal, m = 20 GeV, c #tau = 10 mm", "l");
+   out_legend1->Draw("Same"); 
+
+
+
+   TH1D* hist_bdt_c = (TH1D*)hist_bdt_expected ->GetCumulative(kFALSE);
+   TH1D* hist_bdt_signal2_c = (TH1D*)hist_bdt_signal2_expected ->GetCumulative(kFALSE);
+   TH1D* hist_bdt1_c = (TH1D*)hist_bdt1_expected ->GetCumulative(kFALSE);
+   
+   TH1D* ssqrtb_bdt = make_hist("ssqrtb_bdtscore", "BDT score distribution", 10000, 0., 1.0, "BDT score", "#splitline{Median}{discovery significance}", kBlack, 2);
+
+   for(Int_t i = 1; i < 10001; i++){
+       ssqrtb_bdt->SetBinContent(i, ssqrtb(hist_bdt_c->GetBinContent(i), hist_bdt1_c->GetBinContent(i)));
+       ssqrtb_bdt->SetBinError(i, ssqrtb_error(hist_bdt_c->GetBinContent(i), hist_bdt1_c->GetBinContent(i)));
+   }
+   TH1D* Z_bdt = make_hist("Z_bdt", "BDT score distribution", 10000, 0., 1.0, "BDT score", "#splitline{Median}{discovery significance}", kBlack, 2);
+
+   for(Int_t i = 1; i < 10001; i++){
+       Z_bdt->SetBinContent(i, Z(hist_bdt_c->GetBinContent(i), hist_bdt1_c->GetBinContent(i)));
+       Z_bdt->SetBinError(i, Z_error(hist_bdt_c->GetBinContent(i), hist_bdt1_c->GetBinContent(i)));
+   } 
+
+
+   TCanvas* c2 = new TCanvas("", "", 800, 700);
+   c2->SetLogy();
+   hist_bdt1_c->SetLineColor(kRed);
+   hist_bdt1_c->DrawClone("hist");
+  
+   TH1D* hist_bdt1_c_inverted = make_hist("hist_bdt1_c_inverted", "BDT cut efficiency", 10000, 0.0, 1.0, "1 - BDT score", "Efficiency", kRed, 2);
+   for(Int_t i = 1; i < 10001; i++){
+       hist_bdt1_c_inverted->SetBinContent(i, hist_bdt1_c->GetBinContent(10001-i));
+   }
+   
+   TH1D* hist_bdt_c_inverted = make_hist("hist_bdt_c_inverted", "BDT cut efficiency", 10000, 0.0, 1.0, "1 - BDT score", "Efficiency", kRed, 2);
+   for(Int_t i = 1; i < 10001; i++){
+       hist_bdt_c_inverted->SetBinContent(i, hist_bdt_c->GetBinContent(10001-i));
+   }
+
+   TH1D* hist_bdt_signal2_c_inverted = make_hist("hist_bdt_signal2_c_inverted", "BDT cut efficiency", 10000, 0.0, 1.0, "1 - BDT score", "Efficiency", kRed, 2);
+   for(Int_t i = 1; i < 10001; i++){
+       hist_bdt_signal2_c_inverted->SetBinContent(i, hist_bdt_signal2_c->GetBinContent(10001-i));
+   }
+   
+   TCanvas* c3 = new TCanvas("", "", 800, 700);
+   c3->SetLogy();
+   c3->SetLogx();
+   hist_bdt1_c_inverted->SetLineColor(kRed);
+   //hist_bdt_c_inverted->SetLineColor(kBlue+1);
+   hist_bdt1_c_inverted->DrawClone("hist");
+   //hist_bdt_c_inverted->DrawClone("hist Same");  
+
+
+   TCanvas* c4 = new TCanvas("", "", 800, 700);
+   c4->SetLogy();
+   c4->SetLogx();
+   hist_bdt1_c_inverted->SetLineColor(kRed);
+   hist_bdt_c_inverted->SetLineColor(kBlue+1);
+   hist_bdt_signal2_c_inverted->SetLineColor(kMagenta);
+
+   hist_bdt1_c_inverted->GetXaxis()->SetRangeUser(1E-4,1.0);
+   hist_bdt1_c_inverted->SetTitle("");
+
+   hist_bdt1_c_inverted->DrawClone("hist");
+   hist_bdt_c_inverted->DrawClone("hist Same");
+   hist_bdt_signal2_c_inverted->DrawClone("hist Same");
+   TLegend* out_legend2 = new TLegend(0.78, 0.695, 0.98, 0.775);
+   out_legend2->AddEntry(hist_bdt1_c_inverted->GetName(), "Background", "l");
+   out_legend2->AddEntry(hist_bdt_c_inverted->GetName(), "Vector portal, m = 2 GeV, c #tau = 10 mm", "l");
+   out_legend2->AddEntry(hist_bdt_signal2_c_inverted->GetName(), "Vector portal, m = 20 GeV, c #tau = 10 mm", "l");
+   out_legend2->Draw("Same");    
+
+
+   //hist_draw_3({ hist_bdt_expected, hist_bdt1_expected, Z_bdt, ssqrtb_bdt });
+   //hist_stack("h_svmass_nano_stack", h_svmass1, h_svmass, Ntuple_name, true);
+  // hist_stack_old("h_bdt_stack", { hist_bdt1_c, hist_bdt_c });
+
+}
