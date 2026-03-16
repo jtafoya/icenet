@@ -270,6 +270,90 @@ xgb01-NOJETS:
   evalmode: 1                  # Every n-th epoch (integer), evaluation done also for every n-th
   readmode: -1                 # -1 is the last saved epoch
 
+# XGBoost without MET variables
+xgb01-NOMET:
+  train:   'xgb'
+  predict: 'xgb'
+  label:   'XGB-NOMET'
+  raytune:  xgb_trial_0
+
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*', 'muonSV_deltaR_*', 'nJet', 'muonSV_SVdeltaR_.*', 'dRmSV_.*', 'MET_.*']
+
+  # general parameters
+  model_param:
+    num_boost_round: 250       # number of epochs (equal to the number of trees!)
+    booster: 'gbtree'          # 'gbtree' (default), 'dart' (dropout boosting)
+    tree_method: 'hist'
+    device:      'auto'        # 'auto', 'cpu', 'cuda'
+
+    learning_rate: 0.1
+    gamma: 1.67
+    max_depth: 10
+    min_child_weight: 1.0
+    max_delta_step: 1
+    subsample: 1
+
+    colsample_bytree:  0.86
+    colsample_bylevel: 0.6
+    colsample_bynode:  0.8
+
+    reg_lambda: 2.0               # L2 regularization
+    reg_alpha: 0.05               # L1 regularization
+
+    # learning task parameters
+    objective: 'binary:logistic'
+    eval_metric: ['logloss']
+
+  plot_trees: false
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1                  # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                 # -1 is the last saved epoch
+
+
+# XGBoost without jets and without MET variables
+xgb01-NOJETS-NOMET:
+  train:   'xgb'
+  predict: 'xgb'
+  label:   'XGB-NOJETS-NOMET'
+  raytune:  xgb_trial_0
+
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_.*', 'muonSV_deltaR_*', 'nJet', 'muonSV_SVdeltaR_.*', 'dRmSV_.*', 'MET_.*']
+
+  # general parameters
+  model_param:
+    num_boost_round: 150       # number of epochs (equal to the number of trees!)
+    booster: 'gbtree'          # 'gbtree' (default), 'dart' (dropout boosting)
+    tree_method: 'hist'
+    device:      'auto'        # 'auto', 'cpu', 'cuda'
+
+    learning_rate: 0.1
+    gamma: 1.67
+    max_depth: 10
+    min_child_weight: 1.0
+    max_delta_step: 1
+    subsample: 1
+
+    colsample_bytree:  0.86
+    colsample_bylevel: 0.6
+    colsample_bynode:  0.8
+
+    reg_lambda: 2.0               # L2 regularization
+    reg_alpha: 0.05               # L1 regularization
+
+    # learning task parameters
+    objective: 'binary:logistic'
+    eval_metric: ['logloss']
+
+  plot_trees: false
+  tensorboard: true
+
+  # Read/Write of epochs
+  evalmode: 1                  # Every n-th epoch (integer), evaluation done also for every n-th
+  readmode: -1                 # -1 is the last saved epoch
+
+
 # XGBoost
 # https://xgboost.readthedocs.io/en/latest/parameter.html
 xgb01-ONLYMU:
@@ -277,7 +361,7 @@ xgb01-ONLYMU:
   predict: 'xgb'
   label:   'XGB-ONLYMU'
   raytune:  xgb_trial_0
-  
+
   exclude_MVA_vars: ['.*']
   include_MVA_vars: ['muonSV_chi2.*', 'muonSV_pAngle.*', 'muonSV_dlen.*', muonSV_dlenSig.*', 'muonSV_dxy.*', 'muonSV_dxySig.*', 'muonSV_mu1pt.*', 'muonSV_mu1eta.*', 'muonSV_mu1phi.*', 'muonSV_mu2pt.*', 'muonSV_mu2eta.*', 'muonSV_mu2phi.*', 'muonSV_x.*', 'muonSV_y.*', 'muonSV_z.*', 'Muon_.*', 'nMuon']
   #include_MVA_vars: ['muonSV_pAngle_0', 'Muon_pt_3', 'Muon_pt_2', 'muonSV_chi2_0', 'Muon_phi_3', 'muonSV_dxy_0', 'Muon_dz_3', 'Muon_dxy_3', 'Muon_eta_3', 'Muon_softMva_3']

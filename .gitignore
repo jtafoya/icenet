@@ -1,6 +1,7 @@
 # Files ignored in GIT
 
 CLAUDE.md
+setup_all.sh
 
 README_gitManagement.md
 x509up

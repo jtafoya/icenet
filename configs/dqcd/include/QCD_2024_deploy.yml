@@ -5,8 +5,8 @@
 # [0] 
 bparkProductionAll_2024--QCD_Bin-Pt-15To20_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-15To20_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-15to20_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[725-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[725-100000].root' 
   xs:   2799000.0 
   model_param: 
     mpi:    null 
@@ -19,8 +19,8 @@ bparkProductionAll_2024--QCD_Bin-Pt-15To20_Fil-MuEnriched_TuneCP5_13p6TeV_pythia
 # [1] 
 bparkProductionAll_2024--QCD_Bin-Pt-20To30_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-20To30_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-20to30_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[525-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[525-100000].root' 
   xs:   2526000.0 
   model_param: 
     mpi:    null 
@@ -33,8 +33,8 @@ bparkProductionAll_2024--QCD_Bin-Pt-20To30_Fil-MuEnriched_TuneCP5_13p6TeV_pythia
 # [2] 
 bparkProductionAll_2024--QCD_Bin-Pt-30To50_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-30To50_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-30to50_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[557-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[557-100000].root' 
   xs:   1362000.0 
   model_param: 
     mpi:    null 
@@ -47,8 +47,8 @@ bparkProductionAll_2024--QCD_Bin-Pt-30To50_Fil-MuEnriched_TuneCP5_13p6TeV_pythia
 # [3] 
 bparkProductionAll_2024--QCD_Bin-Pt-50To80_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-50To80_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-50to80_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[615-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[615-100000].root' 
   xs:   376600.0 
   model_param: 
     mpi:    null 
@@ -61,8 +61,8 @@ bparkProductionAll_2024--QCD_Bin-Pt-50To80_Fil-MuEnriched_TuneCP5_13p6TeV_pythia
 # [4] 
 bparkProductionAll_2024--QCD_Bin-Pt-80To120_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-80To120_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-80to120_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[589-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[589-100000].root' 
   xs:   88930.0 
   model_param: 
     mpi:    null 
@@ -75,8 +75,8 @@ bparkProductionAll_2024--QCD_Bin-Pt-80To120_Fil-MuEnriched_TuneCP5_13p6TeV_pythi
 # [5] 
 bparkProductionAll_2024--QCD_Bin-Pt-120To170_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-120To170_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-120to170_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[625-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[625-100000].root' 
   xs:   21230.0 
   model_param: 
     mpi:    null 
@@ -89,8 +89,8 @@ bparkProductionAll_2024--QCD_Bin-Pt-120To170_Fil-MuEnriched_TuneCP5_13p6TeV_pyth
 # [6] 
 bparkProductionAll_2024--QCD_Bin-Pt-170To300_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-170To300_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-170to300_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[673-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[673-100000].root' 
   xs:   7055.0 
   model_param: 
     mpi:    null 
@@ -103,8 +103,8 @@ bparkProductionAll_2024--QCD_Bin-Pt-170To300_Fil-MuEnriched_TuneCP5_13p6TeV_pyth
 # [7] 
 bparkProductionAll_2024--QCD_Bin-Pt-300To470_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-300To470_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-300to470_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[597-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[597-100000].root' 
   xs:   619.3 
   model_param: 
     mpi:    null 
@@ -117,8 +117,8 @@ bparkProductionAll_2024--QCD_Bin-Pt-300To470_Fil-MuEnriched_TuneCP5_13p6TeV_pyth
 # [8] 
 bparkProductionAll_2024--QCD_Bin-Pt-470To600_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-470To600_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-470to600_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[581-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[581-100000].root' 
   xs:   59.24 
   model_param: 
     mpi:    null 
@@ -131,8 +131,8 @@ bparkProductionAll_2024--QCD_Bin-Pt-470To600_Fil-MuEnriched_TuneCP5_13p6TeV_pyth
 # [9] 
 bparkProductionAll_2024--QCD_Bin-Pt-600To800_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-600To800_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-600to800_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[749-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[749-100000].root' 
   xs:   18.21 
   model_param: 
     mpi:    null 
@@ -145,8 +145,8 @@ bparkProductionAll_2024--QCD_Bin-Pt-600To800_Fil-MuEnriched_TuneCP5_13p6TeV_pyth
 # [10] 
 bparkProductionAll_2024--QCD_Bin-Pt-800To1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-800To1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-800to1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[719-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[719-100000].root' 
   xs:   3.275 
   model_param: 
     mpi:    null 
@@ -159,8 +159,8 @@ bparkProductionAll_2024--QCD_Bin-Pt-800To1000_Fil-MuEnriched_TuneCP5_13p6TeV_pyt
 # [11] 
 bparkProductionAll_2024--QCD_Bin-Pt-1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'output_[51-100000].root'
-  #files: 'output_[761-100000].root' 
+  files: 'nano_[51-100000].root'
+  #files: 'nano_[761-100000].root' 
   xs:   1.078 
   model_param: 
     mpi:    null 

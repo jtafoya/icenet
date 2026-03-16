@@ -35,18 +35,18 @@ def cut_fiducial(X, xcorr_flow=False):
 
     names = [
         # HLT_Mu10_Barrel_L1HP11_IP6 leg
-        'ak.sum('
+        '(ak.sum('
         '  np.logical_or('
         '    np.logical_and(O.muonSV.mu1pt > 10.0, np.abs(O.muonSV.mu1eta) < 1.2),'
         '    np.logical_and(O.muonSV.mu2pt > 10.0, np.abs(O.muonSV.mu2eta) < 1.2)'
-        '  ), -1) > 0'
+        '  ), -1) > 0)'
         ' | '
         # HLT_DoubleMu4_3_LowMass leg
-        'ak.sum('
+        '(ak.sum('
         '  np.logical_and('
         '    np.maximum(O.muonSV.mu1pt, O.muonSV.mu2pt) > 4.0,'
         '    np.minimum(O.muonSV.mu1pt, O.muonSV.mu2pt) > 3.0'
-        '  ), -1) > 0'
+        '  ), -1) > 0)'
     ]
 
     #names = ['ak.sum(np.logical_and(O.Muon.pt >  5.0, np.abs(O.Muon.eta) < 2.4), -1) > 0']

@@ -3,12 +3,47 @@ import sys
 sys.path.insert(0, "/home/hep/jtafoyav/vols/parking/bdt/icenet")
 from icenet.tools import aux
 
-run_id = "2026-03-03_20-54-49_lxdgpu00"
-#type="XGB"
-type="XGB-NOJETS"
 
-MODELDIR  = f"../checkpoint/dqcd/config__tune0_new.yml/modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2018_firstTry/{run_id}/{type}"
-OUTFILE   = type.replace('-','_')+f"_2018_scenarioA_Reproduction.model"  # or .json, .ubj
+##### With MET variables
+
+#type="XGB"
+#type="XGB-NOJETS"
+
+#MODELDIR  = f"../checkpoint/dqcd/config__tune0_new.yml/modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2018_firstTry/2026-03-03_20-54-49_lxdgpu00/{type}"
+#OUTFILE   = type.replace('-','_')+f"_2018_scenarioA_Reproduction.model"  # or .json, .ubj
+##
+
+#MODELDIR  = f"../checkpoint/dqcd/config__tune0_2024_new.yml/modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_withMET/2026-03-15_17-26-06_lxbgpu00/{type}"
+#OUTFILE   = type.replace('-','_')+f"_2024_Mu10orDoubleMu_withMET.model"  # or .json, .ubj
+## best model at epoch [147] with validation loss = 0.2298
+
+#MODELDIR  = f"../checkpoint/dqcd/config__tune0_2024_Mu10_new.yml/modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_Mu10/2026-03-15_17-26-42_lxbgpu01/{type}"
+#OUTFILE   = type.replace('-','_')+f"_2024_Mu10_withMET.model"  # or .json, .ubj
+## best model at epoch [85] with validation loss = 0.1698
+
+#MODELDIR  = f"../checkpoint/dqcd/config__tune0_2024_DoubleMu_new.yml/modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_DoubleMu/2026-03-15_17-17-30_lxdgpu00/{type}"
+#OUTFILE   = type.replace('-','_')+f"_2024_DoubleMu_withMET.model"  # or .json, .ubj
+## best model at epoch [124] with validation loss = 0.2313
+
+
+##### Without MET variables
+
+#type="XGB-NOMET"
+type="XGB-NOJETS-NOMET"
+
+#OUTFILE   = type.replace('-','_')+f"_2024_Mu10orDoubleMu_noMET.model"  # or .json, .ubj
+#MODELDIR  = f"../checkpoint/dqcd/config__tune0_2024_noMET_new.yml/modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_noMET/2026-03-16_09-15-23_lxbgpu00/{type}"
+## best model at epoch [144] with validation loss = 0.2281
+
+#MODELDIR  = f"../checkpoint/dqcd/config__tune0_2024_Mu10_noMET_new.yml/modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_Mu10_noMET/2026-03-16_09-15-45_lxdgpu00/{type}"
+#OUTFILE   = type.replace('-','_')+f"_2024_Mu10_noMET.model"  # or .json, .ubj
+## best model at epoch [83] with validation loss = 0.1724
+
+MODELDIR  = f"../checkpoint/dqcd/config__tune0_2024_DoubleMu_noMET_new.yml/modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_DoubleMu_noMET/2026-03-16_09-15-23_lxbgpu01/{type}"
+OUTFILE   = type.replace('-','_')+f"_2024_DoubleMu_noMET.model"  # or .json, .ubj
+## best model at epoch [141] with validation loss = 0.2313
+
+######
 
 print(f"Searching model in directory: {MODELDIR}")
 

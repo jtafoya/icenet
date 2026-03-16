@@ -12,6 +12,7 @@ import os
 import psutil
 import subprocess
 import re
+import functools
 
 
 # MVA imputation
@@ -148,21 +149,9 @@ def gfal_list_files_OLD(directory_url, pattern='*'):
     return sorted(matched)
 
 
-def gfal_list_files(directory_url, pattern='*'):
-    """
-    List files in a remote directory using gfal-ls and filter by pattern.
-
-    Args:
-        directory_url: Remote directory URL
-                       (e.g. root://xrootd.grid.hep.ph.ic.ac.uk//store/user/...)
-        pattern:       Filename glob pattern (e.g. 'output_*.root')
-
-    Returns:
-        List of full remote URLs for matching files
-    """
-
-    directory_url = directory_url.rstrip('/')
-
+@functools.lru_cache(maxsize=512)
+def _gfal_ls(directory_url):
+    """Cached gfal-ls call. Returns a tuple of entry names (hashable for caching)."""
     try:
         result = subprocess.run(
             ["gfal-ls", directory_url],
@@ -180,17 +169,55 @@ def gfal_list_files(directory_url, pattern='*'):
         raise RuntimeError(
             f"gfal-ls failed for {directory_url}\n{e.stderr}"
         )
+    return tuple(e for e in result.stdout.splitlines() if e not in ('.', '..'))
 
-    entries = result.stdout.splitlines()
 
-    matched = []
-    for entry in entries:
-        if entry in ('.', '..'):
-            continue
-        if fnmatch(entry, pattern):
-            matched.append(f"{directory_url}/{entry}")
+def gfal_list_files(directory_url, pattern='*', max_depth=3):
+    """
+    List files in a remote directory using gfal-ls and filter by pattern.
+    If no matching files are found at the top level, recursively searches
+    subdirectories up to max_depth levels deep. This handles storage layouts
+    where files are nested under timestamp/subdir directories (e.g. CRAB output).
+    Directory listings are cached so repeated calls for the same directory
+    (e.g. when expanding a file range like nano_[0-50].root) incur only one
+    gfal-ls call per unique directory.
 
-    return sorted(matched)
+    Args:
+        directory_url: Remote directory URL
+                       (e.g. root://xrootd.grid.hep.ph.ic.ac.uk//store/user/...)
+        pattern:       Filename glob pattern (e.g. 'nano_*.root' or 'nano_5.root')
+        max_depth:     Maximum recursion depth for subdirectory search
+
+    Returns:
+        List of full remote URLs for matching files
+    """
+
+    directory_url = directory_url.rstrip('/')
+    entries = _gfal_ls(directory_url)
+
+    matched = [f"{directory_url}/{e}" for e in entries if fnmatch(e, pattern)]
+
+    if matched:
+        return sorted(matched)
+
+    # No matches at this level — recurse into subdirectories if depth allows.
+    # Only recurse into entries that look like directories (no '.' in the name),
+    # to avoid slow gfal-ls calls on individual files like nano_1.root.
+    if max_depth > 0:
+        all_matched = []
+        for entry in entries:
+            if '.' in entry:
+                continue  # looks like a file, not a directory — skip
+            try:
+                sub_matched = gfal_list_files(
+                    f"{directory_url}/{entry}", pattern, max_depth - 1
+                )
+                all_matched.extend(sub_matched)
+            except RuntimeError:
+                pass  # gfal-ls failed on this entry, skip it
+        return sorted(all_matched)
+
+    return []
 
 def glob_expand_files(datasets, datapath, recursive_glob=False):
     """
