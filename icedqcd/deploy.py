@@ -334,8 +334,15 @@ def process_data(args):
             # ------------------
             # Phase 5: Write MVA-scores out
 
-            aux.makedir(basepath + '/' + filename.rsplit('/', 1)[0]) # Create dir
-            outputfile = basepath + '/' + filename.replace('.root', '-icenet.root')
+            # Strip XRootD protocol (e.g. root://host/path/file.root -> host/path/file.root)
+            # to avoid fsspec misinterpreting the concatenated path as a URL
+            if '://' in filename:
+                local_filename = filename.split('://', 1)[1]
+            else:
+                local_filename = filename
+
+            aux.makedir(basepath + '/' + local_filename.rsplit('/', 1)[0]) # Create dir
+            outputfile = basepath + '/' + local_filename.replace('.root', '-icenet.root')
             
             print(f'Saving root output to "{outputfile}"')
 

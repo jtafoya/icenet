@@ -97,8 +97,8 @@ genesis_runmode:
   inputmap:  "mc_input.yml"
   tree_name:  null #'ntuplizer/tree'
   
-  filterfunc: 'filter_DoubleMu'         # Filter cuts, implemented under filter_2024.py
-  cutfunc:    'cut_fiducial_DoubleMu'   # Basic cuts,  implemented under cuts_2024.py
+  filterfunc: 'filter_DoubleMu'         # Filter cuts, implemented under filter.py
+  cutfunc:    'cut_fiducial_DoubleMu'   # Basic cuts,  implemented under cuts.py
   targetfunc:  null              # -- not active --
   
   xcorr_flow: True               # Full N-point correlations computed between cuts

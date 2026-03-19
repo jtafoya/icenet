@@ -55,8 +55,8 @@ MVA_SCALAR_VARS = [
   'nSV',
   'nmuonSV',
 
-  'MET_pt',
-  'MET_phi'
+  'PFMET_pt',
+  'PFMET_phi'
 ]
 
 # ---------------------------------------------------------

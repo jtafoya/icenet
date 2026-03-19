@@ -6,7 +6,8 @@ log		= iceqsub/log/dqcd_scenarioA_train_2024_noMET.job.$(CLUSTER).log
 #Resource request
 request_gpus	= 1
 request_memory	= 100G
-+MaxRuntime	= 86400
+#+MaxRuntime	= 86400
++MaxRuntime	= 8640
 periodic_release = (HoldReasonCode == 34) && (HoldReasonSubCode == 0)
 
 #Notification

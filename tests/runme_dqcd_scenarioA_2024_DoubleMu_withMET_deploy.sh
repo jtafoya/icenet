@@ -29,10 +29,13 @@ source $ICEPATH/setproxy.sh
 export GRID_ID=$HTC_PROCESS_ID
 export GRID_NODES=$HTC_QUEUE_SIZE
 
-CONFIG="tune0_2024_new.yml"
+CONFIG="tune0_2024_DoubleMu_withMET_new.yml"
 DATAPATH="/vols/cms/khl216"
 
 CONDITIONAL=0
 
-python analysis/dqcd_deploy_2024.py --runmode deploy --use_conditional $CONDITIONAL --inputmap 'include/scenarioA_all_model_points_2024_deploy.yml' --modeltag scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_withMET --grid_id $GRID_ID --grid_nodes $GRID_NODES --config $CONFIG --datapath $DATAPATH
-#python analysis/dqcd_deploy_2024.py --runmode deploy --use_conditional $CONDITIONAL --inputmap 'include/QCD_2024_deploy.yml' --modeltag scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_withMET --grid_id $GRID_ID --grid_nodes $GRID_NODES --config $CONFIG --datapath $DATAPATH
+
+MODELTAG="scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_DoubleMu_withMET"
+
+python analysis/dqcd_deploy_2024.py --runmode deploy --use_conditional $CONDITIONAL --inputmap 'include/scenarioA_all_model_points_2024_deploy.yml' --modeltag $MODELTAG --grid_id $GRID_ID --grid_nodes $GRID_NODES --config $CONFIG --datapath $DATAPATH
+#python analysis/dqcd_deploy_2024.py --runmode deploy --use_conditional $CONDITIONAL --inputmap 'include/QCD_2024_deploy.yml' --modeltag $MODELTAG --grid_id $GRID_ID --grid_nodes $GRID_NODES --config $CONFIG --datapath $DATAPATH

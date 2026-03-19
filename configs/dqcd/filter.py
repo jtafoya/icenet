@@ -44,4 +44,60 @@ def filter_standard(X, isMC=None, class_id=None, xcorr_flow=False):
 
     return mask
 
+
+def filter_standard_2024(X, isMC=None, class_id=None, xcorr_flow=False):
+    """ OR of HLT_Mu10_Barrel_L1HP11_IP6 and HLT_DoubleMu4_3_LowMass (2024).
+    """
+    global O; O = X  # __technical__ recast due to eval() scope
+
+    names = ["O['HLT_Mu10_Barrel_L1HP11_IP6'] | "
+             "O['HLT_DoubleMu4_3_LowMass']"]
+
+    #if isMC and class_id == 0:
+    #    names += ["additional cut here"]
+    #    names += ["additional cut here"]
+    
+    # Evaluate columnar cuts; Compute cutflow
+    cuts  = [eval(names[i], globals()) for i in range(len(names))]
+    mask  = stx.apply_cutflow(cut=cuts, names=names, xcorr_flow=xcorr_flow)
+
+    return mask
+
+
+def filter_Mu10(X, isMC=None, class_id=None, xcorr_flow=False):
+    """ HLT_Mu10_Barrel_L1HP11_IP6 only.
+    """
+    global O; O = X  # __technical__ recast due to eval() scope
+
+    names = ["O['HLT_Mu10_Barrel_L1HP11_IP6']"]
+
+    #if isMC and class_id == 0:
+    #    names += ["additional cut here"]
+    #    names += ["additional cut here"]
+    
+    # Evaluate columnar cuts; Compute cutflow
+    cuts  = [eval(names[i], globals()) for i in range(len(names))]
+    mask  = stx.apply_cutflow(cut=cuts, names=names, xcorr_flow=xcorr_flow)
+
+    return mask
+
+
+def filter_DoubleMu(X, isMC=None, class_id=None, xcorr_flow=False):
+    """ HLT_DoubleMu4_3_LowMass only.
+    """
+    global O; O = X  # __technical__ recast due to eval() scope
+
+    names = ["O['HLT_DoubleMu4_3_LowMass']"]
+
+    #if isMC and class_id == 0:
+    #    names += ["additional cut here"]
+    #    names += ["additional cut here"]
+    
+    # Evaluate columnar cuts; Compute cutflow
+    cuts  = [eval(names[i], globals()) for i in range(len(names))]
+    mask  = stx.apply_cutflow(cut=cuts, names=names, xcorr_flow=xcorr_flow)
+
+    return mask
+
+
 # Add alternative filters here ...

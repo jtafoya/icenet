@@ -1,9 +1,9 @@
-executable	= tests/runme_dqcd_scenarioA_deploy.sh
+executable	= tests/runme_dqcd_scenarioA_2024_DoubleMu_withMET_deploy.sh
 #arguments	= "$(PROCESS) 100"
 arguments	= "$(PROCESS) 1000"
 output		= iceqsub/output/outputfile.$(CLUSTER)
 error		= iceqsub/error/errorfile.$(CLUSTER)
-log		= iceqsub/log/dqcd_scenarioA_deploy_2018_FirstTry.job.$(CLUSTER).log
+log		= iceqsub/log/dqcd_scenarioA_deploy_2024_DoubleMu_withMET.job.$(CLUSTER).log
 
 #Resource request
 +MaxRuntime = 6500
