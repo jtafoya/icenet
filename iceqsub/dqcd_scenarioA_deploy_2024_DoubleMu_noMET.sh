@@ -1,14 +1,21 @@
+#Signal
+#NJobs	= 100
+#MaxRuntimeVal	= 6500
+
+#QCD
+NJobs	= 1000
+#NJobs	= 4000
+MaxRuntimeVal	= 12000
+#MaxRuntimeVal	= 40000
+
 executable	= tests/runme_dqcd_scenarioA_2024_DoubleMu_noMET_deploy.sh
-#arguments	= "$(PROCESS) 100"
-arguments	= "$(PROCESS) 1000"
+arguments	= "$(PROCESS) $(NJobs)"
 output		= iceqsub/output/outputfile.$(CLUSTER)
 error		= iceqsub/error/errorfile.$(CLUSTER)
 log		= iceqsub/log/dqcd_scenarioA_deploy_2024_DoubleMu_noMET.job.$(CLUSTER).log
 
 #Resource request
-+MaxRuntime = 6500
-#+MaxRuntime = 40000
-periodic_release = (HoldReasonCode == 34) && (HoldReasonSubCode == 0)
++MaxRuntime = $(MaxRuntimeVal)
+periodic_release = ((HoldReasonCode == 34) && (HoldReasonSubCode == 0)) || (HoldReasonCode == 26)
 
-#queue 100
-queue 1000
+queue $(NJobs)

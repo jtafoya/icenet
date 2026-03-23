@@ -37,5 +37,5 @@ CONDITIONAL=0
 
 MODELTAG="scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_Mu10_noMET"
 
-python analysis/dqcd_deploy_2024.py --runmode deploy --use_conditional $CONDITIONAL --inputmap 'include/scenarioA_all_model_points_2024_deploy.yml' --modeltag $MODELTAG --grid_id $GRID_ID --grid_nodes $GRID_NODES --config $CONFIG --datapath $DATAPATH
-#python analysis/dqcd_deploy_2024.py --runmode deploy --use_conditional $CONDITIONAL --inputmap 'include/QCD_2024_deploy.yml' --modeltag $MODELTAG --grid_id $GRID_ID --grid_nodes $GRID_NODES --config $CONFIG --datapath $DATAPATH
+#python analysis/dqcd_deploy_2024.py --runmode deploy --use_conditional $CONDITIONAL --inputmap 'include/scenarioA_all_model_points_2024_deploy.yml' --modeltag $MODELTAG --grid_id $GRID_ID --grid_nodes $GRID_NODES --config $CONFIG --datapath $DATAPATH
+python analysis/dqcd_deploy_2024.py --runmode deploy --use_conditional $CONDITIONAL --inputmap 'include/QCD_2024_deploy.yml' --modeltag $MODELTAG --grid_id $GRID_ID --grid_nodes $GRID_NODES --config $CONFIG --datapath $DATAPATH

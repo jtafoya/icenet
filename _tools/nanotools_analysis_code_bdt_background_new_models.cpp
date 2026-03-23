@@ -258,36 +258,41 @@ void nano_analysis(){
    TChain *background9_bdt_ext = new TChain();
    TChain *background11_bdt_ext = new TChain();
 
-   signal_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__vector_all_no_DA_old_BDT_new_samples_fixed4/vols/cms/khl216/bparkProductionAll_V1p3/hiddenValleyGridPack_vector_m_2_ctau_10_xiO_1_xiL_1/*.root/Events");
-   signal_bdt2->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__vector_all_no_DA_old_BDT_new_samples_fixed4/vols/cms/khl216/bparkProductionAll_V1p3/hiddenValleyGridPack_vector_m_20_ctau_10_xiO_1_xiL_1/*.root/Events");
-   background1_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-15To20_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
-   background2_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-20To30_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
-   background3_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-30To50_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
-   background4_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-50To80_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
-   background5_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-80To120_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
-   background6_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-120To170_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   TString path_bdt_output_base="/home/hep/jtafoyav/vols/parking/bdt/icenet/output/dqcd/deploy";
+   TString modeltag="modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2018_firstTry";
+   TString path_bdt_qcd="gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/mcitron/darkshowersamples/bparkProductionAll_V1p3/tmp";
+   TString path_bdt_signal="vols/cms/khl216/bparkProductionAll_V1p3";
 
-   background7_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-170To300_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
-   background8_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-300To470_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
-   background9_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-470To600_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
-   background10_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-600To800_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
-   background11_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-800To1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
-   background12_bdt->Add("/vols/cms/khl216/icenet_Mikael/icenet/output/dqcd/deploy/modeltag__scenarioB1_all_no_DA_old_BDT_fixed_samples_new3/vols/cms/khl216/bparkProductionAll_V1p3/QCD_Pt-1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events");
+   signal_bdt->Add( TString::Format("%s/%s/%s/scenarioA_mpi_4_mA_1p33_ctau_1p0/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_signal.Data() ) );
+   signal_bdt2->Add( TString::Format("%s/%s/%s/scenarioA_mpi_4_mA_1p33_ctau_10/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_signal.Data() ) );
+   background1_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-15To20_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
+   background2_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-20To30_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
+   background3_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-30To50_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
+   background4_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-50To80_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
+   background5_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-80To120_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
+   background6_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-120To170_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
+
+   background7_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-170To300_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
+   background8_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-300To470_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
+   background9_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-470To600_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
+   background10_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-600To800_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
+   background11_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-800To1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
+   background12_bdt->Add( TString::Format("%s/%s/%s/QCD_Pt-1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Events", path_bdt_output_base.Data(), modeltag.Data(), path_bdt_qcd.Data() ) );
    
-   signal->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/scenarioA_mpi_4_mA_1p33_ctau_10/*.root/Friends");
-   background1->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-15To20_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
-   background2->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-20To30_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
-   background3->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-30To50_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
-   background4->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-50To80_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
-   background5->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-80To120_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
-   background6->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-120To170_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   signal->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/scenarioA_mpi_4_mA_1p33_ctau_10/*.root/Friends" );
+   background1->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-15To20_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
+   background2->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-20To30_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
+   background3->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-30To50_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
+   background4->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-50To80_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
+   background5->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-80To120_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
+   background6->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-120To170_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
 
-   background7->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-170To300_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
-   background8->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-300To470_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
-   background9->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-470To600_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
-   background10->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-600To800_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
-   background11->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-800To1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
-   background12->Add("/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends");
+   background7->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-170To300_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
+   background8->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-300To470_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
+   background9->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-470To600_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
+   background10->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-600To800_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
+   background11->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-800To1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
+   background12->Add( "/vols/cms/khl216/nano_out/scenario_A_no_conditional/bparkProductionAll_V1p3/QCD_Pt-1000_MuEnrichedPt5_TuneCP5_13TeV-pythia8_RunIISummer20UL18MiniAODv2-106X_upgrade2018_realistic_v16_L1v1-v2_MINIAODSIM_v1p1_generationSync/*.root/Friends" );
    
 
 
@@ -596,4 +601,10 @@ void nano_analysis(){
    //hist_stack("h_svmass_nano_stack", h_svmass1, h_svmass, Ntuple_name, true);
   // hist_stack_old("h_bdt_stack", { hist_bdt1_c, hist_bdt_c });
 
+}
+
+
+int nanotools_analysis_code_bdt_background_new_models(){
+	nano_analysis();
+	return 0;
 }
