@@ -317,29 +317,34 @@ void nano_analysis(){
    TString path_bdt_output_base="/home/hep/jtafoyav/vols/parking/bdt/icenet/output/dqcd/deploy";
    TString path_bdt_2024="gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024";
 
+   //// noMET
+
    // 2024, Mu10 OR DoubleMu, noMET deployment output
    //TString modeltag="modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_noMET";
    //TString BDTmodel="xgb01_NOJETS_NOMET";
 
-   // 2024, Mu10 OR DoubleMu, withMET deployment output
-   //TString modeltag="modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_withMET";
-   //TString BDTmodel="xgb01_NOJETS";
-
    // 2024, Mu10, noMET deployment output
-   TString modeltag="modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_Mu10_noMET";
-   TString BDTmodel="xgb01_NOJETS_NOMET";
-
-   // 2024, Mu10, withMET deployment output
-   //TString modeltag="modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_Mu10_withMET";
-   //TString BDTmodel="xgb01_NOJETS";
+   //TString modeltag="modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_Mu10_noMET";
+   //TString BDTmodel="xgb01_NOJETS_NOMET";
 
    // 2024, DoubleMu, noMET deployment output
    //TString modeltag="modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_DoubleMu_noMET";
    //TString BDTmodel="xgb01_NOJETS_NOMET";
 
+   //// withMET v1 (with MET_pt and MET_phi)
+
+   // 2024, Mu10 OR DoubleMu, withMET deployment output
+   //TString modeltag="modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_withMET";
+   //TString BDTmodel="xgb01_NOJETS";
+
+   // 2024, Mu10, withMET deployment output
+   TString modeltag="modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_Mu10_withMET";
+   TString BDTmodel="xgb01_NOJETS";
+
    // 2024, DoubleMu, withMET deployment output
    //TString modeltag="modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_DoubleMu_withMET";
    //TString BDTmodel="xgb01_NOJETS";
+
 
    printf("Running on %s, for result %s\n", modeltag.Data(), BDTmodel.Data());
 
@@ -748,7 +753,7 @@ void nano_analysis(){
 }
 
 
-int inspectBDTdeployOutput(){
+int getBDTScoreThreshold_fromDeploymentOutput(){
    nano_analysis();
    return 0;
 }

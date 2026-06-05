@@ -1,0 +1,528 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,top=1.5cm,bottom=1.5cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage{booktabs}
+\usepackage{pdflscape}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{8pt}
+\renewcommand{\arraystretch}{1.4}
+\begin{document}
+
+{\large Signal efficiency cutflow $|$ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=1.33\,\mathrm{GeV}$ $|$ 2024, $13.6\,\mathrm{TeV}$}
+
+\vspace{0.8em}
+
+Step 1 -- Kinematic selection: any muonSV cand.: $\max(p_T^{\mu_1},p_T^{\mu_2}){>}4\,\mathrm{GeV}$ and $\min(p_T^{\mu_1},p_T^{\mu_2}){>}3\,\mathrm{GeV}$
+
+Step 2 -- Trigger selection: \texttt{HLT\_DoubleMu4\_3\_LowMass}
+
+Step 3 -- SV quality: at least one muonSV with $\chi^2<10$ and $\Delta R(\mu_1,\mu_2)<1.2$
+
+Step 4 -- BDT selection: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (target FPR $=10^{-4}$)
+
+\vspace{0.8em}
+
+\vspace{18pt}
+
+Absolute event counts
+
+\begin{tabular}{lcccccc}
+\toprule
+$\mathrm{Cut\ step}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Total\ (weighted)}$} \\
+\midrule
+$N_{\mathrm{total}}$ & 917872 & 868835 & 861355 & 943679 & 105319413.6\\
+$\mathrm{Kin.\ sel.}$ & 236705 & 221463 & 197330 & 117118 & 15294235.6\\
+$\mathrm{HLT\ presel.}$ & 118799 & 96863 & 59132 & 12507 & 705114.5\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 116378 & 93696 & 52892 & 10788 & 661109.8\\
+$\mathrm{BDT\ sel.}$ & 3684 & 18962 & 31287 & 7680 & 69.7\\
+\bottomrule
+\end{tabular}
+
+\vspace{18pt}
+
+Relative efficiencies (w.r.t.\ $N_{\mathrm{total}}$)
+
+\begin{tabular}{lcccccc}
+\toprule
+$\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Weighted}\ \varepsilon$} \\
+\midrule
+$\varepsilon_{\mathrm{kin}}$ & 0.2579 & 0.2549 & 0.2291 & 0.1241 & 0.1470\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.1294 & 0.1115 & 0.0686 & 0.0133 & 0.0069\\
+$\varepsilon_{\mathrm{SV}}$ & 0.1268 & 0.1078 & 0.0614 & 0.0114 & 0.0065\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0040 & 0.0218 & 0.0363 & 0.0081 & 0.0000\\
+\bottomrule
+\end{tabular}
+
+\clearpage
+
+\begin{landscape}
+
+{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=1.33\,\mathrm{GeV}$ $|$ 2024}
+
+\vspace{0.6em}
+
+Efficiencies relative to $N$ in each $l_{xy}$ bin.
+
+\vspace{18pt}
+
+Absolute event counts
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|cccc|cccc|cccc}
+\toprule
+ & \multicolumn{4}{c|}{$l_{xy}\in[0,\,1]\,\mathrm{cm}$} & \multicolumn{4}{c|}{$l_{xy}\in[1,\,10]\,\mathrm{cm}$} & \multicolumn{4}{c}{$l_{xy}\in[10,\,100]\,\mathrm{cm}$}\\
+$\mathrm{Step}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
+\midrule
+$N_{l_{xy}}$ & 235956 & 170269 & 87762 & 46462 & 9649 & 58672 & 87868 & 51347 & 1373 & 2097 & 30863 & 27336\\
+$\mathrm{Kin.\ sel.}$ & 227086 & 162372 & 82266 & 42623 & 8310 & 57054 & 84396 & 47867 & 1285 & 2002 & 30580 & 26463\\
+$\mathrm{HLT\ presel.}$ & 117852 & 61731 & 12656 & 1990 & 752 & 34572 & 35043 & 6285 & 184 & 548 & 11417 & 4228\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 115548 & 59255 & 9832 & 1427 & 670 & 33968 & 32531 & 5532 & 150 & 465 & 10523 & 3827\\
+$\mathrm{BDT\ sel.}$ & 3592 & 5822 & 746 & 77 & 85 & 12918 & 20418 & 3730 & 7 & 221 & 10119 & 3871\\
+\bottomrule
+\end{tabular}}
+
+\vspace{18pt}
+
+Relative efficiencies (w.r.t.\ $N$ in $l_{xy}$ bin)
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|cccc|cccc|cccc}
+\toprule
+ & \multicolumn{4}{c|}{$l_{xy}\in[0,\,1]\,\mathrm{cm}$} & \multicolumn{4}{c|}{$l_{xy}\in[1,\,10]\,\mathrm{cm}$} & \multicolumn{4}{c}{$l_{xy}\in[10,\,100]\,\mathrm{cm}$}\\
+$\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
+\midrule
+$\varepsilon_{\mathrm{kin}}$ & 0.9624 & 0.9536 & 0.9374 & 0.9174 & 0.8612 & 0.9724 & 0.9605 & 0.9322 & 0.9359 & 0.9547 & 0.9908 & 0.9681\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.4995 & 0.3625 & 0.1442 & 0.0428 & 0.0779 & 0.5892 & 0.3988 & 0.1224 & 0.1340 & 0.2613 & 0.3699 & 0.1547\\
+$\varepsilon_{\mathrm{SV}}$ & 0.4897 & 0.3480 & 0.1120 & 0.0307 & 0.0694 & 0.5789 & 0.3702 & 0.1077 & 0.1092 & 0.2217 & 0.3410 & 0.1400\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0152 & 0.0342 & 0.0085 & 0.0017 & 0.0088 & 0.2202 & 0.2324 & 0.0726 & 0.0051 & 0.1054 & 0.3279 & 0.1416\\
+\bottomrule
+\end{tabular}}
+
+\end{landscape}
+\clearpage
+
+{\large Signal efficiency cutflow $|$ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=0.40\,\mathrm{GeV}$ $|$ 2024, $13.6\,\mathrm{TeV}$}
+
+\vspace{0.8em}
+
+Step 1 -- Kinematic selection: any muonSV cand.: $\max(p_T^{\mu_1},p_T^{\mu_2}){>}4\,\mathrm{GeV}$ and $\min(p_T^{\mu_1},p_T^{\mu_2}){>}3\,\mathrm{GeV}$
+
+Step 2 -- Trigger selection: \texttt{HLT\_DoubleMu4\_3\_LowMass}
+
+Step 3 -- SV quality: at least one muonSV with $\chi^2<10$ and $\Delta R(\mu_1,\mu_2)<1.2$
+
+Step 4 -- BDT selection: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (target FPR $=10^{-4}$)
+
+\vspace{0.8em}
+
+\vspace{18pt}
+
+Absolute event counts
+
+\begin{tabular}{lcccccc}
+\toprule
+$\mathrm{Cut\ step}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Total\ (weighted)}$} \\
+\midrule
+$N_{\mathrm{total}}$ & 913060 & 960840 & 879810 & 960785 & 105319413.6\\
+$\mathrm{Kin.\ sel.}$ & 322052 & 327538 & 218115 & 109027 & 15294235.6\\
+$\mathrm{HLT\ presel.}$ & 189700 & 165134 & 58657 & 8565 & 705114.5\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 186405 & 157267 & 50945 & 7385 & 661109.8\\
+$\mathrm{BDT\ sel.}$ & 30354 & 80637 & 33532 & 4983 & 69.7\\
+\bottomrule
+\end{tabular}
+
+\vspace{18pt}
+
+Relative efficiencies (w.r.t.\ $N_{\mathrm{total}}$)
+
+\begin{tabular}{lcccccc}
+\toprule
+$\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Weighted}\ \varepsilon$} \\
+\midrule
+$\varepsilon_{\mathrm{kin}}$ & 0.3527 & 0.3409 & 0.2479 & 0.1135 & 0.1470\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.2078 & 0.1719 & 0.0667 & 0.0089 & 0.0069\\
+$\varepsilon_{\mathrm{SV}}$ & 0.2042 & 0.1637 & 0.0579 & 0.0077 & 0.0065\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0332 & 0.0839 & 0.0381 & 0.0052 & 0.0000\\
+\bottomrule
+\end{tabular}
+
+\clearpage
+
+\begin{landscape}
+
+{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=0.40\,\mathrm{GeV}$ $|$ 2024}
+
+\vspace{0.6em}
+
+Efficiencies relative to $N$ in each $l_{xy}$ bin.
+
+\vspace{18pt}
+
+Absolute event counts
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|cccc|cccc|cccc}
+\toprule
+ & \multicolumn{4}{c|}{$l_{xy}\in[0,\,1]\,\mathrm{cm}$} & \multicolumn{4}{c|}{$l_{xy}\in[1,\,10]\,\mathrm{cm}$} & \multicolumn{4}{c}{$l_{xy}\in[10,\,100]\,\mathrm{cm}$}\\
+$\mathrm{Step}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
+\midrule
+$N_{l_{xy}}$ & 301977 & 179263 & 94058 & 61544 & 29476 & 142485 & 84528 & 36474 & 1443 & 17612 & 50041 & 17685\\
+$\mathrm{Kin.\ sel.}$ & 292469 & 170747 & 88163 & 57746 & 28208 & 139238 & 80703 & 33985 & 1352 & 17506 & 49103 & 17141\\
+$\mathrm{HLT\ presel.}$ & 172055 & 62280 & 13597 & 1829 & 17289 & 93441 & 28208 & 3697 & 347 & 9399 & 16842 & 3034\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 169079 & 56405 & 9398 & 1332 & 17048 & 92131 & 26105 & 3347 & 270 & 8721 & 15435 & 2705\\
+$\mathrm{BDT\ sel.}$ & 23357 & 13405 & 1277 & 81 & 6961 & 59634 & 17204 & 2159 & 34 & 7596 & 15049 & 2741\\
+\bottomrule
+\end{tabular}}
+
+\vspace{18pt}
+
+Relative efficiencies (w.r.t.\ $N$ in $l_{xy}$ bin)
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|cccc|cccc|cccc}
+\toprule
+ & \multicolumn{4}{c|}{$l_{xy}\in[0,\,1]\,\mathrm{cm}$} & \multicolumn{4}{c|}{$l_{xy}\in[1,\,10]\,\mathrm{cm}$} & \multicolumn{4}{c}{$l_{xy}\in[10,\,100]\,\mathrm{cm}$}\\
+$\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
+\midrule
+$\varepsilon_{\mathrm{kin}}$ & 0.9685 & 0.9525 & 0.9373 & 0.9383 & 0.9570 & 0.9772 & 0.9547 & 0.9318 & 0.9369 & 0.9940 & 0.9813 & 0.9692\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.5698 & 0.3474 & 0.1446 & 0.0297 & 0.5865 & 0.6558 & 0.3337 & 0.1014 & 0.2405 & 0.5337 & 0.3366 & 0.1716\\
+$\varepsilon_{\mathrm{SV}}$ & 0.5599 & 0.3146 & 0.0999 & 0.0216 & 0.5784 & 0.6466 & 0.3088 & 0.0918 & 0.1871 & 0.4952 & 0.3084 & 0.1530\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0773 & 0.0748 & 0.0136 & 0.0013 & 0.2362 & 0.4185 & 0.2035 & 0.0592 & 0.0236 & 0.4313 & 0.3007 & 0.1550\\
+\bottomrule
+\end{tabular}}
+
+\end{landscape}
+\clearpage
+
+{\large Signal efficiency cutflow $|$ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=1.00\,\mathrm{GeV}$ $|$ 2024, $13.6\,\mathrm{TeV}$}
+
+\vspace{0.8em}
+
+Step 1 -- Kinematic selection: any muonSV cand.: $\max(p_T^{\mu_1},p_T^{\mu_2}){>}4\,\mathrm{GeV}$ and $\min(p_T^{\mu_1},p_T^{\mu_2}){>}3\,\mathrm{GeV}$
+
+Step 2 -- Trigger selection: \texttt{HLT\_DoubleMu4\_3\_LowMass}
+
+Step 3 -- SV quality: at least one muonSV with $\chi^2<10$ and $\Delta R(\mu_1,\mu_2)<1.2$
+
+Step 4 -- BDT selection: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (target FPR $=10^{-4}$)
+
+\vspace{0.8em}
+
+\vspace{18pt}
+
+Absolute event counts
+
+\begin{tabular}{lcccccc}
+\toprule
+$\mathrm{Cut\ step}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Total\ (weighted)}$} \\
+\midrule
+$N_{\mathrm{total}}$ & 911340 & 804161 & 806777 & 853360 & 105319413.6\\
+$\mathrm{Kin.\ sel.}$ & 203996 & 176716 & 147756 & 83056 & 15294235.6\\
+$\mathrm{HLT\ presel.}$ & 130314 & 104849 & 56819 & 10277 & 705114.5\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 128168 & 101780 & 51519 & 9026 & 661109.8\\
+$\mathrm{BDT\ sel.}$ & 10394 & 39918 & 35823 & 6723 & 69.7\\
+\bottomrule
+\end{tabular}
+
+\vspace{18pt}
+
+Relative efficiencies (w.r.t.\ $N_{\mathrm{total}}$)
+
+\begin{tabular}{lcccccc}
+\toprule
+$\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Weighted}\ \varepsilon$} \\
+\midrule
+$\varepsilon_{\mathrm{kin}}$ & 0.2238 & 0.2198 & 0.1831 & 0.0973 & 0.1470\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.1430 & 0.1304 & 0.0704 & 0.0120 & 0.0069\\
+$\varepsilon_{\mathrm{SV}}$ & 0.1406 & 0.1266 & 0.0639 & 0.0106 & 0.0065\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0114 & 0.0496 & 0.0444 & 0.0079 & 0.0000\\
+\bottomrule
+\end{tabular}
+
+\clearpage
+
+\begin{landscape}
+
+{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=1.00\,\mathrm{GeV}$ $|$ 2024}
+
+\vspace{0.6em}
+
+Efficiencies relative to $N$ in each $l_{xy}$ bin.
+
+\vspace{18pt}
+
+Absolute event counts
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|cccc|cccc|cccc}
+\toprule
+ & \multicolumn{4}{c|}{$l_{xy}\in[0,\,1]\,\mathrm{cm}$} & \multicolumn{4}{c|}{$l_{xy}\in[1,\,10]\,\mathrm{cm}$} & \multicolumn{4}{c}{$l_{xy}\in[10,\,100]\,\mathrm{cm}$}\\
+$\mathrm{Step}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
+\midrule
+$N_{l_{xy}}$ & 195034 & 93909 & 50055 & 40979 & 11737 & 81275 & 59977 & 27375 & 1591 & 5408 & 41406 & 18507\\
+$\mathrm{Kin.\ sel.}$ & 191468 & 91022 & 47790 & 38641 & 10979 & 80314 & 58492 & 26029 & 1521 & 5347 & 41227 & 18216\\
+$\mathrm{HLT\ presel.}$ & 125258 & 45723 & 10132 & 1655 & 4748 & 56661 & 29581 & 4387 & 297 & 2455 & 17071 & 4231\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 123312 & 43743 & 7658 & 1220 & 4614 & 55821 & 28033 & 3983 & 234 & 2208 & 15802 & 3820\\
+$\mathrm{BDT\ sel.}$ & 9072 & 7039 & 864 & 72 & 1311 & 31067 & 18934 & 2648 & 11 & 1809 & 15997 & 4000\\
+\bottomrule
+\end{tabular}}
+
+\vspace{18pt}
+
+Relative efficiencies (w.r.t.\ $N$ in $l_{xy}$ bin)
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|cccc|cccc|cccc}
+\toprule
+ & \multicolumn{4}{c|}{$l_{xy}\in[0,\,1]\,\mathrm{cm}$} & \multicolumn{4}{c|}{$l_{xy}\in[1,\,10]\,\mathrm{cm}$} & \multicolumn{4}{c}{$l_{xy}\in[10,\,100]\,\mathrm{cm}$}\\
+$\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
+\midrule
+$\varepsilon_{\mathrm{kin}}$ & 0.9817 & 0.9693 & 0.9547 & 0.9429 & 0.9354 & 0.9882 & 0.9752 & 0.9508 & 0.9560 & 0.9887 & 0.9957 & 0.9843\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.6422 & 0.4869 & 0.2024 & 0.0404 & 0.4045 & 0.6972 & 0.4932 & 0.1603 & 0.1867 & 0.4540 & 0.4123 & 0.2286\\
+$\varepsilon_{\mathrm{SV}}$ & 0.6323 & 0.4658 & 0.1530 & 0.0298 & 0.3931 & 0.6868 & 0.4674 & 0.1455 & 0.1471 & 0.4083 & 0.3816 & 0.2064\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0465 & 0.0750 & 0.0173 & 0.0018 & 0.1117 & 0.3822 & 0.3157 & 0.0967 & 0.0069 & 0.3345 & 0.3863 & 0.2161\\
+\bottomrule
+\end{tabular}}
+
+\end{landscape}
+\clearpage
+
+{\large Signal efficiency cutflow $|$ \texttt{DoubleMu} $|$ $m_{\pi}=1\,\mathrm{GeV}$, $m_{A}=0.33\,\mathrm{GeV}$ $|$ 2024, $13.6\,\mathrm{TeV}$}
+
+\vspace{0.8em}
+
+Step 1 -- Kinematic selection: any muonSV cand.: $\max(p_T^{\mu_1},p_T^{\mu_2}){>}4\,\mathrm{GeV}$ and $\min(p_T^{\mu_1},p_T^{\mu_2}){>}3\,\mathrm{GeV}$
+
+Step 2 -- Trigger selection: \texttt{HLT\_DoubleMu4\_3\_LowMass}
+
+Step 3 -- SV quality: at least one muonSV with $\chi^2<10$ and $\Delta R(\mu_1,\mu_2)<1.2$
+
+Step 4 -- BDT selection: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (target FPR $=10^{-4}$)
+
+\vspace{0.8em}
+
+\vspace{18pt}
+
+Absolute event counts
+
+\begin{tabular}{lcccccc}
+\toprule
+$\mathrm{Cut\ step}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Total\ (weighted)}$} \\
+\midrule
+$N_{\mathrm{total}}$ & 912670 & 828649 & 812380 & 842040 & 105319413.6\\
+$\mathrm{Kin.\ sel.}$ & 229176 & 201654 & 137079 & 70896 & 15294235.6\\
+$\mathrm{HLT\ presel.}$ & 114793 & 81102 & 27626 & 3657 & 705114.5\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 112925 & 76776 & 23992 & 3195 & 661109.8\\
+$\mathrm{BDT\ sel.}$ & 7204 & 30208 & 13447 & 1884 & 69.7\\
+\bottomrule
+\end{tabular}
+
+\vspace{18pt}
+
+Relative efficiencies (w.r.t.\ $N_{\mathrm{total}}$)
+
+\begin{tabular}{lcccccc}
+\toprule
+$\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Weighted}\ \varepsilon$} \\
+\midrule
+$\varepsilon_{\mathrm{kin}}$ & 0.2511 & 0.2434 & 0.1687 & 0.0842 & 0.1470\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.1258 & 0.0979 & 0.0340 & 0.0043 & 0.0069\\
+$\varepsilon_{\mathrm{SV}}$ & 0.1237 & 0.0927 & 0.0295 & 0.0038 & 0.0065\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0079 & 0.0365 & 0.0166 & 0.0022 & 0.0000\\
+\bottomrule
+\end{tabular}
+
+\clearpage
+
+\begin{landscape}
+
+{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=1\,\mathrm{GeV}$, $m_{A}=0.33\,\mathrm{GeV}$ $|$ 2024}
+
+\vspace{0.6em}
+
+Efficiencies relative to $N$ in each $l_{xy}$ bin.
+
+\vspace{18pt}
+
+Absolute event counts
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|cccc|cccc|cccc}
+\toprule
+ & \multicolumn{4}{c|}{$l_{xy}\in[0,\,1]\,\mathrm{cm}$} & \multicolumn{4}{c|}{$l_{xy}\in[1,\,10]\,\mathrm{cm}$} & \multicolumn{4}{c}{$l_{xy}\in[10,\,100]\,\mathrm{cm}$}\\
+$\mathrm{Step}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
+\midrule
+$N_{l_{xy}}$ & 225899 & 130306 & 63698 & 42550 & 20216 & 79130 & 57468 & 23830 & 1116 & 8241 & 29777 & 10920\\
+$\mathrm{Kin.\ sel.}$ & 209871 & 118329 & 55967 & 38924 & 18311 & 75218 & 52469 & 21402 & 978 & 8078 & 28538 & 10398\\
+$\mathrm{HLT\ presel.}$ & 105476 & 33353 & 6294 & 782 & 9128 & 43943 & 13887 & 1670 & 187 & 3798 & 7435 & 1205\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 103798 & 30363 & 4572 & 571 & 8967 & 42963 & 12708 & 1539 & 158 & 3446 & 6704 & 1085\\
+$\mathrm{BDT\ sel.}$ & 5123 & 4047 & 379 & 29 & 2075 & 23488 & 7182 & 852 & 6 & 2673 & 5881 & 1003\\
+\bottomrule
+\end{tabular}}
+
+\vspace{18pt}
+
+Relative efficiencies (w.r.t.\ $N$ in $l_{xy}$ bin)
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|cccc|cccc|cccc}
+\toprule
+ & \multicolumn{4}{c|}{$l_{xy}\in[0,\,1]\,\mathrm{cm}$} & \multicolumn{4}{c|}{$l_{xy}\in[1,\,10]\,\mathrm{cm}$} & \multicolumn{4}{c}{$l_{xy}\in[10,\,100]\,\mathrm{cm}$}\\
+$\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
+\midrule
+$\varepsilon_{\mathrm{kin}}$ & 0.9290 & 0.9081 & 0.8786 & 0.9148 & 0.9058 & 0.9506 & 0.9130 & 0.8981 & 0.8763 & 0.9802 & 0.9584 & 0.9522\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.4669 & 0.2560 & 0.0988 & 0.0184 & 0.4515 & 0.5553 & 0.2416 & 0.0701 & 0.1676 & 0.4609 & 0.2497 & 0.1103\\
+$\varepsilon_{\mathrm{SV}}$ & 0.4595 & 0.2330 & 0.0718 & 0.0134 & 0.4436 & 0.5429 & 0.2211 & 0.0646 & 0.1416 & 0.4182 & 0.2251 & 0.0994\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0227 & 0.0311 & 0.0059 & 0.0007 & 0.1026 & 0.2968 & 0.1250 & 0.0358 & 0.0054 & 0.3244 & 0.1975 & 0.0918\\
+\bottomrule
+\end{tabular}}
+
+\end{landscape}
+\clearpage
+
+{\large Signal efficiency cutflow $|$ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=3.33\,\mathrm{GeV}$ $|$ 2024, $13.6\,\mathrm{TeV}$}
+
+\vspace{0.8em}
+
+Step 1 -- Kinematic selection: any muonSV cand.: $\max(p_T^{\mu_1},p_T^{\mu_2}){>}4\,\mathrm{GeV}$ and $\min(p_T^{\mu_1},p_T^{\mu_2}){>}3\,\mathrm{GeV}$
+
+Step 2 -- Trigger selection: \texttt{HLT\_DoubleMu4\_3\_LowMass}
+
+Step 3 -- SV quality: at least one muonSV with $\chi^2<10$ and $\Delta R(\mu_1,\mu_2)<1.2$
+
+Step 4 -- BDT selection: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (target FPR $=10^{-4}$)
+
+\vspace{0.8em}
+
+\vspace{18pt}
+
+Absolute event counts
+
+\begin{tabular}{lcccccc}
+\toprule
+$\mathrm{Cut\ step}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Total\ (weighted)}$} \\
+\midrule
+$N_{\mathrm{total}}$ & 809720 & 932645 & 914920 & 884107 & 105319413.6\\
+$\mathrm{Kin.\ sel.}$ & 125164 & 143011 & 129885 & 81316 & 15294235.6\\
+$\mathrm{HLT\ presel.}$ & 73475 & 79110 & 54177 & 11955 & 705114.5\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 72402 & 77246 & 50934 & 10856 & 661109.8\\
+$\mathrm{BDT\ sel.}$ & 741 & 4731 & 23721 & 7245 & 69.7\\
+\bottomrule
+\end{tabular}
+
+\vspace{18pt}
+
+Relative efficiencies (w.r.t.\ $N_{\mathrm{total}}$)
+
+\begin{tabular}{lcccccc}
+\toprule
+$\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Weighted}\ \varepsilon$} \\
+\midrule
+$\varepsilon_{\mathrm{kin}}$ & 0.1546 & 0.1533 & 0.1420 & 0.0920 & 0.1470\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.0907 & 0.0848 & 0.0592 & 0.0135 & 0.0069\\
+$\varepsilon_{\mathrm{SV}}$ & 0.0894 & 0.0828 & 0.0557 & 0.0123 & 0.0065\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0009 & 0.0051 & 0.0259 & 0.0082 & 0.0000\\
+\bottomrule
+\end{tabular}
+
+\clearpage
+
+\begin{landscape}
+
+{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=3.33\,\mathrm{GeV}$ $|$ 2024}
+
+\vspace{0.6em}
+
+Efficiencies relative to $N$ in each $l_{xy}$ bin.
+
+\vspace{18pt}
+
+Absolute event counts
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|cccc|cccc|cccc}
+\toprule
+ & \multicolumn{4}{c|}{$l_{xy}\in[0,\,1]\,\mathrm{cm}$} & \multicolumn{4}{c|}{$l_{xy}\in[1,\,10]\,\mathrm{cm}$} & \multicolumn{4}{c}{$l_{xy}\in[10,\,100]\,\mathrm{cm}$}\\
+$\mathrm{Step}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
+\midrule
+$N_{l_{xy}}$ & 122549 & 116925 & 48251 & 26007 & 5384 & 28926 & 68908 & 33929 & 1180 & 1586 & 16926 & 25166\\
+$\mathrm{Kin.\ sel.}$ & 119508 & 113425 & 45495 & 23813 & 4537 & 28050 & 67502 & 32512 & 1107 & 1507 & 16848 & 24877\\
+$\mathrm{HLT\ presel.}$ & 73068 & 62477 & 13704 & 1855 & 272 & 16383 & 34864 & 6909 & 133 & 244 & 5603 & 3190\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 72070 & 61038 & 12391 & 1580 & 219 & 16033 & 33359 & 6363 & 111 & 169 & 5182 & 2913\\
+$\mathrm{BDT\ sel.}$ & 730 & 1629 & 318 & 32 & 5 & 3082 & 18524 & 4270 & 6 & 20 & 4875 & 2943\\
+\bottomrule
+\end{tabular}}
+
+\vspace{18pt}
+
+Relative efficiencies (w.r.t.\ $N$ in $l_{xy}$ bin)
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{l|cccc|cccc|cccc}
+\toprule
+ & \multicolumn{4}{c|}{$l_{xy}\in[0,\,1]\,\mathrm{cm}$} & \multicolumn{4}{c|}{$l_{xy}\in[1,\,10]\,\mathrm{cm}$} & \multicolumn{4}{c}{$l_{xy}\in[10,\,100]\,\mathrm{cm}$}\\
+$\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
+\midrule
+$\varepsilon_{\mathrm{kin}}$ & 0.9752 & 0.9701 & 0.9429 & 0.9156 & 0.8427 & 0.9697 & 0.9796 & 0.9582 & 0.9381 & 0.9502 & 0.9954 & 0.9885\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.5962 & 0.5343 & 0.2840 & 0.0713 & 0.0505 & 0.5664 & 0.5059 & 0.2036 & 0.1127 & 0.1538 & 0.3310 & 0.1268\\
+$\varepsilon_{\mathrm{SV}}$ & 0.5881 & 0.5220 & 0.2568 & 0.0608 & 0.0407 & 0.5543 & 0.4841 & 0.1875 & 0.0941 & 0.1066 & 0.3062 & 0.1158\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0060 & 0.0139 & 0.0066 & 0.0012 & 0.0009 & 0.1065 & 0.2688 & 0.1259 & 0.0051 & 0.0126 & 0.2880 & 0.1169\\
+\bottomrule
+\end{tabular}}
+
+\end{landscape}
+\clearpage
+
+\begin{landscape}
+
+{\large QCD background cutflow $|$ \texttt{DoubleMu} $|$ 2024, $13.6\,\mathrm{TeV}$}
+
+\vspace{0.8em}
+
+\textit{Column headers: $p_T$ range [GeV] and $\sigma$ [pb].}
+
+Preselection: \texttt{xgb01\_NOJETS\_NOMET} $\geq 0$\quad BDT: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (FPR$=10^{-4}$)
+
+\vspace{0.8em}
+
+\vspace{18pt}
+
+Absolute event counts; Total\ (weighted)$=\sum_q(\sigma_q N_q)/\sum_q\sigma_q$
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrrrrrrrrr}
+\toprule
+Cut step & \shortstack{$p_T\in[15\text{--}20]\,\mathrm{GeV}$\\$\sigma=2.80\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[20\text{--}30]\,\mathrm{GeV}$\\$\sigma=2.53\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[30\text{--}50]\,\mathrm{GeV}$\\$\sigma=1.36\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[50\text{--}80]\,\mathrm{GeV}$\\$\sigma=3.77\times10^{5}\,\mathrm{pb}$} & \shortstack{$p_T\in[80\text{--}120]\,\mathrm{GeV}$\\$\sigma=8.89\times10^{4}\,\mathrm{pb}$} & \shortstack{$p_T\in[120\text{--}170]\,\mathrm{GeV}$\\$\sigma=2.12\times10^{4}\,\mathrm{pb}$} & \shortstack{$p_T\in[170\text{--}300]\,\mathrm{GeV}$\\$\sigma=7.05\times10^{3}\,\mathrm{pb}$} & \shortstack{$p_T\in[300\text{--}470]\,\mathrm{GeV}$\\$\sigma=6.19\times10^{2}\,\mathrm{pb}$} & \shortstack{$p_T\in[470\text{--}600]\,\mathrm{GeV}$\\$\sigma=5.92\times10^{1}\,\mathrm{pb}$} & \shortstack{$p_T\in[600\text{--}800]\,\mathrm{GeV}$\\$\sigma=1.82\times10^{1}\,\mathrm{pb}$} & \shortstack{$p_T\in[800\text{--}1000]\,\mathrm{GeV}$\\$\sigma=3.27\,\mathrm{pb}$} & \shortstack{$p_T>1000\,\mathrm{GeV}$\\$\sigma=1.08\,\mathrm{pb}$} & \shortstack{$\mathrm{Total}$\\$\mathrm{(weighted)}$}\\
+\midrule
+$N_{\mathrm{total}}$ & 123770024 & 91738748 & 93845715 & 105010260 & 91217031 & 96167179 & 87457063 & 76722144 & 68451685 & 81354006 & 77332004 & 82646883 & 105319413.6\\
+$\mathrm{Kin.\ sel.}$ & 15900677 & 13107891 & 15679001 & 21295112 & 22440404 & 28360428 & 31398128 & 35685021 & 37992635 & 50099625 & 52670397 & 62151563 & 15294235.6\\
+$\mathrm{HLT\ presel.}$ & 575528 & 617714 & 899384 & 1323181 & 1369444 & 1630488 & 1657394 & 1669576 & 1642324 & 2076075 & 2110561 & 2443075 & 705114.5\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 533129 & 579520 & 850526 & 1255082 & 1299354 & 1545813 & 1573455 & 1592337 & 1574863 & 2000325 & 2045213 & 2384238 & 661109.8\\
+$\mathrm{BDT\ sel.}$ & 62 & 73 & 73 & 84 & 98 & 101 & 53 & 34 & 24 & 34 & 34 & 29 & 69.7\\
+\bottomrule
+\end{tabular}}
+
+\vspace{18pt}
+
+Relative efficiencies (w.r.t.\ $N_{\mathrm{total}}$); Weighted\ $\varepsilon=\sum(\sigma_q\varepsilon_q)/\sum\sigma_q$
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrrrrrrrrrrr}
+\toprule
+$\mathrm{Efficiency}$ & \shortstack{$p_T\in[15\text{--}20]\,\mathrm{GeV}$\\$\sigma=2.80\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[20\text{--}30]\,\mathrm{GeV}$\\$\sigma=2.53\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[30\text{--}50]\,\mathrm{GeV}$\\$\sigma=1.36\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[50\text{--}80]\,\mathrm{GeV}$\\$\sigma=3.77\times10^{5}\,\mathrm{pb}$} & \shortstack{$p_T\in[80\text{--}120]\,\mathrm{GeV}$\\$\sigma=8.89\times10^{4}\,\mathrm{pb}$} & \shortstack{$p_T\in[120\text{--}170]\,\mathrm{GeV}$\\$\sigma=2.12\times10^{4}\,\mathrm{pb}$} & \shortstack{$p_T\in[170\text{--}300]\,\mathrm{GeV}$\\$\sigma=7.05\times10^{3}\,\mathrm{pb}$} & \shortstack{$p_T\in[300\text{--}470]\,\mathrm{GeV}$\\$\sigma=6.19\times10^{2}\,\mathrm{pb}$} & \shortstack{$p_T\in[470\text{--}600]\,\mathrm{GeV}$\\$\sigma=5.92\times10^{1}\,\mathrm{pb}$} & \shortstack{$p_T\in[600\text{--}800]\,\mathrm{GeV}$\\$\sigma=1.82\times10^{1}\,\mathrm{pb}$} & \shortstack{$p_T\in[800\text{--}1000]\,\mathrm{GeV}$\\$\sigma=3.27\,\mathrm{pb}$} & \shortstack{$p_T>1000\,\mathrm{GeV}$\\$\sigma=1.08\,\mathrm{pb}$} & \shortstack{$\mathrm{Weighted}\ \varepsilon$\\$\sigma_{\mathrm{tot}}=7.18\times10^{6}\,\mathrm{pb}$}\\
+\midrule
+$\varepsilon_{\mathrm{kin}}$ & 0.1285 & 0.1429 & 0.1671 & 0.2028 & 0.2460 & 0.2949 & 0.3590 & 0.4651 & 0.5550 & 0.6158 & 0.6811 & 0.7520 & 0.1470\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.0046 & 0.0067 & 0.0096 & 0.0126 & 0.0150 & 0.0170 & 0.0190 & 0.0218 & 0.0240 & 0.0255 & 0.0273 & 0.0296 & 0.0069\\
+$\varepsilon_{\mathrm{SV}}$ & 0.0043 & 0.0063 & 0.0091 & 0.0120 & 0.0142 & 0.0161 & 0.0180 & 0.0208 & 0.0230 & 0.0246 & 0.0264 & 0.0288 & 0.0065\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 0.0000\\
+\bottomrule
+\end{tabular}}
+
+\end{landscape}
+\clearpage
+
+\end{document}
