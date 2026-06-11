@@ -6,6 +6,8 @@
 ./getSignalEff_noMET_C.so: /usr/include/root/TCanvas.h
 ./getSignalEff_noMET_C.so: /usr/include/root/TChain.h
 ./getSignalEff_noMET_C.so: /usr/include/root/TH1D.h
+./getSignalEff_noMET_C.so: /usr/include/root/TGraph.h
+./getSignalEff_noMET_C.so: /usr/include/root/TLine.h
 ./getSignalEff_noMET_C.so: /usr/include/root/TLegend.h
 ./getSignalEff_noMET_C.so: /usr/include/root/TLatex.h
 ./getSignalEff_noMET_C.so: /usr/include/root/TStyle.h

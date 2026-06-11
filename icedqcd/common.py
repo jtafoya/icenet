@@ -26,13 +26,6 @@ from icenet import print
 from configs.dqcd.cuts   import *
 from configs.dqcd.filter import *
 
-def phi_phasewrap(phi):
-    """
-    Used for example when phi is deltaphi = phi1 - phi2
-    """
-    return (phi + np.pi) % (2 * np.pi) - np.pi
-
-
 def load_root_file(root_path, ids=None, entry_start=0, entry_stop=None, maxevents=None, args=None):
     """ Loads the root files
     
@@ -286,8 +279,8 @@ def splitfactor(x, y, w, ids, args, skip_graph=True, use_dequantize=True):
     
     jagged_vars.append('muonSV_mass')
     muonsv_vars.append('muonSV_mass')
-    
-    
+
+
     ## \DeltaR w.r.t first muon SV
     '''
     data.x['muonSV', 'SVdeltaR'] = \

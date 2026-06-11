@@ -1,7 +1,7 @@
-executable	= tests/runme_dqcd_scenarioA_2024_Mu10_noMET_train.sh
+executable	= tests/runme_dqcd_scenarioB1_2024_train.sh
 output		= iceqsub/output/outputfile.$(CLUSTER)
 error		= iceqsub/error/errorfile.$(CLUSTER)
-log		= iceqsub/log/dqcd_scenarioA_train_2024_Mu10_noMET.job.$(CLUSTER).log
+log		= iceqsub/log/dqcd_scenarioB1_train_2024.job.$(CLUSTER).log
 
 #Resource request
 request_gpus	= 1

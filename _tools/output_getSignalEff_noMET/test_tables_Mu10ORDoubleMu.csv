@@ -5,28 +5,35 @@ N_total,5000,5000,5000,5000,4995.7
 Kin sel.,1286,1263,1140,609,730.4
 HLT presel.,671,574,416,91,50.7
 SV sel. (chi2<10 dR<1.2),659,532,348,69,39.1
-BDT sel.,45,154,228,51,0.0
+BDT sel.,245,321,340,73,0.0
 
 "# TABLE: Signal relative effs wrt N_total | Mu10ORDoubleMu | mpi=4, mA=1.33"
 Efficiency,"mpi=4, mA=1.33, ctau=0.1mm","mpi=4, mA=1.33, ctau=1mm","mpi=4, mA=1.33, ctau=10mm","mpi=4, mA=1.33, ctau=100mm",QCD Weighted.eff
 eps_kin,0.2572,0.2526,0.2280,0.1218,0.1464
 eps_HLT,0.1342,0.1148,0.0832,0.0182,0.0102
 eps_SV,0.1318,0.1064,0.0696,0.0138,0.0079
-eps_BDT,0.0090,0.0308,0.0456,0.0102,0.00e+00
+eps_BDT,0.0490,0.0642,0.0680,0.0146,6.21e-07
 
 "# TABLE: Signal relative effs wrt previous step | Mu10ORDoubleMu | mpi=4, mA=1.33"
 Efficiency,"mpi=4, mA=1.33, ctau=0.1mm","mpi=4, mA=1.33, ctau=1mm","mpi=4, mA=1.33, ctau=10mm","mpi=4, mA=1.33, ctau=100mm",QCD Weighted.eff
 eps_kin,0.2572,0.2526,0.2280,0.1218,0.1464
 eps_HLT,0.5218,0.4545,0.3649,0.1494,0.0654
 eps_SV,0.9821,0.9268,0.8365,0.7582,0.7817
-eps_BDT,0.0683,0.2895,0.6552,0.7391,0.00e+00
+eps_BDT,0.3718,0.6034,0.9770,1.0580,3.05e-05
 
-"# TABLE: Asymptotic significance (Asimov) | Mu10ORDoubleMu | mpi=4, mA=1.33 | sigmaxBR=0.439 pb, L=109.95/fb"
+"# TABLE: 95% CL upper limit on B(H->psipsibar) | Mu10ORDoubleMu | mpi=4, mA=1.33 | sigma_ggH=43.9 pb, L=109.95/fb, B(A'->mumu)=0.317"
 FPR,BDT threshold,"mpi=4, mA=1.33, ctau=0.1mm","mpi=4, mA=1.33, ctau=1mm","mpi=4, mA=1.33, ctau=10mm","mpi=4, mA=1.33, ctau=100mm"
-1e-01,0.6445,0.1701,0.1653,0.126,0.02506
-1e-02,0.9451,0.3335,0.4139,0.3666,0.07568
-1e-03,0.9631,0.9124,1.197,1.133,0.2318
-1e-04,0.9636,2.884,3.734,3.569,0.7331
+1e-01,0.6445,0.09667,0.09952,0.1305,0.6565
+1e-02,0.9451,0.04933,0.03974,0.04487,0.2173
+1e-03,0.9631,0.01803,0.01375,0.01452,0.07096
+1e-04,0.9636,0.005704,0.004405,0.004609,0.02245
+
+"# TABLE: Asymptotic significance p0 (Z) (Asimov) | Mu10ORDoubleMu | mpi=4, mA=1.33 | sigmaxBR=0.439 pb, L=109.95/fb"
+FPR,BDT threshold,"mpi=4, mA=1.33, ctau=0.1mm","mpi=4, mA=1.33, ctau=1mm","mpi=4, mA=1.33, ctau=10mm","mpi=4, mA=1.33, ctau=100mm"
+1e-01,0.6445,"0.432 (0.17 sigma)","0.434 (0.17 sigma)","0.45 (0.13 sigma)","0.49 (0.03 sigma)"
+1e-02,0.9451,"0.369 (0.33 sigma)","0.339 (0.41 sigma)","0.357 (0.37 sigma)","0.47 (0.08 sigma)"
+1e-03,0.9631,"0.181 (0.91 sigma)","0.116 (1.20 sigma)","0.129 (1.13 sigma)","0.408 (0.23 sigma)"
+1e-04,0.9636,"0.00196 (2.88 sigma)","9.42e-05 (3.73 sigma)","0.000179 (3.57 sigma)","0.232 (0.73 sigma)"
 
 "# TABLE: lxy=[0,1]cm efficiencies | Mu10ORDoubleMu | mpi=4, mA=1.33"
 Step,"mpi=4, mA=1.33, ctau=0.1mm","mpi=4, mA=1.33, ctau=1mm","mpi=4, mA=1.33, ctau=10mm","mpi=4, mA=1.33, ctau=100mm"
@@ -34,11 +41,11 @@ N_lxy,1282,1008,506,249
 eps_kin,0.9641,0.9603,0.9269,0.9157
 eps_HLT,0.5187,0.3909,0.1996,0.0763
 eps_SV,0.5094,0.3542,0.1126,0.0402
-eps_BDT,0.0343,0.0575,0.0257,0.0120
+eps_BDT,0.1880,0.1736,0.0929,0.0281
 eps_kin_prev,0.9641,0.9603,0.9269,0.9157
 eps_HLT_prev,0.5380,0.4070,0.2154,0.0833
 eps_SV_prev,0.9820,0.9061,0.5644,0.5263
-eps_BDT_prev,0.0674,0.1625,0.2281,0.3000
+eps_BDT_prev,0.3691,0.4902,0.8246,0.7000
 
 "# TABLE: lxy=[1,10]cm efficiencies | Mu10ORDoubleMu | mpi=4, mA=1.33"
 Step,"mpi=4, mA=1.33, ctau=0.1mm","mpi=4, mA=1.33, ctau=1mm","mpi=4, mA=1.33, ctau=10mm","mpi=4, mA=1.33, ctau=100mm"
@@ -46,11 +53,11 @@ N_lxy,51,294,495,278
 eps_kin,0.8824,0.9660,0.9515,0.9281
 eps_HLT,0.0784,0.5986,0.4687,0.1835
 eps_SV,0.0784,0.5816,0.4424,0.1475
-eps_BDT,0.0196,0.3231,0.2970,0.1151
+eps_BDT,0.0588,0.4932,0.4303,0.1619
 eps_kin_prev,0.8824,0.9660,0.9515,0.9281
 eps_HLT_prev,0.0889,0.6197,0.4926,0.1977
 eps_SV_prev,1.0000,0.9716,0.9440,0.8039
-eps_BDT_prev,0.2500,0.5556,0.6712,0.7805
+eps_BDT_prev,0.7500,0.8480,0.9726,1.0976
 
 "# TABLE: lxy=[10,100]cm efficiencies | Mu10ORDoubleMu | mpi=4, mA=1.33"
 Step,"mpi=4, mA=1.33, ctau=0.1mm","mpi=4, mA=1.33, ctau=1mm","mpi=4, mA=1.33, ctau=10mm","mpi=4, mA=1.33, ctau=100mm"
@@ -58,11 +65,11 @@ N_lxy,5,12,202,125
 eps_kin,1.0000,0.9167,0.9901,0.9760
 eps_HLT,0.4000,0.3333,0.4109,0.1680
 eps_SV,0.4000,0.3333,0.3564,0.1440
-eps_BDT,0.0000,0.0833,0.3366,0.1280
+eps_BDT,0.2000,0.0833,0.3960,0.1680
 eps_kin_prev,1.0000,0.9167,0.9901,0.9760
 eps_HLT_prev,0.4000,0.3636,0.4150,0.1721
 eps_SV_prev,1.0000,1.0000,0.8675,0.8571
-eps_BDT_prev,0.0000,0.2500,0.9444,0.8889
+eps_BDT_prev,0.5000,0.2500,1.1111,1.1667
 
 "# TABLE: Signal absolute counts | Mu10ORDoubleMu | mpi=4, mA=0.40"
 Cut step,"mpi=4, mA=0.40, ctau=0.1mm","mpi=4, mA=0.40, ctau=1mm","mpi=4, mA=0.40, ctau=10mm","mpi=4, mA=0.40, ctau=100mm",QCD Total (weighted)
@@ -70,28 +77,35 @@ N_total,5000,5000,5000,5000,4995.7
 Kin sel.,488,519,1249,584,730.4
 HLT presel.,302,266,376,54,50.7
 SV sel. (chi2<10 dR<1.2),292,252,309,42,39.1
-BDT sel.,68,141,212,29,0.0
+BDT sel.,187,218,317,44,0.0
 
 "# TABLE: Signal relative effs wrt N_total | Mu10ORDoubleMu | mpi=4, mA=0.40"
 Efficiency,"mpi=4, mA=0.40, ctau=0.1mm","mpi=4, mA=0.40, ctau=1mm","mpi=4, mA=0.40, ctau=10mm","mpi=4, mA=0.40, ctau=100mm",QCD Weighted.eff
 eps_kin,0.0976,0.1038,0.2498,0.1168,0.1464
 eps_HLT,0.0604,0.0532,0.0752,0.0108,0.0102
 eps_SV,0.0584,0.0504,0.0618,0.0084,0.0079
-eps_BDT,0.0136,0.0282,0.0424,0.0058,0.00e+00
+eps_BDT,0.0374,0.0436,0.0634,0.0088,6.21e-07
 
 "# TABLE: Signal relative effs wrt previous step | Mu10ORDoubleMu | mpi=4, mA=0.40"
 Efficiency,"mpi=4, mA=0.40, ctau=0.1mm","mpi=4, mA=0.40, ctau=1mm","mpi=4, mA=0.40, ctau=10mm","mpi=4, mA=0.40, ctau=100mm",QCD Weighted.eff
 eps_kin,0.0976,0.1038,0.2498,0.1168,0.1464
 eps_HLT,0.6189,0.5125,0.3010,0.0925,0.0654
 eps_SV,0.9669,0.9474,0.8218,0.7778,0.7817
-eps_BDT,0.2329,0.5595,0.6861,0.6905,0.00e+00
+eps_BDT,0.6404,0.8651,1.0259,1.0476,3.05e-05
 
-"# TABLE: Asymptotic significance (Asimov) | Mu10ORDoubleMu | mpi=4, mA=0.40 | sigmaxBR=0.439 pb, L=109.95/fb"
+"# TABLE: 95% CL upper limit on B(H->psipsibar) | Mu10ORDoubleMu | mpi=4, mA=0.40 | sigma_ggH=43.9 pb, L=109.95/fb, B(A'->mumu)=0.44"
 FPR,BDT threshold,"mpi=4, mA=0.40, ctau=0.1mm","mpi=4, mA=0.40, ctau=1mm","mpi=4, mA=0.40, ctau=10mm","mpi=4, mA=0.40, ctau=100mm"
-1e-01,0.6445,0.09723,0.08825,0.1148,0.01459
-1e-02,0.9451,0.2412,0.2602,0.3347,0.04494
-1e-03,0.9631,0.6993,0.7965,1.036,0.1384
-1e-04,0.9636,2.199,2.518,3.273,0.4375
+1e-01,0.6445,0.1692,0.1864,0.1433,1.128
+1e-02,0.9451,0.06819,0.06323,0.04915,0.3661
+1e-03,0.9631,0.02353,0.02065,0.01588,0.1189
+1e-04,0.9636,0.007483,0.006535,0.005025,0.03762
+
+"# TABLE: Asymptotic significance p0 (Z) (Asimov) | Mu10ORDoubleMu | mpi=4, mA=0.40 | sigmaxBR=0.439 pb, L=109.95/fb"
+FPR,BDT threshold,"mpi=4, mA=0.40, ctau=0.1mm","mpi=4, mA=0.40, ctau=1mm","mpi=4, mA=0.40, ctau=10mm","mpi=4, mA=0.40, ctau=100mm"
+1e-01,0.6445,"0.461 (0.10 sigma)","0.465 (0.09 sigma)","0.454 (0.11 sigma)","0.494 (0.01 sigma)"
+1e-02,0.9451,"0.405 (0.24 sigma)","0.397 (0.26 sigma)","0.369 (0.33 sigma)","0.482 (0.04 sigma)"
+1e-03,0.9631,"0.242 (0.70 sigma)","0.213 (0.80 sigma)","0.15 (1.04 sigma)","0.445 (0.14 sigma)"
+1e-04,0.9636,"0.014 (2.20 sigma)","0.00591 (2.52 sigma)","0.000531 (3.27 sigma)","0.331 (0.44 sigma)"
 
 "# TABLE: lxy=[0,1]cm efficiencies | Mu10ORDoubleMu | mpi=4, mA=0.40"
 Step,"mpi=4, mA=0.40, ctau=0.1mm","mpi=4, mA=0.40, ctau=1mm","mpi=4, mA=0.40, ctau=10mm","mpi=4, mA=0.40, ctau=100mm"
@@ -99,11 +113,11 @@ N_lxy,450,284,547,339
 eps_kin,0.9756,0.9613,0.9433,0.9351
 eps_HLT,0.6067,0.3451,0.1700,0.0236
 eps_SV,0.5867,0.3134,0.1042,0.0118
-eps_BDT,0.1200,0.1197,0.0439,0.0000
+eps_BDT,0.3689,0.2113,0.0987,0.0059
 eps_kin_prev,0.9756,0.9613,0.9433,0.9351
 eps_HLT_prev,0.6219,0.3590,0.1802,0.0252
 eps_SV_prev,0.9670,0.9082,0.6129,0.5000
-eps_BDT_prev,0.2045,0.3820,0.4211,0.0000
+eps_BDT_prev,0.6288,0.6742,0.9474,0.5000
 
 "# TABLE: lxy=[1,10]cm efficiencies | Mu10ORDoubleMu | mpi=4, mA=0.40"
 Step,"mpi=4, mA=0.40, ctau=0.1mm","mpi=4, mA=0.40, ctau=1mm","mpi=4, mA=0.40, ctau=10mm","mpi=4, mA=0.40, ctau=100mm"
@@ -111,11 +125,11 @@ N_lxy,46,228,469,182
 eps_kin,1.0000,0.9605,0.9595,0.9505
 eps_HLT,0.6087,0.6579,0.3667,0.1374
 eps_SV,0.5870,0.6535,0.3177,0.0989
-eps_BDT,0.3043,0.4167,0.1962,0.0769
+eps_BDT,0.4348,0.6228,0.3262,0.1209
 eps_kin_prev,1.0000,0.9605,0.9595,0.9505
 eps_HLT_prev,0.6087,0.6849,0.3822,0.1445
 eps_SV_prev,0.9643,0.9933,0.8663,0.7200
-eps_BDT_prev,0.5185,0.6376,0.6174,0.7778
+eps_BDT_prev,0.7407,0.9530,1.0268,1.2222
 
 "# TABLE: lxy=[10,100]cm efficiencies | Mu10ORDoubleMu | mpi=4, mA=0.40"
 Step,"mpi=4, mA=0.40, ctau=0.1mm","mpi=4, mA=0.40, ctau=1mm","mpi=4, mA=0.40, ctau=10mm","mpi=4, mA=0.40, ctau=100mm"
@@ -123,11 +137,11 @@ N_lxy,3,27,287,96
 eps_kin,1.0000,1.0000,0.9861,0.9792
 eps_HLT,0.3333,0.6667,0.3868,0.2188
 eps_SV,0.3333,0.5185,0.3589,0.2083
-eps_BDT,0.0000,0.4444,0.3345,0.1562
+eps_BDT,0.3333,0.5926,0.3833,0.2083
 eps_kin_prev,1.0000,1.0000,0.9861,0.9792
 eps_HLT_prev,0.3333,0.6667,0.3922,0.2234
 eps_SV_prev,1.0000,0.7778,0.9279,0.9524
-eps_BDT_prev,0.0000,0.8571,0.9320,0.7500
+eps_BDT_prev,1.0000,1.1429,1.0680,1.0000
 
 "# TABLE: Signal absolute counts | Mu10ORDoubleMu | mpi=10, mA=1.00"
 Cut step,"mpi=10, mA=1.00, ctau=0.1mm","mpi=10, mA=1.00, ctau=1mm","mpi=10, mA=1.00, ctau=10mm","mpi=10, mA=1.00, ctau=100mm",QCD Total (weighted)
@@ -135,28 +149,35 @@ N_total,5000,5000,5000,5000,4995.7
 Kin sel.,1107,1102,908,482,730.4
 HLT presel.,730,705,398,96,50.7
 SV sel. (chi2<10 dR<1.2),713,671,335,78,39.1
-BDT sel.,95,314,247,57,0.0
+BDT sel.,387,538,343,87,0.0
 
 "# TABLE: Signal relative effs wrt N_total | Mu10ORDoubleMu | mpi=10, mA=1.00"
 Efficiency,"mpi=10, mA=1.00, ctau=0.1mm","mpi=10, mA=1.00, ctau=1mm","mpi=10, mA=1.00, ctau=10mm","mpi=10, mA=1.00, ctau=100mm",QCD Weighted.eff
 eps_kin,0.2214,0.2204,0.1816,0.0964,0.1464
 eps_HLT,0.1460,0.1410,0.0796,0.0192,0.0102
 eps_SV,0.1426,0.1342,0.0670,0.0156,0.0079
-eps_BDT,0.0190,0.0628,0.0494,0.0114,0.00e+00
+eps_BDT,0.0774,0.1076,0.0686,0.0174,6.21e-07
 
 "# TABLE: Signal relative effs wrt previous step | Mu10ORDoubleMu | mpi=10, mA=1.00"
 Efficiency,"mpi=10, mA=1.00, ctau=0.1mm","mpi=10, mA=1.00, ctau=1mm","mpi=10, mA=1.00, ctau=10mm","mpi=10, mA=1.00, ctau=100mm",QCD Weighted.eff
 eps_kin,0.2214,0.2204,0.1816,0.0964,0.1464
 eps_HLT,0.6594,0.6397,0.4383,0.1992,0.0654
 eps_SV,0.9767,0.9518,0.8417,0.8125,0.7817
-eps_BDT,0.1332,0.4680,0.7373,0.7308,0.00e+00
+eps_BDT,0.5428,0.8018,1.0239,1.1154,3.05e-05
 
-"# TABLE: Asymptotic significance (Asimov) | Mu10ORDoubleMu | mpi=10, mA=1.00 | sigmaxBR=0.439 pb, L=109.95/fb"
+"# TABLE: 95% CL upper limit on B(H->psipsibar) | Mu10ORDoubleMu | mpi=10, mA=1.00 | sigma_ggH=43.9 pb, L=109.95/fb, B(A'->mumu)=0.307"
 FPR,BDT threshold,"mpi=10, mA=1.00, ctau=0.1mm","mpi=10, mA=1.00, ctau=1mm","mpi=10, mA=1.00, ctau=10mm","mpi=10, mA=1.00, ctau=100mm"
-1e-01,0.6445,0.2289,0.2348,0.1227,0.0288
-1e-02,0.9451,0.5215,0.6539,0.3701,0.08869
-1e-03,0.9631,1.451,1.985,1.155,0.2767
-1e-04,0.9636,4.572,6.248,3.64,0.8749
+1e-01,0.6445,0.07187,0.07004,0.1341,0.5712
+1e-02,0.9451,0.03154,0.02515,0.04444,0.1855
+1e-03,0.9631,0.01134,0.008285,0.01424,0.05945
+1e-04,0.9636,0.003597,0.002631,0.004519,0.01881
+
+"# TABLE: Asymptotic significance p0 (Z) (Asimov) | Mu10ORDoubleMu | mpi=10, mA=1.00 | sigmaxBR=0.439 pb, L=109.95/fb"
+FPR,BDT threshold,"mpi=10, mA=1.00, ctau=0.1mm","mpi=10, mA=1.00, ctau=1mm","mpi=10, mA=1.00, ctau=10mm","mpi=10, mA=1.00, ctau=100mm"
+1e-01,0.6445,"0.409 (0.23 sigma)","0.407 (0.23 sigma)","0.451 (0.12 sigma)","0.489 (0.03 sigma)"
+1e-02,0.9451,"0.301 (0.52 sigma)","0.257 (0.65 sigma)","0.356 (0.37 sigma)","0.465 (0.09 sigma)"
+1e-03,0.9631,"0.0734 (1.45 sigma)","0.0235 (1.99 sigma)","0.124 (1.16 sigma)","0.391 (0.28 sigma)"
+1e-04,0.9636,"2.41e-06 (4.57 sigma)","2.08e-10 (6.25 sigma)","0.000137 (3.64 sigma)","0.191 (0.87 sigma)"
 
 "# TABLE: lxy=[0,1]cm efficiencies | Mu10ORDoubleMu | mpi=10, mA=1.00"
 Step,"mpi=10, mA=1.00, ctau=0.1mm","mpi=10, mA=1.00, ctau=1mm","mpi=10, mA=1.00, ctau=10mm","mpi=10, mA=1.00, ctau=100mm"
@@ -164,11 +185,11 @@ N_lxy,1058,589,324,231
 eps_kin,0.9811,0.9610,0.9630,0.9394
 eps_HLT,0.6654,0.5246,0.2654,0.0909
 eps_SV,0.6493,0.4822,0.1481,0.0606
-eps_BDT,0.0784,0.1104,0.0401,0.0173
+eps_BDT,0.3469,0.3175,0.1265,0.0693
 eps_kin_prev,0.9811,0.9610,0.9630,0.9394
 eps_HLT_prev,0.6782,0.5459,0.2756,0.0968
 eps_SV_prev,0.9759,0.9191,0.5581,0.6667
-eps_BDT_prev,0.1208,0.2289,0.2708,0.2857
+eps_BDT_prev,0.5342,0.6585,0.8542,1.1429
 
 "# TABLE: lxy=[1,10]cm efficiencies | Mu10ORDoubleMu | mpi=10, mA=1.00"
 Step,"mpi=10, mA=1.00, ctau=0.1mm","mpi=10, mA=1.00, ctau=1mm","mpi=10, mA=1.00, ctau=10mm","mpi=10, mA=1.00, ctau=100mm"
@@ -176,11 +197,11 @@ N_lxy,64,514,341,170
 eps_kin,0.9844,0.9844,0.9648,0.9412
 eps_HLT,0.3906,0.7393,0.5308,0.2294
 eps_SV,0.3906,0.7237,0.4956,0.1941
-eps_BDT,0.1875,0.4611,0.3460,0.1294
+eps_BDT,0.3125,0.6556,0.5044,0.2059
 eps_kin_prev,0.9844,0.9844,0.9648,0.9412
 eps_HLT_prev,0.3968,0.7510,0.5502,0.2437
 eps_SV_prev,1.0000,0.9789,0.9337,0.8462
-eps_BDT_prev,0.4800,0.6371,0.6982,0.6667
+eps_BDT_prev,0.8000,0.9059,1.0178,1.0606
 
 "# TABLE: lxy=[10,100]cm efficiencies | Mu10ORDoubleMu | mpi=10, mA=1.00"
 Step,"mpi=10, mA=1.00, ctau=0.1mm","mpi=10, mA=1.00, ctau=1mm","mpi=10, mA=1.00, ctau=10mm","mpi=10, mA=1.00, ctau=100mm"
@@ -188,11 +209,11 @@ N_lxy,6,31,266,106
 eps_kin,1.0000,0.9677,0.9962,0.9717
 eps_HLT,0.1667,0.5161,0.4925,0.3396
 eps_SV,0.1667,0.4839,0.4436,0.2925
-eps_BDT,0.0000,0.3871,0.4361,0.2925
+eps_BDT,0.0000,0.4516,0.4887,0.3396
 eps_kin_prev,1.0000,0.9677,0.9962,0.9717
 eps_HLT_prev,0.1667,0.5333,0.4943,0.3495
 eps_SV_prev,1.0000,0.9375,0.9008,0.8611
-eps_BDT_prev,0.0000,0.8000,0.9831,1.0000
+eps_BDT_prev,0.0000,0.9333,1.1017,1.1613
 
 "# TABLE: Signal absolute counts | Mu10ORDoubleMu | mpi=1, mA=0.33"
 Cut step,"mpi=1, mA=0.33, ctau=0.1mm","mpi=1, mA=0.33, ctau=1mm","mpi=1, mA=0.33, ctau=10mm","mpi=1, mA=0.33, ctau=100mm",QCD Total (weighted)
@@ -200,28 +221,35 @@ N_total,5000,5000,5000,5000,4995.7
 Kin sel.,1277,1195,472,422,730.4
 HLT presel.,651,511,116,39,50.7
 SV sel. (chi2<10 dR<1.2),644,474,98,34,39.1
-BDT sel.,79,221,53,16,0.0
+BDT sel.,311,401,88,32,0.0
 
 "# TABLE: Signal relative effs wrt N_total | Mu10ORDoubleMu | mpi=1, mA=0.33"
 Efficiency,"mpi=1, mA=0.33, ctau=0.1mm","mpi=1, mA=0.33, ctau=1mm","mpi=1, mA=0.33, ctau=10mm","mpi=1, mA=0.33, ctau=100mm",QCD Weighted.eff
 eps_kin,0.2554,0.2390,0.0944,0.0844,0.1464
 eps_HLT,0.1302,0.1022,0.0232,0.0078,0.0102
 eps_SV,0.1288,0.0948,0.0196,0.0068,0.0079
-eps_BDT,0.0158,0.0442,0.0106,0.0032,0.00e+00
+eps_BDT,0.0622,0.0802,0.0176,0.0064,6.21e-07
 
 "# TABLE: Signal relative effs wrt previous step | Mu10ORDoubleMu | mpi=1, mA=0.33"
 Efficiency,"mpi=1, mA=0.33, ctau=0.1mm","mpi=1, mA=0.33, ctau=1mm","mpi=1, mA=0.33, ctau=10mm","mpi=1, mA=0.33, ctau=100mm",QCD Weighted.eff
 eps_kin,0.2554,0.2390,0.0944,0.0844,0.1464
 eps_HLT,0.5098,0.4276,0.2458,0.0924,0.0654
 eps_SV,0.9892,0.9276,0.8448,0.8718,0.7817
-eps_BDT,0.1227,0.4662,0.5408,0.4706,0.00e+00
+eps_BDT,0.4829,0.8460,0.8980,0.9412,3.05e-05
 
-"# TABLE: Asymptotic significance (Asimov) | Mu10ORDoubleMu | mpi=1, mA=0.33 | sigmaxBR=0.439 pb, L=109.95/fb"
+"# TABLE: 95% CL upper limit on B(H->psipsibar) | Mu10ORDoubleMu | mpi=1, mA=0.33 | sigma_ggH=43.9 pb, L=109.95/fb, B(A'->mumu)=0.464"
 FPR,BDT threshold,"mpi=1, mA=0.33, ctau=0.1mm","mpi=1, mA=0.33, ctau=1mm","mpi=1, mA=0.33, ctau=10mm","mpi=1, mA=0.33, ctau=100mm"
-1e-01,0.6445,0.19,0.1679,0.03403,0.01197
-1e-02,0.9451,0.4127,0.486,0.09933,0.03548
-1e-03,0.9631,1.163,1.455,0.2954,0.1122
-1e-04,0.9636,3.663,4.572,0.934,0.3547
+1e-01,0.6445,0.08659,0.09796,0.4834,1.375
+1e-02,0.9451,0.03986,0.03384,0.1656,0.4637
+1e-03,0.9631,0.01415,0.01131,0.05569,0.1466
+1e-04,0.9636,0.00449,0.003597,0.01762,0.0464
+
+"# TABLE: Asymptotic significance p0 (Z) (Asimov) | Mu10ORDoubleMu | mpi=1, mA=0.33 | sigmaxBR=0.439 pb, L=109.95/fb"
+FPR,BDT threshold,"mpi=1, mA=0.33, ctau=0.1mm","mpi=1, mA=0.33, ctau=1mm","mpi=1, mA=0.33, ctau=10mm","mpi=1, mA=0.33, ctau=100mm"
+1e-01,0.6445,"0.425 (0.19 sigma)","0.433 (0.17 sigma)","0.486 (0.03 sigma)","0.495 (0.01 sigma)"
+1e-02,0.9451,"0.34 (0.41 sigma)","0.313 (0.49 sigma)","0.46 (0.10 sigma)","0.486 (0.04 sigma)"
+1e-03,0.9631,"0.122 (1.16 sigma)","0.0729 (1.45 sigma)","0.384 (0.30 sigma)","0.455 (0.11 sigma)"
+1e-04,0.9636,"0.000125 (3.66 sigma)","2.41e-06 (4.57 sigma)","0.175 (0.93 sigma)","0.361 (0.35 sigma)"
 
 "# TABLE: lxy=[0,1]cm efficiencies | Mu10ORDoubleMu | mpi=1, mA=0.33"
 Step,"mpi=1, mA=0.33, ctau=0.1mm","mpi=1, mA=0.33, ctau=1mm","mpi=1, mA=0.33, ctau=10mm","mpi=1, mA=0.33, ctau=100mm"
@@ -229,11 +257,11 @@ N_lxy,1280,755,238,243
 eps_kin,0.9102,0.9020,0.8950,0.9342
 eps_HLT,0.4594,0.2742,0.1218,0.0412
 eps_SV,0.4547,0.2477,0.0966,0.0288
-eps_BDT,0.0437,0.0543,0.0126,0.0082
+eps_BDT,0.2008,0.1563,0.0462,0.0206
 eps_kin_prev,0.9102,0.9020,0.8950,0.9342
 eps_HLT_prev,0.5047,0.3040,0.1362,0.0441
 eps_SV_prev,0.9898,0.9034,0.7931,0.7000
-eps_BDT_prev,0.0962,0.2193,0.1304,0.2857
+eps_BDT_prev,0.4416,0.6310,0.4783,0.7143
 
 "# TABLE: lxy=[1,10]cm efficiencies | Mu10ORDoubleMu | mpi=1, mA=0.33"
 Step,"mpi=1, mA=0.33, ctau=0.1mm","mpi=1, mA=0.33, ctau=1mm","mpi=1, mA=0.33, ctau=10mm","mpi=1, mA=0.33, ctau=100mm"
@@ -241,11 +269,11 @@ N_lxy,115,492,187,130
 eps_kin,0.9478,0.9533,0.9037,0.9462
 eps_HLT,0.5391,0.5711,0.2888,0.1385
 eps_SV,0.5304,0.5427,0.2406,0.1308
-eps_BDT,0.2000,0.3354,0.1230,0.0538
+eps_BDT,0.4609,0.5285,0.2406,0.1231
 eps_kin_prev,0.9478,0.9533,0.9037,0.9462
 eps_HLT_prev,0.5688,0.5991,0.3195,0.1463
 eps_SV_prev,0.9839,0.9502,0.8333,0.9444
-eps_BDT_prev,0.3770,0.6180,0.5111,0.4118
+eps_BDT_prev,0.8689,0.9738,1.0000,0.9412
 
 "# TABLE: lxy=[10,100]cm efficiencies | Mu10ORDoubleMu | mpi=1, mA=0.33"
 Step,"mpi=1, mA=0.33, ctau=0.1mm","mpi=1, mA=0.33, ctau=1mm","mpi=1, mA=0.33, ctau=10mm","mpi=1, mA=0.33, ctau=100mm"
@@ -253,11 +281,11 @@ N_lxy,3,48,102,73
 eps_kin,1.0000,0.9375,0.8824,0.9589
 eps_HLT,0.3333,0.4792,0.3235,0.1507
 eps_SV,0.3333,0.4167,0.2941,0.1370
-eps_BDT,0.0000,0.3125,0.2647,0.0959
+eps_BDT,0.3333,0.4792,0.3137,0.1507
 eps_kin_prev,1.0000,0.9375,0.8824,0.9589
 eps_HLT_prev,0.3333,0.5111,0.3667,0.1571
 eps_SV_prev,1.0000,0.8696,0.9091,0.9091
-eps_BDT_prev,0.0000,0.7500,0.9000,0.7000
+eps_BDT_prev,1.0000,1.1500,1.0667,1.1000
 
 "# TABLE: Signal absolute counts | Mu10ORDoubleMu | mpi=10, mA=3.33"
 Cut step,"mpi=10, mA=3.33, ctau=0.1mm","mpi=10, mA=3.33, ctau=1mm","mpi=10, mA=3.33, ctau=10mm","mpi=10, mA=3.33, ctau=100mm",QCD Total (weighted)
@@ -265,28 +293,35 @@ N_total,5000,5000,5000,5000,4995.7
 Kin sel.,767,758,683,452,730.4
 HLT presel.,469,459,335,100,50.7
 SV sel. (chi2<10 dR<1.2),454,438,295,77,39.1
-BDT sel.,14,41,157,62,0.0
+BDT sel.,94,176,256,85,0.0
 
 "# TABLE: Signal relative effs wrt N_total | Mu10ORDoubleMu | mpi=10, mA=3.33"
 Efficiency,"mpi=10, mA=3.33, ctau=0.1mm","mpi=10, mA=3.33, ctau=1mm","mpi=10, mA=3.33, ctau=10mm","mpi=10, mA=3.33, ctau=100mm",QCD Weighted.eff
 eps_kin,0.1534,0.1516,0.1366,0.0904,0.1464
 eps_HLT,0.0938,0.0918,0.0670,0.0200,0.0102
 eps_SV,0.0908,0.0876,0.0590,0.0154,0.0079
-eps_BDT,0.0028,0.0082,0.0314,0.0124,0.00e+00
+eps_BDT,0.0188,0.0352,0.0512,0.0170,6.21e-07
 
 "# TABLE: Signal relative effs wrt previous step | Mu10ORDoubleMu | mpi=10, mA=3.33"
 Efficiency,"mpi=10, mA=3.33, ctau=0.1mm","mpi=10, mA=3.33, ctau=1mm","mpi=10, mA=3.33, ctau=10mm","mpi=10, mA=3.33, ctau=100mm",QCD Weighted.eff
 eps_kin,0.1534,0.1516,0.1366,0.0904,0.1464
 eps_HLT,0.6115,0.6055,0.4905,0.2212,0.0654
 eps_SV,0.9680,0.9542,0.8806,0.7700,0.7817
-eps_BDT,0.0308,0.0936,0.5322,0.8052,0.00e+00
+eps_BDT,0.2070,0.4018,0.8678,1.1039,3.05e-05
 
-"# TABLE: Asymptotic significance (Asimov) | Mu10ORDoubleMu | mpi=10, mA=3.33 | sigmaxBR=0.439 pb, L=109.95/fb"
+"# TABLE: 95% CL upper limit on B(H->psipsibar) | Mu10ORDoubleMu | mpi=10, mA=3.33 | sigma_ggH=43.9 pb, L=109.95/fb, B(A'->mumu)=0.193"
 FPR,BDT threshold,"mpi=10, mA=3.33, ctau=0.1mm","mpi=10, mA=3.33, ctau=1mm","mpi=10, mA=3.33, ctau=10mm","mpi=10, mA=3.33, ctau=100mm"
-1e-01,0.6445,0.09012,0.1182,0.09947,0.02842
-1e-02,0.9451,0.1313,0.2353,0.2933,0.08633
-1e-03,0.9631,0.3515,0.6544,0.9049,0.2692
-1e-04,0.9636,1.111,2.069,2.86,0.8513
+1e-01,0.6445,0.1825,0.1392,0.1654,0.5788
+1e-02,0.9451,0.1253,0.0699,0.05609,0.1906
+1e-03,0.9631,0.0468,0.02514,0.01818,0.0611
+1e-04,0.9636,0.01481,0.007954,0.005752,0.01933
+
+"# TABLE: Asymptotic significance p0 (Z) (Asimov) | Mu10ORDoubleMu | mpi=10, mA=3.33 | sigmaxBR=0.439 pb, L=109.95/fb"
+FPR,BDT threshold,"mpi=10, mA=3.33, ctau=0.1mm","mpi=10, mA=3.33, ctau=1mm","mpi=10, mA=3.33, ctau=10mm","mpi=10, mA=3.33, ctau=100mm"
+1e-01,0.6445,"0.464 (0.09 sigma)","0.453 (0.12 sigma)","0.46 (0.10 sigma)","0.489 (0.03 sigma)"
+1e-02,0.9451,"0.448 (0.13 sigma)","0.407 (0.24 sigma)","0.385 (0.29 sigma)","0.466 (0.09 sigma)"
+1e-03,0.9631,"0.363 (0.35 sigma)","0.256 (0.65 sigma)","0.183 (0.90 sigma)","0.394 (0.27 sigma)"
+1e-04,0.9636,"0.133 (1.11 sigma)","0.0193 (2.07 sigma)","0.00212 (2.86 sigma)","0.197 (0.85 sigma)"
 
 "# TABLE: lxy=[0,1]cm efficiencies | Mu10ORDoubleMu | mpi=10, mA=3.33"
 Step,"mpi=10, mA=3.33, ctau=0.1mm","mpi=10, mA=3.33, ctau=1mm","mpi=10, mA=3.33, ctau=10mm","mpi=10, mA=3.33, ctau=100mm"
@@ -294,11 +329,11 @@ N_lxy,755,618,251,151
 eps_kin,0.9748,0.9757,0.9402,0.9338
 eps_HLT,0.6159,0.5955,0.3267,0.1192
 eps_SV,0.5987,0.5663,0.2271,0.0464
-eps_BDT,0.0185,0.0307,0.0239,0.0132
+eps_BDT,0.1232,0.1877,0.0956,0.0464
 eps_kin_prev,0.9748,0.9757,0.9402,0.9338
 eps_HLT_prev,0.6318,0.6103,0.3475,0.1277
 eps_SV_prev,0.9720,0.9511,0.6951,0.3889
-eps_BDT_prev,0.0310,0.0543,0.1053,0.2857
+eps_BDT_prev,0.2058,0.3314,0.4211,1.0000
 
 "# TABLE: lxy=[1,10]cm efficiencies | Mu10ORDoubleMu | mpi=10, mA=3.33"
 Step,"mpi=10, mA=3.33, ctau=0.1mm","mpi=10, mA=3.33, ctau=1mm","mpi=10, mA=3.33, ctau=10mm","mpi=10, mA=3.33, ctau=100mm"
@@ -306,11 +341,11 @@ N_lxy,28,148,365,187
 eps_kin,0.8214,0.9730,0.9753,0.9358
 eps_HLT,0.1071,0.5878,0.5781,0.2567
 eps_SV,0.0714,0.5811,0.5452,0.2193
-eps_BDT,0.0000,0.1486,0.3178,0.1711
+eps_BDT,0.0357,0.4054,0.5205,0.2353
 eps_kin_prev,0.8214,0.9730,0.9753,0.9358
 eps_HLT_prev,0.1304,0.6042,0.5927,0.2743
 eps_SV_prev,0.6667,0.9885,0.9431,0.8542
-eps_BDT_prev,0.0000,0.2558,0.5829,0.7805
+eps_BDT_prev,0.5000,0.6977,0.9548,1.0732
 
 "# TABLE: lxy=[10,100]cm efficiencies | Mu10ORDoubleMu | mpi=10, mA=3.33"
 Step,"mpi=10, mA=3.33, ctau=0.1mm","mpi=10, mA=3.33, ctau=1mm","mpi=10, mA=3.33, ctau=10mm","mpi=10, mA=3.33, ctau=100mm"
@@ -318,11 +353,11 @@ N_lxy,9,12,91,136
 eps_kin,0.8889,0.9167,0.9890,1.0000
 eps_HLT,0.1111,0.3333,0.4615,0.2500
 eps_SV,0.0000,0.1667,0.4286,0.2132
-eps_BDT,0.0000,0.0000,0.3846,0.2059
+eps_BDT,0.0000,0.0000,0.4615,0.2500
 eps_kin_prev,0.8889,0.9167,0.9890,1.0000
 eps_HLT_prev,0.1250,0.3636,0.4667,0.2500
 eps_SV_prev,0.0000,0.5000,0.9286,0.8529
-eps_BDT_prev,--,0.0000,0.8974,0.9655
+eps_BDT_prev,--,0.0000,1.0769,1.1724
 
 "# TABLE: QCD absolute counts | Mu10ORDoubleMu"
 Cut step,15-20,20-30,30-50,50-80,80-120,120-170,170-300,300-470,470-600,600-800,800-1000,1000,Total (weighted)
@@ -330,18 +365,18 @@ N_total,5000,5000,5000,5000,5000,5000,718,5000,5000,5000,5000,5000,4995.7
 Kin sel.,640,687,866,1041,1244,1510,267,2313,2798,3068,3426,3748,730.4
 HLT presel.,25,47,83,118,148,193,41,336,399,412,465,535,50.7
 SV sel.,18,42,63,76,85,100,30,195,275,301,344,431,39.1
-BDT sel.,0,0,0,0,0,0,0,0,0,0,0,0,0.0
+BDT sel.,0,0,0,0,0,1,0,1,2,0,0,0,0.0
 
 "# TABLE: QCD relative efficiencies wrt N_total | Mu10ORDoubleMu"
 Efficiency,15-20,20-30,30-50,50-80,80-120,120-170,170-300,300-470,470-600,600-800,800-1000,1000,Weighted.eff
 eps_kin,0.1280,0.1374,0.1732,0.2082,0.2488,0.3020,0.3719,0.4626,0.5596,0.6136,0.6852,0.7496,0.1464
 eps_HLT,0.0050,0.0094,0.0166,0.0236,0.0296,0.0386,0.0571,0.0672,0.0798,0.0824,0.0930,0.1070,0.0102
 eps_SV,0.0036,0.0084,0.0126,0.0152,0.0170,0.0200,0.0418,0.0390,0.0550,0.0602,0.0688,0.0862,0.0079
-eps_BDT,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00
+eps_BDT,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,2.00e-04,0.00e+00,2.00e-04,4.00e-04,0.00e+00,0.00e+00,0.00e+00,6.21e-07
 
 "# TABLE: QCD relative efficiencies wrt previous step | Mu10ORDoubleMu"
 Efficiency,15-20,20-30,30-50,50-80,80-120,120-170,170-300,300-470,470-600,600-800,800-1000,1000,Weighted.eff
 eps_kin,0.1280,0.1374,0.1732,0.2082,0.2488,0.3020,0.3719,0.4626,0.5596,0.6136,0.6852,0.7496,0.1464
 eps_HLT,0.0391,0.0684,0.0958,0.1134,0.1190,0.1278,0.1536,0.1453,0.1426,0.1343,0.1357,0.1427,0.0654
 eps_SV,0.7200,0.8936,0.7590,0.6441,0.5743,0.5181,0.7317,0.5804,0.6892,0.7306,0.7398,0.8056,0.7817
-eps_BDT,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00
+eps_BDT,0.00e+00,0.00e+00,0.00e+00,0.00e+00,0.00e+00,1.00e-02,0.00e+00,5.13e-03,7.27e-03,0.00e+00,0.00e+00,0.00e+00,3.05e-05

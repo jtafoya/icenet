@@ -54,9 +54,7 @@ MVA_SCALAR_VARS = [
   'nMuon',
   'nSV',
   'nmuonSV',
-
-  'PFMET_pt',
-  'PFMET_phi'
+  'nfourmuonSV'
 ]
 
 # ---------------------------------------------------------
@@ -220,6 +218,40 @@ MVA_MUONSV_VARS = [
   'muonSV_z'         # Sec. vertex position
 ]
 
+# ---------------------------------------------------------
+# Four-muon secondary vertex
+#  'fourmuonSV_' is the custom four-muon SV collection (counter: nfourmuonSV)
+#  mass / origMass are stored directly in NanoAOD (no need to recompute)
+
+MVA_FOURMUONSV_VARS = [
+  'fourmuonSV_chi2',     # Reduced chi2, i.e. chi2 / ndof
+  'fourmuonSV_pAngle',   # Pointing angle: acos(p_SV * (SV - PV))
+
+  'fourmuonSV_dlen',     # 3D decay length (cm)
+  'fourmuonSV_dlenSig',  # 3D decay length significance
+  'fourmuonSV_dxy',      # 2D transverse decay length (cm)
+  'fourmuonSV_dxySig',   # 2D transverse decay length significance
+
+  'fourmuonSV_mu1pt',    # Muon (1) kinematics
+  'fourmuonSV_mu1eta',
+  'fourmuonSV_mu1phi',
+  'fourmuonSV_mu2pt',    # Muon (2) kinematics
+  'fourmuonSV_mu2eta',
+  'fourmuonSV_mu2phi',
+  'fourmuonSV_mu3pt',    # Muon (3) kinematics
+  'fourmuonSV_mu3eta',
+  'fourmuonSV_mu3phi',
+  'fourmuonSV_mu4pt',    # Muon (4) kinematics
+  'fourmuonSV_mu4eta',
+  'fourmuonSV_mu4phi',
+
+  'fourmuonSV_x',        # Sec. vertex position
+  'fourmuonSV_y',        # Sec. vertex position
+  'fourmuonSV_z',        # Sec. vertex position
+
+  'fourmuonSV_mass'      # Four-muon invariant mass
+]
+
 
 MVA_SV_VARS = [
   'SV_pt',      # Transverse momentum
@@ -250,7 +282,7 @@ KINEMATIC_VARS  += KINEMATIC_GEN_VARS
 MVA_SCALAR_VARS += MODEL_VARS           # Treated on the same basis as scalar vars
 
 MVA_PF_VARS      = MVA_CPF_VARS + MVA_NPF_VARS
-MVA_JAGGED_VARS  = MVA_JET_VARS + MVA_MUON_VARS + MVA_MUONSV_VARS + MVA_SV_VARS # + MVA_PF_VARS
+MVA_JAGGED_VARS  = MVA_JET_VARS + MVA_MUON_VARS + MVA_MUONSV_VARS + MVA_FOURMUONSV_VARS + MVA_SV_VARS # + MVA_PF_VARS
 
 # ---------------------------------------------------------
 # Variables we read out from the root files

@@ -33,6 +33,7 @@ FILTER: &FILTER
       # Latex description is for boolean [0,1] per cut
       [{cut: 'GEN_mpi == 1  && GEN_mA == 0.33', latex: ['', 'mpi = 1 & mA = 0.33']},
        {cut: 'GEN_mpi == 4  && GEN_mA == 0.40', latex: ['', 'mpi = 4 & mA = 0.40']},
+       {cut: 'GEN_mpi == 2  && GEN_mA == 0.40', latex: ['', 'mpi = 2 & mA = 0.40']},
        {cut: 'GEN_mpi == 2  && GEN_mA == 0.67', latex: ['', 'mpi = 2 & mA = 0.67']},
        {cut: 'GEN_mpi == 4  && GEN_mA == 1.33', latex: ['', 'mpi = 4 & mA = 1.33']},
        {cut: 'GEN_mpi == 10 && GEN_mA == 1.00', latex: ['', 'mpi = 10 & mA = 1.00']},

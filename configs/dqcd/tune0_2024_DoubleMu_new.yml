@@ -25,6 +25,7 @@ mva_param: &MVA_INPUT_PARAM
     Jet:  8
     Muon: 8
     muonSV: 8
+    fourmuonSV: 8
     SV:   8
     cpf:  0     # 20
     npf:  0     # 10
@@ -36,12 +37,19 @@ mva_param: &MVA_INPUT_PARAM
     - name: 'muonSV'
       condition: 'muonSV.dlen > 0'   # placeholder, for 'muonSV.charge == 0' condition
 
+    - name: 'fourmuonSV'
+      condition: 'fourmuonSV.dlen > 0'   # placeholder
+
   # Re-ordering of collection entries (for BDT)
   jagged_order:
 
     - name: 'muonSV'
       var:  'chi2'
       ascending: True  # True ~ smallest first, False ~ largest first
+    
+    - name: 'fourmuonSV'
+      var:  'chi2'
+      ascending: True  # smallest chi2 first (keep best vertices when truncating to maxdim)
     
     - name: 'SV'
       var:  'dlen'
@@ -97,8 +105,8 @@ genesis_runmode:
   inputmap:  "mc_input.yml"
   tree_name:  null #'ntuplizer/tree'
   
-  filterfunc: 'filter_standard_2024'  # Filter cuts, implemented under filter.py
-  cutfunc:    'cut_fiducial_2024'  # Basic cuts,  implemented under cuts.py
+  filterfunc: 'filter_DoubleMu'         # Filter cuts, implemented under filter.py
+  cutfunc:    'cut_fiducial_DoubleMu'   # Basic cuts,  implemented under cuts.py
   targetfunc:  null              # -- not active --
   
   xcorr_flow: True               # Full N-point correlations computed between cuts
