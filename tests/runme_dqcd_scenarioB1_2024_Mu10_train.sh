@@ -30,7 +30,7 @@ CONDITIONAL=0
 MAX=5000000    # Tune according to maximum CPU RAM available
 
 
-MODELTAG="scenarioB1_all_no_DA_old_BDT_with_dRmSV_2024_Mu10"
+MODELTAG="scenarioB1_all_no_DA_old_BDT_2024_Mu10"
 
 python analysis/dqcd_2024.py --runmode genesis  --maxevents $MAX --inputmap mc_map__scenarioB1_all_2024.yml --config $CONFIG --datapath $DATAPATH
 python analysis/dqcd_2024.py --runmode train    --maxevents $MAX --inputmap mc_map__scenarioB1_all_2024.yml --modeltag $MODELTAG --config $CONFIG --datapath $DATAPATH --use_conditional $CONDITIONAL

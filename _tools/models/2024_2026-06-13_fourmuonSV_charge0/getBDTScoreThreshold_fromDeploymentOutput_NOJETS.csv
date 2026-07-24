@@ -1,0 +1,7 @@
+run,model,threshold,bkg_eff_at_threshold
+A_combined,xgb01_NOJETS,0.9980,9.52e-05
+A_DoubleMu,xgb01_NOJETS,0.9982,9.38e-05
+A_Mu10,xgb01_NOJETS,0.9956,9.93e-05
+B1_combined,xgb01_NOJETS,0.9981,9.28e-05
+B1_DoubleMu,xgb01_NOJETS,0.9985,9.54e-05
+B1_Mu10,xgb01_NOJETS,0.9962,9.65e-05

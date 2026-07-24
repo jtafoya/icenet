@@ -184,7 +184,7 @@ xgb01: &XGB01
   raytune:  xgb_trial_0
   
   #exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*']
-  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*', 'muonSV_deltaR_*', 'nJet', 'muonSV_SVdeltaR_.*', 'dRmSV_.*', 'PFMET_.*']
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_mass.*', 'muonSV_deltaR_*', 'nJet', 'muonSV_SVdeltaR_.*', 'dRmSV_.*', 'PFMET_.*', 'muonSV_charge.*', 'fourmuonSV_charge.*']
   #exclude_MVA_vars: ['.*']
   #include_MVA_vars: ['.*']
   
@@ -232,7 +232,7 @@ xgb01-NOJETS:
   raytune:  xgb_trial_0
   
   #exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_.*']
-  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_.*', 'muonSV_deltaR_*', 'nJet', 'muonSV_SVdeltaR_.*', 'dRmSV_.*', 'PFMET_.*']
+  exclude_MVA_vars: ['muonSV_mass.*', 'SV_mass.*', 'Jet_.*', 'muonSV_deltaR_*', 'nJet', 'muonSV_SVdeltaR_.*', 'dRmSV_.*', 'PFMET_.*', 'muonSV_charge.*', 'fourmuonSV_charge.*']
   #include_MVA_vars: ['.*']
   
   # general parameters

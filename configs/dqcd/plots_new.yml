@@ -54,7 +54,8 @@ FILTER: &FILTER
     expand: 'set'  # 'set', 'vetoset' or 'powerset'
     cutset:
       [{cut: '0.264  < muonSV_mass_0 && muonSV_mass_0 < 0.396',  latex: ['', 'box(M ~ 0.33)']},
-       {cut: '0.320  < muonSV_mass_0 && muonSV_mass_0 < 0.480',  latex: ['', 'box(M ~ 0.40)']},
+       {cut: '0.320  < muonSV_mass_0 && muonSV_mass_0 < 0.480',  latex: ['', 'box(M ~ 0.40)']},   # mpi=4 & mA=0.40
+       {cut: '0.320  < muonSV_mass_0 && muonSV_mass_0 < 0.480',  latex: ['', 'box(M ~ 0.40)']},   # mpi=2 & mA=0.40  (keep index-aligned with set[0]!)
        {cut: '0.536  < muonSV_mass_0 && muonSV_mass_0 < 0.804',  latex: ['', 'box(M ~ 0.67)']},
        {cut: '1.064  < muonSV_mass_0 && muonSV_mass_0 < 1.596',  latex: ['', 'box(M ~ 1.33)']},
        {cut: '0.800  < muonSV_mass_0 && muonSV_mass_0 < 1.200',  latex: ['', 'box(M ~ 1.00)']},

@@ -35,10 +35,10 @@ mva_param: &MVA_INPUT_PARAM
   jagged_filter:
     
     - name: 'muonSV'
-      condition: 'muonSV.dlen > 0'   # placeholder, for 'muonSV.charge == 0' condition
+      condition: 'muonSV.charge == 0'      # opposite-charge dimuon (total charge 0)
 
     - name: 'fourmuonSV'
-      condition: 'fourmuonSV.dlen > 0'   # placeholder
+      condition: 'fourmuonSV.charge == 0'  # net-neutral four-muon (total charge 0)
 
   # Re-ordering of collection entries (for BDT)
   jagged_order:

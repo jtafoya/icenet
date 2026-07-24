@@ -1,0 +1,7 @@
+run,model,best_epoch,val_loss,saved_model
+A_combined,XGB-NOJETS,131,0.2264,XGB_NOJETS_2024_A_combined.model
+A_DoubleMu,XGB-NOJETS,125,0.2267,XGB_NOJETS_2024_A_DoubleMu.model
+A_Mu10,XGB-NOJETS,73,0.1673,XGB_NOJETS_2024_A_Mu10.model
+B1_combined,XGB-NOJETS,129,0.2438,XGB_NOJETS_2024_B1_combined.model
+B1_DoubleMu,XGB-NOJETS,116,0.2489,XGB_NOJETS_2024_B1_DoubleMu.model
+B1_Mu10,XGB-NOJETS,89,0.1970,XGB_NOJETS_2024_B1_Mu10.model

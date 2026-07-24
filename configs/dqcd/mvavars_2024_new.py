@@ -215,7 +215,9 @@ MVA_MUONSV_VARS = [
   
   'muonSV_x',        # Sec. vertex position
   'muonSV_y',        # Sec. vertex position
-  'muonSV_z'         # Sec. vertex position
+  'muonSV_z',        # Sec. vertex position
+
+  'muonSV_charge'    # Total dimuon charge (0 for opposite-charge mu+mu-)
 ]
 
 # ---------------------------------------------------------
@@ -249,7 +251,9 @@ MVA_FOURMUONSV_VARS = [
   'fourmuonSV_y',        # Sec. vertex position
   'fourmuonSV_z',        # Sec. vertex position
 
-  'fourmuonSV_mass'      # Four-muon invariant mass
+  'fourmuonSV_mass',     # Four-muon invariant mass
+
+  'fourmuonSV_charge'    # Total 4-muon charge (0 for net-neutral)
 ]
 
 

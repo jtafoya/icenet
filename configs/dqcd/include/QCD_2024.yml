@@ -5,51 +5,62 @@
 # [0] 
 bparkProductionAll_2024--QCD_Bin-Pt-15To20_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-15To20_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-15to20_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'nano_[0-50].root'
-  #files: 'nano_[0-724].root' 
-  xs:   2799000.0 
+  #files: 'nano_[0-50].root'   # Initial attempt to get a training (uses ~1.6% of the samples)
+  files: 'nano_[0-199].root'   # Extended range to improve some QCD statistics (uses ~6% of the samples, note that the bulk of the sample is focused around the bins with higher cross-section)
+  #files: 'nano_[0-1810].root'   # 50/50 option: train half (1810 of ~3621 files on disk); deploy uses the complement
+  #xs:   2799000.0   # 2018
+  xs:   3018000.0
   model_param: 
     mpi:    null 
     mA:     null 
     ctau:   null 
   force_xs: false 
   isMC:     true 
-  maxevents_scale: 1.0 
+  #maxevents_scale: 1.0 
+  maxevents_scale: 2.0   # uncap: current range holds ~5-6.2M > 5M cap
  
 # [1] 
 bparkProductionAll_2024--QCD_Bin-Pt-20To30_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-20To30_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-20to30_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'nano_[0-50].root'
-  #files: 'nano_[0-524].root' 
-  xs:   2526000.0 
+  #files: 'nano_[0-50].root'
+  files: 'nano_[0-199].root'
+  #files: 'nano_[0-1314].root'   # 50/50 option: train half (1314 of ~2627 files on disk); deploy uses the complement
+  #xs:   2526000.0   # 2018 
+  xs:   2701000.0
   model_param: 
     mpi:    null 
     mA:     null 
     ctau:   null 
   force_xs: false 
   isMC:     true 
-  maxevents_scale: 1.0 
+  #maxevents_scale: 1.0 
+  maxevents_scale: 2.0   # uncap: current range holds ~5-6.2M > 5M cap
  
 # [2] 
 bparkProductionAll_2024--QCD_Bin-Pt-30To50_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-30To50_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-30to50_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'nano_[0-50].root'
-  #files: 'nano_[0-556].root' 
-  xs:   1362000.0 
+  #files: 'nano_[0-50].root'
+  files: 'nano_[0-199].root'
+  #files: 'nano_[0-1391].root'   # 50/50 option: train half (1391 of ~2782 files on disk); deploy uses the complement
+  #xs:   1362000.0   # 2018
+  xs:   1461000.0
   model_param: 
     mpi:    null 
     mA:     null 
     ctau:   null 
   force_xs: false 
   isMC:     true 
-  maxevents_scale: 1.0 
+  #maxevents_scale: 1.0 
+  maxevents_scale: 2.0   # uncap: current range holds ~5-6.2M > 5M cap
  
 # [3] 
 bparkProductionAll_2024--QCD_Bin-Pt-50To80_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-50To80_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-50to80_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'nano_[0-50].root'
-  #files: 'nano_[0-614].root' 
-  xs:   376600.0 
+  #files: 'nano_[0-50].root'
+  files: 'nano_[0-149].root'
+  #files: 'nano_[0-1540].root'   # 50/50 option: train half (1540 of ~3079 files on disk); deploy uses the complement
+  #xs:   376600.0   # 2018 
+  xs:   407600.0
   model_param: 
     mpi:    null 
     mA:     null 
@@ -61,9 +72,11 @@ bparkProductionAll_2024--QCD_Bin-Pt-50To80_Fil-MuEnriched_TuneCP5_13p6TeV_pythia
 # [4] 
 bparkProductionAll_2024--QCD_Bin-Pt-80To120_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-80To120_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-80to120_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'nano_[0-50].root'
-  #files: 'nano_[0-588].root' 
-  xs:   88930.0 
+  #files: 'nano_[0-50].root'
+  files: 'nano_[0-99].root'
+  #files: 'nano_[0-1474].root'   # 50/50 option: train half (1474 of ~2947 files on disk); deploy uses the complement
+  #xs:   88930.0   # 2018 
+  xs:   96070.0
   model_param: 
     mpi:    null 
     mA:     null 
@@ -75,9 +88,11 @@ bparkProductionAll_2024--QCD_Bin-Pt-80To120_Fil-MuEnriched_TuneCP5_13p6TeV_pythi
 # [5] 
 bparkProductionAll_2024--QCD_Bin-Pt-120To170_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-120To170_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-120to170_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'nano_[0-50].root'
-  #files: 'nano_[0-624].root' 
-  xs:   21230.0 
+  #files: 'nano_[0-50].root'
+  files: 'nano_[0-59].root'
+  #files: 'nano_[0-1560].root'   # 50/50 option: train half (1560 of ~3120 files on disk); deploy uses the complement
+  #xs:   21230.0   # 2018 
+  xs:   23140.0
   model_param: 
     mpi:    null 
     mA:     null 
@@ -90,8 +105,9 @@ bparkProductionAll_2024--QCD_Bin-Pt-120To170_Fil-MuEnriched_TuneCP5_13p6TeV_pyth
 bparkProductionAll_2024--QCD_Bin-Pt-170To300_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-170To300_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-170to300_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
   files: 'nano_[0-50].root'
-  #files: 'nano_[0-672].root' 
-  xs:   7055.0 
+  #files: 'nano_[0-1681].root'   # 50/50 option: train half (1681 of ~3362 files on disk); deploy uses the complement
+  #xs:   7055.0   # 2018 
+  xs:   7754.0
   model_param: 
     mpi:    null 
     mA:     null 
@@ -103,9 +119,11 @@ bparkProductionAll_2024--QCD_Bin-Pt-170To300_Fil-MuEnriched_TuneCP5_13p6TeV_pyth
 # [7] 
 bparkProductionAll_2024--QCD_Bin-Pt-300To470_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-300To470_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-300to470_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'nano_[0-50].root'
-  #files: 'nano_[0-596].root' 
-  xs:   619.3 
+  #files: 'nano_[0-50].root'
+  files: 'nano_[0-29].root'
+  #files: 'nano_[0-1494].root'   # 50/50 option: train half (1494 of ~2989 files on disk); deploy uses the complement
+  #xs:   619.3   # 2018 
+  xs:   699.6
   model_param: 
     mpi:    null 
     mA:     null 
@@ -117,9 +135,11 @@ bparkProductionAll_2024--QCD_Bin-Pt-300To470_Fil-MuEnriched_TuneCP5_13p6TeV_pyth
 # [8] 
 bparkProductionAll_2024--QCD_Bin-Pt-470To600_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-470To600_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-470to600_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'nano_[0-50].root'
-  #files: 'nano_[0-580].root' 
-  xs:   59.24 
+  #files: 'nano_[0-50].root'
+  files: 'nano_[0-29].root'
+  #files: 'nano_[0-1450].root'   # 50/50 option: train half (1450 of ~2901 files on disk); deploy uses the complement
+  #xs:   59.24   # 2018
+  xs:   67.67
   model_param: 
     mpi:    null 
     mA:     null 
@@ -131,9 +151,11 @@ bparkProductionAll_2024--QCD_Bin-Pt-470To600_Fil-MuEnriched_TuneCP5_13p6TeV_pyth
 # [9] 
 bparkProductionAll_2024--QCD_Bin-Pt-600To800_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-600To800_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-600to800_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'nano_[0-50].root'
-  #files: 'nano_[0-748].root' 
-  xs:   18.21 
+  #files: 'nano_[0-50].root'
+  files: 'nano_[0-29].root'
+  #files: 'nano_[0-1872].root'   # 50/50 option: train half (1872 of ~3745 files on disk); deploy uses the complement
+  #xs:   18.21   # 2018 
+  xs:   21.27
   model_param: 
     mpi:    null 
     mA:     null 
@@ -145,9 +167,11 @@ bparkProductionAll_2024--QCD_Bin-Pt-600To800_Fil-MuEnriched_TuneCP5_13p6TeV_pyth
 # [10] 
 bparkProductionAll_2024--QCD_Bin-Pt-800To1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-800To1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-800to1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'nano_[0-50].root'
-  #files: 'nano_[0-718].root' 
-  xs:   3.275 
+  #files: 'nano_[0-50].root'
+  files: 'nano_[0-29].root'
+  #files: 'nano_[0-1800].root'   # 50/50 option: train half (1800 of ~3599 files on disk); deploy uses the complement
+  #xs:   3.275   # 2018 
+  xs:   3.89
   model_param: 
     mpi:    null 
     mA:     null 
@@ -159,9 +183,11 @@ bparkProductionAll_2024--QCD_Bin-Pt-800To1000_Fil-MuEnriched_TuneCP5_13p6TeV_pyt
 # [11] 
 bparkProductionAll_2024--QCD_Bin-Pt-1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8: &bparkProductionAll_2024--QCD_Bin-Pt-1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/QCD_Bin-PT-1000_Fil-MuEnriched_TuneCP5_13p6TeV_pythia8'
-  files: 'nano_[0-50].root'
-  #files: 'nano_[0-760].root' 
-  xs:   1.078 
+  #files: 'nano_[0-50].root'
+  files: 'nano_[0-29].root'
+  #files: 'nano_[0-1900].root'   # 50/50 option: train half (1900 of ~3801 files on disk); deploy uses the complement
+  #xs:   1.078   # 2018 
+  xs:   1.323
   model_param: 
     mpi:    null 
     mA:     null 

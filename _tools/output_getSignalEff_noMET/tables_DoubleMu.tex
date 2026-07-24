@@ -12,7 +12,9 @@
 \renewcommand{\arraystretch}{1.4}
 \begin{document}
 
-{\large Signal efficiency cutflow $|$ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=1.33\,\mathrm{GeV}$ $|$ 2024, $13.6\,\mathrm{TeV}$}
+{\large Signal efficiency cutflow
+
+ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=1.33\,\mathrm{GeV}$, $\mathcal{B}(A'\!\to\!\mu\mu)=0.317$ $|$ 2024, $13.6\,\mathrm{TeV}$}
 
 \vspace{0.8em}
 
@@ -20,9 +22,9 @@ Step 1 -- Kinematic selection: any muonSV cand.: $\max(p_T^{\mu_1},p_T^{\mu_2}){
 
 Step 2 -- Trigger selection: \texttt{HLT\_DoubleMu4\_3\_LowMass}
 
-Step 3 -- SV quality: at least one muonSV with $\chi^2<10$ and $\Delta R(\mu_1,\mu_2)<1.2$
+Step 3 -- SV quality: at least one muonSV with $\chi^2<10$
 
-Step 4 -- BDT selection: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (target FPR $=10^{-4}$)
+Step 4 -- BDT selection: \texttt{xgb01\_NOJETS} $>0.9978$ (target FPR $=10^{-4}$)
 
 \vspace{0.8em}
 
@@ -35,11 +37,11 @@ Absolute event counts
 \toprule
 $\mathrm{Cut\ step}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Total\ (weighted)}$} \\
 \midrule
-$N_{\mathrm{total}}$ & 917872 & 868835 & 861355 & 943679 & 105369343.4\\
-$\mathrm{Kin.\ sel.}$ & 236705 & 221463 & 197330 & 117118 & 15302469.3\\
-$\mathrm{HLT\ presel.}$ & 118799 & 96863 & 59132 & 12507 & 705371.8\\
-$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 116378 & 93696 & 52892 & 10788 & 661347.2\\
-$\mathrm{BDT\ sel.}$ & 3684 & 18962 & 31287 & 7680 & 69.6\\
+$N_{\mathrm{total}}$ & 917872 & 868835 & 861355 & 943679 & 105584726.4\\
+$\mathrm{Kin.\ sel.}$ & 236705 & 221463 & 197330 & 117118 & 15340940.2\\
+$\mathrm{HLT\ presel.}$ & 118799 & 96863 & 59132 & 12507 & 707505.9\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$) & 117829 & 94418 & 53354 & 10998 & 686936.4\\
+$\mathrm{BDT\ sel.}$ & 6306 & 23459 & 33296 & 8085 & 96.1\\
 \bottomrule
 \end{tabular}
 
@@ -53,8 +55,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.2579 & 0.2549 & 0.2291 & 0.1241 & 0.1470\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.1294 & 0.1115 & 0.0686 & 0.0133 & 0.0069\\
-$\varepsilon_{\mathrm{SV}}$ & 0.1268 & 0.1078 & 0.0614 & 0.0114 & 0.0065\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0040 & 0.0218 & 0.0363 & 0.0081 & $6.81\times10^{-7}$\\
+$\varepsilon_{\mathrm{SV}}$ & 0.1284 & 0.1087 & 0.0619 & 0.0117 & 0.0067\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0069 & 0.0270 & 0.0387 & 0.0086 & $9.35\times10^{-7}$\\
 \bottomrule
 \end{tabular}
 
@@ -68,8 +70,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.2579 & 0.2549 & 0.2291 & 0.1241 & 0.1470\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.5019 & 0.4374 & 0.2997 & 0.1068 & 0.0458\\
-$\varepsilon_{\mathrm{SV}}$ & 0.9796 & 0.9673 & 0.8945 & 0.8626 & 0.9357\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0317 & 0.2024 & 0.5915 & 0.7119 & $1.11\times10^{-4}$\\
+$\varepsilon_{\mathrm{SV}}$ & 0.9918 & 0.9748 & 0.9023 & 0.8793 & 0.9715\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0535 & 0.2485 & 0.6241 & 0.7351 & $1.46\times10^{-4}$\\
 \bottomrule
 \end{tabular}
 
@@ -81,37 +83,41 @@ Median expected $95\%$ CL upper limit on $\mathcal{B}(H\to\psi\bar{\psi})$ (SM $
 \toprule
 $\mathrm{FPR}$ & $\mathrm{BDT\ threshold}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
 \midrule
-$10^{-1}$ & $0.4618$ & 0.0851 & 0.0847 & 0.135 & 0.722\\
-$10^{-2}$ & $0.9294$ & 0.047 & 0.0346 & 0.0464 & 0.242\\
-$10^{-3}$ & $0.9894$ & 0.0368 & 0.0168 & 0.0171 & 0.0847\\
-$10^{-4}$ & $0.9977$ & 0.059 & 0.0113 & 0.00709 & 0.0328\\
+$10^{-1}$ & $0.4316$ & 0.0349 & 0.0256 & 0.0395 & 0.221\\
+$10^{-2}$ & $0.9252$ & 0.0196 & 0.0101 & 0.0134 & 0.0732\\
+$10^{-3}$ & $0.9896$ & 0.0144 & 0.00464 & 0.00481 & 0.0251\\
+$10^{-4}$ & $0.9979$ & 0.0176 & 0.00278 & 0.00194 & 0.00929\\
 \bottomrule
 \end{tabular}
 
 {\small Median expected $95\%$ CL upper limit (asymptotic CLs, background-only Asimov): $\mathcal{B}(H\to\psi\bar{\psi})=s_{95}/(L\,\varepsilon_S\,\sigma_{\mathrm{ggH}})$ whose median expected exclusion reaches $1.64\sigma$, with $s_{95}$ the signal yield solving $2[s-B\ln(1{+}s/B)]=1.64^2$ and $B=\mathrm{FPR}\times L\sum_q\sigma_q\varepsilon_q^{\mathrm{SV}}$. The cascade $\psi\bar{\psi}\to\ldots\to\pi_3\to A'A'\to\mu\mu$ ($\mathcal{B}(A'\to\mu\mu)=0.317$, $\mathcal{B}(\pi_3\to A'A')=1$ from the gen fragment) is folded into $\varepsilon_S$ by the MC; assumes SM $\sigma_{\mathrm{ggH}}$.}
 
+{\small Background $B$ counted in the dimuon mass window $1.2<m_{\mu\mu}<1.46\,\mathrm{GeV}$ ($[0.9,1.1]\times m_A$); $\varepsilon_S$ evaluated in the same window.}
+
 \vspace{12pt}
 
-Asymptotic significance, $p_0$ ($Z$) (Asimov; presel.\,$+$\,SV\,$+$\,BDT, $\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})=0.439\,\mathrm{pb}$, $L=109.95\,\mathrm{fb}^{-1}$)
+Asymptotic significance, $p_0$ ($Z$) (presel.\,$+$\,SV\,$+$\,BDT, $\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})=0.439\,\mathrm{pb}$, $L=109.95\,\mathrm{fb}^{-1}$)
 
 \begin{tabular}{cccccc}
 \toprule
 $\mathrm{FPR}$ & $\mathrm{BDT\ threshold}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
 \midrule
-$10^{-1}$ & $0.4618$ & 0.42 ($0.2\sigma$) & 0.42 ($0.2\sigma$) & 0.45 ($0.1\sigma$) & 0.49 ($0.0\sigma$)\\
-$10^{-2}$ & $0.9294$ & 0.36 ($0.4\sigma$) & 0.32 ($0.5\sigma$) & 0.36 ($0.4\sigma$) & 0.47 ($0.1\sigma$)\\
-$10^{-3}$ & $0.9894$ & 0.33 ($0.4\sigma$) & 0.16 ($1.0\sigma$) & 0.17 ($1.0\sigma$) & 0.42 ($0.2\sigma$)\\
-$10^{-4}$ & $0.9977$ & 0.39 ($0.3\sigma$) & 0.072 ($1.5\sigma$) & 0.01 ($2.3\sigma$) & 0.31 ($0.5\sigma$)\\
+$10^{-1}$ & $0.4316$ & 0.32 ($0.5\sigma$) & 0.26 ($0.6\sigma$) & 0.34 ($0.4\sigma$) & 0.47 ($0.1\sigma$)\\
+$10^{-2}$ & $0.9252$ & 0.2 ($0.8\sigma$) & 0.053 ($1.6\sigma$) & 0.11 ($1.2\sigma$) & 0.41 ($0.2\sigma$)\\
+$10^{-3}$ & $0.9896$ & 0.13 ($1.1\sigma$) & $1.99\times10^{-4}$ ($3.5\sigma$) & $3.16\times10^{-4}$ ($3.4\sigma$) & 0.26 ($0.7\sigma$)\\
+$10^{-4}$ & $0.9979$ & 0.18 ($0.9\sigma$) & $1.84\times10^{-9}$ ($5.9\sigma$) & $1.33\times10^{-17}$ ($8.5\sigma$) & 0.038 ($1.8\sigma$)\\
 \bottomrule
 \end{tabular}
 
 {\small Each cell: one-sided $p$-value $p_0=1-\Phi(Z)$ and, in parentheses, the Gaussian significance $Z=\sqrt{2\left[(S{+}B)\ln(1{+}S/B)-S\right]}$, with signal yield $S=L\,\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})\,\varepsilon_S$ (assumed $\mathcal{B}(H\to\psi\bar{\psi})=0.01$; $\varepsilon_S=$ fraction of produced signal passing presel.\,$+$\,SV\,$+$\,BDT, with the $A'\to\mu\mu$ cascade BRs included) and background yield $B=\mathrm{FPR}\times L\sum_q\sigma_q\,\varepsilon_q^{\mathrm{SV}}$ (SV-selected QCD). For each FPR the BDT threshold is the one at which the cross-section-weighted SV-selected QCD has that false-positive rate.}
 
+{\small Evaluated in the dimuon mass window $1.2<m_{\mu\mu}<1.46\,\mathrm{GeV}$ ($[0.9,1.1]\times m_A$): $B$ from windowed-SV QCD and $\varepsilon_S$ in the same window.}
+
 }\clearpage
 
 \begin{landscape}
 
-{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=1.33\,\mathrm{GeV}$ $|$ 2024}
+{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=1.33\,\mathrm{GeV}$, $\mathcal{B}(A'\!\to\!\mu\mu)=0.317$ $|$ 2024}
 
 \vspace{0.6em}
 
@@ -130,8 +136,8 @@ $\mathrm{Step}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mathrm{Ge
 $N_{l_{xy}}$ & 235956 & 170269 & 87762 & 46462 & 9649 & 58672 & 87868 & 51347 & 1373 & 2097 & 30863 & 27336\\
 $\mathrm{Kin.\ sel.}$ & 227086 & 162372 & 82266 & 42623 & 8310 & 57054 & 84396 & 47867 & 1285 & 2002 & 30580 & 26463\\
 $\mathrm{HLT\ presel.}$ & 117852 & 61731 & 12656 & 1990 & 752 & 34572 & 35043 & 6285 & 184 & 548 & 11417 & 4228\\
-$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 115548 & 59255 & 9832 & 1427 & 670 & 33968 & 32531 & 5532 & 150 & 465 & 10523 & 3827\\
-$\mathrm{BDT\ sel.}$ & 3592 & 5822 & 746 & 77 & 85 & 12918 & 20418 & 3730 & 7 & 221 & 10119 & 3871\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$) & 116991 & 59969 & 10181 & 1549 & 677 & 33975 & 32640 & 5617 & 151 & 466 & 10526 & 3830\\
+$\mathrm{BDT\ sel.}$ & 6179 & 8404 & 1364 & 203 & 114 & 14797 & 21567 & 3952 & 13 & 257 & 10361 & 3928\\
 \bottomrule
 \end{tabular}}
 
@@ -147,8 +153,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.9624 & 0.9536 & 0.9374 & 0.9174 & 0.8612 & 0.9724 & 0.9605 & 0.9322 & 0.9359 & 0.9547 & 0.9908 & 0.9681\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.4995 & 0.3625 & 0.1442 & 0.0428 & 0.0779 & 0.5892 & 0.3988 & 0.1224 & 0.1340 & 0.2613 & 0.3699 & 0.1547\\
-$\varepsilon_{\mathrm{SV}}$ & 0.4897 & 0.3480 & 0.1120 & 0.0307 & 0.0694 & 0.5789 & 0.3702 & 0.1077 & 0.1092 & 0.2217 & 0.3410 & 0.1400\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0152 & 0.0342 & 0.0085 & 0.0017 & 0.0088 & 0.2202 & 0.2324 & 0.0726 & 0.0051 & 0.1054 & 0.3279 & 0.1416\\
+$\varepsilon_{\mathrm{SV}}$ & 0.4958 & 0.3522 & 0.1160 & 0.0333 & 0.0702 & 0.5791 & 0.3715 & 0.1094 & 0.1100 & 0.2222 & 0.3411 & 0.1401\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0262 & 0.0494 & 0.0155 & 0.0044 & 0.0118 & 0.2522 & 0.2454 & 0.0770 & 0.0095 & 0.1226 & 0.3357 & 0.1437\\
 \bottomrule
 \end{tabular}}
 
@@ -164,15 +170,17 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=1.33\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.9624 & 0.9536 & 0.9374 & 0.9174 & 0.8612 & 0.9724 & 0.9605 & 0.9322 & 0.9359 & 0.9547 & 0.9908 & 0.9681\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.5190 & 0.3802 & 0.1538 & 0.0467 & 0.0905 & 0.6060 & 0.4152 & 0.1313 & 0.1432 & 0.2737 & 0.3733 & 0.1598\\
-$\varepsilon_{\mathrm{SV}}$ & 0.9805 & 0.9599 & 0.7769 & 0.7171 & 0.8910 & 0.9825 & 0.9283 & 0.8802 & 0.8152 & 0.8485 & 0.9217 & 0.9052\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0311 & 0.0983 & 0.0759 & 0.0540 & 0.1269 & 0.3803 & 0.6276 & 0.6743 & 0.0467 & 0.4753 & 0.9616 & 1.0115\\
+$\varepsilon_{\mathrm{SV}}$ & 0.9927 & 0.9715 & 0.8044 & 0.7784 & 0.9003 & 0.9827 & 0.9314 & 0.8937 & 0.8207 & 0.8504 & 0.9220 & 0.9059\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0528 & 0.1401 & 0.1340 & 0.1311 & 0.1684 & 0.4355 & 0.6608 & 0.7036 & 0.0861 & 0.5515 & 0.9843 & 1.0256\\
 \bottomrule
 \end{tabular}}
 
 \end{landscape}
 \clearpage
 
-{\large Signal efficiency cutflow $|$ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=0.40\,\mathrm{GeV}$ $|$ 2024, $13.6\,\mathrm{TeV}$}
+{\large Signal efficiency cutflow
+
+ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=0.40\,\mathrm{GeV}$, $\mathcal{B}(A'\!\to\!\mu\mu)=0.44$ $|$ 2024, $13.6\,\mathrm{TeV}$}
 
 \vspace{0.8em}
 
@@ -180,9 +188,9 @@ Step 1 -- Kinematic selection: any muonSV cand.: $\max(p_T^{\mu_1},p_T^{\mu_2}){
 
 Step 2 -- Trigger selection: \texttt{HLT\_DoubleMu4\_3\_LowMass}
 
-Step 3 -- SV quality: at least one muonSV with $\chi^2<10$ and $\Delta R(\mu_1,\mu_2)<1.2$
+Step 3 -- SV quality: at least one muonSV with $\chi^2<10$
 
-Step 4 -- BDT selection: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (target FPR $=10^{-4}$)
+Step 4 -- BDT selection: \texttt{xgb01\_NOJETS} $>0.9978$ (target FPR $=10^{-4}$)
 
 \vspace{0.8em}
 
@@ -195,11 +203,11 @@ Absolute event counts
 \toprule
 $\mathrm{Cut\ step}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Total\ (weighted)}$} \\
 \midrule
-$N_{\mathrm{total}}$ & 913060 & 960840 & 879810 & 960785 & 105369343.4\\
-$\mathrm{Kin.\ sel.}$ & 322052 & 327538 & 218115 & 109027 & 15302469.3\\
-$\mathrm{HLT\ presel.}$ & 189700 & 165134 & 58657 & 8565 & 705371.8\\
-$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 186405 & 157267 & 50945 & 7385 & 661347.2\\
-$\mathrm{BDT\ sel.}$ & 30354 & 80637 & 33532 & 4983 & 69.6\\
+$N_{\mathrm{total}}$ & 913060 & 960840 & 879810 & 960785 & 105584726.4\\
+$\mathrm{Kin.\ sel.}$ & 322052 & 327538 & 218115 & 109027 & 15340940.2\\
+$\mathrm{HLT\ presel.}$ & 189700 & 165134 & 58657 & 8565 & 707505.9\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$) & 188292 & 158966 & 52316 & 7642 & 686936.4\\
+$\mathrm{BDT\ sel.}$ & 43657 & 90705 & 36578 & 5357 & 96.1\\
 \bottomrule
 \end{tabular}
 
@@ -213,8 +221,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.3527 & 0.3409 & 0.2479 & 0.1135 & 0.1470\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.2078 & 0.1719 & 0.0667 & 0.0089 & 0.0069\\
-$\varepsilon_{\mathrm{SV}}$ & 0.2042 & 0.1637 & 0.0579 & 0.0077 & 0.0065\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0332 & 0.0839 & 0.0381 & 0.0052 & $6.81\times10^{-7}$\\
+$\varepsilon_{\mathrm{SV}}$ & 0.2062 & 0.1654 & 0.0595 & 0.0080 & 0.0067\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0478 & 0.0944 & 0.0416 & 0.0056 & $9.35\times10^{-7}$\\
 \bottomrule
 \end{tabular}
 
@@ -228,8 +236,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.3527 & 0.3409 & 0.2479 & 0.1135 & 0.1470\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.5890 & 0.5042 & 0.2689 & 0.0786 & 0.0458\\
-$\varepsilon_{\mathrm{SV}}$ & 0.9826 & 0.9524 & 0.8685 & 0.8622 & 0.9357\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.1628 & 0.5127 & 0.6582 & 0.6747 & $1.11\times10^{-4}$\\
+$\varepsilon_{\mathrm{SV}}$ & 0.9926 & 0.9626 & 0.8919 & 0.8922 & 0.9715\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.2319 & 0.5706 & 0.6992 & 0.7010 & $1.46\times10^{-4}$\\
 \bottomrule
 \end{tabular}
 
@@ -241,37 +249,41 @@ Median expected $95\%$ CL upper limit on $\mathcal{B}(H\to\psi\bar{\psi})$ (SM $
 \toprule
 $\mathrm{FPR}$ & $\mathrm{BDT\ threshold}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
 \midrule
-$10^{-1}$ & $0.4618$ & 0.0433 & 0.0503 & 0.14 & 1.07\\
-$10^{-2}$ & $0.9294$ & 0.0176 & 0.0173 & 0.0468 & 0.357\\
-$10^{-3}$ & $0.9894$ & 0.00906 & 0.00659 & 0.0168 & 0.128\\
-$10^{-4}$ & $0.9977$ & 0.00729 & 0.00298 & 0.00689 & 0.0518\\
+$10^{-1}$ & $0.6071$ & 0.00999 & 0.00871 & 0.0252 & 0.193\\
+$10^{-2}$ & $0.9605$ & 0.00425 & 0.00299 & 0.00834 & 0.064\\
+$10^{-3}$ & $0.9959$ & 0.00259 & 0.00121 & 0.00307 & 0.0233\\
+$10^{-4}$ & $0.9996$ & 0.00821 & 0.0013 & 0.00314 & 0.0265\\
 \bottomrule
 \end{tabular}
 
 {\small Median expected $95\%$ CL upper limit (asymptotic CLs, background-only Asimov): $\mathcal{B}(H\to\psi\bar{\psi})=s_{95}/(L\,\varepsilon_S\,\sigma_{\mathrm{ggH}})$ whose median expected exclusion reaches $1.64\sigma$, with $s_{95}$ the signal yield solving $2[s-B\ln(1{+}s/B)]=1.64^2$ and $B=\mathrm{FPR}\times L\sum_q\sigma_q\varepsilon_q^{\mathrm{SV}}$. The cascade $\psi\bar{\psi}\to\ldots\to\pi_3\to A'A'\to\mu\mu$ ($\mathcal{B}(A'\to\mu\mu)=0.44$, $\mathcal{B}(\pi_3\to A'A')=1$ from the gen fragment) is folded into $\varepsilon_S$ by the MC; assumes SM $\sigma_{\mathrm{ggH}}$.}
 
+{\small Background $B$ counted in the dimuon mass window $0.36<m_{\mu\mu}<0.44\,\mathrm{GeV}$ ($[0.9,1.1]\times m_A$); $\varepsilon_S$ evaluated in the same window.}
+
 \vspace{12pt}
 
-Asymptotic significance, $p_0$ ($Z$) (Asimov; presel.\,$+$\,SV\,$+$\,BDT, $\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})=0.439\,\mathrm{pb}$, $L=109.95\,\mathrm{fb}^{-1}$)
+Asymptotic significance, $p_0$ ($Z$) (presel.\,$+$\,SV\,$+$\,BDT, $\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})=0.439\,\mathrm{pb}$, $L=109.95\,\mathrm{fb}^{-1}$)
 
 \begin{tabular}{cccccc}
 \toprule
 $\mathrm{FPR}$ & $\mathrm{BDT\ threshold}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
 \midrule
-$10^{-1}$ & $0.4618$ & 0.35 ($0.4\sigma$) & 0.37 ($0.3\sigma$) & 0.45 ($0.1\sigma$) & 0.49 ($0.0\sigma$)\\
-$10^{-2}$ & $0.9294$ & 0.17 ($0.9\sigma$) & 0.17 ($1.0\sigma$) & 0.36 ($0.4\sigma$) & 0.48 ($0.0\sigma$)\\
-$10^{-3}$ & $0.9894$ & 0.035 ($1.8\sigma$) & 0.0063 ($2.5\sigma$) & 0.16 ($1.0\sigma$) & 0.45 ($0.1\sigma$)\\
-$10^{-4}$ & $0.9977$ & 0.012 ($2.3\sigma$) & $1.73\times10^{-8}$ ($5.5\sigma$) & 0.0085 ($2.4\sigma$) & 0.38 ($0.3\sigma$)\\
+$10^{-1}$ & $0.6071$ & 0.05 ($1.6\sigma$) & 0.029 ($1.9\sigma$) & 0.26 ($0.7\sigma$) & 0.47 ($0.1\sigma$)\\
+$10^{-2}$ & $0.9605$ & $5.54\times10^{-5}$ ($3.9\sigma$) & $1.97\times10^{-8}$ ($5.5\sigma$) & 0.024 ($2.0\sigma$) & 0.4 ($0.3\sigma$)\\
+$10^{-3}$ & $0.9959$ & $1.21\times10^{-10}$ ($6.3\sigma$) & $3.42\times10^{-42}$ ($13.6\sigma$) & $4.25\times10^{-8}$ ($5.4\sigma$) & 0.24 ($0.7\sigma$)\\
+$10^{-4}$ & $0.9996$ & 0.022 ($2.0\sigma$) & $3.63\times10^{-36}$ ($12.5\sigma$) & $8.78\times10^{-8}$ ($5.2\sigma$) & 0.27 ($0.6\sigma$)\\
 \bottomrule
 \end{tabular}
 
 {\small Each cell: one-sided $p$-value $p_0=1-\Phi(Z)$ and, in parentheses, the Gaussian significance $Z=\sqrt{2\left[(S{+}B)\ln(1{+}S/B)-S\right]}$, with signal yield $S=L\,\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})\,\varepsilon_S$ (assumed $\mathcal{B}(H\to\psi\bar{\psi})=0.01$; $\varepsilon_S=$ fraction of produced signal passing presel.\,$+$\,SV\,$+$\,BDT, with the $A'\to\mu\mu$ cascade BRs included) and background yield $B=\mathrm{FPR}\times L\sum_q\sigma_q\,\varepsilon_q^{\mathrm{SV}}$ (SV-selected QCD). For each FPR the BDT threshold is the one at which the cross-section-weighted SV-selected QCD has that false-positive rate.}
 
+{\small Evaluated in the dimuon mass window $0.36<m_{\mu\mu}<0.44\,\mathrm{GeV}$ ($[0.9,1.1]\times m_A$): $B$ from windowed-SV QCD and $\varepsilon_S$ in the same window.}
+
 }\clearpage
 
 \begin{landscape}
 
-{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=0.40\,\mathrm{GeV}$ $|$ 2024}
+{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=4\,\mathrm{GeV}$, $m_{A}=0.40\,\mathrm{GeV}$, $\mathcal{B}(A'\!\to\!\mu\mu)=0.44$ $|$ 2024}
 
 \vspace{0.6em}
 
@@ -290,8 +302,8 @@ $\mathrm{Step}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mathrm{Ge
 $N_{l_{xy}}$ & 301977 & 179263 & 94058 & 61544 & 29476 & 142485 & 84528 & 36474 & 1443 & 17612 & 50041 & 17685\\
 $\mathrm{Kin.\ sel.}$ & 292469 & 170747 & 88163 & 57746 & 28208 & 139238 & 80703 & 33985 & 1352 & 17506 & 49103 & 17141\\
 $\mathrm{HLT\ presel.}$ & 172055 & 62280 & 13597 & 1829 & 17289 & 93441 & 28208 & 3697 & 347 & 9399 & 16842 & 3034\\
-$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 169079 & 56405 & 9398 & 1332 & 17048 & 92131 & 26105 & 3347 & 270 & 8721 & 15435 & 2705\\
-$\mathrm{BDT\ sel.}$ & 23357 & 13405 & 1277 & 81 & 6961 & 59634 & 17204 & 2159 & 34 & 7596 & 15049 & 2741\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$) & 170963 & 58074 & 10507 & 1516 & 17051 & 92159 & 26355 & 3418 & 270 & 8723 & 15447 & 2707\\
+$\mathrm{BDT\ sel.}$ & 35295 & 18593 & 2635 & 202 & 8289 & 64091 & 18538 & 2358 & 71 & 8017 & 15401 & 2794\\
 \bottomrule
 \end{tabular}}
 
@@ -307,8 +319,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.9685 & 0.9525 & 0.9373 & 0.9383 & 0.9570 & 0.9772 & 0.9547 & 0.9318 & 0.9369 & 0.9940 & 0.9813 & 0.9692\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.5698 & 0.3474 & 0.1446 & 0.0297 & 0.5865 & 0.6558 & 0.3337 & 0.1014 & 0.2405 & 0.5337 & 0.3366 & 0.1716\\
-$\varepsilon_{\mathrm{SV}}$ & 0.5599 & 0.3146 & 0.0999 & 0.0216 & 0.5784 & 0.6466 & 0.3088 & 0.0918 & 0.1871 & 0.4952 & 0.3084 & 0.1530\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0773 & 0.0748 & 0.0136 & 0.0013 & 0.2362 & 0.4185 & 0.2035 & 0.0592 & 0.0236 & 0.4313 & 0.3007 & 0.1550\\
+$\varepsilon_{\mathrm{SV}}$ & 0.5661 & 0.3240 & 0.1117 & 0.0246 & 0.5785 & 0.6468 & 0.3118 & 0.0937 & 0.1871 & 0.4953 & 0.3087 & 0.1531\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.1169 & 0.1037 & 0.0280 & 0.0033 & 0.2812 & 0.4498 & 0.2193 & 0.0646 & 0.0492 & 0.4552 & 0.3078 & 0.1580\\
 \bottomrule
 \end{tabular}}
 
@@ -324,15 +336,17 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=4\,\mathrm{GeV}$\\$m_{A}=0.40\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.9685 & 0.9525 & 0.9373 & 0.9383 & 0.9570 & 0.9772 & 0.9547 & 0.9318 & 0.9369 & 0.9940 & 0.9813 & 0.9692\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.5883 & 0.3648 & 0.1542 & 0.0317 & 0.6129 & 0.6711 & 0.3495 & 0.1088 & 0.2567 & 0.5369 & 0.3430 & 0.1770\\
-$\varepsilon_{\mathrm{SV}}$ & 0.9827 & 0.9057 & 0.6912 & 0.7283 & 0.9861 & 0.9860 & 0.9254 & 0.9053 & 0.7781 & 0.9279 & 0.9165 & 0.8916\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.1381 & 0.2377 & 0.1359 & 0.0608 & 0.4083 & 0.6473 & 0.6590 & 0.6451 & 0.1259 & 0.8710 & 0.9750 & 1.0133\\
+$\varepsilon_{\mathrm{SV}}$ & 0.9937 & 0.9325 & 0.7727 & 0.8289 & 0.9862 & 0.9863 & 0.9343 & 0.9245 & 0.7781 & 0.9281 & 0.9172 & 0.8922\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.2064 & 0.3202 & 0.2508 & 0.1332 & 0.4861 & 0.6954 & 0.7034 & 0.6899 & 0.2630 & 0.9191 & 0.9970 & 1.0321\\
 \bottomrule
 \end{tabular}}
 
 \end{landscape}
 \clearpage
 
-{\large Signal efficiency cutflow $|$ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=1.00\,\mathrm{GeV}$ $|$ 2024, $13.6\,\mathrm{TeV}$}
+{\large Signal efficiency cutflow
+
+ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=1.00\,\mathrm{GeV}$, $\mathcal{B}(A'\!\to\!\mu\mu)=0.307$ $|$ 2024, $13.6\,\mathrm{TeV}$}
 
 \vspace{0.8em}
 
@@ -340,9 +354,9 @@ Step 1 -- Kinematic selection: any muonSV cand.: $\max(p_T^{\mu_1},p_T^{\mu_2}){
 
 Step 2 -- Trigger selection: \texttt{HLT\_DoubleMu4\_3\_LowMass}
 
-Step 3 -- SV quality: at least one muonSV with $\chi^2<10$ and $\Delta R(\mu_1,\mu_2)<1.2$
+Step 3 -- SV quality: at least one muonSV with $\chi^2<10$
 
-Step 4 -- BDT selection: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (target FPR $=10^{-4}$)
+Step 4 -- BDT selection: \texttt{xgb01\_NOJETS} $>0.9978$ (target FPR $=10^{-4}$)
 
 \vspace{0.8em}
 
@@ -355,11 +369,11 @@ Absolute event counts
 \toprule
 $\mathrm{Cut\ step}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Total\ (weighted)}$} \\
 \midrule
-$N_{\mathrm{total}}$ & 911340 & 804161 & 806777 & 853360 & 105369343.4\\
-$\mathrm{Kin.\ sel.}$ & 203996 & 176716 & 147756 & 83056 & 15302469.3\\
-$\mathrm{HLT\ presel.}$ & 130314 & 104849 & 56819 & 10277 & 705371.8\\
-$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 128168 & 101780 & 51519 & 9026 & 661347.2\\
-$\mathrm{BDT\ sel.}$ & 10394 & 39918 & 35823 & 6723 & 69.6\\
+$N_{\mathrm{total}}$ & 911340 & 804161 & 806777 & 853360 & 105584726.4\\
+$\mathrm{Kin.\ sel.}$ & 203996 & 176716 & 147756 & 83056 & 15340940.2\\
+$\mathrm{HLT\ presel.}$ & 130314 & 104849 & 56819 & 10277 & 707505.9\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$) & 129121 & 102163 & 51979 & 9219 & 686936.4\\
+$\mathrm{BDT\ sel.}$ & 15191 & 45835 & 38247 & 7180 & 96.1\\
 \bottomrule
 \end{tabular}
 
@@ -373,8 +387,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\ma
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.2238 & 0.2198 & 0.1831 & 0.0973 & 0.1470\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.1430 & 0.1304 & 0.0704 & 0.0120 & 0.0069\\
-$\varepsilon_{\mathrm{SV}}$ & 0.1406 & 0.1266 & 0.0639 & 0.0106 & 0.0065\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0114 & 0.0496 & 0.0444 & 0.0079 & $6.81\times10^{-7}$\\
+$\varepsilon_{\mathrm{SV}}$ & 0.1417 & 0.1270 & 0.0644 & 0.0108 & 0.0067\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0167 & 0.0570 & 0.0474 & 0.0084 & $9.35\times10^{-7}$\\
 \bottomrule
 \end{tabular}
 
@@ -388,8 +402,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\ma
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.2238 & 0.2198 & 0.1831 & 0.0973 & 0.1470\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.6388 & 0.5933 & 0.3845 & 0.1237 & 0.0458\\
-$\varepsilon_{\mathrm{SV}}$ & 0.9835 & 0.9707 & 0.9067 & 0.8783 & 0.9357\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0811 & 0.3922 & 0.6953 & 0.7448 & $1.11\times10^{-4}$\\
+$\varepsilon_{\mathrm{SV}}$ & 0.9908 & 0.9744 & 0.9148 & 0.8971 & 0.9715\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.1176 & 0.4486 & 0.7358 & 0.7788 & $1.46\times10^{-4}$\\
 \bottomrule
 \end{tabular}
 
@@ -401,37 +415,41 @@ Median expected $95\%$ CL upper limit on $\mathcal{B}(H\to\psi\bar{\psi})$ (SM $
 \toprule
 $\mathrm{FPR}$ & $\mathrm{BDT\ threshold}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
 \midrule
-$10^{-1}$ & $0.4618$ & 0.0643 & 0.0662 & 0.127 & 0.772\\
-$10^{-2}$ & $0.9294$ & 0.0291 & 0.0238 & 0.0424 & 0.256\\
-$10^{-3}$ & $0.9894$ & 0.0185 & 0.00967 & 0.015 & 0.089\\
-$10^{-4}$ & $0.9977$ & 0.021 & 0.00499 & 0.00586 & 0.0339\\
+$10^{-1}$ & $0.4658$ & 0.0205 & 0.0183 & 0.0361 & 0.231\\
+$10^{-2}$ & $0.9276$ & 0.00914 & 0.00645 & 0.0119 & 0.0754\\
+$10^{-3}$ & $0.9895$ & 0.00555 & 0.00254 & 0.00412 & 0.0256\\
+$10^{-4}$ & $0.9975$ & 0.00458 & 0.00114 & 0.00149 & 0.00891\\
 \bottomrule
 \end{tabular}
 
 {\small Median expected $95\%$ CL upper limit (asymptotic CLs, background-only Asimov): $\mathcal{B}(H\to\psi\bar{\psi})=s_{95}/(L\,\varepsilon_S\,\sigma_{\mathrm{ggH}})$ whose median expected exclusion reaches $1.64\sigma$, with $s_{95}$ the signal yield solving $2[s-B\ln(1{+}s/B)]=1.64^2$ and $B=\mathrm{FPR}\times L\sum_q\sigma_q\varepsilon_q^{\mathrm{SV}}$. The cascade $\psi\bar{\psi}\to\ldots\to\pi_3\to A'A'\to\mu\mu$ ($\mathcal{B}(A'\to\mu\mu)=0.307$, $\mathcal{B}(\pi_3\to A'A')=1$ from the gen fragment) is folded into $\varepsilon_S$ by the MC; assumes SM $\sigma_{\mathrm{ggH}}$.}
 
+{\small Background $B$ counted in the dimuon mass window $0.9<m_{\mu\mu}<1.1\,\mathrm{GeV}$ ($[0.9,1.1]\times m_A$); $\varepsilon_S$ evaluated in the same window.}
+
 \vspace{12pt}
 
-Asymptotic significance, $p_0$ ($Z$) (Asimov; presel.\,$+$\,SV\,$+$\,BDT, $\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})=0.439\,\mathrm{pb}$, $L=109.95\,\mathrm{fb}^{-1}$)
+Asymptotic significance, $p_0$ ($Z$) (presel.\,$+$\,SV\,$+$\,BDT, $\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})=0.439\,\mathrm{pb}$, $L=109.95\,\mathrm{fb}^{-1}$)
 
 \begin{tabular}{cccccc}
 \toprule
 $\mathrm{FPR}$ & $\mathrm{BDT\ threshold}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
 \midrule
-$10^{-1}$ & $0.4618$ & 0.4 ($0.3\sigma$) & 0.4 ($0.2\sigma$) & 0.45 ($0.1\sigma$) & 0.49 ($0.0\sigma$)\\
-$10^{-2}$ & $0.9294$ & 0.29 ($0.6\sigma$) & 0.24 ($0.7\sigma$) & 0.35 ($0.4\sigma$) & 0.47 ($0.1\sigma$)\\
-$10^{-3}$ & $0.9894$ & 0.19 ($0.9\sigma$) & 0.044 ($1.7\sigma$) & 0.14 ($1.1\sigma$) & 0.43 ($0.2\sigma$)\\
-$10^{-4}$ & $0.9977$ & 0.22 ($0.8\sigma$) & $4.91\times10^{-4}$ ($3.3\sigma$) & 0.0025 ($2.8\sigma$) & 0.31 ($0.5\sigma$)\\
+$10^{-1}$ & $0.4658$ & 0.21 ($0.8\sigma$) & 0.18 ($0.9\sigma$) & 0.32 ($0.5\sigma$) & 0.47 ($0.1\sigma$)\\
+$10^{-2}$ & $0.9276$ & 0.036 ($1.8\sigma$) & 0.0054 ($2.6\sigma$) & 0.083 ($1.4\sigma$) & 0.41 ($0.2\sigma$)\\
+$10^{-3}$ & $0.9895$ & 0.0015 ($3.0\sigma$) & $4.96\times10^{-11}$ ($6.5\sigma$) & $3.28\times10^{-5}$ ($4.0\sigma$) & 0.26 ($0.6\sigma$)\\
+$10^{-4}$ & $0.9975$ & $1.65\times10^{-4}$ ($3.6\sigma$) & $6.16\times10^{-47}$ ($14.3\sigma$) & $3.23\times10^{-28}$ ($11.0\sigma$) & 0.032 ($1.8\sigma$)\\
 \bottomrule
 \end{tabular}
 
 {\small Each cell: one-sided $p$-value $p_0=1-\Phi(Z)$ and, in parentheses, the Gaussian significance $Z=\sqrt{2\left[(S{+}B)\ln(1{+}S/B)-S\right]}$, with signal yield $S=L\,\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})\,\varepsilon_S$ (assumed $\mathcal{B}(H\to\psi\bar{\psi})=0.01$; $\varepsilon_S=$ fraction of produced signal passing presel.\,$+$\,SV\,$+$\,BDT, with the $A'\to\mu\mu$ cascade BRs included) and background yield $B=\mathrm{FPR}\times L\sum_q\sigma_q\,\varepsilon_q^{\mathrm{SV}}$ (SV-selected QCD). For each FPR the BDT threshold is the one at which the cross-section-weighted SV-selected QCD has that false-positive rate.}
 
+{\small Evaluated in the dimuon mass window $0.9<m_{\mu\mu}<1.1\,\mathrm{GeV}$ ($[0.9,1.1]\times m_A$): $B$ from windowed-SV QCD and $\varepsilon_S$ in the same window.}
+
 }\clearpage
 
 \begin{landscape}
 
-{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=1.00\,\mathrm{GeV}$ $|$ 2024}
+{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=1.00\,\mathrm{GeV}$, $\mathcal{B}(A'\!\to\!\mu\mu)=0.307$ $|$ 2024}
 
 \vspace{0.6em}
 
@@ -450,8 +468,8 @@ $\mathrm{Step}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\mathrm{G
 $N_{l_{xy}}$ & 195034 & 93909 & 50055 & 40979 & 11737 & 81275 & 59977 & 27375 & 1591 & 5408 & 41406 & 18507\\
 $\mathrm{Kin.\ sel.}$ & 191468 & 91022 & 47790 & 38641 & 10979 & 80314 & 58492 & 26029 & 1521 & 5347 & 41227 & 18216\\
 $\mathrm{HLT\ presel.}$ & 125258 & 45723 & 10132 & 1655 & 4748 & 56661 & 29581 & 4387 & 297 & 2455 & 17071 & 4231\\
-$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 123312 & 43743 & 7658 & 1220 & 4614 & 55821 & 28033 & 3983 & 234 & 2208 & 15802 & 3820\\
-$\mathrm{BDT\ sel.}$ & 9072 & 7039 & 864 & 72 & 1311 & 31067 & 18934 & 2648 & 11 & 1809 & 15997 & 4000\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$) & 124260 & 44112 & 8011 & 1352 & 4618 & 55835 & 28135 & 4041 & 235 & 2208 & 15806 & 3822\\
+$\mathrm{BDT\ sel.}$ & 13485 & 9619 & 1610 & 208 & 1677 & 34298 & 20367 & 2910 & 29 & 1914 & 16241 & 4058\\
 \bottomrule
 \end{tabular}}
 
@@ -467,8 +485,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\ma
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.9817 & 0.9693 & 0.9547 & 0.9429 & 0.9354 & 0.9882 & 0.9752 & 0.9508 & 0.9560 & 0.9887 & 0.9957 & 0.9843\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.6422 & 0.4869 & 0.2024 & 0.0404 & 0.4045 & 0.6972 & 0.4932 & 0.1603 & 0.1867 & 0.4540 & 0.4123 & 0.2286\\
-$\varepsilon_{\mathrm{SV}}$ & 0.6323 & 0.4658 & 0.1530 & 0.0298 & 0.3931 & 0.6868 & 0.4674 & 0.1455 & 0.1471 & 0.4083 & 0.3816 & 0.2064\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0465 & 0.0750 & 0.0173 & 0.0018 & 0.1117 & 0.3822 & 0.3157 & 0.0967 & 0.0069 & 0.3345 & 0.3863 & 0.2161\\
+$\varepsilon_{\mathrm{SV}}$ & 0.6371 & 0.4697 & 0.1600 & 0.0330 & 0.3935 & 0.6870 & 0.4691 & 0.1476 & 0.1477 & 0.4083 & 0.3817 & 0.2065\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0691 & 0.1024 & 0.0322 & 0.0051 & 0.1429 & 0.4220 & 0.3396 & 0.1063 & 0.0182 & 0.3539 & 0.3922 & 0.2193\\
 \bottomrule
 \end{tabular}}
 
@@ -484,15 +502,17 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=1.00\,\ma
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.9817 & 0.9693 & 0.9547 & 0.9429 & 0.9354 & 0.9882 & 0.9752 & 0.9508 & 0.9560 & 0.9887 & 0.9957 & 0.9843\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.6542 & 0.5023 & 0.2120 & 0.0428 & 0.4325 & 0.7055 & 0.5057 & 0.1685 & 0.1953 & 0.4591 & 0.4141 & 0.2323\\
-$\varepsilon_{\mathrm{SV}}$ & 0.9845 & 0.9567 & 0.7558 & 0.7372 & 0.9718 & 0.9852 & 0.9477 & 0.9079 & 0.7879 & 0.8994 & 0.9257 & 0.9029\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0736 & 0.1609 & 0.1128 & 0.0590 & 0.2841 & 0.5565 & 0.6754 & 0.6648 & 0.0470 & 0.8193 & 1.0123 & 1.0471\\
+$\varepsilon_{\mathrm{SV}}$ & 0.9920 & 0.9648 & 0.7907 & 0.8169 & 0.9726 & 0.9854 & 0.9511 & 0.9211 & 0.7912 & 0.8994 & 0.9259 & 0.9033\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.1085 & 0.2181 & 0.2010 & 0.1538 & 0.3631 & 0.6143 & 0.7239 & 0.7201 & 0.1234 & 0.8668 & 1.0275 & 1.0617\\
 \bottomrule
 \end{tabular}}
 
 \end{landscape}
 \clearpage
 
-{\large Signal efficiency cutflow $|$ \texttt{DoubleMu} $|$ $m_{\pi}=1\,\mathrm{GeV}$, $m_{A}=0.33\,\mathrm{GeV}$ $|$ 2024, $13.6\,\mathrm{TeV}$}
+{\large Signal efficiency cutflow
+
+ \texttt{DoubleMu} $|$ $m_{\pi}=1\,\mathrm{GeV}$, $m_{A}=0.33\,\mathrm{GeV}$, $\mathcal{B}(A'\!\to\!\mu\mu)=0.464$ $|$ 2024, $13.6\,\mathrm{TeV}$}
 
 \vspace{0.8em}
 
@@ -500,9 +520,9 @@ Step 1 -- Kinematic selection: any muonSV cand.: $\max(p_T^{\mu_1},p_T^{\mu_2}){
 
 Step 2 -- Trigger selection: \texttt{HLT\_DoubleMu4\_3\_LowMass}
 
-Step 3 -- SV quality: at least one muonSV with $\chi^2<10$ and $\Delta R(\mu_1,\mu_2)<1.2$
+Step 3 -- SV quality: at least one muonSV with $\chi^2<10$
 
-Step 4 -- BDT selection: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (target FPR $=10^{-4}$)
+Step 4 -- BDT selection: \texttt{xgb01\_NOJETS} $>0.9978$ (target FPR $=10^{-4}$)
 
 \vspace{0.8em}
 
@@ -515,11 +535,11 @@ Absolute event counts
 \toprule
 $\mathrm{Cut\ step}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Total\ (weighted)}$} \\
 \midrule
-$N_{\mathrm{total}}$ & 912670 & 828649 & 812380 & 842040 & 105369343.4\\
-$\mathrm{Kin.\ sel.}$ & 229176 & 201654 & 137079 & 70896 & 15302469.3\\
-$\mathrm{HLT\ presel.}$ & 114793 & 81102 & 27626 & 3657 & 705371.8\\
-$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 112925 & 76776 & 23992 & 3195 & 661347.2\\
-$\mathrm{BDT\ sel.}$ & 7204 & 30208 & 13447 & 1884 & 69.6\\
+$N_{\mathrm{total}}$ & 912670 & 828649 & 812380 & 842040 & 105584726.4\\
+$\mathrm{Kin.\ sel.}$ & 229176 & 201654 & 137079 & 70896 & 15340940.2\\
+$\mathrm{HLT\ presel.}$ & 114793 & 81102 & 27626 & 3657 & 707505.9\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$) & 113888 & 77612 & 24506 & 3287 & 686936.4\\
+$\mathrm{BDT\ sel.}$ & 12866 & 35220 & 14883 & 2072 & 96.1\\
 \bottomrule
 \end{tabular}
 
@@ -533,8 +553,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.2511 & 0.2434 & 0.1687 & 0.0842 & 0.1470\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.1258 & 0.0979 & 0.0340 & 0.0043 & 0.0069\\
-$\varepsilon_{\mathrm{SV}}$ & 0.1237 & 0.0927 & 0.0295 & 0.0038 & 0.0065\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0079 & 0.0365 & 0.0166 & 0.0022 & $6.81\times10^{-7}$\\
+$\varepsilon_{\mathrm{SV}}$ & 0.1248 & 0.0937 & 0.0302 & 0.0039 & 0.0067\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0141 & 0.0425 & 0.0183 & 0.0025 & $9.35\times10^{-7}$\\
 \bottomrule
 \end{tabular}
 
@@ -548,8 +568,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.2511 & 0.2434 & 0.1687 & 0.0842 & 0.1470\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.5009 & 0.4022 & 0.2015 & 0.0516 & 0.0458\\
-$\varepsilon_{\mathrm{SV}}$ & 0.9837 & 0.9467 & 0.8685 & 0.8737 & 0.9357\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0638 & 0.3935 & 0.5605 & 0.5897 & $1.11\times10^{-4}$\\
+$\varepsilon_{\mathrm{SV}}$ & 0.9921 & 0.9570 & 0.8871 & 0.8988 & 0.9715\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.1130 & 0.4538 & 0.6073 & 0.6304 & $1.46\times10^{-4}$\\
 \bottomrule
 \end{tabular}
 
@@ -561,37 +581,41 @@ Median expected $95\%$ CL upper limit on $\mathcal{B}(H\to\psi\bar{\psi})$ (SM $
 \toprule
 $\mathrm{FPR}$ & $\mathrm{BDT\ threshold}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
 \midrule
-$10^{-1}$ & $0.4618$ & 0.0763 & 0.09 & 0.278 & 2.2\\
-$10^{-2}$ & $0.9294$ & 0.0356 & 0.0322 & 0.095 & 0.747\\
-$10^{-3}$ & $0.9894$ & 0.0239 & 0.0132 & 0.0357 & 0.271\\
-$10^{-4}$ & $0.9977$ & 0.0302 & 0.00684 & 0.0158 & 0.118\\
+$10^{-1}$ & $0.6257$ & 0.0195 & 0.0165 & 0.0508 & 0.392\\
+$10^{-2}$ & $0.9592$ & 0.00911 & 0.00578 & 0.0171 & 0.131\\
+$10^{-3}$ & $0.9935$ & 0.00564 & 0.0023 & 0.00626 & 0.0467\\
+$10^{-4}$ & $0.9984$ & 0.0051 & 0.00113 & 0.00269 & 0.0197\\
 \bottomrule
 \end{tabular}
 
 {\small Median expected $95\%$ CL upper limit (asymptotic CLs, background-only Asimov): $\mathcal{B}(H\to\psi\bar{\psi})=s_{95}/(L\,\varepsilon_S\,\sigma_{\mathrm{ggH}})$ whose median expected exclusion reaches $1.64\sigma$, with $s_{95}$ the signal yield solving $2[s-B\ln(1{+}s/B)]=1.64^2$ and $B=\mathrm{FPR}\times L\sum_q\sigma_q\varepsilon_q^{\mathrm{SV}}$. The cascade $\psi\bar{\psi}\to\ldots\to\pi_3\to A'A'\to\mu\mu$ ($\mathcal{B}(A'\to\mu\mu)=0.464$, $\mathcal{B}(\pi_3\to A'A')=1$ from the gen fragment) is folded into $\varepsilon_S$ by the MC; assumes SM $\sigma_{\mathrm{ggH}}$.}
 
+{\small Background $B$ counted in the dimuon mass window $0.297<m_{\mu\mu}<0.363\,\mathrm{GeV}$ ($[0.9,1.1]\times m_A$); $\varepsilon_S$ evaluated in the same window.}
+
 \vspace{12pt}
 
-Asymptotic significance, $p_0$ ($Z$) (Asimov; presel.\,$+$\,SV\,$+$\,BDT, $\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})=0.439\,\mathrm{pb}$, $L=109.95\,\mathrm{fb}^{-1}$)
+Asymptotic significance, $p_0$ ($Z$) (presel.\,$+$\,SV\,$+$\,BDT, $\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})=0.439\,\mathrm{pb}$, $L=109.95\,\mathrm{fb}^{-1}$)
 
 \begin{tabular}{cccccc}
 \toprule
 $\mathrm{FPR}$ & $\mathrm{BDT\ threshold}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
 \midrule
-$10^{-1}$ & $0.4618$ & 0.41 ($0.2\sigma$) & 0.43 ($0.2\sigma$) & 0.48 ($0.1\sigma$) & 0.5 ($0.0\sigma$)\\
-$10^{-2}$ & $0.9294$ & 0.32 ($0.5\sigma$) & 0.3 ($0.5\sigma$) & 0.43 ($0.2\sigma$) & 0.49 ($0.0\sigma$)\\
-$10^{-3}$ & $0.9894$ & 0.25 ($0.7\sigma$) & 0.11 ($1.2\sigma$) & 0.32 ($0.5\sigma$) & 0.48 ($0.1\sigma$)\\
-$10^{-4}$ & $0.9977$ & 0.29 ($0.5\sigma$) & 0.0081 ($2.4\sigma$) & 0.15 ($1.0\sigma$) & 0.44 ($0.1\sigma$)\\
+$10^{-1}$ & $0.6257$ & 0.2 ($0.8\sigma$) & 0.16 ($1.0\sigma$) & 0.37 ($0.3\sigma$) & 0.48 ($0.0\sigma$)\\
+$10^{-2}$ & $0.9592$ & 0.035 ($1.8\sigma$) & 0.0022 ($2.8\sigma$) & 0.17 ($1.0\sigma$) & 0.45 ($0.1\sigma$)\\
+$10^{-3}$ & $0.9935$ & 0.0018 ($2.9\sigma$) & $4.36\times10^{-13}$ ($7.1\sigma$) & 0.0043 ($2.6\sigma$) & 0.36 ($0.4\sigma$)\\
+$10^{-4}$ & $0.9984$ & $6.23\times10^{-4}$ ($3.2\sigma$) & $5.77\times10^{-47}$ ($14.3\sigma$) & $5.56\times10^{-10}$ ($6.1\sigma$) & 0.2 ($0.8\sigma$)\\
 \bottomrule
 \end{tabular}
 
 {\small Each cell: one-sided $p$-value $p_0=1-\Phi(Z)$ and, in parentheses, the Gaussian significance $Z=\sqrt{2\left[(S{+}B)\ln(1{+}S/B)-S\right]}$, with signal yield $S=L\,\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})\,\varepsilon_S$ (assumed $\mathcal{B}(H\to\psi\bar{\psi})=0.01$; $\varepsilon_S=$ fraction of produced signal passing presel.\,$+$\,SV\,$+$\,BDT, with the $A'\to\mu\mu$ cascade BRs included) and background yield $B=\mathrm{FPR}\times L\sum_q\sigma_q\,\varepsilon_q^{\mathrm{SV}}$ (SV-selected QCD). For each FPR the BDT threshold is the one at which the cross-section-weighted SV-selected QCD has that false-positive rate.}
 
+{\small Evaluated in the dimuon mass window $0.297<m_{\mu\mu}<0.363\,\mathrm{GeV}$ ($[0.9,1.1]\times m_A$): $B$ from windowed-SV QCD and $\varepsilon_S$ in the same window.}
+
 }\clearpage
 
 \begin{landscape}
 
-{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=1\,\mathrm{GeV}$, $m_{A}=0.33\,\mathrm{GeV}$ $|$ 2024}
+{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=1\,\mathrm{GeV}$, $m_{A}=0.33\,\mathrm{GeV}$, $\mathcal{B}(A'\!\to\!\mu\mu)=0.464$ $|$ 2024}
 
 \vspace{0.6em}
 
@@ -610,8 +634,8 @@ $\mathrm{Step}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mathrm{Ge
 $N_{l_{xy}}$ & 225899 & 130306 & 63698 & 42550 & 20216 & 79130 & 57468 & 23830 & 1116 & 8241 & 29777 & 10920\\
 $\mathrm{Kin.\ sel.}$ & 209871 & 118329 & 55967 & 38924 & 18311 & 75218 & 52469 & 21402 & 978 & 8078 & 28538 & 10398\\
 $\mathrm{HLT\ presel.}$ & 105476 & 33353 & 6294 & 782 & 9128 & 43943 & 13887 & 1670 & 187 & 3798 & 7435 & 1205\\
-$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 103798 & 30363 & 4572 & 571 & 8967 & 42963 & 12708 & 1539 & 158 & 3446 & 6704 & 1085\\
-$\mathrm{BDT\ sel.}$ & 5123 & 4047 & 379 & 29 & 2075 & 23488 & 7182 & 852 & 6 & 2673 & 5881 & 1003\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$) & 104758 & 31183 & 5006 & 644 & 8970 & 42978 & 12784 & 1557 & 158 & 3447 & 6708 & 1086\\
+$\mathrm{BDT\ sel.}$ & 10003 & 6606 & 819 & 88 & 2844 & 25757 & 7857 & 946 & 19 & 2855 & 6199 & 1038\\
 \bottomrule
 \end{tabular}}
 
@@ -627,8 +651,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.9290 & 0.9081 & 0.8786 & 0.9148 & 0.9058 & 0.9506 & 0.9130 & 0.8981 & 0.8763 & 0.9802 & 0.9584 & 0.9522\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.4669 & 0.2560 & 0.0988 & 0.0184 & 0.4515 & 0.5553 & 0.2416 & 0.0701 & 0.1676 & 0.4609 & 0.2497 & 0.1103\\
-$\varepsilon_{\mathrm{SV}}$ & 0.4595 & 0.2330 & 0.0718 & 0.0134 & 0.4436 & 0.5429 & 0.2211 & 0.0646 & 0.1416 & 0.4182 & 0.2251 & 0.0994\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0227 & 0.0311 & 0.0059 & 0.0007 & 0.1026 & 0.2968 & 0.1250 & 0.0358 & 0.0054 & 0.3244 & 0.1975 & 0.0918\\
+$\varepsilon_{\mathrm{SV}}$ & 0.4637 & 0.2393 & 0.0786 & 0.0151 & 0.4437 & 0.5431 & 0.2225 & 0.0653 & 0.1416 & 0.4183 & 0.2253 & 0.0995\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0443 & 0.0507 & 0.0129 & 0.0021 & 0.1407 & 0.3255 & 0.1367 & 0.0397 & 0.0170 & 0.3464 & 0.2082 & 0.0951\\
 \bottomrule
 \end{tabular}}
 
@@ -644,15 +668,17 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=1\,\mathrm{GeV}$\\$m_{A}=0.33\,\mat
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.9290 & 0.9081 & 0.8786 & 0.9148 & 0.9058 & 0.9506 & 0.9130 & 0.8981 & 0.8763 & 0.9802 & 0.9584 & 0.9522\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.5026 & 0.2819 & 0.1125 & 0.0201 & 0.4985 & 0.5842 & 0.2647 & 0.0780 & 0.1912 & 0.4702 & 0.2605 & 0.1159\\
-$\varepsilon_{\mathrm{SV}}$ & 0.9841 & 0.9104 & 0.7264 & 0.7302 & 0.9824 & 0.9777 & 0.9151 & 0.9216 & 0.8449 & 0.9073 & 0.9017 & 0.9004\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0494 & 0.1333 & 0.0829 & 0.0508 & 0.2314 & 0.5467 & 0.5652 & 0.5536 & 0.0380 & 0.7757 & 0.8772 & 0.9244\\
+$\varepsilon_{\mathrm{SV}}$ & 0.9932 & 0.9349 & 0.7954 & 0.8235 & 0.9827 & 0.9780 & 0.9206 & 0.9323 & 0.8449 & 0.9076 & 0.9022 & 0.9012\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0955 & 0.2118 & 0.1636 & 0.1366 & 0.3171 & 0.5993 & 0.6146 & 0.6076 & 0.1203 & 0.8283 & 0.9241 & 0.9558\\
 \bottomrule
 \end{tabular}}
 
 \end{landscape}
 \clearpage
 
-{\large Signal efficiency cutflow $|$ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=3.33\,\mathrm{GeV}$ $|$ 2024, $13.6\,\mathrm{TeV}$}
+{\large Signal efficiency cutflow
+
+ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=3.33\,\mathrm{GeV}$, $\mathcal{B}(A'\!\to\!\mu\mu)=0.193$ $|$ 2024, $13.6\,\mathrm{TeV}$}
 
 \vspace{0.8em}
 
@@ -660,9 +686,9 @@ Step 1 -- Kinematic selection: any muonSV cand.: $\max(p_T^{\mu_1},p_T^{\mu_2}){
 
 Step 2 -- Trigger selection: \texttt{HLT\_DoubleMu4\_3\_LowMass}
 
-Step 3 -- SV quality: at least one muonSV with $\chi^2<10$ and $\Delta R(\mu_1,\mu_2)<1.2$
+Step 3 -- SV quality: at least one muonSV with $\chi^2<10$
 
-Step 4 -- BDT selection: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (target FPR $=10^{-4}$)
+Step 4 -- BDT selection: \texttt{xgb01\_NOJETS} $>0.9978$ (target FPR $=10^{-4}$)
 
 \vspace{0.8em}
 
@@ -675,11 +701,11 @@ Absolute event counts
 \toprule
 $\mathrm{Cut\ step}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} & \shortstack{$\mathrm{QCD}$\\$\mathrm{Total\ (weighted)}$} \\
 \midrule
-$N_{\mathrm{total}}$ & 809720 & 932645 & 914920 & 884107 & 105369343.4\\
-$\mathrm{Kin.\ sel.}$ & 125164 & 143011 & 129885 & 81316 & 15302469.3\\
-$\mathrm{HLT\ presel.}$ & 73475 & 79110 & 54177 & 11955 & 705371.8\\
-$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 72402 & 77246 & 50934 & 10856 & 661347.2\\
-$\mathrm{BDT\ sel.}$ & 741 & 4731 & 23721 & 7245 & 69.6\\
+$N_{\mathrm{total}}$ & 809720 & 932645 & 914920 & 884107 & 105584726.4\\
+$\mathrm{Kin.\ sel.}$ & 125164 & 143011 & 129885 & 81316 & 15340940.2\\
+$\mathrm{HLT\ presel.}$ & 73475 & 79110 & 54177 & 11955 & 707505.9\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$) & 72761 & 77450 & 51096 & 10943 & 686936.4\\
+$\mathrm{BDT\ sel.}$ & 1528 & 6458 & 25030 & 7526 & 96.1\\
 \bottomrule
 \end{tabular}
 
@@ -693,8 +719,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\ma
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.1546 & 0.1533 & 0.1420 & 0.0920 & 0.1470\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.0907 & 0.0848 & 0.0592 & 0.0135 & 0.0069\\
-$\varepsilon_{\mathrm{SV}}$ & 0.0894 & 0.0828 & 0.0557 & 0.0123 & 0.0065\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0009 & 0.0051 & 0.0259 & 0.0082 & $6.81\times10^{-7}$\\
+$\varepsilon_{\mathrm{SV}}$ & 0.0899 & 0.0830 & 0.0558 & 0.0124 & 0.0067\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0019 & 0.0069 & 0.0274 & 0.0085 & $9.35\times10^{-7}$\\
 \bottomrule
 \end{tabular}
 
@@ -708,8 +734,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\ma
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.1546 & 0.1533 & 0.1420 & 0.0920 & 0.1470\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.5870 & 0.5532 & 0.4171 & 0.1470 & 0.0458\\
-$\varepsilon_{\mathrm{SV}}$ & 0.9854 & 0.9764 & 0.9401 & 0.9081 & 0.9357\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0102 & 0.0612 & 0.4657 & 0.6674 & $1.11\times10^{-4}$\\
+$\varepsilon_{\mathrm{SV}}$ & 0.9903 & 0.9790 & 0.9431 & 0.9153 & 0.9715\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0210 & 0.0834 & 0.4899 & 0.6877 & $1.46\times10^{-4}$\\
 \bottomrule
 \end{tabular}
 
@@ -721,37 +747,41 @@ Median expected $95\%$ CL upper limit on $\mathcal{B}(H\to\psi\bar{\psi})$ (SM $
 \toprule
 $\mathrm{FPR}$ & $\mathrm{BDT\ threshold}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
 \midrule
-$10^{-1}$ & $0.4618$ & 0.137 & 0.125 & 0.154 & 0.679\\
-$10^{-2}$ & $0.9294$ & 0.103 & 0.0631 & 0.0557 & 0.232\\
-$10^{-3}$ & $0.9894$ & 0.104 & 0.042 & 0.0217 & 0.0824\\
-$10^{-4}$ & $0.9977$ & 0.252 & 0.0472 & 0.00979 & 0.032\\
+$10^{-1}$ & $0.4161$ & 0.0737 & 0.0591 & 0.0726 & 0.331\\
+$10^{-2}$ & $0.9029$ & 0.053 & 0.0274 & 0.0255 & 0.111\\
+$10^{-3}$ & $0.9851$ & 0.0451 & 0.0152 & 0.00949 & 0.0382\\
+$10^{-4}$ & $0.9967$ & 0.0539 & 0.0118 & 0.00392 & 0.0139\\
 \bottomrule
 \end{tabular}
 
 {\small Median expected $95\%$ CL upper limit (asymptotic CLs, background-only Asimov): $\mathcal{B}(H\to\psi\bar{\psi})=s_{95}/(L\,\varepsilon_S\,\sigma_{\mathrm{ggH}})$ whose median expected exclusion reaches $1.64\sigma$, with $s_{95}$ the signal yield solving $2[s-B\ln(1{+}s/B)]=1.64^2$ and $B=\mathrm{FPR}\times L\sum_q\sigma_q\varepsilon_q^{\mathrm{SV}}$. The cascade $\psi\bar{\psi}\to\ldots\to\pi_3\to A'A'\to\mu\mu$ ($\mathcal{B}(A'\to\mu\mu)=0.193$, $\mathcal{B}(\pi_3\to A'A')=1$ from the gen fragment) is folded into $\varepsilon_S$ by the MC; assumes SM $\sigma_{\mathrm{ggH}}$.}
 
+{\small Background $B$ counted in the dimuon mass window $3<m_{\mu\mu}<3.66\,\mathrm{GeV}$ ($[0.9,1.1]\times m_A$); $\varepsilon_S$ evaluated in the same window.}
+
 \vspace{12pt}
 
-Asymptotic significance, $p_0$ ($Z$) (Asimov; presel.\,$+$\,SV\,$+$\,BDT, $\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})=0.439\,\mathrm{pb}$, $L=109.95\,\mathrm{fb}^{-1}$)
+Asymptotic significance, $p_0$ ($Z$) (presel.\,$+$\,SV\,$+$\,BDT, $\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})=0.439\,\mathrm{pb}$, $L=109.95\,\mathrm{fb}^{-1}$)
 
 \begin{tabular}{cccccc}
 \toprule
 $\mathrm{FPR}$ & $\mathrm{BDT\ threshold}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=0.1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=1\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=10\,\mathrm{mm}$} & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{GeV}$\\$c\tau=100\,\mathrm{mm}$} \\
 \midrule
-$10^{-1}$ & $0.4618$ & 0.45 ($0.1\sigma$) & 0.45 ($0.1\sigma$) & 0.46 ($0.1\sigma$) & 0.49 ($0.0\sigma$)\\
-$10^{-2}$ & $0.9294$ & 0.44 ($0.2\sigma$) & 0.4 ($0.3\sigma$) & 0.38 ($0.3\sigma$) & 0.47 ($0.1\sigma$)\\
-$10^{-3}$ & $0.9894$ & 0.44 ($0.2\sigma$) & 0.35 ($0.4\sigma$) & 0.22 ($0.8\sigma$) & 0.42 ($0.2\sigma$)\\
-$10^{-4}$ & $0.9977$ & 0.47 ($0.1\sigma$) & 0.36 ($0.3\sigma$) & 0.046 ($1.7\sigma$) & 0.3 ($0.5\sigma$)\\
+$10^{-1}$ & $0.4161$ & 0.41 ($0.2\sigma$) & 0.39 ($0.3\sigma$) & 0.41 ($0.2\sigma$) & 0.48 ($0.0\sigma$)\\
+$10^{-2}$ & $0.9029$ & 0.38 ($0.3\sigma$) & 0.27 ($0.6\sigma$) & 0.26 ($0.6\sigma$) & 0.44 ($0.1\sigma$)\\
+$10^{-3}$ & $0.9851$ & 0.36 ($0.4\sigma$) & 0.14 ($1.1\sigma$) & 0.041 ($1.7\sigma$) & 0.33 ($0.4\sigma$)\\
+$10^{-4}$ & $0.9967$ & 0.38 ($0.3\sigma$) & 0.081 ($1.4\sigma$) & $1.35\times10^{-5}$ ($4.2\sigma$) & 0.12 ($1.2\sigma$)\\
 \bottomrule
 \end{tabular}
 
 {\small Each cell: one-sided $p$-value $p_0=1-\Phi(Z)$ and, in parentheses, the Gaussian significance $Z=\sqrt{2\left[(S{+}B)\ln(1{+}S/B)-S\right]}$, with signal yield $S=L\,\sigma_{\mathrm{ggH}}\,\mathcal{B}(H\to\psi\bar{\psi})\,\varepsilon_S$ (assumed $\mathcal{B}(H\to\psi\bar{\psi})=0.01$; $\varepsilon_S=$ fraction of produced signal passing presel.\,$+$\,SV\,$+$\,BDT, with the $A'\to\mu\mu$ cascade BRs included) and background yield $B=\mathrm{FPR}\times L\sum_q\sigma_q\,\varepsilon_q^{\mathrm{SV}}$ (SV-selected QCD). For each FPR the BDT threshold is the one at which the cross-section-weighted SV-selected QCD has that false-positive rate.}
 
+{\small Evaluated in the dimuon mass window $3<m_{\mu\mu}<3.66\,\mathrm{GeV}$ ($[0.9,1.1]\times m_A$): $B$ from windowed-SV QCD and $\varepsilon_S$ in the same window.}
+
 }\clearpage
 
 \begin{landscape}
 
-{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=3.33\,\mathrm{GeV}$ $|$ 2024}
+{\large Signal efficiencies by $l_{xy}$ bin $|$ \texttt{DoubleMu} $|$ $m_{\pi}=10\,\mathrm{GeV}$, $m_{A}=3.33\,\mathrm{GeV}$, $\mathcal{B}(A'\!\to\!\mu\mu)=0.193$ $|$ 2024}
 
 \vspace{0.6em}
 
@@ -770,8 +800,8 @@ $\mathrm{Step}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\mathrm{G
 $N_{l_{xy}}$ & 122549 & 116925 & 48251 & 26007 & 5384 & 28926 & 68908 & 33929 & 1180 & 1586 & 16926 & 25166\\
 $\mathrm{Kin.\ sel.}$ & 119508 & 113425 & 45495 & 23813 & 4537 & 28050 & 67502 & 32512 & 1107 & 1507 & 16848 & 24877\\
 $\mathrm{HLT\ presel.}$ & 73068 & 62477 & 13704 & 1855 & 272 & 16383 & 34864 & 6909 & 133 & 244 & 5603 & 3190\\
-$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 72070 & 61038 & 12391 & 1580 & 219 & 16033 & 33359 & 6363 & 111 & 169 & 5182 & 2913\\
-$\mathrm{BDT\ sel.}$ & 730 & 1629 & 318 & 32 & 5 & 3082 & 18524 & 4270 & 6 & 20 & 4875 & 2943\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$) & 72428 & 61237 & 12509 & 1627 & 220 & 16036 & 33399 & 6402 & 111 & 171 & 5185 & 2914\\
+$\mathrm{BDT\ sel.}$ & 1511 & 2758 & 591 & 99 & 9 & 3674 & 19463 & 4429 & 8 & 26 & 4974 & 2998\\
 \bottomrule
 \end{tabular}}
 
@@ -787,8 +817,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\ma
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.9752 & 0.9701 & 0.9429 & 0.9156 & 0.8427 & 0.9697 & 0.9796 & 0.9582 & 0.9381 & 0.9502 & 0.9954 & 0.9885\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.5962 & 0.5343 & 0.2840 & 0.0713 & 0.0505 & 0.5664 & 0.5059 & 0.2036 & 0.1127 & 0.1538 & 0.3310 & 0.1268\\
-$\varepsilon_{\mathrm{SV}}$ & 0.5881 & 0.5220 & 0.2568 & 0.0608 & 0.0407 & 0.5543 & 0.4841 & 0.1875 & 0.0941 & 0.1066 & 0.3062 & 0.1158\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0060 & 0.0139 & 0.0066 & 0.0012 & 0.0009 & 0.1065 & 0.2688 & 0.1259 & 0.0051 & 0.0126 & 0.2880 & 0.1169\\
+$\varepsilon_{\mathrm{SV}}$ & 0.5910 & 0.5237 & 0.2592 & 0.0626 & 0.0409 & 0.5544 & 0.4847 & 0.1887 & 0.0941 & 0.1078 & 0.3063 & 0.1158\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0123 & 0.0236 & 0.0122 & 0.0038 & 0.0017 & 0.1270 & 0.2824 & 0.1305 & 0.0068 & 0.0164 & 0.2939 & 0.1191\\
 \bottomrule
 \end{tabular}}
 
@@ -804,8 +834,8 @@ $\mathrm{Efficiency}$ & \shortstack{$m_{\pi}=10\,\mathrm{GeV}$\\$m_{A}=3.33\,\ma
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.9752 & 0.9701 & 0.9429 & 0.9156 & 0.8427 & 0.9697 & 0.9796 & 0.9582 & 0.9381 & 0.9502 & 0.9954 & 0.9885\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.6114 & 0.5508 & 0.3012 & 0.0779 & 0.0600 & 0.5841 & 0.5165 & 0.2125 & 0.1201 & 0.1619 & 0.3326 & 0.1282\\
-$\varepsilon_{\mathrm{SV}}$ & 0.9863 & 0.9770 & 0.9042 & 0.8518 & 0.8051 & 0.9786 & 0.9568 & 0.9210 & 0.8346 & 0.6926 & 0.9249 & 0.9132\\
-$\varepsilon_{\mathrm{BDT}}$ & 0.0101 & 0.0267 & 0.0257 & 0.0203 & 0.0228 & 0.1922 & 0.5553 & 0.6711 & 0.0541 & 0.1183 & 0.9408 & 1.0103\\
+$\varepsilon_{\mathrm{SV}}$ & 0.9912 & 0.9802 & 0.9128 & 0.8771 & 0.8088 & 0.9788 & 0.9580 & 0.9266 & 0.8346 & 0.7008 & 0.9254 & 0.9135\\
+$\varepsilon_{\mathrm{BDT}}$ & 0.0209 & 0.0450 & 0.0472 & 0.0608 & 0.0409 & 0.2291 & 0.5827 & 0.6918 & 0.0721 & 0.1520 & 0.9593 & 1.0288\\
 \bottomrule
 \end{tabular}}
 
@@ -820,7 +850,7 @@ $\varepsilon_{\mathrm{BDT}}$ & 0.0101 & 0.0267 & 0.0257 & 0.0203 & 0.0228 & 0.19
 
 \textit{Column headers: $p_T$ range [GeV] and $\sigma$ [pb].}
 
-Preselection: \texttt{xgb01\_NOJETS\_NOMET} $\geq 0$\quad BDT: \texttt{xgb01\_NOJETS\_NOMET} $>0.9978$ (FPR$=10^{-4}$)
+Preselection: \texttt{xgb01\_NOJETS} $\geq 0$\quad BDT: \texttt{xgb01\_NOJETS} $>0.9978$ (FPR$=10^{-4}$)
 
 \vspace{0.8em}
 
@@ -833,11 +863,11 @@ Absolute event counts; Total\ (weighted)$=\sum_q(\sigma_q N_q)/\sum_q\sigma_q$
 \toprule
 Cut step & \shortstack{$p_T\in[15\text{--}20]\,\mathrm{GeV}$\\$\sigma=3.02\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[20\text{--}30]\,\mathrm{GeV}$\\$\sigma=2.70\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[30\text{--}50]\,\mathrm{GeV}$\\$\sigma=1.46\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[50\text{--}80]\,\mathrm{GeV}$\\$\sigma=4.08\times10^{5}\,\mathrm{pb}$} & \shortstack{$p_T\in[80\text{--}120]\,\mathrm{GeV}$\\$\sigma=9.61\times10^{4}\,\mathrm{pb}$} & \shortstack{$p_T\in[120\text{--}170]\,\mathrm{GeV}$\\$\sigma=2.31\times10^{4}\,\mathrm{pb}$} & \shortstack{$p_T\in[170\text{--}300]\,\mathrm{GeV}$\\$\sigma=7.75\times10^{3}\,\mathrm{pb}$} & \shortstack{$p_T\in[300\text{--}470]\,\mathrm{GeV}$\\$\sigma=7.00\times10^{2}\,\mathrm{pb}$} & \shortstack{$p_T\in[470\text{--}600]\,\mathrm{GeV}$\\$\sigma=6.77\times10^{1}\,\mathrm{pb}$} & \shortstack{$p_T\in[600\text{--}800]\,\mathrm{GeV}$\\$\sigma=2.13\times10^{1}\,\mathrm{pb}$} & \shortstack{$p_T\in[800\text{--}1000]\,\mathrm{GeV}$\\$\sigma=3.89\,\mathrm{pb}$} & \shortstack{$p_T>1000\,\mathrm{GeV}$\\$\sigma=1.32\,\mathrm{pb}$} & \shortstack{$\mathrm{Total}$\\$\mathrm{(weighted)}$}\\
 \midrule
-$N_{\mathrm{total}}$ & 123770024 & 91738748 & 93845715 & 105010260 & 91217031 & 96167179 & 87457063 & 76722144 & 68451685 & 81354006 & 77332004 & 82646883 & 105369343.4\\
-$\mathrm{Kin.\ sel.}$ & 15900677 & 13107891 & 15679001 & 21295112 & 22440404 & 28360428 & 31398128 & 35685021 & 37992635 & 50099625 & 52670397 & 62151563 & 15302469.3\\
-$\mathrm{HLT\ presel.}$ & 575528 & 617714 & 899384 & 1323181 & 1369444 & 1630488 & 1657394 & 1669576 & 1642324 & 2076075 & 2110561 & 2443075 & 705371.8\\
-$\mathrm{SV\ sel.}$ ($\chi^2{<}10$, $\Delta R{<}1.2$) & 533129 & 579520 & 850526 & 1255082 & 1299354 & 1545813 & 1573455 & 1592337 & 1574863 & 2000325 & 2045213 & 2384238 & 661347.2\\
-$\mathrm{BDT\ sel.}$ & 62 & 73 & 73 & 84 & 98 & 101 & 53 & 34 & 24 & 34 & 34 & 29 & 69.6\\
+$N_{\mathrm{total}}$ & 123916850 & 91778052 & 94134216 & 106170812 & 92658880 & 98710381 & 89898932 & 78691010 & 70832992 & 84833615 & 81188458 & 86344120 & 105584726.4\\
+$\mathrm{Kin.\ sel.}$ & 15919475 & 13113388 & 15726854 & 21531212 & 22795678 & 29111284 & 32274364 & 36600320 & 39315247 & 52242124 & 55297082 & 64932427 & 15340940.2\\
+$\mathrm{HLT\ presel.}$ & 576184 & 618010 & 902262 & 1337907 & 1391157 & 1673750 & 1703259 & 1712577 & 1699323 & 2165135 & 2215916 & 2552247 & 707505.9\\
+$\mathrm{SV\ sel.}$ ($\chi^2{<}10$) & 560653 & 600607 & 874731 & 1293742 & 1342445 & 1612654 & 1643358 & 1660401 & 1655870 & 2117714 & 2176084 & 2518435 & 686936.4\\
+$\mathrm{BDT\ sel.}$ & 88 & 97 & 100 & 126 & 135 & 133 & 86 & 72 & 49 & 73 & 72 & 82 & 96.1\\
 \bottomrule
 \end{tabular}}
 
@@ -851,9 +881,9 @@ Relative efficiencies (w.r.t.\ $N_{\mathrm{total}}$); Weighted\ $\varepsilon=\su
 $\mathrm{Efficiency}$ & \shortstack{$p_T\in[15\text{--}20]\,\mathrm{GeV}$\\$\sigma=3.02\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[20\text{--}30]\,\mathrm{GeV}$\\$\sigma=2.70\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[30\text{--}50]\,\mathrm{GeV}$\\$\sigma=1.46\times10^{6}\,\mathrm{pb}$} & \shortstack{$p_T\in[50\text{--}80]\,\mathrm{GeV}$\\$\sigma=4.08\times10^{5}\,\mathrm{pb}$} & \shortstack{$p_T\in[80\text{--}120]\,\mathrm{GeV}$\\$\sigma=9.61\times10^{4}\,\mathrm{pb}$} & \shortstack{$p_T\in[120\text{--}170]\,\mathrm{GeV}$\\$\sigma=2.31\times10^{4}\,\mathrm{pb}$} & \shortstack{$p_T\in[170\text{--}300]\,\mathrm{GeV}$\\$\sigma=7.75\times10^{3}\,\mathrm{pb}$} & \shortstack{$p_T\in[300\text{--}470]\,\mathrm{GeV}$\\$\sigma=7.00\times10^{2}\,\mathrm{pb}$} & \shortstack{$p_T\in[470\text{--}600]\,\mathrm{GeV}$\\$\sigma=6.77\times10^{1}\,\mathrm{pb}$} & \shortstack{$p_T\in[600\text{--}800]\,\mathrm{GeV}$\\$\sigma=2.13\times10^{1}\,\mathrm{pb}$} & \shortstack{$p_T\in[800\text{--}1000]\,\mathrm{GeV}$\\$\sigma=3.89\,\mathrm{pb}$} & \shortstack{$p_T>1000\,\mathrm{GeV}$\\$\sigma=1.32\,\mathrm{pb}$} & \shortstack{$\mathrm{Weighted}\ \varepsilon$\\$\sigma_{\mathrm{tot}}=7.72\times10^{6}\,\mathrm{pb}$}\\
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.1285 & 0.1429 & 0.1671 & 0.2028 & 0.2460 & 0.2949 & 0.3590 & 0.4651 & 0.5550 & 0.6158 & 0.6811 & 0.7520 & 0.1470\\
-$\varepsilon_{\mathrm{HLT}}$ & 0.0046 & 0.0067 & 0.0096 & 0.0126 & 0.0150 & 0.0170 & 0.0190 & 0.0218 & 0.0240 & 0.0255 & 0.0273 & 0.0296 & 0.0069\\
-$\varepsilon_{\mathrm{SV}}$ & 0.0043 & 0.0063 & 0.0091 & 0.0120 & 0.0142 & 0.0161 & 0.0180 & 0.0208 & 0.0230 & 0.0246 & 0.0264 & 0.0288 & 0.0065\\
-$\varepsilon_{\mathrm{BDT}}$ & $5.01\times10^{-7}$ & $7.96\times10^{-7}$ & $7.78\times10^{-7}$ & $8.00\times10^{-7}$ & $1.07\times10^{-6}$ & $1.05\times10^{-6}$ & $6.06\times10^{-7}$ & $4.43\times10^{-7}$ & $3.51\times10^{-7}$ & $4.18\times10^{-7}$ & $4.40\times10^{-7}$ & $3.51\times10^{-7}$ & $6.81\times10^{-7}$\\
+$\varepsilon_{\mathrm{HLT}}$ & 0.0046 & 0.0067 & 0.0096 & 0.0126 & 0.0150 & 0.0170 & 0.0189 & 0.0218 & 0.0240 & 0.0255 & 0.0273 & 0.0296 & 0.0069\\
+$\varepsilon_{\mathrm{SV}}$ & 0.0045 & 0.0065 & 0.0093 & 0.0122 & 0.0145 & 0.0163 & 0.0183 & 0.0211 & 0.0234 & 0.0250 & 0.0268 & 0.0292 & 0.0067\\
+$\varepsilon_{\mathrm{BDT}}$ & $7.10\times10^{-7}$ & $1.06\times10^{-6}$ & $1.06\times10^{-6}$ & $1.19\times10^{-6}$ & $1.46\times10^{-6}$ & $1.35\times10^{-6}$ & $9.57\times10^{-7}$ & $9.15\times10^{-7}$ & $6.92\times10^{-7}$ & $8.61\times10^{-7}$ & $8.87\times10^{-7}$ & $9.50\times10^{-7}$ & $9.35\times10^{-7}$\\
 \bottomrule
 \end{tabular}}
 
@@ -868,8 +898,8 @@ $\mathrm{Efficiency}$ & \shortstack{$p_T\in[15\text{--}20]\,\mathrm{GeV}$\\$\sig
 \midrule
 $\varepsilon_{\mathrm{kin}}$ & 0.1285 & 0.1429 & 0.1671 & 0.2028 & 0.2460 & 0.2949 & 0.3590 & 0.4651 & 0.5550 & 0.6158 & 0.6811 & 0.7520 & 0.1470\\
 $\varepsilon_{\mathrm{HLT}}$ & 0.0362 & 0.0471 & 0.0574 & 0.0621 & 0.0610 & 0.0575 & 0.0528 & 0.0468 & 0.0432 & 0.0414 & 0.0401 & 0.0393 & 0.0458\\
-$\varepsilon_{\mathrm{SV}}$ & 0.9263 & 0.9382 & 0.9457 & 0.9485 & 0.9488 & 0.9481 & 0.9494 & 0.9537 & 0.9589 & 0.9635 & 0.9690 & 0.9759 & 0.9357\\
-$\varepsilon_{\mathrm{BDT}}$ & $1.16\times10^{-4}$ & $1.26\times10^{-4}$ & $8.58\times10^{-5}$ & $6.69\times10^{-5}$ & $7.54\times10^{-5}$ & $6.53\times10^{-5}$ & $3.37\times10^{-5}$ & $2.14\times10^{-5}$ & $1.52\times10^{-5}$ & $1.70\times10^{-5}$ & $1.66\times10^{-5}$ & $1.22\times10^{-5}$ & $1.11\times10^{-4}$\\
+$\varepsilon_{\mathrm{SV}}$ & 0.9730 & 0.9718 & 0.9695 & 0.9670 & 0.9650 & 0.9635 & 0.9648 & 0.9695 & 0.9744 & 0.9781 & 0.9820 & 0.9868 & 0.9715\\
+$\varepsilon_{\mathrm{BDT}}$ & $1.57\times10^{-4}$ & $1.62\times10^{-4}$ & $1.14\times10^{-4}$ & $9.74\times10^{-5}$ & $1.01\times10^{-4}$ & $8.25\times10^{-5}$ & $5.23\times10^{-5}$ & $4.34\times10^{-5}$ & $2.96\times10^{-5}$ & $3.45\times10^{-5}$ & $3.31\times10^{-5}$ & $3.26\times10^{-5}$ & $1.46\times10^{-4}$\\
 \bottomrule
 \end{tabular}}
 

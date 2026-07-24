@@ -5,7 +5,8 @@
 # [0] 
 bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_0p1: &bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_0p1 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-0p1-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-18].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    1.0 
@@ -18,7 +19,8 @@ bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_0p1: &bparkProductionAll_2
 # [1] 
 bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_1p0: &bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_1p0 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-1p0-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-25].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    1.0 
@@ -31,7 +33,8 @@ bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_1p0: &bparkProductionAll_2
 # [2] 
 bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_10: &bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_10 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-10-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-35].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    1.0 
@@ -44,7 +47,8 @@ bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_10: &bparkProductionAll_20
 # [3] 
 bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_100: &bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_100 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-100-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-17].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    1.0 
@@ -57,7 +61,8 @@ bparkProductionAll_2024--scenarioA_mpi_1_mA_0p33_ctau_100: &bparkProductionAll_2
 # [4] 
 bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_0p1: &bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_0p1 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-0p1-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-16].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    2.0 
@@ -70,7 +75,8 @@ bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_0p1: &bparkProductionAll_2
 # [5] 
 bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_1p0: &bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_1p0 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-1p0-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-25].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    2.0 
@@ -83,7 +89,8 @@ bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_1p0: &bparkProductionAll_2
 # [6] 
 bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_10: &bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_10 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-10-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-17].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    2.0 
@@ -96,7 +103,8 @@ bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_10: &bparkProductionAll_20
 # [7] 
 bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_100: &bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_100 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-100-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-22].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    2.0 
@@ -109,7 +117,8 @@ bparkProductionAll_2024--scenarioA_mpi_2_mA_0p67_ctau_100: &bparkProductionAll_2
 # [8] 
 bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_0p1: &bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_0p1 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-0p1-mA-0p40-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-27].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    4.0 
@@ -122,7 +131,8 @@ bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_0p1: &bparkProductionAll_2
 # [9] 
 bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_1p0: &bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_1p0 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-1p0-mA-0p40-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-32].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    4.0 
@@ -135,7 +145,8 @@ bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_1p0: &bparkProductionAll_2
 # [10] 
 bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_10: &bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_10 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-10-mA-0p40-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-17].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    4.0 
@@ -148,7 +159,8 @@ bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_10: &bparkProductionAll_20
 # [11] 
 bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_100: &bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_100 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-100-mA-0p40-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-35].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    4.0 
@@ -161,7 +173,8 @@ bparkProductionAll_2024--scenarioA_mpi_4_mA_0p40_ctau_100: &bparkProductionAll_2
 # [12] 
 bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_0p1: &bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_0p1 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-0p1-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-16].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    4.0 
@@ -174,7 +187,8 @@ bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_0p1: &bparkProductionAll_2
 # [13] 
 bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_1p0: &bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_1p0 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-1p0-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-18].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    4.0 
@@ -187,7 +201,8 @@ bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_1p0: &bparkProductionAll_2
 # [14] 
 bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_10: &bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_10 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-10-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-16].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    4.0 
@@ -200,7 +215,8 @@ bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_10: &bparkProductionAll_20
 # [15] 
 bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_100: &bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_100 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-100-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-17].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    4.0 
@@ -213,7 +229,8 @@ bparkProductionAll_2024--scenarioA_mpi_4_mA_1p33_ctau_100: &bparkProductionAll_2
 # [16] 
 bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_0p1: &bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_0p1 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-0p1-mA-1p00-mpi-10_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-18].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    10.0 
@@ -226,7 +243,8 @@ bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_0p1: &bparkProductionAll_
 # [17] 
 bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_1p0: &bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_1p0 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-1p0-mA-1p00-mpi-10_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-17].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    10.0 
@@ -239,7 +257,8 @@ bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_1p0: &bparkProductionAll_
 # [18] 
 bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_10: &bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_10 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-10-mA-1p00-mpi-10_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-13].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    10.0 
@@ -252,7 +271,8 @@ bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_10: &bparkProductionAll_2
 # [19] 
 bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_100: &bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_100 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-100-mA-1p00-mpi-10_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-18].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    10.0 
@@ -265,7 +285,8 @@ bparkProductionAll_2024--scenarioA_mpi_10_mA_1p00_ctau_100: &bparkProductionAll_
 # [20] 
 bparkProductionAll_2024--scenarioA_mpi_10_mA_3p33_ctau_0p1: &bparkProductionAll_2024--scenarioA_mpi_10_mA_3p33_ctau_0p1 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-0p1-mA-3p33-mpi-10_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-16].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    10.0 
@@ -278,7 +299,8 @@ bparkProductionAll_2024--scenarioA_mpi_10_mA_3p33_ctau_0p1: &bparkProductionAll_
 # [21] 
 bparkProductionAll_2024--scenarioA_mpi_10_mA_3p33_ctau_1p0: &bparkProductionAll_2024--scenarioA_mpi_10_mA_3p33_ctau_1p0 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-1p0-mA-3p33-mpi-10_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-28].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    10.0 
@@ -291,7 +313,8 @@ bparkProductionAll_2024--scenarioA_mpi_10_mA_3p33_ctau_1p0: &bparkProductionAll_
 # [22] 
 bparkProductionAll_2024--scenarioA_mpi_10_mA_3p33_ctau_10: &bparkProductionAll_2024--scenarioA_mpi_10_mA_3p33_ctau_10 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-10-mA-3p33-mpi-10_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-16].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    10.0 
@@ -304,7 +327,8 @@ bparkProductionAll_2024--scenarioA_mpi_10_mA_3p33_ctau_10: &bparkProductionAll_2
 # [23] 
 bparkProductionAll_2024--scenarioA_mpi_10_mA_3p33_ctau_100: &bparkProductionAll_2024--scenarioA_mpi_10_mA_3p33_ctau_100 
   path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioA_Par-ctau-100-mA-3p33-mpi-10_TuneCP5_13p6TeV_powheg-pythia8'
-  files: 'nano_[0-5].root' 
+  #files: 'nano_[0-5].root' 
+  files: 'nano_[0-18].root' 
   xs:   1.0 # [pb] 
   model_param: 
     mpi:    10.0 

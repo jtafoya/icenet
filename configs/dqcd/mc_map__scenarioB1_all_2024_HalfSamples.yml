@@ -1,0 +1,3 @@
+input:
+  class_0: !include include/QCD_2024_HalfSamples.yml
+  class_1: !include include/scenarioB1_all_model_points_2024.yml

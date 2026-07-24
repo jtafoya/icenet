@@ -1,0 +1,681 @@
+#TODO 2024 samples have variable number of files (30-70), accounting for a total of 10^6 events
+#TODO N.B. 2018 had 100 files accounting for 10^5 events -> training would run over the first 20 files (i.e. 20% of sample)
+#TODO    setting initial training on first 5 files (N.B. this may correspond to up 7-16% of the total sample, which is still a lot of events)
+#TODO FULL ScenarioB1 grid (all combinations from include/scenarioB1.yml), assuming 2024 samples land in the same dcache location.
+#TODO       Many of these points are NOT yet produced; ctau tokens mirror scenarioB1.yml and may need to match the eventual sample directory names.
+
+# [0]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_0p1: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_0p1
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p1-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   0.1
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [1]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_0p25: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_0p25
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p25-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   0.25
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [2]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_0p3: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_0p3
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p3-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   0.3
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [3]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_0p6: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_0p6
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p6-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   0.6
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [4]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_1p0: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_1p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-1p0-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   1.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [5]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_2p5: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_2p5
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-2p5-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   2.5
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [6]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_3p0: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_3p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-3p0-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   3.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [7]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_6p0: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_6p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-6p0-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   6.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [8]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_10: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_10
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-10-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   10.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [9]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_30: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_30
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-30-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   30.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [10]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_25p0: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_25p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-25p0-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   25.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [11]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_60p0: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_60p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-60p0-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   60.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [12]
+bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_100: &bparkProductionAll_2024--scenarioB1_mpi_1_mA_0p33_ctau_100
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-100-mA-0p33-mpi-1_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    1.0
+    mA:     0.33
+    ctau:   100.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [13]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_0p1: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_0p1
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p1-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   0.1
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [14]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_0p25: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_0p25
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p25-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   0.25
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [15]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_0p3: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_0p3
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p3-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   0.3
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [16]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_0p6: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_0p6
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p6-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   0.6
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [17]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_1p0: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_1p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-1p0-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   1.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [18]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_2p5: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_2p5
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-2p5-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   2.5
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [19]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_3p0: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_3p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-3p0-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   3.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [20]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_6p0: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_6p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-6p0-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   6.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [21]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_10: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_10
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-10-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   10.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [22]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_30: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_30
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-30-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   30.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [23]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_25p0: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_25p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-25p0-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   25.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [24]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_60p0: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_60p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-60p0-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   60.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [25]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_100: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p67_ctau_100
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-100-mA-0p67-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.67
+    ctau:   100.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [26]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_0p1: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_0p1
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p1-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   0.1
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [27]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_0p25: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_0p25
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p25-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   0.25
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [28]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_0p3: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_0p3
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p3-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   0.3
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [29]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_0p6: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_0p6
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p6-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   0.6
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [30]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_1p0: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_1p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-1p0-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   1.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [31]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_2p5: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_2p5
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-2p5-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   2.5
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [32]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_3p0: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_3p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-3p0-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   3.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [33]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_6p0: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_6p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-6p0-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   6.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [34]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_10: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_10
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-10-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   10.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [35]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_30: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_30
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-30-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   30.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [36]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_25p0: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_25p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-25p0-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   25.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [37]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_60p0: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_60p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-60p0-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   60.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [38]
+bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_100: &bparkProductionAll_2024--scenarioB1_mpi_2_mA_0p40_ctau_100
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-100-mA-0p40-mpi-2_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    2.0
+    mA:     0.4
+    ctau:   100.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [39]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_0p1: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_0p1
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p1-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   0.1
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [40]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_0p25: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_0p25
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p25-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   0.25
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [41]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_0p3: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_0p3
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p3-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   0.3
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [42]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_0p6: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_0p6
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-0p6-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   0.6
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [43]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_1p0: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_1p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-1p0-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   1.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [44]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_2p5: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_2p5
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-2p5-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   2.5
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [45]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_3p0: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_3p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-3p0-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   3.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [46]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_6p0: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_6p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-6p0-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   6.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [47]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_10: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_10
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-10-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   10.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [48]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_30: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_30
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-30-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   30.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [49]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_25p0: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_25p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-25p0-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   25.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [50]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_60p0: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_60p0
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-60p0-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   60.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0
+
+# [51]
+bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_100: &bparkProductionAll_2024--scenarioB1_mpi_4_mA_1p33_ctau_100
+  path:  'root://gfe02.grid.hep.ph.ic.ac.uk/pnfs/hep.ph.ic.ac.uk/data/cms/store/user/tafoyava/samples/bParking/2024/GluGluHToDarkShowers-ScenarioB1_Par-ctau-100-mA-1p33-mpi-4_TuneCP5_13p6TeV_powheg-pythia8'
+  files: 'nano_[0-5].root'
+  xs:   1.0 # [pb]
+  model_param:
+    mpi:    4.0
+    mA:     1.33
+    ctau:   100.0
+  force_xs: true
+  isMC:     true
+  maxevents_scale: 1.0

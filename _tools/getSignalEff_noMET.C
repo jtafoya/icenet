@@ -63,6 +63,13 @@
 //                  with dashed lines marking the FPR = 1e-1..1e-4 working points
 //     pages 2..6 - one per signal set: 95% CL upper limit on B(H->psipsibar) vs ctau,
 //                  one coloured/markered curve per FPR working point
+//   significance_<model>.pdf
+//     one page per signal set: asymptotic Asimov significance Z vs ctau,
+//     one coloured/markered curve per FPR working point (legends at top)
+//   limits_by_lxy_<model>.pdf / significance_by_lxy_<model>.pdf
+//     page 1 (limits only) - inclusive FPR calibration; then one page per signal
+//     set with 3 pads (one per lxy category), each = limit/Z vs ctau for that bin
+//     (each lxy bin is its own search region: own windowed-SV thresholds+weight)
 //
 // Usage:
 //   root -l -b -q getSignalEff_noMET.C                   # full run (all pages)
@@ -127,7 +134,7 @@ static const char*    LXY_LABEL[3] = {
 // Order matches MODELS[]: [0] Mu10ORDoubleMu, [1] Mu10, [2] DoubleMu.
 static const Double_t HARDCODED_THR[3] = { 0.9971, 0.9969, 0.9978 };
 
-static const char*    BRANCH   = "xgb01_NOJETS_NOMET";
+static const char*    BRANCH   = "xgb01_NOJETS";
 static const Int_t    NBINS    = 10000;
 static const Double_t TARGET   = 1e-4;   // target background fake rate
 static const Double_t LUMI     = 109.95e3; // pb^-1  (2024 total)
@@ -145,11 +152,14 @@ static const char* GRID_PATH =
 struct ModelCfg { const char* name; const char* modeltag; };
 static const ModelCfg MODELS[3] = {
     { "Mu10ORDoubleMu",
-      "modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_noMET" },
+      // "modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024" },
+      "modeltag__scenarioA_all_no_DA_old_BDT_2024" },
     { "Mu10",
-      "modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_Mu10_noMET" },
+      // "modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_Mu10" },
+      "modeltag__scenarioA_all_no_DA_old_BDT_2024_Mu10" },
     { "DoubleMu",
-      "modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_DoubleMu_noMET" },
+      // "modeltag__scenarioA_all_no_DA_old_BDT_with_dRmSV_2024_DoubleMu" },
+      "modeltag__scenarioA_all_no_DA_old_BDT_2024_DoubleMu" },
 };
 static const Int_t N_MODELS = 3;
 
@@ -242,6 +252,38 @@ static const Int_t N_SETS   = N_SIG / N_CTAU;  // = 5 signal mass sets
 //   set0 mpi=4/mA=1.33  set1 mpi=4/mA=0.40  set2 mpi=10/mA=1.00
 //   set3 mpi=1/mA=0.33  set4 mpi=10/mA=3.33
 static const Double_t BR_A_MUMU[N_SETS] = { 0.317, 0.440, 0.307, 0.464, 0.193 };
+
+// ---------------------------------------------------------------------------
+// Mass-window background (prepared 2026-06-24)
+//
+// Rather than counting the whole QCD sample as background, restrict it to a
+// dimuon-mass window around each signal's A' peak (m_A). The window is applied
+// to the leading-muonSV invariant mass (lead_mass) on BOTH signal and QCD, so
+// the SV-selected background yield becomes per-signal-set.
+//
+// Peaks (m_A) per set, matching the SIG[] set ordering:
+//   set0 m_A=1.33  set1 m_A=0.40  set2 m_A=1.00  set3 m_A=0.33  set4 m_A=3.33
+// Window: 0.9*m_A to 1.1*m_A (i.e. +-10% around the resonance peak), same
+// fractional width for every set.
+static const Double_t MA_PEAK   [N_SETS] = { 1.33, 0.40, 1.00, 0.33, 3.33 };
+static const Double_t MWIN_FRAC_LO = 0.9;   // window lower edge = MWIN_FRAC_LO * m_A
+static const Double_t MWIN_FRAC_HI = 1.1;   // window upper edge = MWIN_FRAC_HI * m_A
+// Master switch: when false the limit/significance use the full QCD (inclusive);
+// when true they use the per-set 0.9-1.1*m_A windowed-SV QCD background.
+static const Bool_t   USE_MASS_WINDOW = true;
+// When true (and USE_MASS_WINDOW), the SAME window is also applied to the signal
+// (eps_S measured in the window). Set false to window ONLY the QCD background.
+static const Bool_t   WINDOW_SIGNAL   = true;
+
+// Per-set leading-muonSV mass-window cut string (for RDataFrame Filter):
+//   0.9*m_A <= lead_mass < 1.1*m_A
+// 'set' is the signal-set index (= signal index / N_CTAU). Requires a
+// 'lead_mass' column to have been Define()'d on the node.
+static inline TString mass_window_cut(Int_t set) {
+    return TString::Format("lead_mass >= %.4ff && lead_mass < %.4ff",
+                           MWIN_FRAC_LO * MA_PEAK[set],
+                           MWIN_FRAC_HI * MA_PEAK[set]);
+}
 
 // 12 QCD background bins [name, cross section in pb]
 struct QCDCfg { const char* dirname; Double_t xs; };
@@ -558,7 +600,7 @@ void make_eff_tables_pdf(
     printf("\n======== Tables: collecting additional data ========\n");
 
     Long64_t N_kin_s [N_SIG][N_MODELS]    = {};
-    Long64_t N_sv_s  [N_SIG][N_MODELS]    = {};  // presel + SV quality (chi2<10, dR<1.2)
+    Long64_t N_sv_s  [N_SIG][N_MODELS]    = {};  // presel + SV quality (chi2<10)
     Long64_t N_lxy   [N_SIG][N_MODELS][3] = {};
     Long64_t N_k_lxy [N_SIG][N_MODELS][3] = {};
     Long64_t N_p_lxy [N_SIG][N_MODELS][3] = {};
@@ -575,9 +617,31 @@ void make_eff_tables_pdf(
     // are used ONLY for the Asimov-significance table.
     const Double_t FPR_TGT[4] = { 1e-1, 1e-2, 1e-3, 1e-4 };
     TH1D*    sig_sv_cumul[N_SIG][N_MODELS] = {};  // reverse-cumulative BDT score, SV-selected signal
+    TH1D*    sig_sv_cumul_win[N_SIG][N_MODELS] = {};  // same, SV+mass-window selected (WINDOW_SIGNAL)
     TH1D*    h_bkg_sv    [N_MODELS]        = {};  // xs/N_tot-weighted SV-selected QCD score
     TH1D*    bkg_sv_c    [N_MODELS]        = {};  // its normalised reverse-cumulative (= FPR vs threshold)
     Double_t sig_thr     [N_MODELS][4]     = {};  // BDT threshold at each FPR target, per model
+    // Mass-window background (USE_MASS_WINDOW): per-(model,set) windowed-SV QCD.
+    // When the window is on, the limit/significance use these instead of the
+    // per-model arrays above (which stay as the inclusive cutflow reference).
+    TH1D*    bkg_sv_c_win[N_MODELS][N_SETS] = {};  // FPR-vs-threshold on windowed-SV QCD
+    Double_t sig_thr_win [N_MODELS][N_SETS][4] = {};  // BDT threshold at each FPR, per (model,set)
+    Double_t w_sv_win    [N_MODELS][N_SETS] = {};  // windowed SV bkg weight sum_q xs_q*eps_q^(SV+win)
+    // Per-lxy-category versions (for the "by_lxy" limit/significance PDFs): each
+    // lxy bin is its own search region -> own windowed-SV thresholds + weight, and
+    // signal efficiency measured in that lxy bin.
+    TH1D*    sig_sv_cumul_lxy[N_SIG][N_MODELS][3] = {};   // windowed-SV signal score, per lxy
+    Double_t sig_thr_win_lxy [N_MODELS][N_SETS][3][4] = {};  // FPR thresholds per (model,set,lxy)
+    Double_t w_sv_win_lxy    [N_MODELS][N_SETS][3]    = {};  // windowed-SV bkg weight per (model,set,lxy)
+    // RAW (unweighted) QCD count reverse-cumulatives -> #events above threshold,
+    // for the event-count tables / QCD-lxy plots / CSVs (absolute MC counts).
+    TH1D*    bkg_raw_c_win    [N_MODELS][N_SETS]    = {};  // windowed-SV QCD raw count cumul
+    TH1D*    bkg_raw_c_win_lxy[N_MODELS][N_SETS][3] = {};  // windowed-SV QCD raw count cumul, per lxy
+    // xs-weighted (by xs_q, NOT xs_q/N_tot) QCD count reverse-cumulatives. Dividing the
+    // value above threshold by xs_total gives the sigma-weighted AVERAGE MC count passing
+    // = same definition as the cutflow "QCD Total (weighted)" column (no luminosity).
+    TH1D*    bkg_xsw_c_win    [N_MODELS][N_SETS]    = {};  // windowed-SV QCD xs-weighted count cumul
+    TH1D*    bkg_xsw_c_win_lxy[N_MODELS][N_SETS][3] = {};  // windowed-SV QCD xs-weighted count cumul, per lxy
 
     auto f_kin_or = [](const ROOT::RVec<float>& m1pt, const ROOT::RVec<float>& m1eta,
                         const ROOT::RVec<float>& m2pt, const ROOT::RVec<float>& m2eta) -> bool {
@@ -596,17 +660,11 @@ void make_eff_tables_pdf(
         auto mn = Map(m1pt, m2pt, [](float a, float b){ return a<b?a:b; });
         return Any(mx > 4.f && mn > 3.f);
     };
-    // SV quality: at least one muonSV with chi2 < 10 and dR(mu1,mu2) < 1.2
-    auto f_sv = [](const ROOT::RVec<float>& chi2,
-                   const ROOT::RVec<float>& m1eta, const ROOT::RVec<float>& m2eta,
-                   const ROOT::RVec<float>& m1phi, const ROOT::RVec<float>& m2phi) -> bool {
+    // SV quality: at least one muonSV with chi2 < 10
+    // (dR(mu1,mu2) < 1.2 cut removed 2026-06-24)
+    auto f_sv = [](const ROOT::RVec<float>& chi2) -> bool {
         for (int i = 0; i < (int)chi2.size(); ++i) {
-            if (chi2[i] >= 10.f) continue;
-            float deta = m1eta[i] - m2eta[i];
-            float dphi = m1phi[i] - m2phi[i];
-            while (dphi >  3.14159265f) dphi -= 6.28318530f;
-            while (dphi < -3.14159265f) dphi += 6.28318530f;
-            if (deta*deta + dphi*dphi < 1.44f) return true;  // dR^2 < 1.2^2
+            if (chi2[i] < 10.f) return true;
         }
         return false;
     };
@@ -639,7 +697,8 @@ void make_eff_tables_pdf(
             ROOT::RDataFrame df_base(*nano_ch);
             ROOT::RDF::RNode df_lxy = make_rnode(df_base)
                 .Define("lead_idx", lead_fn, {"muonSV_chi2","muonSV_dlen"})
-                .Define("lead_dxy", pick_fn, {"lead_idx","muonSV_dxy"});
+                .Define("lead_dxy", pick_fn, {"lead_idx","muonSV_dxy"})
+                .Define("lead_mass",pick_fn, {"lead_idx","muonSV_mass"});
             ROOT::RDF::RNode df2 = [&]() -> ROOT::RDF::RNode {
                 if (m==0) return df_lxy.Define("kin_pass", f_kin_or,
                     {"muonSV_mu1pt","muonSV_mu1eta","muonSV_mu2pt","muonSV_mu2eta"});
@@ -648,9 +707,7 @@ void make_eff_tables_pdf(
                 return df_lxy.Define("kin_pass", f_kin_dmu,
                     {"muonSV_mu1pt","muonSV_mu1eta","muonSV_mu2pt","muonSV_mu2eta"});
             }();
-            ROOT::RDF::RNode df3 = df2.Define("sv_pass", f_sv,
-                {"muonSV_chi2","muonSV_mu1eta","muonSV_mu2eta",
-                 "muonSV_mu1phi","muonSV_mu2phi"});
+            ROOT::RDF::RNode df3 = df2.Define("sv_pass", f_sv, {"muonSV_chi2"});
             TString fpre = TString::Format("%s >= 0.", BRANCH);
             TString fsv  = TString::Format("sv_pass && %s >= 0.", BRANCH);
             TString fbdt = TString::Format("%s > %.8f", BRANCH, bdt_thr[m]);
@@ -669,6 +726,20 @@ void make_eff_tables_pdf(
             // SV-selected BDT score shape (for the significance study)
             auto h_ssv = df3.Filter(fsv.Data())
                             .Histo1D({Form("h_ssv_%d_%d",s,m),"",NBINS,0.,1.}, BRANCH);
+            // SV+mass-window-selected signal score (windowed eps_S; set = s/N_CTAU)
+            TString fsw = fsv + " && " + mass_window_cut(s / N_CTAU);
+            auto h_ssv_w = df3.Filter(fsw.Data())
+                            .Histo1D({Form("h_ssvw_%d_%d",s,m),"",NBINS,0.,1.}, BRANCH);
+            // per-lxy windowed-SV signal score (for the by-lxy plots); same window
+            // semantics as eps_S (window only if USE_MASS_WINDOW && WINDOW_SIGNAL)
+            ROOT::RDF::RResultPtr<TH1D> h_ssv_lxy[3];
+            for (Int_t c=0;c<3;++c) {
+                TString fsl = fsv;
+                if (USE_MASS_WINDOW && WINDOW_SIGNAL) fsl += " && " + mass_window_cut(s / N_CTAU);
+                fsl += TString::Format(" && lead_dxy >= %.1ff && lead_dxy < %.1ff", LXY_LO[c], LXY_HI[c]);
+                h_ssv_lxy[c] = df3.Filter(fsl.Data())
+                    .Histo1D({Form("h_ssvlxy_%d_%d_%d",s,m,c),"",NBINS,0.,1.}, BRANCH);
+            }
             printf("    running event loop (kin + sv + lxy counts)...\n");
             N_kin_s[s][m] = (Long64_t)*c_kin;
             N_sv_s [s][m] = (Long64_t)*c_sv;
@@ -688,6 +759,20 @@ void make_eff_tables_pdf(
             sig_sv_cumul[s][m] = (TH1D*)hssv->GetCumulative(kFALSE);
             sig_sv_cumul[s][m]->SetDirectory(nullptr);
             delete hssv;
+            // windowed-SV signal reverse-cumulative (for WINDOW_SIGNAL eps_S)
+            TH1D* hssvw = (TH1D*)h_ssv_w->Clone(Form("hssvw_%d_%d",s,m));
+            hssvw->SetDirectory(nullptr);
+            sig_sv_cumul_win[s][m] = (TH1D*)hssvw->GetCumulative(kFALSE);
+            sig_sv_cumul_win[s][m]->SetDirectory(nullptr);
+            delete hssvw;
+            // per-lxy windowed-SV signal reverse-cumulatives (by-lxy eps_S)
+            for (Int_t c=0;c<3;++c) {
+                TH1D* hl = (TH1D*)h_ssv_lxy[c]->Clone(Form("hssvlxy_%d_%d_%d",s,m,c));
+                hl->SetDirectory(nullptr);
+                sig_sv_cumul_lxy[s][m][c] = (TH1D*)hl->GetCumulative(kFALSE);
+                sig_sv_cumul_lxy[s][m][c]->SetDirectory(nullptr);
+                delete hl;
+            }
             delete nano_ch; delete bdt_ch;
         }
     }
@@ -699,6 +784,38 @@ void make_eff_tables_pdf(
         printf("  -- Model %d/%d: %s --\n", m+1, N_MODELS, MODELS[m].name);
         h_bkg_sv[m] = new TH1D(Form("h_bkg_sv_%d",m),"",NBINS,0.,1.);
         h_bkg_sv[m]->SetDirectory(nullptr);
+        // per-set windowed-SV background score accumulators (mass-window option)
+        TH1D* hbw[N_SETS] = {};
+        for (Int_t s=0; s<N_SETS; ++s) {
+            hbw[s] = new TH1D(Form("h_bkg_svwin_%d_%d",m,s),"",NBINS,0.,1.);
+            hbw[s]->SetDirectory(nullptr);
+        }
+        // per-(set,lxy) windowed-SV background accumulators (by-lxy plots)
+        TH1D* hbwl[N_SETS][3] = {};
+        for (Int_t s=0; s<N_SETS; ++s) for (Int_t c=0;c<3;++c) {
+            hbwl[s][c] = new TH1D(Form("h_bkg_svwinlxy_%d_%d_%d",m,s,c),"",NBINS,0.,1.);
+            hbwl[s][c]->SetDirectory(nullptr);
+        }
+        // RAW (unweighted) windowed-SV QCD count accumulators (for absolute counts)
+        TH1D* hbw_raw[N_SETS] = {}; TH1D* hbwl_raw[N_SETS][3] = {};
+        for (Int_t s=0; s<N_SETS; ++s) {
+            hbw_raw[s] = new TH1D(Form("h_bkg_rawwin_%d_%d",m,s),"",NBINS,0.,1.);
+            hbw_raw[s]->SetDirectory(nullptr);
+            for (Int_t c=0;c<3;++c) {
+                hbwl_raw[s][c] = new TH1D(Form("h_bkg_rawwinlxy_%d_%d_%d",m,s,c),"",NBINS,0.,1.);
+                hbwl_raw[s][c]->SetDirectory(nullptr);
+            }
+        }
+        // xs-weighted (by xs_q) windowed-SV QCD count accumulators (sigma-weighted avg count)
+        TH1D* hbw_xs[N_SETS] = {}; TH1D* hbwl_xs[N_SETS][3] = {};
+        for (Int_t s=0; s<N_SETS; ++s) {
+            hbw_xs[s] = new TH1D(Form("h_bkg_xswin_%d_%d",m,s),"",NBINS,0.,1.);
+            hbw_xs[s]->SetDirectory(nullptr);
+            for (Int_t c=0;c<3;++c) {
+                hbwl_xs[s][c] = new TH1D(Form("h_bkg_xswinlxy_%d_%d_%d",m,s,c),"",NBINS,0.,1.);
+                hbwl_xs[s][c]->SetDirectory(nullptr);
+            }
+        }
         for (Int_t q = 0; q < N_QCD; ++q) {
             TChain* nano_ch = new TChain("Events");
             TChain* bdt_ch  = new TChain("Events");
@@ -719,9 +836,10 @@ void make_eff_tables_pdf(
                 return base.Define("kin_pass", f_kin_dmu,
                     {"muonSV_mu1pt","muonSV_mu1eta","muonSV_mu2pt","muonSV_mu2eta"});
             }();
-            ROOT::RDF::RNode df = df_kin.Define("sv_pass", f_sv,
-                {"muonSV_chi2","muonSV_mu1eta","muonSV_mu2eta",
-                 "muonSV_mu1phi","muonSV_mu2phi"});
+            ROOT::RDF::RNode df = df_kin.Define("sv_pass", f_sv, {"muonSV_chi2"})
+                .Define("lead_idx",  lead_fn, {"muonSV_chi2","muonSV_dlen"})
+                .Define("lead_mass", pick_fn, {"lead_idx","muonSV_mass"})
+                .Define("lead_dxy",  pick_fn, {"lead_idx","muonSV_dxy"});
             TString fpre = TString::Format("%s >= 0.", BRANCH);
             TString fsv  = TString::Format("sv_pass && %s >= 0.", BRANCH);
             TString fbdt = TString::Format("%s > %.8f", BRANCH, bdt_thr[m]);
@@ -730,8 +848,29 @@ void make_eff_tables_pdf(
             auto c_pre = df.Filter(fpre.Data()).Count();
             auto c_sv  = df.Filter(fsv.Data()).Count();
             auto c_bdt = df.Filter(fbdt.Data()).Count();
-            auto h_qsv = df.Filter(fsv.Data())
-                           .Histo1D({Form("h_qsv_%d_%d",m,q),"",NBINS,0.,1.}, BRANCH);
+            // Pre-filter SV+score>=0 ONCE (single jitted filter); the per-(set,lxy)
+            // windowed histograms below then use *compiled* lambda filters (much
+            // faster than ~20 jitted string filters per QCD bin).
+            ROOT::RDF::RNode df_sv = df.Filter(fsv.Data());
+            auto h_qsv = df_sv.Histo1D({Form("h_qsv_%d_%d",m,q),"",NBINS,0.,1.}, BRANCH);
+            // per-set windowed-SV score histograms (compiled mass-window filter)
+            ROOT::RDF::RResultPtr<TH1D> h_qsv_w[N_SETS];
+            for (Int_t s=0; s<N_SETS; ++s) {
+                double mlo=MWIN_FRAC_LO*MA_PEAK[s], mhi=MWIN_FRAC_HI*MA_PEAK[s];
+                h_qsv_w[s] = df_sv.Filter([mlo,mhi](float lm){ return lm>=mlo && lm<mhi; },
+                                          {"lead_mass"})
+                    .Histo1D({Form("h_qsvw_%d_%d_%d",m,q,s),"",NBINS,0.,1.}, BRANCH);
+            }
+            // per-(set,lxy) windowed-SV score histograms (compiled mass+lxy filter)
+            ROOT::RDF::RResultPtr<TH1D> h_qsv_wl[N_SETS][3];
+            for (Int_t s=0; s<N_SETS; ++s) for (Int_t c=0;c<3;++c) {
+                double mlo=MWIN_FRAC_LO*MA_PEAK[s], mhi=MWIN_FRAC_HI*MA_PEAK[s];
+                float  llo=LXY_LO[c], lhi=LXY_HI[c];
+                h_qsv_wl[s][c] = df_sv.Filter(
+                    [mlo,mhi,llo,lhi](float lm, float ld){ return lm>=mlo && lm<mhi && ld>=llo && ld<lhi; },
+                    {"lead_mass","lead_dxy"})
+                    .Histo1D({Form("h_qsvwl_%d_%d_%d_%d",m,q,s,c),"",NBINS,0.,1.}, BRANCH);
+            }
             N_tot_q[q][m] = (Long64_t)*c_tot;
             N_kin_q[q][m] = (Long64_t)*c_kin;
             N_pre_q[q][m] = (Long64_t)*c_pre;
@@ -739,15 +878,34 @@ void make_eff_tables_pdf(
             N_bdt_q[q][m] = (Long64_t)*c_bdt;
             // accumulate luminosity-yield-weighted (xs/N_tot) SV-selected score
             if (N_tot_q[q][m] > 0) {
+                Double_t wnorm = QCD[q].xs / (Double_t)N_tot_q[q][m];
                 TH1D* hq = (TH1D*)h_qsv->Clone(Form("hq_%d_%d",m,q));
-                hq->SetDirectory(nullptr);
-                hq->Scale(QCD[q].xs / (Double_t)N_tot_q[q][m]);
-                h_bkg_sv[m]->Add(hq);
-                delete hq;
+                hq->SetDirectory(nullptr); hq->Scale(wnorm);
+                h_bkg_sv[m]->Add(hq); delete hq;
+                // per-set windowed SV background: score shape + weight sum_q xs*N_win/N_tot
+                for (Int_t s=0; s<N_SETS; ++s) {
+                    TH1D* hqw = (TH1D*)h_qsv_w[s]->Clone(Form("hqw_%d_%d_%d",m,q,s));
+                    hqw->SetDirectory(nullptr);
+                    w_sv_win[m][s] += QCD[q].xs * hqw->GetEntries() / (Double_t)N_tot_q[q][m];
+                    hqw->Scale(wnorm);
+                    hbw[s]->Add(hqw); delete hqw;
+                    hbw_raw[s]->Add(h_qsv_w[s].GetPtr());   // raw (unweighted) count
+                    hbw_xs[s]->Add(h_qsv_w[s].GetPtr(), QCD[q].xs); // xs-weighted (by xs_q) count
+                    // per-(set,lxy)
+                    for (Int_t c=0;c<3;++c) {
+                        TH1D* hqwl = (TH1D*)h_qsv_wl[s][c]->Clone(Form("hqwl_%d_%d_%d_%d",m,q,s,c));
+                        hqwl->SetDirectory(nullptr);
+                        w_sv_win_lxy[m][s][c] += QCD[q].xs * hqwl->GetEntries() / (Double_t)N_tot_q[q][m];
+                        hqwl->Scale(wnorm);
+                        hbwl[s][c]->Add(hqwl); delete hqwl;
+                        hbwl_raw[s][c]->Add(h_qsv_wl[s][c].GetPtr());  // raw count
+                        hbwl_xs[s][c]->Add(h_qsv_wl[s][c].GetPtr(), QCD[q].xs); // xs-weighted count
+                    }
+                }
             }
             delete nano_ch; delete bdt_ch;
         }
-        // background score shape -> reverse cumulative -> FPR thresholds
+        // inclusive background score shape -> reverse cumulative -> FPR thresholds
         if (h_bkg_sv[m]->Integral() > 0.) {
             normalise(h_bkg_sv[m]);
             bkg_sv_c[m] = (TH1D*)h_bkg_sv[m]->GetCumulative(kFALSE);  // kept for the limit PDF
@@ -757,6 +915,42 @@ void make_eff_tables_pdf(
                    sig_thr[m][0],sig_thr[m][1],sig_thr[m][2],sig_thr[m][3]);
         } else {
             for (Int_t k=0;k<4;++k) sig_thr[m][k]=1.;
+        }
+        // per-set windowed background shape -> reverse cumulative -> FPR thresholds
+        for (Int_t s=0; s<N_SETS; ++s) {
+            if (hbw[s]->Integral() > 0.) {
+                normalise(hbw[s]);
+                bkg_sv_c_win[m][s] = (TH1D*)hbw[s]->GetCumulative(kFALSE);
+                bkg_sv_c_win[m][s]->SetDirectory(nullptr);
+                for (Int_t k=0;k<4;++k) { Double_t dum; sig_thr_win[m][s][k]=find_thr(bkg_sv_c_win[m][s],FPR_TGT[k],dum); }
+            } else {
+                for (Int_t k=0;k<4;++k) sig_thr_win[m][s][k]=1.;
+            }
+            delete hbw[s];
+            // RAW (unnormalized) windowed-SV QCD count reverse-cumulative
+            bkg_raw_c_win[m][s] = (TH1D*)hbw_raw[s]->GetCumulative(kFALSE);
+            bkg_raw_c_win[m][s]->SetDirectory(nullptr); delete hbw_raw[s];
+            // xs-weighted (by xs_q) windowed-SV QCD count reverse-cumulative
+            bkg_xsw_c_win[m][s] = (TH1D*)hbw_xs[s]->GetCumulative(kFALSE);
+            bkg_xsw_c_win[m][s]->SetDirectory(nullptr); delete hbw_xs[s];
+            // per-(set,lxy) windowed background -> reverse cumulative -> FPR thresholds
+            for (Int_t c=0;c<3;++c) {
+                if (hbwl[s][c]->Integral() > 0.) {
+                    normalise(hbwl[s][c]);
+                    TH1D* cwl = (TH1D*)hbwl[s][c]->GetCumulative(kFALSE); cwl->SetDirectory(nullptr);
+                    for (Int_t k=0;k<4;++k) { Double_t dum; sig_thr_win_lxy[m][s][c][k]=find_thr(cwl,FPR_TGT[k],dum); }
+                    delete cwl;
+                } else {
+                    for (Int_t k=0;k<4;++k) sig_thr_win_lxy[m][s][c][k]=1.;
+                }
+                delete hbwl[s][c];
+                // RAW windowed+lxy QCD count reverse-cumulative
+                bkg_raw_c_win_lxy[m][s][c] = (TH1D*)hbwl_raw[s][c]->GetCumulative(kFALSE);
+                bkg_raw_c_win_lxy[m][s][c]->SetDirectory(nullptr); delete hbwl_raw[s][c];
+                // xs-weighted windowed+lxy QCD count reverse-cumulative
+                bkg_xsw_c_win_lxy[m][s][c] = (TH1D*)hbwl_xs[s][c]->GetCumulative(kFALSE);
+                bkg_xsw_c_win_lxy[m][s][c]->SetDirectory(nullptr); delete hbwl_xs[s][c];
+            }
         }
     }
 
@@ -778,10 +972,29 @@ void make_eff_tables_pdf(
 
     // Signal efficiency eps_S = N_s^SV(>thr)/N_tot_s, from the SV-selected cumulative.
     auto epsS_at = [&](Int_t s, Int_t m, Double_t thr) -> Double_t {
-        if (N_tot_s[s][m] <= 0 || !sig_sv_cumul[s][m]) return 0.;
-        return sig_sv_cumul[s][m]->GetBinContent(
-                   sig_sv_cumul[s][m]->GetXaxis()->FindBin(thr)) / (Double_t)N_tot_s[s][m];
+        TH1D* cum = (USE_MASS_WINDOW && WINDOW_SIGNAL) ? sig_sv_cumul_win[s][m]
+                                                       : sig_sv_cumul[s][m];
+        if (N_tot_s[s][m] <= 0 || !cum) return 0.;
+        return cum->GetBinContent(cum->GetXaxis()->FindBin(thr)) / (Double_t)N_tot_s[s][m];
     };
+    // Signal efficiency in lxy category c (windowed-SV signal restricted to the bin).
+    auto epsS_lxy = [&](Int_t s, Int_t m, Int_t c, Double_t thr) -> Double_t {
+        TH1D* cum = sig_sv_cumul_lxy[s][m][c];
+        if (N_tot_s[s][m] <= 0 || !cum) return 0.;
+        return cum->GetBinContent(cum->GetXaxis()->FindBin(thr)) / (Double_t)N_tot_s[s][m];
+    };
+    // RAW (absolute MC) event counts above a BDT threshold.
+    auto hcount = [](TH1D* cum, Double_t thr) -> Long64_t {
+        return cum ? (Long64_t)llround(cum->GetBinContent(cum->GetXaxis()->FindBin(thr))) : 0;
+    };
+    auto sigCount = [&](Int_t s, Int_t m, Double_t thr) -> Long64_t {       // inclusive (windowed) signal
+        return hcount((USE_MASS_WINDOW && WINDOW_SIGNAL) ? sig_sv_cumul_win[s][m] : sig_sv_cumul[s][m], thr);
+    };
+    auto sigCount_lxy = [&](Int_t s, Int_t m, Int_t c, Double_t thr) -> Long64_t {
+        return hcount(sig_sv_cumul_lxy[s][m][c], thr);
+    };
+    auto bkgCount     = [&](Int_t m, Int_t g, Double_t thr) -> Long64_t { return hcount(bkg_raw_c_win[m][g], thr); };
+    auto bkgCount_lxy = [&](Int_t m, Int_t g, Int_t c, Double_t thr) -> Long64_t { return hcount(bkg_raw_c_win_lxy[m][g][c], thr); };
     // Median expected 95% CL upper limit on the signal YIELD (asymptotic CLs,
     // background-only Asimov): s solving 2[s - B ln(1+s/B)] = (Phi^-1(0.95))^2.
     auto s95_upper = [](Double_t B) -> Double_t {
@@ -828,6 +1041,16 @@ void make_eff_tables_pdf(
 
     Double_t xs_total = 0.;
     for (Int_t q=0; q<N_QCD; ++q) xs_total += QCD[q].xs;
+    // sigma-weighted AVERAGE MC count passing a threshold = [Sigma_q xs_q*N_pass_q]/xs_total
+    // (same definition as the cutflow "QCD Total (weighted)" column; no luminosity).
+    auto bkgAvg     = [&](Int_t m, Int_t g, Double_t thr) -> Double_t {
+        TH1D* c = bkg_xsw_c_win[m][g];
+        return (c && xs_total>0.) ? c->GetBinContent(c->GetXaxis()->FindBin(thr))/xs_total : 0.;
+    };
+    auto bkgAvg_lxy = [&](Int_t m, Int_t g, Int_t c, Double_t thr) -> Double_t {
+        TH1D* h = bkg_xsw_c_win_lxy[m][g][c];
+        return (h && xs_total>0.) ? h->GetBinContent(h->GetXaxis()->FindBin(thr))/xs_total : 0.;
+    };
 
     // 3-line LaTeX column header for signal: $m_\pi=X$ GeV / $m_A=Y$ GeV / $c\tau=Z$ mm
     auto tex_sig_hdr = [](Int_t s) -> TString {
@@ -856,8 +1079,9 @@ void make_eff_tables_pdf(
         TString p2=lbl(c1+2,c2-c1-2);
         TString v2=p2(p2.Index("=")+1, p2.Length()-p2.Index("=")-1);
         return TString::Format(
-            "$m_{\\pi}=%s\\,\\mathrm{GeV}$, $m_{A}=%s\\,\\mathrm{GeV}$",
-            v1.Data(), v2.Data());
+            "$m_{\\pi}=%s\\,\\mathrm{GeV}$, $m_{A}=%s\\,\\mathrm{GeV}$, "
+            "$\\mathcal{B}(A'\\!\\to\\!\\mu\\mu)=%.3g$",
+            v1.Data(), v2.Data(), BR_A_MUMU[s / N_CTAU]);
     };
 
     // plain-text set label "mpi=X, mA=Y" (no ctau) for CSV section headers
@@ -976,6 +1200,11 @@ void make_eff_tables_pdf(
             if (N_pre_q[q][m]>0) wp_sv +=QCD[q].xs*(Double_t)N_sv_q [q][m]/N_pre_q[q][m];
             if (N_sv_q [q][m]>0) wp_bdt+=QCD[q].xs*(Double_t)N_bdt_q[q][m]/N_sv_q [q][m];
         }
+        // Mass-window selectors: when USE_MASS_WINDOW the limit/significance use the
+        // per-(model,set) windowed-SV background; otherwise the inclusive per-model
+        // values. (The cutflow QCD column always uses the inclusive w_sv below.)
+        auto WSV  = [&](Int_t gg)          { return USE_MASS_WINDOW ? w_sv_win[m][gg]       : w_sv;          };
+        auto THRk = [&](Int_t gg, Int_t k) { return USE_MASS_WINDOW ? sig_thr_win[m][gg][k] : sig_thr[m][k]; };
         TString wstr_kin=TString::Format("%.4f",w_kin/xs_total);
         TString wstr_pre=TString::Format("%.4f",w_pre/xs_total);
         TString wstr_sv =TString::Format("%.4f",w_sv /xs_total);
@@ -1040,14 +1269,14 @@ void make_eff_tables_pdf(
 
             // ===== Cutflow page (4 ctau columns + QCD weighted reference) =====
             fprintf(ftex,
-                "{\\large Signal efficiency cutflow"
-                " $|$ \\texttt{%s} $|$ %s"
+                "{\\large Signal efficiency cutflow\n\n"
+                " \\texttt{%s} $|$ %s"
                 " $|$ 2024, $13.6\\,\\mathrm{TeV}$}\n\n"
                 "\\vspace{0.8em}\n\n"
                 "Step 1 -- Kinematic selection: %s\n\n"
                 "Step 2 -- Trigger selection: %s\n\n"
                 "Step 3 -- SV quality: at least one muonSV with"
-                " $\\chi^2<10$ and $\\Delta R(\\mu_1,\\mu_2)<1.2$\n\n"
+                " $\\chi^2<10$\n\n"
                 "Step 4 -- BDT selection: %s $>%.4f$"
                 " (target FPR $=10^{-4}$)\n\n"
                 "\\vspace{0.8em}\n\n",
@@ -1071,7 +1300,7 @@ void make_eff_tables_pdf(
             for (Int_t c=0;c<N_CTAU;++c) fprintf(ftex," & %lld",N_kin_s[gb+c][m]);
             fprintf(ftex," & %s\\\\\n$\\mathrm{HLT\\ presel.}$",ytex(y_kin).Data());
             for (Int_t c=0;c<N_CTAU;++c) fprintf(ftex," & %lld",N_pre_s[gb+c][m]);
-            fprintf(ftex," & %s\\\\\n$\\mathrm{SV\\ sel.}$ ($\\chi^2{<}10$, $\\Delta R{<}1.2$)",ytex(y_pre).Data());
+            fprintf(ftex," & %s\\\\\n$\\mathrm{SV\\ sel.}$ ($\\chi^2{<}10$)",ytex(y_pre).Data());
             for (Int_t c=0;c<N_CTAU;++c) fprintf(ftex," & %lld",N_sv_s[gb+c][m]);
             fprintf(ftex," & %s\\\\\n$\\mathrm{BDT\\ sel.}$",ytex(y_sv).Data());
             for (Int_t c=0;c<N_CTAU;++c) fprintf(ftex," & %lld",N_bdt_s[gb+c][m]);
@@ -1121,11 +1350,11 @@ void make_eff_tables_pdf(
             for (Int_t c=0;c<N_CTAU;++c) fprintf(ftex," & %s",tex_sig_hdr(gb+c).Data());
             fprintf(ftex," \\\\\n\\midrule\n");
             for (Int_t k=0;k<4;++k) {
-                Double_t B = FPR_TGT[k]*LUMI*w_sv;
+                Double_t B = FPR_TGT[k]*LUMI*WSV(g);
                 Double_t s95 = s95_upper(B);
-                fprintf(ftex,"$10^{-%d}$ & $%.4f$", k+1, sig_thr[m][k]);
+                fprintf(ftex,"$10^{-%d}$ & $%.4f$", k+1, THRk(g,k));
                 for (Int_t c=0;c<N_CTAU;++c) {
-                    Double_t epsS = epsS_at(gb+c, m, sig_thr[m][k]);
+                    Double_t epsS = epsS_at(gb+c, m, THRk(g,k));
                     Double_t lim  = epsS>0. ? s95/(LUMI*epsS*SIG_XS) : -1.;
                     fprintf(ftex," & %s", lim<0.?TString("--").Data():TString::Format("%.3g",lim).Data());
                 }
@@ -1141,12 +1370,20 @@ void make_eff_tables_pdf(
                 " ($\\mathcal{B}(A'\\to\\mu\\mu)=%.3g$, $\\mathcal{B}(\\pi_3\\to A'A')=1$ from the gen"
                 " fragment) is folded into $\\varepsilon_S$ by the MC; assumes SM $\\sigma_{\\mathrm{ggH}}$.}\n\n",
                 BR_A_MUMU[g]);
+            if (USE_MASS_WINDOW)
+                fprintf(ftex,
+                    "{\\small Background $B$ counted in the dimuon mass window"
+                    " $%.3g<m_{\\mu\\mu}<%.3g\\,\\mathrm{GeV}$ ($[0.9,1.1]\\times m_A$); "
+                    "$\\varepsilon_S$ %s.}\n\n",
+                    MWIN_FRAC_LO*MA_PEAK[g], MWIN_FRAC_HI*MA_PEAK[g],
+                    WINDOW_SIGNAL ? "evaluated in the same window"
+                                  : "over the full mass range (background-only window)");
 
             // 5th table: Asimov significance Z. Col1 = FPR (scientific), col2 = BDT
             // threshold, then one Z column per ctau point (rows = FPR working points).
             fprintf(ftex,
                 "\\vspace{12pt}\n\n"
-                "Asymptotic significance, $p_0$ ($Z$) (Asimov; presel.\\,$+$\\,SV\\,$+$\\,BDT,"
+                "Asymptotic significance, $p_0$ ($Z$) (presel.\\,$+$\\,SV\\,$+$\\,BDT,"
                 " $\\sigma_{\\mathrm{ggH}}\\,\\mathcal{B}(H\\to\\psi\\bar{\\psi})=%.3g\\,\\mathrm{pb}$,"
                 " $L=%.2f\\,\\mathrm{fb}^{-1}$)\n\n"
                 "\\begin{tabular}{cccccc}\n\\toprule\n"
@@ -1155,10 +1392,10 @@ void make_eff_tables_pdf(
             for (Int_t c=0;c<N_CTAU;++c) fprintf(ftex," & %s",tex_sig_hdr(gb+c).Data());
             fprintf(ftex," \\\\\n\\midrule\n");
             for (Int_t k=0;k<4;++k) {
-                Double_t B = FPR_TGT[k]*LUMI*w_sv;
-                fprintf(ftex,"$10^{-%d}$ & $%.4f$", k+1, sig_thr[m][k]);
+                Double_t B = FPR_TGT[k]*LUMI*WSV(g);
+                fprintf(ftex,"$10^{-%d}$ & $%.4f$", k+1, THRk(g,k));
                 for (Int_t c=0;c<N_CTAU;++c) {
-                    Double_t S = LUMI*SIG_XS*SIG_BR*epsS_at(gb+c, m, sig_thr[m][k]);
+                    Double_t S = LUMI*SIG_XS*SIG_BR*epsS_at(gb+c, m, THRk(g,k));
                     fprintf(ftex," & %s", zptex(asimov_Z(S,B)).Data());
                 }
                 fprintf(ftex,"\\\\\n");
@@ -1174,6 +1411,14 @@ void make_eff_tables_pdf(
                 " (SV-selected QCD). For each FPR the BDT threshold is the one at which the"
                 " cross-section-weighted SV-selected QCD has that false-positive rate.}\n\n",
                 SIG_BR);
+            if (USE_MASS_WINDOW)
+                fprintf(ftex,
+                    "{\\small Evaluated in the dimuon mass window"
+                    " $%.3g<m_{\\mu\\mu}<%.3g\\,\\mathrm{GeV}$ ($[0.9,1.1]\\times m_A$): $B$ from"
+                    " windowed-SV QCD%s.}\n\n",
+                    MWIN_FRAC_LO*MA_PEAK[g], MWIN_FRAC_HI*MA_PEAK[g],
+                    WINDOW_SIGNAL ? " and $\\varepsilon_S$ in the same window"
+                                  : " ($\\varepsilon_S$ over full mass range)");
 
             if (fcsv) {
                 fprintf(fcsv,"\n\"# TABLE: Signal absolute counts | %s | %s\"\n",MODELS[m].name,set_label(gb).Data());
@@ -1185,7 +1430,7 @@ void make_eff_tables_pdf(
                 for (Int_t c=0;c<N_CTAU;++c) fprintf(fcsv,",%lld",N_kin_s[gb+c][m]);
                 fprintf(fcsv,",%s\nHLT presel.",ycsv(y_kin).Data());
                 for (Int_t c=0;c<N_CTAU;++c) fprintf(fcsv,",%lld",N_pre_s[gb+c][m]);
-                fprintf(fcsv,",%s\nSV sel. (chi2<10 dR<1.2)",ycsv(y_pre).Data());
+                fprintf(fcsv,",%s\nSV sel. (chi2<10)",ycsv(y_pre).Data());
                 for (Int_t c=0;c<N_CTAU;++c) fprintf(fcsv,",%lld",N_sv_s[gb+c][m]);
                 fprintf(fcsv,",%s\nBDT sel.",ycsv(y_sv).Data());
                 for (Int_t c=0;c<N_CTAU;++c) fprintf(fcsv,",%lld",N_bdt_s[gb+c][m]);
@@ -1223,26 +1468,26 @@ void make_eff_tables_pdf(
                 for (Int_t c=0;c<N_CTAU;++c) fprintf(fcsv,",\"%s\"",SIG[gb+c].label);
                 fprintf(fcsv,"\n");
                 for (Int_t k=0;k<4;++k) {
-                    Double_t s95 = s95_upper(FPR_TGT[k]*LUMI*w_sv);
-                    fprintf(fcsv,"%.0e,%.4f",FPR_TGT[k],sig_thr[m][k]);
+                    Double_t s95 = s95_upper(FPR_TGT[k]*LUMI*WSV(g));
+                    fprintf(fcsv,"%.0e,%.4f",FPR_TGT[k],THRk(g,k));
                     for (Int_t c=0;c<N_CTAU;++c) {
-                        Double_t epsS = epsS_at(gb+c, m, sig_thr[m][k]);
+                        Double_t epsS = epsS_at(gb+c, m, THRk(g,k));
                         Double_t lim  = epsS>0. ? s95/(LUMI*epsS*SIG_XS) : -1.;
                         fprintf(fcsv,",%s", lim<0.?TString("--").Data():TString::Format("%.4g",lim).Data());
                     }
                     fprintf(fcsv,"\n");
                 }
 
-                fprintf(fcsv,"\n\"# TABLE: Asymptotic significance p0 (Z) (Asimov) | %s | %s | sigmaxBR=%.4g pb, L=%.2f/fb\"\n",
+                fprintf(fcsv,"\n\"# TABLE: Asymptotic significance p0 (Z) | %s | %s | sigmaxBR=%.4g pb, L=%.2f/fb\"\n",
                     MODELS[m].name,set_label(gb).Data(),SIG_XS*SIG_BR,LUMI/1e3);
                 fprintf(fcsv,"FPR,BDT threshold");
                 for (Int_t c=0;c<N_CTAU;++c) fprintf(fcsv,",\"%s\"",SIG[gb+c].label);
                 fprintf(fcsv,"\n");
                 for (Int_t k=0;k<4;++k) {
-                    Double_t B = FPR_TGT[k]*LUMI*w_sv;
-                    fprintf(fcsv,"%.0e,%.4f",FPR_TGT[k],sig_thr[m][k]);
+                    Double_t B = FPR_TGT[k]*LUMI*WSV(g);
+                    fprintf(fcsv,"%.0e,%.4f",FPR_TGT[k],THRk(g,k));
                     for (Int_t c=0;c<N_CTAU;++c) {
-                        Double_t Z = asimov_Z(LUMI*SIG_XS*SIG_BR*epsS_at(gb+c,m,sig_thr[m][k]), B);
+                        Double_t Z = asimov_Z(LUMI*SIG_XS*SIG_BR*epsS_at(gb+c,m,THRk(g,k)), B);
                         fprintf(fcsv,",\"%s\"", zpcsv(Z).Data());
                     }
                     fprintf(fcsv,"\n");
@@ -1270,7 +1515,7 @@ void make_eff_tables_pdf(
             for (Int_t k=0;k<3;++k) for (Int_t c=0;c<N_CTAU;++c) fprintf(ftex," & %lld",N_k_lxy[gb+c][m][k]);
             fprintf(ftex,"\\\\\n$\\mathrm{HLT\\ presel.}$");
             for (Int_t k=0;k<3;++k) for (Int_t c=0;c<N_CTAU;++c) fprintf(ftex," & %lld",N_p_lxy[gb+c][m][k]);
-            fprintf(ftex,"\\\\\n$\\mathrm{SV\\ sel.}$ ($\\chi^2{<}10$, $\\Delta R{<}1.2$)");
+            fprintf(ftex,"\\\\\n$\\mathrm{SV\\ sel.}$ ($\\chi^2{<}10$)");
             for (Int_t k=0;k<3;++k) for (Int_t c=0;c<N_CTAU;++c) fprintf(ftex," & %lld",N_sv_lxy[gb+c][m][k]);
             fprintf(ftex,"\\\\\n$\\mathrm{BDT\\ sel.}$");
             for (Int_t k=0;k<3;++k) for (Int_t c=0;c<N_CTAU;++c) fprintf(ftex," & %lld",N_b_lxy[gb+c][m][k]);
@@ -1371,7 +1616,7 @@ void make_eff_tables_pdf(
         fprintf(ftex,"$\\mathrm{HLT\\ presel.}$");
         for (Int_t q=0;q<N_QCD;++q) fprintf(ftex," & %lld",N_pre_q[q][m]);
         fprintf(ftex," & %s\\\\\n",ytex(y_pre).Data());
-        fprintf(ftex,"$\\mathrm{SV\\ sel.}$ ($\\chi^2{<}10$, $\\Delta R{<}1.2$)");
+        fprintf(ftex,"$\\mathrm{SV\\ sel.}$ ($\\chi^2{<}10$)");
         for (Int_t q=0;q<N_QCD;++q) fprintf(ftex," & %lld",N_sv_q[q][m]);
         fprintf(ftex," & %s\\\\\n",ytex(y_sv).Data());
         fprintf(ftex,"$\\mathrm{BDT\\ sel.}$");
@@ -1515,10 +1760,11 @@ void make_eff_tables_pdf(
             hb->GetXaxis()->SetTitleOffset(1.1); hb->GetYaxis()->SetTitleOffset(1.4);
             hb->Draw("hist");
             TLatex tt; tt.SetNDC(); tt.SetTextSize(0.036); tt.SetTextAlign(22);
-            tt.DrawLatex(0.55,0.95,Form("%s  |  %.2f fb^{-1} (13.6 TeV, 2024)",
+            tt.DrawLatex(0.55,0.95,Form("%s  |  %.2f fb#kern[0.30]{^{-1}} (13.6 TeV, 2024)",
                                         MODELS[m].name, LUMI/1e3));
-            TLegend* lgf = new TLegend(0.16,0.16,0.52,0.40);
+            TLegend* lgf = new TLegend(0.20,0.16,0.48,0.42);
             lgf->SetFillStyle(0); lgf->SetBorderSize(0); lgf->SetTextSize(0.03);
+            lgf->SetHeader("BDT working point:");
             std::vector<TLine*> lines;
             for (Int_t k=0;k<4;++k) {
                 Double_t thr=sig_thr[m][k], fpr=FPR_TGT[k];
@@ -1542,10 +1788,10 @@ void make_eff_tables_pdf(
                 std::vector<TGraph*> graphs;
                 Double_t ymax=-1e30;
                 for (Int_t k=0;k<4;++k) {
-                    Double_t s95 = s95_upper(FPR_TGT[k]*LUMI*w_sv);
+                    Double_t s95 = s95_upper(FPR_TGT[k]*LUMI*WSV(g));
                     TGraph* gr = new TGraph();
                     for (Int_t c=0;c<N_CTAU;++c) {
-                        Double_t epsS = epsS_at(gb+c,m,sig_thr[m][k]);
+                        Double_t epsS = epsS_at(gb+c,m,THRk(g,k));
                         if (epsS<=0.) continue;
                         Double_t lim = s95/(LUMI*epsS*SIG_XS);
                         gr->SetPoint(gr->GetN(), CTAU_MM[c], lim);
@@ -1557,36 +1803,438 @@ void make_eff_tables_pdf(
                 }
                 if (ymax<=0.) { delete cg; for (auto gr:graphs) delete gr; continue; }
                 TH1F* frame = cg->DrawFrame(0.05, 1e-5, 200., 1.);   // fixed y-range 1e-5..1
-                frame->GetXaxis()->SetTitle("c#tau [mm]");
-                frame->GetYaxis()->SetTitle("95% CL upper limit on #it{B}(H#rightarrow#psi#bar{#psi})");
+                frame->GetXaxis()->SetTitle("c#kern[0.25]{#tau} [mm]");
+                frame->GetYaxis()->SetTitle("95% CL upper limit on  #it{B}(H#rightarrow#psi#psi#kern[-0.58]{#lower[-0.80]{#minus}})");
                 frame->GetXaxis()->SetTitleOffset(1.1); frame->GetYaxis()->SetTitleOffset(1.5);
                 for (Int_t k=0;k<4;++k) graphs[k]->Draw("LP");
-                // FPR-curve legend (top-right); header states the asymptotic nature
-                TLegend* lg2 = new TLegend(0.60,0.64,0.88,0.86);
+                // mark MC-stat-limited set: no QCD MC in window -> B=0 (background-free)
+                if (WSV(g) <= 0.) {
+                    TLatex mk; mk.SetNDC(); mk.SetTextAlign(22);
+                    mk.SetTextColor(kRed+1); mk.SetTextSize(0.030);
+                    mk.DrawLatex(0.5,0.93,"* B=0: no QCD MC #Rightarrow background-free (MC-stat limited)");
+                }
+                // FPR-curve legend (lower-right); header states the asymptotic nature
+                TLegend* lg2 = new TLegend(0.60,0.16,0.88,0.40);
                 lg2->SetFillStyle(0); lg2->SetBorderSize(0); lg2->SetTextSize(0.030);
-                lg2->SetHeader("Asymptotic 95% CL_{s}");
+                lg2->SetHeader("BDT working point:");
                 for (Int_t k=0;k<4;++k) lg2->AddEntry(graphs[k], Form("FPR=10^{-%d}",k+1), "lp");
                 lg2->Draw();
-                // signal-point info legend (top-left)
+                // signal-point info legend (lower-left)
                 TString sl = set_label(gb);                  // "mpi=X, mA=Y"
                 Int_t cp = sl.Index(",");
                 TString smpi = sl(4, cp-4);
                 TString sma  = sl(sl.Index("mA=")+3, sl.Length());
-                TLegend* lgs = new TLegend(0.17,0.62,0.52,0.86);
+                TLegend* lgs = new TLegend(0.17,0.14,0.52,0.42);
                 lgs->SetFillStyle(0); lgs->SetBorderSize(0); lgs->SetTextSize(0.030);
                 lgs->AddEntry((TObject*)nullptr, "Scenario A", "");
-                lgs->AddEntry((TObject*)nullptr, Form("m_{#bar{#pi}_{3}} = %s GeV", smpi.Data()), "");
+                lgs->AddEntry((TObject*)nullptr, Form("m_{#pi#kern[-0.45]{#lower[-0.72]{#minus}}_{3}} = %s GeV", smpi.Data()), "");
                 lgs->AddEntry((TObject*)nullptr, Form("m_{A'} = %s GeV", sma.Data()), "");
                 lgs->AddEntry((TObject*)nullptr, Form("#it{B}(A'#rightarrow#mu#mu) = %.3g", BR_A_MUMU[g]), "");
+                lgs->AddEntry((TObject*)nullptr,
+                    USE_MASS_WINDOW
+                      ? Form("Mass window: [%.3g, %.3g] GeV",
+                             MWIN_FRAC_LO*MA_PEAK[g], MWIN_FRAC_HI*MA_PEAK[g])
+                      : "Mass window: none (inclusive QCD)", "");
                 lgs->Draw();
                 // title: Model | Luminosity (Energy, Year)
                 TLatex tg; tg.SetNDC(); tg.SetTextSize(0.036); tg.SetTextAlign(22);
-                tg.DrawLatex(0.55,0.95, Form("%s  |  %.2f fb^{-1} (13.6 TeV, 2024)",
+                tg.DrawLatex(0.55,0.95, Form("%s  |  %.2f fb#kern[0.30]{^{-1}} (13.6 TeV, 2024)",
                                              MODELS[m].name, LUMI/1e3));
                 cg->Print((g==last_g ? (lim_pdf+")") : lim_pdf).Data());
                 delete lg2; delete lgs; for (auto gr:graphs) delete gr; delete cg;
             }
             printf("  -> %s\n", lim_pdf.Data());
+        }
+
+        // ---- extra PDF: asymptotic significance Z vs ctau -------------------
+        // One page per signal set (curve per FPR working point) + a raw-MC-count
+        // table below each plot (4 ctau-signal columns + QCD total, FPR rows).
+        {
+            const Double_t CTAU_MM[N_CTAU] = { 0.1, 1., 10., 100. };  // SIG ordering
+            const Int_t COL[4] = { kBlue+1, kRed+1, kGreen+2, kMagenta+1 };
+            const Int_t MRK[4] = { 20, 21, 22, 33 };
+            // raw-count table on the current pad. c=-1 -> inclusive(windowed); else lxy bin.
+            auto draw_count_table = [&](Int_t g, Int_t c){
+                Int_t gb=g*N_CTAU;
+                TLatex t; t.SetNDC(); t.SetTextFont(42); t.SetTextAlign(22);
+                // caption: meaning of the two QCD columns
+                t.SetTextSize(0.044);
+                t.DrawLatex(0.5,0.955,"signal cols: raw MC counts at c #tau;   "
+                    "QCD yield = FPR#kern[0.75]{#times}#kern[0.18]{L}#kern[0.30]{#times}#kern[0.18]{#sigma#epsilon};   QCD #LTN#GT = #sigma-weighted total"
+                    "   (* B=0: no QCD MC #Rightarrow Z undef., limit bkg-free)");
+                // --- table grid: outer box + header rule + block separators ---
+                const double xL=0.02,xR=0.985,yT=0.88,yH=0.72,yB=0.06; // box/header/bottom
+                const double vx1=0.145,vx2=0.63;                       // FPR|signal, signal|QCD
+                TLine ln; ln.SetLineColor(kGray+1); ln.SetLineWidth(1);
+                ln.DrawLineNDC(xL,yT,xR,yT); ln.DrawLineNDC(xL,yH,xR,yH); ln.DrawLineNDC(xL,yB,xR,yB);
+                ln.DrawLineNDC(xL,yB,xL,yT); ln.DrawLineNDC(xR,yB,xR,yT);
+                ln.DrawLineNDC(vx1,yB,vx1,yT); ln.DrawLineNDC(vx2,yB,vx2,yT);
+                // column centres (align 22) + header row centred in the header band
+                const double xc[7]={0.083,0.215,0.320,0.425,0.535,0.720,0.900};
+                const char* hd[7]={"FPR","0.1mm","1mm","10mm","100mm","QCD yield","QCD #LTN#GT"};
+                t.SetTextSize(0.058);
+                for(int j=0;j<7;j++) t.DrawLatex(xc[j],0.5*(yT+yH),hd[j]);
+                for(int k=0;k<4;k++){  // signal: raw MC counts ; QCD: yield + sigma-wtd avg count
+                    double y=yH-(yH-yB)*(k+0.5)/4.;   // 4 rows evenly filling [yB,yH]
+                    double thr = (c<0)?(USE_MASS_WINDOW?sig_thr_win[m][g][k]:sig_thr[m][k])
+                                      : sig_thr_win_lxy[m][g][c][k];
+                    double wsv = (c<0)? WSV(g) : w_sv_win_lxy[m][g][c];
+                    double avg = (c<0)? bkgAvg(m,g,thr) : bkgAvg_lxy(m,g,c,thr);
+                    t.DrawLatex(xc[0],y,Form("10^{-%d}",k+1));
+                    for(int cc=0;cc<4;cc++){
+                        Long64_t n=(c<0)?sigCount(gb+cc,m,thr):sigCount_lxy(gb+cc,m,c,thr);
+                        t.DrawLatex(xc[1+cc],y,Form("%lld",n));
+                    }
+                    double yld=FPR_TGT[k]*LUMI*wsv;
+                    t.DrawLatex(xc[5],y,(wsv<=0.)?"0*":Form("%.2g",yld));
+                    t.DrawLatex(xc[6],y,Form("%.3g",avg));
+                }
+            };
+            TString sig_pdf = out_dir + "/" + (RUN_TEST ? "test_" : "")
+                            + "significance_" + model_safe + ".pdf";
+            Int_t first_g=-1, last_g=-1;
+            for (Int_t g=0; g<N_SETS; ++g) if (run_set(g)) { if(first_g<0) first_g=g; last_g=g; }
+            for (Int_t g=0; first_g>=0 && g<N_SETS; ++g) {
+                if (!run_set(g)) continue;
+                Int_t gb=g*N_CTAU;
+                TCanvas* cz = new TCanvas(Form("c_sig_%d_%d",m,g),"",1000,920);
+                TPad* pT = new TPad("pT","",0,0.27,1,1);
+                pT->SetLeftMargin(0.14); pT->SetBottomMargin(0.12); pT->Draw();
+                TPad* pB = new TPad("pB","",0,0,1,0.27); pB->Draw();
+                pT->cd(); gPad->SetLogx();
+                std::vector<TGraph*> graphs;
+                Double_t zmax=-1e30;
+                for (Int_t k=0;k<4;++k) {
+                    Double_t B = FPR_TGT[k]*LUMI*WSV(g);
+                    TGraph* gr = new TGraph();
+                    for (Int_t c=0;c<N_CTAU;++c) {
+                        Double_t epsS = epsS_at(gb+c,m,THRk(g,k));
+                        if (epsS<=0.) continue;
+                        Double_t Z = asimov_Z(LUMI*SIG_XS*SIG_BR*epsS, B);
+                        if (Z<0.) continue;
+                        gr->SetPoint(gr->GetN(), CTAU_MM[c], Z);
+                        if (Z>zmax) zmax=Z;
+                    }
+                    gr->SetLineColor(COL[k]); gr->SetMarkerColor(COL[k]);
+                    gr->SetMarkerStyle(MRK[k]); gr->SetLineWidth(2); gr->SetMarkerSize(1.4);
+                    graphs.push_back(gr);
+                }
+                if (zmax<=0.) zmax = 1.;
+                TH1F* frame = gPad->DrawFrame(0.05, 0., 200., zmax*1.30);
+                frame->GetXaxis()->SetTitle("c#kern[0.25]{#tau} [mm]");
+                frame->GetYaxis()->SetTitle("Asymptotic significance  #it{Z}");
+                frame->GetXaxis()->SetTitleOffset(1.1); frame->GetYaxis()->SetTitleOffset(1.5);
+                for (Int_t k=0;k<4;++k) graphs[k]->Draw("LP");
+                // FPR-curve legend (top-right; no header -- y-axis already says it)
+                TLegend* lg2 = new TLegend(0.62,0.62,0.90,0.90);
+                lg2->SetFillStyle(0); lg2->SetBorderSize(0); lg2->SetTextSize(0.032);
+                lg2->SetHeader("BDT working point:");
+                for (Int_t k=0;k<4;++k) lg2->AddEntry(graphs[k], Form("FPR=10^{-%d}",k+1), "lp");
+                lg2->Draw();
+                // signal-point info legend (top-left)
+                TString sl = set_label(gb);
+                Int_t cp = sl.Index(",");
+                TString smpi = sl(4, cp-4);
+                TString sma  = sl(sl.Index("mA=")+3, sl.Length());
+                TLegend* lgs = new TLegend(0.17,0.62,0.52,0.90);
+                lgs->SetFillStyle(0); lgs->SetBorderSize(0); lgs->SetTextSize(0.032);
+                lgs->AddEntry((TObject*)nullptr, "Scenario A", "");
+                lgs->AddEntry((TObject*)nullptr, Form("m_{#pi#kern[-0.45]{#lower[-0.72]{#minus}}_{3}} = %s GeV", smpi.Data()), "");
+                lgs->AddEntry((TObject*)nullptr, Form("m_{A'} = %s GeV", sma.Data()), "");
+                lgs->AddEntry((TObject*)nullptr, Form("#it{B}(A'#rightarrow#mu#mu) = %.3g", BR_A_MUMU[g]), "");
+                lgs->AddEntry((TObject*)nullptr,
+                    USE_MASS_WINDOW
+                      ? Form("Mass window: [%.3g, %.3g] GeV",
+                             MWIN_FRAC_LO*MA_PEAK[g], MWIN_FRAC_HI*MA_PEAK[g])
+                      : "Mass window: none (inclusive QCD)", "");
+                lgs->Draw();
+                TLatex tg; tg.SetNDC(); tg.SetTextSize(0.040); tg.SetTextAlign(22);
+                tg.DrawLatex(0.55,0.96, Form("%s  |  %.2f fb#kern[0.30]{^{-1}} (13.6 TeV, 2024)",
+                                             MODELS[m].name, LUMI/1e3));
+                pB->cd(); draw_count_table(g,-1);   // raw-count table (inclusive)
+                TString pg = (g==first_g && g==last_g) ? sig_pdf
+                            : (g==first_g)              ? (sig_pdf+"(")
+                            : (g==last_g)               ? (sig_pdf+")")
+                            :                              sig_pdf;
+                cz->Print(pg.Data());
+                delete lg2; delete lgs; for (auto gr:graphs) delete gr;
+                delete pT; delete pB; delete cz;
+            }
+            if (first_g>=0) printf("  -> %s\n", sig_pdf.Data());
+        }
+
+        // ===== by-lxy PDFs: limits_by_lxy & significance_by_lxy ================
+        // One page per signal set; each page has 3 pads (one per lxy category).
+        // Each lxy bin is treated as its own search region: own windowed-SV FPR
+        // thresholds + weight, and signal efficiency measured in that lxy bin.
+        {
+            const Double_t CTAU_MM[N_CTAU] = { 0.1, 1., 10., 100. };
+            const Int_t COL[4] = { kBlue+1, kRed+1, kGreen+2, kMagenta+1 };
+            const Int_t MRK[4] = { 20, 21, 22, 33 };
+            Int_t first_g=-1, last_g=-1;
+            for (Int_t g=0; g<N_SETS; ++g) if (run_set(g)) { if(first_g<0) first_g=g; last_g=g; }
+
+            // raw-count table for lxy bin c of set g (on the current pad)
+            auto draw_count_table_lxy = [&](Int_t g, Int_t c){
+                Int_t gb=g*N_CTAU;
+                TLatex t; t.SetNDC(); t.SetTextFont(42); t.SetTextAlign(22);
+                // label each table with its lxy bin (so it's obvious which is which)
+                t.SetTextSize(0.075); t.DrawLatex(0.5,0.95, LXY_LABEL[c]);
+                t.SetTextSize(0.036);
+                t.DrawLatex(0.5,0.85,"signal: raw MC counts at c #tau;   "
+                    "QCD yield = FPR#kern[0.75]{#times}#kern[0.18]{L}#kern[0.30]{#times}#kern[0.18]{#sigma#epsilon};   QCD #LTN#GT = #sigma-wtd total"
+                    "   (* B=0: no QCD MC)");
+                // --- table grid: outer box + header rule + block separators ---
+                const double yT=0.76,yH=0.62,yB=0.04, xL=0.02,xR=0.985, vx1=0.145,vx2=0.63;
+                TLine ln; ln.SetLineColor(kGray+1); ln.SetLineWidth(1);
+                ln.DrawLineNDC(xL,yT,xR,yT); ln.DrawLineNDC(xL,yH,xR,yH); ln.DrawLineNDC(xL,yB,xR,yB);
+                ln.DrawLineNDC(xL,yB,xL,yT); ln.DrawLineNDC(xR,yB,xR,yT);
+                ln.DrawLineNDC(vx1,yB,vx1,yT); ln.DrawLineNDC(vx2,yB,vx2,yT);
+                t.SetTextSize(0.050);
+                const double xc[7]={0.083,0.215,0.320,0.425,0.535,0.720,0.900};
+                const char* hd[7]={"FPR","0.1mm","1mm","10mm","100mm","QCD yield","QCD #LTN#GT"};
+                for(int j=0;j<7;j++) t.DrawLatex(xc[j],0.5*(yT+yH),hd[j]);
+                for(int k=0;k<4;k++){  // signal: raw MC counts ; QCD: yield + sigma-wtd avg count
+                    double y=yH-(yH-yB)*(k+0.5)/4., thr=sig_thr_win_lxy[m][g][c][k];
+                    double wsv=w_sv_win_lxy[m][g][c];
+                    t.DrawLatex(xc[0],y,Form("10^{-%d}",k+1));
+                    for(int cc=0;cc<4;cc++) t.DrawLatex(xc[1+cc],y,Form("%lld",sigCount_lxy(gb+cc,m,c,thr)));
+                    t.DrawLatex(xc[5],y,(wsv<=0.)?"0*":Form("%.2g",FPR_TGT[k]*LUMI*wsv));
+                    t.DrawLatex(xc[6],y,Form("%.3g",bkgAvg_lxy(m,g,c,thr)));
+                }
+            };
+
+            // draw one lxy pad on the current gPad; is_limit -> limit else significance
+            auto draw_lxy_pad = [&](Int_t g, Int_t c, Bool_t is_limit,
+                                    std::vector<TObject*>& keep) {
+                Int_t gb=g*N_CTAU;
+                gPad->SetLogx(); if (is_limit) gPad->SetLogy();
+                gPad->SetLeftMargin(0.16); gPad->SetBottomMargin(0.14); gPad->SetRightMargin(0.04);
+                std::vector<TGraph*> graphs; Double_t ymax=-1e30;
+                for (Int_t k=0;k<4;++k) {
+                    Double_t B   = FPR_TGT[k]*LUMI*w_sv_win_lxy[m][g][c];
+                    Double_t s95 = s95_upper(B);
+                    TGraph* gr = new TGraph();
+                    for (Int_t cc=0;cc<N_CTAU;++cc) {
+                        Double_t epsS = epsS_lxy(gb+cc, m, c, sig_thr_win_lxy[m][g][c][k]);
+                        if (epsS<=0.) continue;
+                        Double_t y = is_limit ? s95/(LUMI*epsS*SIG_XS)
+                                              : asimov_Z(LUMI*SIG_XS*SIG_BR*epsS, B);
+                        if (!is_limit && y<0.) continue;
+                        gr->SetPoint(gr->GetN(), CTAU_MM[cc], y);
+                        if (y>ymax) ymax=y;
+                    }
+                    gr->SetLineColor(COL[k]); gr->SetMarkerColor(COL[k]);
+                    gr->SetMarkerStyle(MRK[k]); gr->SetLineWidth(1); gr->SetMarkerSize(1.1);
+                    graphs.push_back(gr); keep.push_back(gr);
+                }
+                if (ymax<=0.) ymax=1.;
+                TH1F* fr = is_limit ? gPad->DrawFrame(0.05, 1e-5, 200., 1.)
+                                    : gPad->DrawFrame(0.05, 0., 200., ymax*1.3);
+                fr->GetXaxis()->SetTitle("c#kern[0.25]{#tau} [mm]");
+                fr->GetYaxis()->SetTitle(is_limit
+                    ? "95% CL Upper Limit on  #it{B}(H#rightarrow#psi#psi#kern[-0.58]{#lower[-0.80]{#minus}})"
+                    : "Asymptotic significance  #it{Z}");
+                fr->GetYaxis()->SetTitleOffset(1.7);
+                for (auto gr:graphs) gr->Draw("LP");
+                TLatex pl; pl.SetNDC(); pl.SetTextSize(0.038); pl.SetTextAlign(22);
+                pl.DrawLatex(0.58,0.93, LXY_LABEL[c]);
+                // limits curves sit high -> legend lower-left; significance -> top-right
+                TLegend* lg = is_limit ? new TLegend(0.58,0.19,0.95,0.45)
+                                       : new TLegend(0.58,0.62,0.95,0.90);
+                lg->SetFillStyle(0); lg->SetBorderSize(0); lg->SetTextSize(0.040);
+                lg->SetHeader("BDT working point:");
+                for (Int_t k=0;k<4;++k) lg->AddEntry(graphs[k], Form("FPR=10^{-%d}",k+1), "lp");
+                lg->Draw(); keep.push_back(lg);
+                // mark MC-stat-limited bins: no QCD MC in window -> B=0 (limit is
+                // background-free / Z undefined). Whole lxy pad shares one B per FPR.
+                if (w_sv_win_lxy[m][g][c] <= 0.) {
+                    TLatex* mk = new TLatex(); mk->SetNDC(); mk->SetTextAlign(22);
+                    mk->SetTextColor(kRed+1); mk->SetTextSize(0.034);
+                    mk->DrawLatex(0.58, is_limit?0.86:0.60,
+                        "* B=0: no QCD MC #Rightarrow background-free (MC-stat limited)");
+                    keep.push_back(mk);
+                }
+            };
+            auto page_title = [&](Int_t g) {
+                Int_t gb=g*N_CTAU;
+                TLatex t; t.SetNDC(); t.SetTextSize(0.028); t.SetTextAlign(22);
+                t.DrawLatex(0.5,0.975, Form(
+                    " %s  |  Scenario A, %s  |  #kern[0.55]{#it{B}}(A'#rightarrow#mu#mu) = %.3g  |  mass window [%.3g,%.3g] GeV  |  %.2f fb#kern[0.60]{^{-1}} (13.6 TeV, 2024)",
+                    MODELS[m].name, set_label(gb).Data(), BR_A_MUMU[g],
+                    MWIN_FRAC_LO*MA_PEAK[g], MWIN_FRAC_HI*MA_PEAK[g], LUMI/1e3));
+            };
+
+            // ---- limits_by_lxy: page 1 (inclusive FPR calibration) + per-set pages ----
+            {
+                TString pdf = out_dir + "/" + (RUN_TEST?"test_":"") + "limits_by_lxy_" + model_safe + ".pdf";
+                TCanvas* cf = new TCanvas(Form("c_fprlxy_%d",m),"",1000,800);
+                cf->SetLogx(); cf->SetLogy();
+                gPad->SetLeftMargin(0.13); gPad->SetBottomMargin(0.12);
+                TH1D* hb = bkg_sv_c[m] ? (TH1D*)bkg_sv_c[m]->Clone(Form("hbpllxy_%d",m))
+                                       : new TH1D(Form("hbpllxy_%d",m),"",NBINS,0.,1.);
+                hb->SetDirectory(nullptr); hb->SetLineColor(kBlack); hb->SetLineWidth(2); hb->SetTitle("");
+                hb->GetXaxis()->SetRangeUser(1e-4,1.); hb->SetMinimum(1e-5); hb->SetMaximum(1.3);
+                hb->GetXaxis()->SetTitle("BDT threshold");
+                hb->GetYaxis()->SetTitle("Fraction of SV-selected QCD above threshold (inclusive)");
+                hb->GetXaxis()->SetTitleOffset(1.1); hb->GetYaxis()->SetTitleOffset(1.4);
+                hb->Draw("hist");
+                // BDT working-point overlay (inclusive thresholds), as in limits_<model> page 1
+                TLegend* lgf = new TLegend(0.20,0.16,0.48,0.42);
+                lgf->SetFillStyle(0); lgf->SetBorderSize(0); lgf->SetTextSize(0.03);
+                lgf->SetHeader("BDT working point:");
+                std::vector<TLine*> lines;
+                for (Int_t k=0;k<4;++k) {
+                    Double_t thr=sig_thr[m][k], fpr=FPR_TGT[k];
+                    TLine* lh = new TLine(1e-4,fpr,thr,fpr);
+                    lh->SetLineColor(COL[k]); lh->SetLineStyle(2); lh->SetLineWidth(2); lh->Draw(); lines.push_back(lh);
+                    TLine* lv = new TLine(thr,1e-5,thr,fpr);
+                    lv->SetLineColor(COL[k]); lv->SetLineStyle(2); lv->SetLineWidth(2); lv->Draw(); lines.push_back(lv);
+                    lgf->AddEntry(lh, Form("FPR=10^{-%d}:  thr = %.4f",k+1,thr), "l");
+                }
+                lgf->Draw();
+                TLatex tt; tt.SetNDC(); tt.SetTextSize(0.036); tt.SetTextAlign(22);
+                tt.DrawLatex(0.55,0.95,Form("%s  |  %.2f fb#kern[0.30]{^{-1}} (13.6 TeV, 2024)", MODELS[m].name, LUMI/1e3));
+                cf->Print((first_g>=0 ? (pdf+"(") : pdf).Data());
+                delete hb; delete lgf; for (auto l:lines) delete l; delete cf;
+                for (Int_t g=0; first_g>=0 && g<N_SETS; ++g) {
+                    if (!run_set(g)) continue;
+                    TCanvas* cv = new TCanvas(Form("c_limlxy_%d_%d",m,g),"",1800,650);
+                    cv->Divide(3,1,0.001,0.001);
+                    std::vector<TObject*> keep;
+                    for (Int_t c=0;c<3;++c) { cv->cd(c+1); draw_lxy_pad(g,c,kTRUE,keep); }
+                    cv->cd(0); page_title(g);
+                    cv->Print((g==last_g ? (pdf+")") : pdf).Data());
+                    for (auto o:keep) delete o; delete cv;
+                }
+                printf("  -> %s\n", pdf.Data());
+            }
+            // ---- significance_by_lxy: per-set, 3 columns (plot + raw-count table) ----
+            if (first_g>=0) {
+                TString pdf = out_dir + "/" + (RUN_TEST?"test_":"") + "significance_by_lxy_" + model_safe + ".pdf";
+                for (Int_t g=0; g<N_SETS; ++g) {
+                    if (!run_set(g)) continue;
+                    TCanvas* cv = new TCanvas(Form("c_siglxy_%d_%d",m,g),"",1800,1000);
+                    std::vector<TObject*> keep;
+                    for (Int_t c=0;c<3;++c) {
+                        double x1=c/3., x2=(c+1)/3.;
+                        cv->cd();
+                        TPad* pp=new TPad(Form("ppz%d_%d",g,c),"",x1,0.33,x2,0.93); pp->Draw(); keep.push_back(pp);
+                        pp->cd(); draw_lxy_pad(g,c,kFALSE,keep);
+                        cv->cd();
+                        TPad* pt=new TPad(Form("ptz%d_%d",g,c),"",x1,0.02,x2,0.33); pt->Draw(); keep.push_back(pt);
+                        pt->cd(); draw_count_table_lxy(g,c);
+                    }
+                    cv->cd(0); page_title(g);
+                    TString pg = (g==first_g&&g==last_g)?pdf:(g==first_g)?(pdf+"("):(g==last_g)?(pdf+")"):pdf;
+                    cv->Print(pg.Data());
+                    for (auto o:keep) delete o; delete cv;
+                }
+                printf("  -> %s\n", pdf.Data());
+            }
+            // ---- qcd_by_lxy: QCD vs lxy bin, one curve per FPR. Two SEPARATE PDFs:
+            //      mode 0 -> qcd_by_lxy_yield   (expected yield  FPR*L*sigma*eps)
+            //      mode 1 -> qcd_by_lxy_weighted (sigma-weighted total = cutflow "Total (weighted)")
+            if (first_g>=0) for (Int_t mode=0; mode<2; ++mode) {
+                TString pdf = out_dir + "/" + (RUN_TEST?"test_":"")
+                            + (mode==0 ? "qcd_by_lxy_yield_" : "qcd_by_lxy_weighted_")
+                            + model_safe + ".pdf";
+                for (Int_t g=0; g<N_SETS; ++g) {
+                    if (!run_set(g)) continue;
+                    TCanvas* cv = new TCanvas(Form("c_qcdlxy_%d_%d_%d",m,g,mode),"",1000,800);
+                    cv->SetLogy(); gPad->SetLeftMargin(0.14); gPad->SetBottomMargin(0.14);
+                    std::vector<TObject*> keep; Double_t ymax=1., ymin=1e30;
+                    std::vector<TGraph*> gr(4,nullptr);
+                    for (Int_t k=0;k<4;++k){
+                        TGraph* g4=new TGraph(); keep.push_back(g4); gr[k]=g4;
+                        for (Int_t c=0;c<3;++c){
+                            double nw = (mode==0)
+                                ? FPR_TGT[k]*LUMI*w_sv_win_lxy[m][g][c]          // expected yield
+                                : bkgAvg_lxy(m,g,c,sig_thr_win_lxy[m][g][c][k]); // sigma-weighted total
+                            g4->SetPoint(g4->GetN(), c+1, nw);
+                            if(nw>ymax) ymax=nw; if(nw>0&&nw<ymin) ymin=nw;
+                        }
+                        g4->SetLineColor(COL[k]); g4->SetMarkerColor(COL[k]); g4->SetMarkerStyle(MRK[k]);
+                        g4->SetLineWidth(1); g4->SetMarkerSize(1.4);
+                    }
+                    if(ymin>=1e30) ymin=0.5;
+                    // extend y-range so the curves occupy ~80% of their current height
+                    // (1/0.8 = 1.25x the log-decade span, headroom added at the top for legends)
+                    double btm=ymin*0.3, newTop=btm*TMath::Power((ymax*5.)/btm, 1.25);
+                    TH1F* fr=gPad->DrawFrame(0.5,btm,3.5,newTop);
+                    fr->GetXaxis()->SetTitle(""); fr->GetXaxis()->SetNdivisions(3);
+                    fr->GetYaxis()->SetTitle(mode==0
+                        ? "Expected QCD yield  (FPR#kern[0.75]{#times}#kern[0.18]{L}#kern[0.30]{#times}#kern[0.18]{#sigma#epsilon})"
+                        : "QCD #sigma-weighted total  ( #LTN#GT)");
+                    fr->GetYaxis()->SetTitleOffset(1.5);
+                    for(Int_t k=0;k<4;++k) gr[k]->Draw("LP");
+                    TLatex tx; tx.SetNDC(); tx.SetTextSize(0.030); tx.SetTextAlign(22);
+                    const double xpos[3]={0.28,0.55,0.82};
+                    for(int c=0;c<3;c++) tx.DrawLatex(xpos[c],0.065,LXY_LABEL[c]);
+                    Int_t gb=g*N_CTAU;
+                    // FPR (BDT working point) legend, top-right
+                    TLegend* lg=new TLegend(0.64,0.62,0.90,0.90); keep.push_back(lg);
+                    lg->SetFillStyle(0); lg->SetBorderSize(0); lg->SetTextSize(0.030);
+                    lg->SetHeader("BDT working point:");
+                    for(Int_t k=0;k<4;++k) lg->AddEntry(gr[k],Form("FPR=10^{-%d}",k+1),"lp");
+                    lg->Draw();
+                    // single framed line, top-left (left of the FPR legend at x=0.64)
+                    { TLegend* ls=new TLegend(0.2,0.83,0.58,0.895); keep.push_back(ls);
+                      ls->SetFillStyle(0); ls->SetBorderSize(1); ls->SetTextSize(0.023);
+                      ls->SetMargin(0.0);       // no marker column -> text spans the full box
+                      ls->SetTextAlign(22);     // centre the label in the box
+                      ls->AddEntry((TObject*)nullptr,Form("Within the mass window [%.3g, %.3g] GeV",
+                        MWIN_FRAC_LO*MA_PEAK[g],MWIN_FRAC_HI*MA_PEAK[g]),"");
+                      ls->Draw(); }
+                    { TLatex tt; tt.SetNDC(); tt.SetTextSize(0.034); tt.SetTextAlign(22);
+                      tt.DrawLatex(0.55,0.96, Form("%s  |  %.2f fb#kern[0.30]{^{-1}} (13.6 TeV, 2024)",
+                        MODELS[m].name, LUMI/1e3)); }
+                    TString pg=(g==first_g&&g==last_g)?pdf:(g==first_g)?(pdf+"("):(g==last_g)?(pdf+")"):pdf;
+                    cv->Print(pg.Data());
+                    for(auto o:keep) delete o; delete cv;
+                }
+                printf("  -> %s\n", pdf.Data());
+            }
+        }
+
+        // ===== comprehensive CSV: per (set, ctau, lxy, FPR) -- absolute counts +
+        // efficiency + significance (Z and p0) + limit. lxy_bin = inclusive or bin. =====
+        {
+            const Double_t CTAU_MM[N_CTAU] = { 0.1, 1., 10., 100. };
+            TString cpath = out_dir + "/" + (RUN_TEST?"test_":"") + "full_by_lxy_" + model_safe + ".csv";
+            FILE* fc = fopen(cpath.Data(),"w");
+            if (fc) {
+                fprintf(fc,"model,signal_point,mA_GeV,ctau_mm,lxy_bin,FPR,BDT_threshold,"
+                           "N_sig_total,N_sig_selected,eff_sig,N_QCD_selected,QCD_xswtd_avg_count,"
+                           "S_yield,B_yield,Z,p0,limit_B,MC_stat_limited\n");
+                for (Int_t g=0; g<N_SETS; ++g) {
+                    if (!run_set(g)) continue;
+                    Int_t gb=g*N_CTAU;
+                    for (Int_t lc=-1; lc<3; ++lc) {          // -1 = inclusive (windowed)
+                        TString lxlab = (lc<0)?TString("inclusive")
+                                              :TString::Format("lxy[%.0f,%.0f]cm",LXY_LO[lc],LXY_HI[lc]);
+                        for (Int_t c=0;c<N_CTAU;++c) for (Int_t k=0;k<4;++k) {
+                            double thr = (lc<0)?THRk(g,k):sig_thr_win_lxy[m][g][lc][k];
+                            double eps = (lc<0)?epsS_at(gb+c,m,thr):epsS_lxy(gb+c,m,lc,thr);
+                            Long64_t nst=N_tot_s[gb+c][m];
+                            Long64_t nss=(lc<0)?sigCount(gb+c,m,thr):sigCount_lxy(gb+c,m,lc,thr);
+                            Long64_t nqs=(lc<0)?bkgCount(m,g,thr):bkgCount_lxy(m,g,lc,thr);
+                            double qavg=(lc<0)?bkgAvg(m,g,thr):bkgAvg_lxy(m,g,lc,thr);
+                            double wsv=(lc<0)?WSV(g):w_sv_win_lxy[m][g][lc];
+                            double B=FPR_TGT[k]*LUMI*wsv, S=LUMI*SIG_XS*SIG_BR*eps;
+                            double Z=asimov_Z(S,B), p0=(Z<0)?-1.:0.5*erfc(Z/sqrt(2.));
+                            double lim=(eps>0)? s95_upper(B)/(LUMI*eps*SIG_XS) : -1.;
+                            int mcstat=(wsv<=0.)?1:0;  // no QCD MC in (window,lxy) -> B=0, bkg-free
+                            // NB: lxy_bin is quoted -- "lxy[10,100]cm" contains a comma
+                            fprintf(fc,"%s,\"%s\",%.4g,%.4g,\"%s\",%.0e,%.6f,%lld,%lld,%.6g,%lld,%.6g,%.6g,%.6g,%.4g,%.4g,%.6g,%d\n",
+                                MODELS[m].name, SIG[gb+c].label, MA_PEAK[g], CTAU_MM[c], lxlab.Data(),
+                                FPR_TGT[k], thr, nst, nss, eps, nqs, qavg, S, B, Z, p0, lim, mcstat);
+                        }
+                    }
+                }
+                fclose(fc);
+                printf("  -> %s\n", cpath.Data());
+            }
         }
     }
 
@@ -1893,7 +2541,7 @@ void run_analysis()
 
             TLatex hdr; hdr.SetNDC(); hdr.SetTextSize(0.034); hdr.SetTextAlign(22);
             hdr.DrawLatex(0.56, 0.95,
-                Form("%s  |  %.2f fb^{-1} (13.6 TeV, 2024)",
+                Form("%s  |  %.2f fb#kern[0.30]{^{-1}} (13.6 TeV, 2024)",
                      MODELS[m].name, LUMI / 1e3));
 
             TLegend* leg = new TLegend(0.3, 0.2, 0.87, 0.32);

@@ -35,7 +35,7 @@ DATAPATH="/vols/cms/khl216"
 CONDITIONAL=0
 
 
-MODELTAG="scenarioB1_all_no_DA_old_BDT_with_dRmSV_2024_DoubleMu"
+MODELTAG="scenarioB1_all_no_DA_old_BDT_2024_DoubleMu"
 
 #python analysis/dqcd_deploy_2024.py --runmode deploy --use_conditional $CONDITIONAL --inputmap 'include/scenarioB1_all_model_points_2024_deploy.yml' --modeltag $MODELTAG --grid_id $GRID_ID --grid_nodes $GRID_NODES --config $CONFIG --datapath $DATAPATH
 python analysis/dqcd_deploy_2024.py --runmode deploy --use_conditional $CONDITIONAL --inputmap 'include/QCD_2024_deploy.yml' --modeltag $MODELTAG --grid_id $GRID_ID --grid_nodes $GRID_NODES --config $CONFIG --datapath $DATAPATH
